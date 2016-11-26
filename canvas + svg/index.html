@@ -44,11 +44,21 @@ map.svg =
       .attr('width', map.width)
       .attr('height', map.height)
       .append('g');
+
 map.svg.append('rect')
   .attr('class', 'overlay')
   .attr('width', map.width)
   .attr('height', map.height);
 
+map.svg.append("text")
+  .style("fill", "black")
+  .style("font-family", "Helvetica Neue")
+  .style("font-weight", "300")
+  .style("font-size", "30")
+  .style("text-anchor", "middle")
+  .text("100'000 syrian refugee children can't wait to go back to school tomorrow" )
+  .attr("x", map.width/2)
+  .attr("y", map.height - 100);
 
 
 // create an in memory only element of type 'custom'
@@ -59,7 +69,7 @@ var dataContainer = d3.select(detachedContainer);
 
 // Function to create our custom data containers
 function drawCustom(data) {
-  var scale = d3.scale.linear()
+  var scale = d3.scaleLinear()
     .range([10, 390])
     .domain(d3.extent(data));
   
@@ -77,7 +87,7 @@ function drawCustom(data) {
       .append("custom")
       .classed("rect", true)
       .attr("x", scale)
-      .attr("y", 100)
+      .attr("y", 200)
       .attr("size", 8)
       .attr("fillStyle", "red");
   
@@ -87,6 +97,7 @@ function drawCustom(data) {
     .duration(1000)
     .attr("size", 5)
     .attr("fillStyle", "lightgrey");
+
 }
 
 
@@ -112,21 +123,13 @@ var simulation = d3.forceSimulation(map.canvas.nodes)
     	}))
     .on("tick", drawCanvas);
 
-map.svg.append("text")
-  .style("fill", "black")
-  .style("font-family", "Helvetica Neue")
-  .style("font-weight", "300")
-  .style("font-size", "30")
-  .style("text-anchor", "middle")
-  .text("100'000 syrian refugee children can't wait to go back to school tomorrow" )
-  .attr("x", map.width/2)
-  .attr("y", map.height - 100);
 
 function drawCanvas() {
   map.canvas.clearRect(0, 0, map.width, map.height);
   map.canvas.lineWidth = 7;
   map.canvas.lineCap = "round";
 
+  //draw nodes
   for (var i = 0, node, vx, vy; i < n; ++i) {
     node = map.canvas.nodes[i];
     map.canvas.beginPath();
@@ -136,7 +139,23 @@ function drawCanvas() {
     map.canvas.stroke();
   }
 
+  
+  // select our dummy nodes and draw the data to canvas
+  var elements = dataContainer.selectAll("custom.rect");
+  elements.each(function(d) {
+    var node = d3.select(this);
+    
+    map.canvas.beginPath();
+    map.canvas.fillStyle = node.attr("fillStyle");
+    map.canvas.rect(node.attr("x"), node.attr("y"), node.attr("size"), node.attr("size"));
+    map.canvas.fill();
+    map.canvas.closePath();
+    
+  })
 
 }
+
+drawCustom([1,2,13,20,23]);
+drawCustom([1,2,12,16,20]);
 
 </script>
