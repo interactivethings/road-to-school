@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body { 
+  margin: 0; 
+}
+svg 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+rect { 
+  fill: transparent; 
+}
+
+canvas {
+  position: absolute;
+}
+
+</style>
+<canvas width="600" height="400"></canvas>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+var map = {};
+map.width = 1080;
+map.height = 500;
+
+map.canvas =
+  d3.select('body')
+    .append('canvas')
+      .attr('width', map.width)
+      .attr('height', map.height)
+      .node().getContext('2d');
+
+map.svg =
+  d3.select('body')
+    .append('svg')
+      .attr('width', map.width)
+      .attr('height', map.height)
+      .append('g');
+
+map.svg.append('rect')
+  .attr('class', 'overlay')
+  .attr('width', map.width)
+  .attr('height', map.height);
+
+
+var n = 1000;
+
+map.canvas.nodes = d3.range(n).map(function() {
+  var x = map.width * Math.random(),
+      y =  100*Math.random();
+  return {
+    x: x,
+    y: y,
+    vx: 0.01,
+    vy: 0.01
+  };
+});
+
+var simulation = d3.forceSimulation(map.canvas.nodes)
+		.alphaTarget(0.1)
+    // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
+    // .force("center", d3.forceCenter(map.width / 2, 140))
+    .force("Y", d3.forceY().strength(function(d,i){
+      return -0.005*Math.cos(i);                             
+    	}))
+    .on("tick", ticked);
+
+map.svg.append("text")
+  .style("fill", "black")
+  .style("font-family", "Helvetica Neue")
+  .style("font-weight", "300")
+  .style("font-size", "30")
+  .style("text-anchor", "middle")
+  .text("100'000 syrian refugee children can't wait to go back to school tomorrow" )
+  .attr("x", map.width/2)
+  .attr("y", map.height - 100);
+
+function ticked(d) {
+  map.canvas.clearRect(0, 0, map.width, map.height);
+  map.svg.selectAll("*").remove();
+  map.canvas.lineWidth = 7;
+  map.canvas.lineCap = "round";
+
+  for (var i = 0, node, vx, vy; i < n; ++i) {
+    node = map.canvas.nodes[i];
+    map.canvas.beginPath();
+    map.canvas.moveTo(node.x, node.y);
+    map.canvas.lineTo(node.x + node.vx * 0.1, node.y + node.vy * 0.1)
+    map.canvas.strokeStyle = '#3B6C73';
+    map.canvas.stroke();
+  }
+
+
+}
+
+</script>
