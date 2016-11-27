@@ -20,12 +20,12 @@ canvas {
 }
 
 </style>
-<canvas width="600" height="400"></canvas>
+<canvas width="800" height="400"></canvas>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
 <script>
 var map = {};
-map.width = 600;
+map.width = 800;
 map.height = 400;
 var n = 1000;
 
@@ -85,7 +85,7 @@ map.canvas.nodes = d3.range(n).map(function() {
 
 
 var simulation = d3.forceSimulation(map.canvas.nodes)
-		.alphaTarget(0.1)
+		.alphaTarget(0)
     // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
     // .force("center", d3.forceCenter(map.width / 2, 140))
     .force("Y", d3.forceY().strength(function(d,i){
@@ -106,7 +106,7 @@ function drawCanvas() {
 
     map.canvas.beginPath();
     map.canvas.fillStyle = node.attr("fillStyle");
-    map.canvas.rect(node.attr("x"), node.attr("y"), node.attr("size"), node.attr("size"));
+    // map.canvas.rect(node.attr("x"), node.attr("y"), node.attr("size"), node.attr("size"));
     map.canvas.arc(d.x, d.y, d.r, 0, 2 * Math.PI);
     map.canvas.fill();
     map.canvas.closePath();
@@ -119,36 +119,30 @@ function drawCanvas() {
 
 // Function to create our custom data containers
 function drawCustom(data) {
-  var scale = d3.scaleLinear()
-    .range([10, 390])
-    .domain(d3.extent(data));
-  
+
   //bind the custom containers to the data
   var dataBinding = dataContainer.selectAll("custom.rect")
     .data(data, function(d) { return d; });
 
-  
-  dataBinding
-    .attr("size", 8)
-    .transition()
-    .duration(1000)
-    .attr("size", 15)
-    .attr("fillStyle", "green");
+  // dataBinding
+  //   .attr("size", 8)
+  //   .transition()
+  //   .duration(1000)
+  //   .attr("size", 15)
+  //   .attr("fillStyle", "green");
   
   dataBinding.enter()
       .append("custom")
       .classed("rect", true)
-      .attr("x", scale)
-      .attr("y", 200)
       .attr("size", 8)
       .attr("fillStyle", "red");
   
-  dataBinding.exit()
-    .attr("size", 8)
-    .transition()
-    .duration(1000)
-    .attr("size", 5)
-    .attr("fillStyle", "lightgrey");
+  // dataBinding.exit()
+  //   .attr("size", 8)
+  //   .transition()
+  //   .duration(1000)
+  //   .attr("size", 5)
+  //   .attr("fillStyle", "lightgrey");
 
 }
 </script>
