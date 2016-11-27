@@ -23,7 +23,6 @@ button {
   margin: 600px 60px ;
 }
 </style>
-<<<<<<< HEAD
 <canvas width="600" height="400"></canvas>
 <!-- <button>stop</button> -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -36,18 +35,7 @@ map.width = 1080;
 map.height = 500;
 var bounce_factor = 0.001;
 var n = 5;
-=======
-<canvas width="800" height="400"></canvas>
-<script src="https://d3js.org/d3.v4.min.js"></script>
 
-<script>
-var map = {};
-map.width = 800;
-map.height = 400;
-var n = 1000;
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
-
-//create canvas
 map.canvas =
   d3.select('body')
     .append('canvas')
@@ -55,7 +43,6 @@ map.canvas =
       .attr('height', map.height)
       .node().getContext('2d');
 
-//create svg
 map.svg =
   d3.select('body')
     .append('svg')
@@ -68,42 +55,15 @@ map.svg.append('rect')
   .attr('width', map.width)
   .attr('height', map.height);
 
-map.svg.append("text")
-  .style("fill", "black")
-  .style("font-family", "Helvetica Neue")
-  .style("font-weight", "300")
-  .style("font-size", "30")
-  .style("text-anchor", "middle")
-  .text("text here" )
-  .attr("x", map.width/2)
-  .attr("y", map.height - 100);
 
 
-// create an in memory only element of type 'custom'
-var detachedContainer = document.createElement("custom");
-// Create a d3 selection for the detached container. We won't
-// actually be attaching it to the DOM.
-var dataContainer = d3.select(detachedContainer);
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
-
-//create nodes
 map.canvas.nodes = d3.range(n).map(function() {
   var x = map.width * Math.random(),
-<<<<<<< HEAD
       y =  40*Math.random();
-=======
-      y =  100*Math.random(),
-      r = 2;
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
   return {
     x: x,
     y: y,
-    r: r,
     vx: 0.01,
     vy: 0.01
   };
@@ -111,20 +71,15 @@ map.canvas.nodes = d3.range(n).map(function() {
 
 
 var simulation = d3.forceSimulation(map.canvas.nodes)
-<<<<<<< HEAD
     .alphaTarget(0.2)
-		.alphaDecay(-0.001)
-=======
-		.alphaTarget(0)
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
+    .alphaDecay(-0.001)
     // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
     // .force("center", d3.forceCenter(map.width / 2, 140))
     .force("Y", d3.forceY().strength(function(d,i){
       return -0.5*Math.random();                             
-    	}))
-    .on("tick",drawCanvas);
+      }))
+    .on("tick", ticked);
 
-<<<<<<< HEAD
 map.svg.append("text")
   .style("fill", "black")
   .style("font-family", "Helvetica Neue")
@@ -139,20 +94,9 @@ function ticked() {
 
   map.canvas.clearRect(0, 0, map.width, map.height);
   map.svg.selectAll(".counter").remove();
-=======
-
-function drawCanvas() {
-  map.canvas.clearRect(0, 0, map.width, map.height);
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
   map.canvas.lineWidth = 7;
   map.canvas.lineCap = "round";
-  
-  // select our dummy nodes and draw the data to canvas
-  var elements = dataContainer.selectAll("custom.rect");
-  elements.each(function(d) {
-    var node = d3.select(this);
 
-<<<<<<< HEAD
 
   map.svg.append("text")
   .attr("class","counter")
@@ -188,23 +132,10 @@ function drawCanvas() {
     map.canvas.strokeStyle = '#3B6C73';
     map.canvas.stroke();
   }
-=======
-    map.canvas.beginPath();
-    map.canvas.fillStyle = node.attr("fillStyle");
-    // map.canvas.rect(node.attr("x"), node.attr("y"), node.attr("size"), node.attr("size"));
-    map.canvas.arc(d.x, d.y, d.r, 0, 2 * Math.PI);
-    map.canvas.fill();
-    map.canvas.closePath();
-    
-  })
-  drawCustom(map.canvas.nodes);
-}
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
 
 }
 
 
-<<<<<<< HEAD
 function counterReturn(){
   console.log("called")
   return Math.floor(Math.random()*100);
@@ -212,35 +143,4 @@ function counterReturn(){
 
 
 
-=======
-
-// Function to create our custom data containers
-function drawCustom(data) {
-
-  //bind the custom containers to the data
-  var dataBinding = dataContainer.selectAll("custom.rect")
-    .data(data, function(d) { return d; });
-
-  // dataBinding
-  //   .attr("size", 8)
-  //   .transition()
-  //   .duration(1000)
-  //   .attr("size", 15)
-  //   .attr("fillStyle", "green");
-  
-  dataBinding.enter()
-      .append("custom")
-      .classed("rect", true)
-      .attr("size", 8)
-      .attr("fillStyle", "red");
-  
-  // dataBinding.exit()
-  //   .attr("size", 8)
-  //   .transition()
-  //   .duration(1000)
-  //   .attr("size", 5)
-  //   .attr("fillStyle", "lightgrey");
-
-}
->>>>>>> 487af370140ec6b8344f85d524a12d912f557953
 </script>
