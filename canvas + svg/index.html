@@ -20,15 +20,16 @@ canvas {
 }
 
 </style>
-<canvas width="600" height="400"></canvas>
+<canvas width="800" height="400"></canvas>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
 <script>
-
 var map = {};
-map.width = 1080;
-map.height = 500;
+map.width = 800;
+map.height = 400;
+var n = 1000;
 
+//create canvas
 map.canvas =
   d3.select('body')
     .append('canvas')
@@ -36,6 +37,7 @@ map.canvas =
       .attr('height', map.height)
       .node().getContext('2d');
 
+//create svg
 map.svg =
   d3.select('body')
     .append('svg')
@@ -48,55 +50,99 @@ map.svg.append('rect')
   .attr('width', map.width)
   .attr('height', map.height);
 
-
-var n = 1000;
-
-map.canvas.nodes = d3.range(n).map(function() {
-  var x = map.width * Math.random(),
-      y =  100*Math.random();
-  return {
-    x: x,
-    y: y,
-    vx: 0.01,
-    vy: 0.01
-  };
-});
-
-var simulation = d3.forceSimulation(map.canvas.nodes)
-		.alphaTarget(0.1)
-    // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
-    // .force("center", d3.forceCenter(map.width / 2, 140))
-    .force("Y", d3.forceY().strength(function(d,i){
-      return -0.005*Math.cos(i);                             
-    	}))
-    .on("tick", ticked);
-
 map.svg.append("text")
   .style("fill", "black")
   .style("font-family", "Helvetica Neue")
   .style("font-weight", "300")
   .style("font-size", "30")
   .style("text-anchor", "middle")
-  .text("100'000 syrian refugee children can't wait to go back to school tomorrow" )
+  .text("text here" )
   .attr("x", map.width/2)
   .attr("y", map.height - 100);
 
-function ticked(d) {
+
+// create an in memory only element of type 'custom'
+var detachedContainer = document.createElement("custom");
+// Create a d3 selection for the detached container. We won't
+// actually be attaching it to the DOM.
+var dataContainer = d3.select(detachedContainer);
+
+
+
+//create nodes
+map.canvas.nodes = d3.range(n).map(function() {
+  var x = map.width * Math.random(),
+      y =  100*Math.random(),
+      r = 2;
+  return {
+    x: x,
+    y: y,
+    r: r,
+    vx: 0.01,
+    vy: 0.01
+  };
+});
+
+
+var simulation = d3.forceSimulation(map.canvas.nodes)
+		.alphaTarget(0)
+    // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
+    // .force("center", d3.forceCenter(map.width / 2, 140))
+    .force("Y", d3.forceY().strength(function(d,i){
+      return -0.005*Math.cos(i);                             
+    	}))
+    .on("tick",drawCanvas);
+
+
+function drawCanvas() {
   map.canvas.clearRect(0, 0, map.width, map.height);
-  map.svg.selectAll("*").remove();
   map.canvas.lineWidth = 7;
   map.canvas.lineCap = "round";
+  
+  // select our dummy nodes and draw the data to canvas
+  var elements = dataContainer.selectAll("custom.rect");
+  elements.each(function(d) {
+    var node = d3.select(this);
 
-  for (var i = 0, node, vx, vy; i < n; ++i) {
-    node = map.canvas.nodes[i];
     map.canvas.beginPath();
-    map.canvas.moveTo(node.x, node.y);
-    map.canvas.lineTo(node.x + node.vx * 0.1, node.y + node.vy * 0.1)
-    map.canvas.strokeStyle = '#3B6C73';
-    map.canvas.stroke();
-  }
-
-
+    map.canvas.fillStyle = node.attr("fillStyle");
+    // map.canvas.rect(node.attr("x"), node.attr("y"), node.attr("size"), node.attr("size"));
+    map.canvas.arc(d.x, d.y, d.r, 0, 2 * Math.PI);
+    map.canvas.fill();
+    map.canvas.closePath();
+    
+  })
+  drawCustom(map.canvas.nodes);
 }
 
+
+
+// Function to create our custom data containers
+function drawCustom(data) {
+
+  //bind the custom containers to the data
+  var dataBinding = dataContainer.selectAll("custom.rect")
+    .data(data, function(d) { return d; });
+
+  // dataBinding
+  //   .attr("size", 8)
+  //   .transition()
+  //   .duration(1000)
+  //   .attr("size", 15)
+  //   .attr("fillStyle", "green");
+  
+  dataBinding.enter()
+      .append("custom")
+      .classed("rect", true)
+      .attr("size", 8)
+      .attr("fillStyle", "red");
+  
+  // dataBinding.exit()
+  //   .attr("size", 8)
+  //   .transition()
+  //   .duration(1000)
+  //   .attr("size", 5)
+  //   .attr("fillStyle", "lightgrey");
+
+}
 </script>
