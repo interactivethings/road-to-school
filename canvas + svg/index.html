@@ -33,7 +33,8 @@ button {
 var map = {};
 map.width = 1080;
 map.height = 500;
-var n = 1000;
+var Ndrop = 66;
+var Nstay = 34;
 
 map.canvas =
   d3.select('body')
@@ -55,30 +56,32 @@ map.svg.append('rect')
   .attr('height', map.height);
 
 
-
-
-map.canvas.nodes = d3.range(n).map(function() {
+map.canvas.nodesDrop= d3.range(Ndrop).map(function() {
   var x = map.width * Math.random(),
       y =  40*Math.random();
-  return {
-    x: x,
-    y: y,
-    vx: 0.1,
-    vy: 0.1
-  };
+  return { 
+    x: x, 
+    y: y 
+  }
 });
 
+map.canvas.nodesStay= d3.range(Nstay).map(function() {
+  var x = map.width * Math.random(),
+      y =  40*Math.random();
+  return { 
+    x: x, 
+    y: y 
+  }
+});
 
-var simulation = d3.forceSimulation(map.canvas.nodes)
-    .alphaTarget(0.8)
-    .alphaDecay(0.9)
-    .force("charge", d3.forceManyBody().strength(0.01).distanceMax(1))
-    // .force("center", d3.forceCenter(map.width / 2, 40))
-    .force("Y", d3.forceY().strength(function(d,i){
-      return -0.1*Math.random();                             
-      }));
+var simulationDrop = d3.forceSimulation(map.canvas.nodesDrop)
+    .alphaTarget(0.4)
+    .velocityDecay(0.5)
+    // .force("charge", d3.forceManyBody().strength(0.1).distanceMax(1))
+    .force("Y", d3.forceY().strength(-0.03))
+    // .force("collide", d3.forceCollide().radius(0.9).strength(0.1))
 
-simulation.on("tick", ticked);
+simulationDrop.on("tick", drop);
 
 
 map.svg.append("text")
@@ -91,13 +94,10 @@ map.svg.append("text")
   .attr("x", map.width/2)
   .attr("y", map.height - 100);
 
-function ticked() {
-
+function drop() {
   map.canvas.clearRect(0, 0, map.width, map.height);
-  map.svg.selectAll(".counter").remove();
-  map.canvas.lineWidth = 7;
-  map.canvas.lineCap = "round";
-
+  map.svg.selectAll("text.counter").remove();
+  map.canvas.strokeStyle = '#3B6C73';
 
   map.svg.append("text")
   .attr("class","counter")
@@ -110,29 +110,38 @@ function ticked() {
   .attr("x", map.width/2)
   .attr("y", map.height - 150);
 
-  for (var i = 0, node, vx, vy; i < n; ++i) {
 
+  for (var i = 0, node; i < Ndrop; ++i) {
     //drawing all the dots at every tick
-    node = map.canvas.nodes[i];
-    map.canvas.strokeStyle = '#3B6C73';
-    
-    if ( //physics part
-        node.x > map.width ||
-        node.x < 0 ||
-        node.y > map.height
-       ) 
-    {
-      node.fy = node.y-5;
-      node.fx = node.x;
+    node = map.canvas.nodesDrop[i];
+    //dots touch the bottom
+    if ( node.y > map.height ) 
+    { 
+      // send them back
+      node.y = 0;
+      node.x = node.x;
+    }
+    else {
+
     }
     map.canvas.beginPath();
-    map.canvas.arc(node.x + node.vx * 0.1,node.y + node.vy * 0.1, 1, 0, 2*Math.PI);
+    map.canvas.arc(node.x,node.y, 1, 0, 2*Math.PI);
     map.canvas.stroke();
+    stay();
   }
 }
 
+function stay() {
+  // map.canvas.clearRect(0, 0, map.width, map.height);
+  for (var i = 0, node; i < Nstay; ++i) {
+      node = map.canvas.nodesStay[i];
+      map.canvas.beginPath();
+      map.canvas.arc(node.x,node.y, 10, 0, 2*Math.PI);
+      map.canvas.stroke();
+    }
+}
 
-function counterReturn(){
+function counterReturn() {
   return Math.floor(Math.random()*100);
 }
 
