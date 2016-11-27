@@ -63,19 +63,19 @@ map.canvas.nodes = d3.range(n).map(function() {
   return {
     x: x,
     y: y,
-    vx: 0.01,
-    vy: 0.01
+    vx: 0.1,
+    vy: 0.1
   };
 });
 
 
 var simulation = d3.forceSimulation(map.canvas.nodes)
-    .alphaTarget(0.2)
-		.alphaDecay(-0.001)
-    // .force("charge", d3.forceManyBody().strength(0.01).distanceMax(0.1) )
-    // .force("center", d3.forceCenter(map.width / 2, 140))
+    .alphaTarget(0)
+    .alphaDecay(0)
+    .force("charge", d3.forceManyBody().strength(0.01).distanceMax(1))
+    // .force("center", d3.forceCenter(map.width / 2, 40))
     .force("Y", d3.forceY().strength(function(d,i){
-      return -0.5*Math.random();                             
+      return -0.1+Math.random();                             
     	}));
 
 simulation.on("tick", ticked);
@@ -135,7 +135,6 @@ function ticked() {
 
 
 function counterReturn(){
-  console.log("called")
   return Math.floor(Math.random()*100);
 }
 
