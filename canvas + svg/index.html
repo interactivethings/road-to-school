@@ -43,17 +43,41 @@ rect {
   .attr('width', config.width)
   .attr('height', config.height);
 
-
-  
-
-  /* Actions
+  /* Application state
   ----------------------------------------------- */
+  var state = {
+    data: {}
+  };
+
+
+  /* actions
+  ----------------------------------------------- */
+
   var actions = {
+    initialize: function() {
+      state.data = d3.range(n).map(function() 
+      {
+        return { 
+          x: config.width * Math.random(), 
+          y: 10*Math.random(),
+          vx: 0,
+          vy: 0,
+          moredata: {
+            type: Math.floor(Math.random() + 0.5),
+            text: "story of a student!",
+            age: 0,
+            country: "Syria"
+          }
+        }
+      })
+    },
     move: function(data) {
-      return d3.forceSimulation(data)
-        .alphaTarget(0.9)
-        .velocityDecay(0.5)
-        .force("Y", d3.forceY().strength(-0.07));
+      var simulation = d3.forceSimulation(data)
+                        .alphaTarget(0.9)
+                        .velocityDecay(0.5)
+                        .force("Y", d3.forceY().strength(-0.07));
+      
+      simulation.on("tick", render(data, config));
     },
 
     freeze: function(data) {
@@ -68,36 +92,14 @@ rect {
     }
   };
 
-  /* Data initialization
-  ----------------------------------------------- */
-  var data = d3.range(n).map(function() 
-  {
-    var x = config.width * Math.random(),
-        y =  10*Math.random();
-    return { 
-      x: x, 
-      y: y,
-      vx: 0.1,
-      vy: 0.1,
-      moredata: {
-        type: Math.floor(Math.random() + 0.5),
-        text: "story of a student!",
-        age: 0,
-        country: "Syria"
-      }
-    }
-  })
-
-
   /* Render
   ----------------------------------------------- */
-  function render(data, action, config) { 
-    console.log(action(data))
+  function render(data, config) { 
     // Components
     // Layers
-
-
     // Rendering
+    config.canvas.clearRect(0, 0, config.width, config.height);
+
 
     for (var i = 0, node; i < data.length; ++i) {
       node = data[i];
@@ -109,17 +111,12 @@ rect {
 
   }
 
-  /* Clock
+
+  /* Data initialization
   ----------------------------------------------- */
+  actions.initialize();
+  actions.move(state.data);
 
-  //render data that stay
-
-
-  //render data that move
-  setInterval(render(data, actions.move, config), 1000);
-
-  /* Helper functions
-  ----------------------------------------------- */
 
   </script>
 </body>
