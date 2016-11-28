@@ -21,19 +21,44 @@ rect {
 
   /* Configuration
   ----------------------------------------------- */
-  var map = {};
-  map.width = 1080;
-  map.height = 500;
   var n = 1000;
+  var config = {};
+  config.width = 1080;
+  config.height = 500;
+  config.canvas = d3.select('#canvas')
+    .append('canvas')
+    .attr('id', "canvasDynamic")
+    .attr('width', config.width)
+    .attr('height', config.height)
+    .node().getContext('2d');
+
+  config.svg = d3.select('body')
+    .append('svg')
+      .attr('width', config.width )
+      .attr('height', config.height + 100)
+      .append('g');
+
+  config.svg.append('rect')
+  .attr('class', 'overlay')
+  .attr('width', config.width)
+  .attr('height', config.height);
 
 
-  /* Application state
-  ----------------------------------------------- */
+  
 
-
-  /* State transitions
+  /* Actions
   ----------------------------------------------- */
   var actions = {
+    move: function(data) {
+      return d3.forceSimulation(data)
+        .alphaTarget(0.9)
+        .velocityDecay(0.5)
+        .force("Y", d3.forceY().strength(-0.07));
+    },
+
+    freeze: function(data) {
+
+    },
     onHover: function(data) {
 
     },
@@ -47,65 +72,51 @@ rect {
   ----------------------------------------------- */
   var data = d3.range(n).map(function() 
   {
-    var x = map.width * Math.random(),
+    var x = config.width * Math.random(),
         y =  10*Math.random();
     return { 
       x: x, 
       y: y,
       vx: 0.1,
       vy: 0.1,
-      type: Math.floor(Math.random() + 0.5),
-      text: "story of a student!"
+      moredata: {
+        type: Math.floor(Math.random() + 0.5),
+        text: "story of a student!",
+        age: 0,
+        country: "Syria"
+      }
     }
   })
 
 
   /* Render
   ----------------------------------------------- */
-  function render(data, actions) { 
-
-    // Layers
-    map.canvas =
-      d3.select('#canvas')
-        .append('canvas')
-        .attr('id', "canvasDynamic")
-        .attr('width', map.width)
-        .attr('height', map.height)
-        .node().getContext('2d');
-
-    map.svg =
-      d3.select('body')
-        .append('svg')
-          .attr('width', map.width )
-          .attr('height', map.height + 100)
-          .append('g');
-
-    map.svg.append('rect')
-      .attr('class', 'overlay')
-      .attr('width', map.width)
-      .attr('height', map.height);
-
+  function render(data, action, config) { 
+    console.log(action(data))
     // Components
+    // Layers
 
-    var simulation = d3.forceSimulation(data)
-      .alphaTarget(0.9)
-      .velocityDecay(0.5)
-      .force("Y", d3.forceY().strength(-0.07));
 
     // Rendering
 
     for (var i = 0, node; i < data.length; ++i) {
       node = data[i];
-      map.canvas.beginPath();
-      map.canvas.arc(node.x,node.y, 3, 0, 2*Math.PI);
-      map.canvas.fillStyle = '#3B6C73';
-      map.canvas.fill();
+      config.canvas.beginPath();
+      config.canvas.arc(node.x,node.y, 3, 0, 2*Math.PI);
+      config.canvas.fillStyle = '#3B6C73';
+      config.canvas.fill();
     }
-
 
   }
 
-  render(data, null);
+  /* Clock
+  ----------------------------------------------- */
+
+  //render data that stay
+
+
+  //render data that move
+  setInterval(render(data, actions.move, config), 1000);
 
   /* Helper functions
   ----------------------------------------------- */
