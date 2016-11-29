@@ -18,6 +18,8 @@ button {
   <button id="A">behaviour A: vertical movement</button>
   <button id="B">behaviour B: school vs no school</button>
   <button id="C">behaviour C: change text</button>
+  <button id="D">behaviour D: horizontal movement</button>
+  <button id="E">behaviour E: move upwards</button>
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -71,6 +73,30 @@ button {
           })
           return state;
         }
+      },
+      {
+        id: "D",
+        algo: function(state) {
+          var sim = d3.forceSimulation(state.data)
+                  .alphaTarget(0.9)
+                  .velocityDecay(0.5)
+                  .force("X", d3.forceX().strength(0.01))
+                  .stop()
+                sim.tick();
+                return state;
+        }
+      },
+      {
+        id: "E",
+        algo: function(state) {
+          var sim = d3.forceSimulation(state.data)
+                  .alphaTarget(0.9)
+                  .velocityDecay(0.5)
+                  .force("Y", d3.forceY().strength(0.01))
+                  .stop()
+                sim.tick();
+                return state;
+        }
       }
     ]
   };
@@ -92,7 +118,7 @@ button {
     .style("font-weight", "300")
     .style("font-size", "30")
     .style("text-anchor", "middle")
-    .text("here's some object-repellent text" )
+    // .text("here's some object-repellent text" )
     .attr("x", config.width/2)
     .attr("y", config.height - 100);
 
