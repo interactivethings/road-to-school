@@ -15,8 +15,8 @@ button {
 }
 </style>
 <body>
-  <button id="first">click me!</button>
-  <button id="second">no, click me!</button>
+  <button id="A">behavior A</button>
+  <button id="B">behavior B</button>
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -24,6 +24,9 @@ button {
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
 
+    /* Helper functions
+  ----------------------------------------------- */
+  var identity = function(x) { return x; };
 
   /* Configuration
   ----------------------------------------------- */
@@ -106,38 +109,26 @@ button {
   }
   
 
-  /* Update state
-  ----------------------------------------------- */
-  var updateState = function(state) {
-    // return state;
-    return identity;
-  }
-
-  /* Choose algorithm function
-  ----------------------------------------------- */
-  var chooseAlgo = function(state, time) {
-    // //if elapsed time reaches 60 - apply opposite force
-    // var algosWithinTime = config.algoMap.filter(function(d) {
-    //   return d.t < time;
-    // });
-    // var lastAlgo = algosWithinTime[algosWithinTime.length - 1];
-    // return lastAlgo ? lastAlgo : config.algoMap[config.algoMap.length - 1];
-
-    return identity;
-
-  }
-
-
   /* Render
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    d3.select("#first").on('click', function() { /* the first button was clicked */
-      //will select the algorithm according to the button clicked
-      console.log("click")       
-      // var event = d3.event()  
-      // actions.onSelectAlgorithm( apply the algorithm and return the state)
+    d3.select("#A").on('click', function() {
+      //apply first algorithm
+      actions.onSelectAlgorithm(function() {
+        state.selectedAlgorithm = algo1;
+      });
     });
+
+    d3.select("#B").on('click', function() {
+      //apply first algorithm
+      actions.onSelectAlgorithm(function() {
+        state.selectedAlgorithm = algo2;
+      });
+    });
+
+
+    state.selectedAlgorithm(state);
 
     canvas.clearRect(0, 0, state.width, state.height);
     for (var i = 0, node; i < state.data.length; ++i) {
@@ -154,16 +145,8 @@ button {
   // Main loop
   (function (state, time, canvas, svg, config) {
     function main() {
-      //advance timer
       ++time; 
-
-      // // update the current state (using events and actions from HTML)
-      // state = updateState(state);
-      // // choose algorithm according to which point we are in the timeline
-      // var algo = chooseAlgo(state, time);
-      // // apply algorithm to state 
-      // state = algo(state);
-
+      
       render(state, canvas, svg, { /* the actions object is passed to the render function */
         onSelectAlgorithm: function(selectedAlgorithm /* = "fallDown" */) {
           state.selectedAlgorithm = selectedAlgorithm;
@@ -171,14 +154,12 @@ button {
       });
     };
 
-    d3.interval(main, 1000);
+    d3.interval(main, 10);
 
   })(makeInitialState(config), 0, canvas, svg, config);
 
 
-  /* Helper functions
-  ----------------------------------------------- */
-  var identity = function(x) { return x; };
+
 
   </script>
 </body>
