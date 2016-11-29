@@ -45,7 +45,7 @@ button {
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
                   .force("Y", d3.forceY().strength(-0.01))
-                  .stop()
+                  .stop();
                 sim.tick();
                 return state;
               }
@@ -57,7 +57,7 @@ button {
                     return d.moredata.type === 0;
                   })
                   .map(function(d){
-                    d.moredata.color = '#fff';
+                    d.moredata.color = 'red';
                   })
                 return state;
               }
@@ -81,7 +81,7 @@ button {
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
                   .force("X", d3.forceX().strength(0.01))
-                  .stop()
+                  .stop();
                 sim.tick();
                 return state;
         }
@@ -93,7 +93,7 @@ button {
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
                   .force("Y", d3.forceY().strength(0.01))
-                  .stop()
+                  .stop();
                 sim.tick();
                 return state;
         }
@@ -118,7 +118,7 @@ button {
     .style("font-weight", "300")
     .style("font-size", "30")
     .style("text-anchor", "middle")
-    // .text("here's some object-repellent text" )
+    .text("here's some text that should repel stuff" )
     .attr("x", config.width/2)
     .attr("y", config.height - 100);
 
@@ -171,20 +171,27 @@ button {
       
     });
 
-    // actions.avoidCollissions(function() {  /* prevent collission*/
-    //   var box = d3.select("text").node().getBBox();
-    //   state.data.filter(function(d) {
-    //     return d.y > box.y;
-    //   })
-    //   .map(function(d){
-    //     d.y = 0; /* just sends them back to the top of the canvas for the moment*/
-    //   })
-    // });
+    actions.avoidCollissions(function() {  /* prevent collission*/
+      var box = d3.select("text").node().getBBox();
+      state.data.filter(function(d) {
+        return d.y > box.y;
+      })
+      .filter(function(d) {
+        return d.x > box.x;
+      })
+      .filter(function(d) {
+        return d.x < box.x + box.width
+      })
+      .map(function(d){
+        d.fy = d.y; 
+        d.fx = d.x;
+      })
+    });
 
     // --------------------------------Apply the actions
 
     state.selectedAlgorithm(state);   /* selectedAlgorithm */
-    // state.collisions(state); /* collisions */ 
+    state.collisions(state); /* collisions */ 
 
     // --------------------------------Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
