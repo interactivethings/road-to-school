@@ -11,12 +11,12 @@ svg
   left: 0;
 }
 button {
-  margin: 10px 0px 0px 10px;
+  margin: 10px;
 }
 </style>
 <body>
-  <button id="A">behavior A</button>
-  <button id="B">behavior B</button>
+  <button id="A">behaviour A</button>
+  <button id="B">behaviour B</button>
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -57,6 +57,15 @@ button {
     .attr('height', config.height + 100)
     .append('g');
 
+  svg.append("text")
+    .style("fill", "black")
+    .style("font-family", "Helvetica Neue")
+    .style("font-weight", "300")
+    .style("font-size", "30")
+    .style("text-anchor", "middle")
+    .text("here's some object-repellent text" )
+    .attr("x", config.width/2)
+    .attr("y", config.height - 100);
 
   /* State initialization
   ----------------------------------------------- */
@@ -113,18 +122,18 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    d3.select("#A").on('click', function() {
-      //apply first algorithm
-      actions.onSelectAlgorithm(function() {
-        state.selectedAlgorithm = algo1;
-      });
-    });
-
-    d3.select("#B").on('click', function() {
-      //apply second algorithm
-      actions.onSelectAlgorithm(function() {
-        state.selectedAlgorithm = algo2;
-      });
+    d3.selectAll("button").on('click', function() {
+      if (d3.event.target.id === "A") {
+        //apply first algorithm
+        actions.onSelectAlgorithm(function() {
+          state.selectedAlgorithm = algo1;
+        });
+      }
+      else {
+        actions.onSelectAlgorithm(function() {
+          state.selectedAlgorithm = algo2;
+        });
+      }
     });
 
     state.selectedAlgorithm(state);
