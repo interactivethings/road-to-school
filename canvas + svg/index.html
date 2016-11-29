@@ -31,7 +31,7 @@ button {
   /* Configuration
   ----------------------------------------------- */
   var config = { 
-    n: 1000, 
+    n: 10, 
     width: 1080, 
     height: 500, 
     algoMap: [ 
@@ -89,7 +89,8 @@ button {
         timeSinceStart: 0,
         width: config.width,
         height: config.height,
-        selectedAlgorithm: identity  /* we initialize this with the identity algorithm*/
+        selectedAlgorithm: identity,
+        collisions: identity
       };
       return state;
   };
@@ -122,9 +123,10 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    d3.selectAll("button").on('click', function() {
-      if (d3.event.target.id === "A") {
-        //apply first algorithm
+    // --------------------------------Define the actions
+
+    d3.selectAll("button").on('click', function() { /* onSelectAlgorithm */
+      if (d3.event.target.id === "A") {  /* I tried doing this with ternary expressions but got loooost */
         actions.onSelectAlgorithm(function() {
           state.selectedAlgorithm = algo1;
         });
@@ -136,9 +138,23 @@ button {
       }
     });
 
-    state.selectedAlgorithm(state);
+    actions.avoidCollissions(function() {  /* prevent collission*/
+      var box = d3.select("text").node().getBBox();
+      state.data.filter(function(d) {
+        return d.y > box.y;
+      })
+      .map(function(d){
+        d.y = 0; /* just sends them back to the top of the canvas for the moment*/
+      })
+    });
 
-    canvas.clearRect(0, 0, state.width, state.height);
+    // --------------------------------Apply the actions
+
+    state.selectedAlgorithm(state);   /* selectedAlgorithm */
+    state.collisions(state); /* collisions */
+
+    // --------------------------------Draw the canvas
+    canvas.clearRect(0, 0, state.width, state.height); 
     for (var i = 0, node; i < state.data.length; ++i) {
       node = state.data[i];
       canvas.beginPath();
@@ -153,9 +169,12 @@ button {
     function main() {
       ++time; 
 
-      render(state, canvas, svg, { /* the actions object is passed to the render function */
-        onSelectAlgorithm: function(selectedAlgorithm /* = "fallDown" */) {
+      render(state, canvas, svg, {
+        onSelectAlgorithm: function(selectedAlgorithm) {
           state.selectedAlgorithm = selectedAlgorithm;
+        },
+        avoidCollissions: function(collisions) {
+          state.collisions = collisions;
         }
       });
     };
