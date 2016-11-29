@@ -25,11 +25,9 @@ button {
     <div id="svg"></div>
   </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="fn.js"></script>
   <script>
 
-    /* Helper functions
-  ----------------------------------------------- */
-  var identity = function(x) { return x; };
 
   /* Configuration
   ----------------------------------------------- */
@@ -145,8 +143,8 @@ button {
         timeSinceStart: 0,
         width: config.width,
         height: config.height,
-        selectedAlgorithm: identity,
-        collisions: identity
+        selectedAlgorithm: fn.identity,
+        collisions: fn.identity
       };
       return state;
   };
@@ -171,7 +169,7 @@ button {
       
     });
 
-    actions.avoidCollissions(function() {  /* prevent collission*/
+    actions.avoidCollisions(function() {  /* prevent collission*/
       var box = d3.select("text").node().getBBox();
       state.data.filter(function(d) {
         return d.y > box.y;
@@ -206,17 +204,20 @@ button {
 
   // Main loop
   (function (state, time, canvas, svg, config) {
-    function main() {
-      ++time; 
 
-      render(state, canvas, svg, {
+    var actions = {
         onSelectAlgorithm: function(selectedAlgorithm) {
           state.selectedAlgorithm = selectedAlgorithm;
         },
-        avoidCollissions: function(collisions) {
+
+        avoidCollisions: function(collisions) {
           state.collisions = collisions;
         }
-      });
+      };
+
+    function main() {
+      ++time; 
+      render(state, canvas, svg, actions);
     };
 
     d3.interval(main, 10);
