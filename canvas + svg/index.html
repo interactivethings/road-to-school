@@ -10,11 +10,17 @@ svg
   top: 0;
   left: 0;
 }
+button {
+  margin: 10px 0px 0px 10px;
+}
 </style>
 <body>
-  <div id="canvas"></div>
-  <button id="first-button">click me!</button>
-  <button id="second-button">no, click me!</button>
+  <button id="first">click me!</button>
+  <button id="second">no, click me!</button>
+  <div style="position: relative">
+    <div id="canvas"></div>
+    <div id="svg"></div>
+  </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
 
@@ -42,7 +48,7 @@ svg
     .attr('height', config.height)
     .node().getContext('2d');
 
-  var svg = d3.select('body')
+  var svg = d3.select('#svg')
     .append('svg')
   .attr('width', config.width )
   .attr('height', config.height + 100)
@@ -121,14 +127,14 @@ svg
 
   }
 
+
   /* Render
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-
-    d3.select("#first-button").on('click', function() { /* the first button was clicked */
+    d3.select("#first").on('click', function() { /* the first button was clicked */
       //will select the algorithm according to the button clicked
-      
+      console.log("click")       
       // var event = d3.event()  
       // actions.onSelectAlgorithm( apply the algorithm and return the state)
     });
@@ -165,7 +171,7 @@ svg
       });
     };
 
-    d3.interval(main, 40);
+    d3.interval(main, 1000);
 
   })(makeInitialState(config), 0, canvas, svg, config);
 
