@@ -21,14 +21,14 @@ rect {
 
   /* Configuration
   ----------------------------------------------- */
-  var config = { n: 1000, width: 1080, height: 500, algos: []};
-  config.algos = [ 
+  var config = { n: 1000, width: 1080, height: 500, algoMap: []};
+  config.algoMap = [ 
     {
     t: 0,
-    alg: algo1
+    algo: algo1
     },
     {
-      t: 2000,
+      t: 60,
       algo: algo2
     }
   ];
@@ -52,15 +52,16 @@ rect {
 
   /* Application state
   ----------------------------------------------- */
-  var state = {
-    data: {},
-    timeSinceStart: 0
-  };
+
 
 
   /* State initialization
   ----------------------------------------------- */
   var mkInitialState = function(config) {
+      var state = {
+        data: [],
+        timeSinceStart: 0
+      };
       state.data = d3.range(config.n).map(function() 
       {
         return { 
@@ -76,6 +77,7 @@ rect {
           }
         }
       })
+      return state;
   };
   
 
@@ -112,9 +114,9 @@ rect {
 
   /* Choose algorithm function
   ----------------------------------------------- */
-  var chooseAlgo = function(state, config) {
+  var chooseAlgo = function(state, time) {
     //if elapsed time reaches 60 - apply opposite force
-    return config.timeSinceStart > 60 ? algo2 : algo1
+    return time > config.algoMap[1].t ? algo2 : algo1
   }
 
   /* Render
@@ -131,20 +133,19 @@ rect {
   }
 
   //initialize state
-  mkInitialState(config);
+  // mkInitialState(config);
 
   // Main loop
   (function (state, time, canvas, svg, config) {
     function main() {
       //advance timer
       ++time;
-      config.timeSinceStart = time;
 
       // update the current state (using events and actions from HTML)
       // state = updateState(state);
 
       // choose algorithm according to which point we are in the timeline
-      var algo = chooseAlgo(state, config);
+      var algo = chooseAlgo(state, time);
       // apply algorithm to state 
       state = algo(state);
 
@@ -153,9 +154,9 @@ rect {
     };
 
     //d3 timer makes the vis advance
-    d3.interval(main, 100);
+    d3.interval(main, 40);
 
-  })(state, 0, canvas, svg, config);
+  })(mkInitialState(config), 0, canvas, svg, config);
 
   </script>
 </body>
