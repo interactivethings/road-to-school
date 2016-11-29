@@ -15,8 +15,9 @@ button {
 }
 </style>
 <body>
-  <button id="A">behaviour A</button>
-  <button id="B">behaviour B</button>
+  <button id="A">behaviour A: vertical movement</button>
+  <button id="B">behaviour B: school vs no school</button>
+  <button id="C">behaviour C: change text</button>
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -31,17 +32,45 @@ button {
   /* Configuration
   ----------------------------------------------- */
   var config = { 
-    n: 10, 
+    n: 1000, 
     width: 1080, 
     height: 500, 
     algoMap: [ 
       {
-      t: 0,
-      algo: algo1
+        id: "A",
+        algo: function(state) { 
+                var sim = d3.forceSimulation(state.data)
+                  .alphaTarget(0.9)
+                  .velocityDecay(0.5)
+                  .force("Y", d3.forceY().strength(-0.01))
+                  .stop()
+                sim.tick();
+                return state;
+              }
       },
       {
-        t: 60,
-        algo: algo2
+        id: "B",
+        algo: function(state) {
+                state.data.filter(function(d) {
+                    return d.moredata.type === 0;
+                  })
+                  .map(function(d){
+                    d.moredata.color = '#fff';
+                  })
+                return state;
+              }
+      },
+      {
+        id: "C",
+        algo: function(state) {
+          state.data.filter(function(d,i) {
+            return i === Math.floor(Math.random() * state.data.length);
+          })
+          .map(function(d) {
+            d3.select("text").text(d.moredata.text)
+          })
+          return state;
+        }
       }
     ]
   };
@@ -75,14 +104,15 @@ button {
               {
                 return { 
                   x: config.width * Math.random(), 
-                  y: 10*Math.random(),
+                  y: config.height/2*Math.random(),
                   vx: 0,
                   vy: 0,
                   moredata: {
-                    type: Math.floor(Math.random() + 0.5),
+                    type: Math.floor(Math.random() + 0.5),  /* 1: school, 0: no school */
                     text: "story of a student!",
                     age: 0,
-                    country: "Syria"
+                    country: "Syria",
+                    color: '#3B6C73'
                   }
                 }
               }),
@@ -96,29 +126,6 @@ button {
   };
   
 
-    /* Algorithm definitions
-  ----------------------------------------------- */
-  var algo1 = function(state) {
-    var sim = d3.forceSimulation(state.data)
-      .alphaTarget(0.9)
-      .velocityDecay(0.5)
-      .force("Y", d3.forceY().strength(-0.07))
-      .stop()
-    sim.tick();
-    return state;
-  }
-
-  var algo2 = function(state) {
-    var sim = d3.forceSimulation(state.data)
-      .alphaTarget(0.9)
-      .velocityDecay(0.5)
-      .force("Y", d3.forceY().strength(0.1))
-      .stop()
-    sim.tick();
-    return state;
-  }
-  
-
   /* Render
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
@@ -126,32 +133,32 @@ button {
     // --------------------------------Define the actions
 
     d3.selectAll("button").on('click', function() { /* onSelectAlgorithm */
-      if (d3.event.target.id === "A") {  /* I tried doing this with ternary expressions but got loooost */
+
+      config.algoMap.filter(function(algo) {
+        return algo.id === d3.event.target.id;
+      })
+      .map(function(d) {
         actions.onSelectAlgorithm(function() {
-          state.selectedAlgorithm = algo1;
+          state.selectedAlgorithm = d.algo;
         });
-      }
-      else {
-        actions.onSelectAlgorithm(function() {
-          state.selectedAlgorithm = algo2;
-        });
-      }
+      })
+      
     });
 
-    actions.avoidCollissions(function() {  /* prevent collission*/
-      var box = d3.select("text").node().getBBox();
-      state.data.filter(function(d) {
-        return d.y > box.y;
-      })
-      .map(function(d){
-        d.y = 0; /* just sends them back to the top of the canvas for the moment*/
-      })
-    });
+    // actions.avoidCollissions(function() {  /* prevent collission*/
+    //   var box = d3.select("text").node().getBBox();
+    //   state.data.filter(function(d) {
+    //     return d.y > box.y;
+    //   })
+    //   .map(function(d){
+    //     d.y = 0; /* just sends them back to the top of the canvas for the moment*/
+    //   })
+    // });
 
     // --------------------------------Apply the actions
 
     state.selectedAlgorithm(state);   /* selectedAlgorithm */
-    state.collisions(state); /* collisions */
+    // state.collisions(state); /* collisions */ 
 
     // --------------------------------Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
@@ -159,7 +166,7 @@ button {
       node = state.data[i];
       canvas.beginPath();
       canvas.arc(node.x,node.y, 3, 0, 2*Math.PI);
-      canvas.fillStyle = '#3B6C73';
+      canvas.fillStyle = node.moredata.color;
       canvas.fill();
     }
   }
