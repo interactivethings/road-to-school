@@ -21,24 +21,31 @@ rect {
 
   /* Configuration
   ----------------------------------------------- */
-  var n = 1000;
-  var config = {};
-  config.width = 1080;
-  config.height = 500;
-  config.canvas = d3.select('#canvas')
+  var config = { n: 1000, width: 1080, height: 500, algos: []};
+  config.algos = [ 
+    {
+    t: 0,
+    alg: algo1
+    },
+    {
+      t: 2000,
+      algo: algo2
+    }
+  ];
+  var canvas = d3.select('#canvas')
     .append('canvas')
     .attr('id', "canvasDynamic")
     .attr('width', config.width)
     .attr('height', config.height)
     .node().getContext('2d');
 
-  config.svg = d3.select('body')
+  var svg = d3.select('body')
     .append('svg')
       .attr('width', config.width )
       .attr('height', config.height + 100)
       .append('g');
 
-  config.svg.append('rect')
+  svg.append('rect')
   .attr('class', 'overlay')
   .attr('width', config.width)
   .attr('height', config.height);
@@ -46,16 +53,15 @@ rect {
   /* Application state
   ----------------------------------------------- */
   var state = {
-    data: {}
+    data: {},
+    timeSinceStart: 0
   };
 
 
-  /* actions
+  /* State initialization
   ----------------------------------------------- */
-
-  var actions = {
-    initialize: function() {
-      state.data = d3.range(n).map(function() 
+  var mkInitialState = function(config) {
+      state.data = d3.range(config.n).map(function() 
       {
         return { 
           x: config.width * Math.random(), 
@@ -70,53 +76,86 @@ rect {
           }
         }
       })
-    },
-    move: function(data) {
-      var simulation = d3.forceSimulation(data)
-                        .alphaTarget(0.9)
-                        .velocityDecay(0.5)
-                        .force("Y", d3.forceY().strength(-0.07));
-      
-      simulation.on("tick", render(data, config));
-    },
-
-    freeze: function(data) {
-
-    },
-    onHover: function(data) {
-
-    },
-
-    onClick: function(data) {
-
-    }
   };
+  
 
-  /* Render
+    /* Algorithm definitions
   ----------------------------------------------- */
-  function render(data, config) { 
-    // Components
-    // Layers
-    // Rendering
-    config.canvas.clearRect(0, 0, config.width, config.height);
+  var algo1 = function(state) {
+    var sim = d3.forceSimulation(state.data)
+      .alphaTarget(0.9)
+      .velocityDecay(0.5)
+      .force("Y", d3.forceY().strength(-0.07))
+      .stop()
+      // .tick(); depends on whether to run this once or 300 times
+    sim.tick();
+    return state;
+  }
 
-
-    for (var i = 0, node; i < data.length; ++i) {
-      node = data[i];
-      config.canvas.beginPath();
-      config.canvas.arc(node.x,node.y, 3, 0, 2*Math.PI);
-      config.canvas.fillStyle = '#3B6C73';
-      config.canvas.fill();
-    }
-
+  var algo2 = function(state) {
+    var sim = d3.forceSimulation(state.data)
+      .alphaTarget(0.9)
+      .velocityDecay(0.5)
+      .force("Y", d3.forceY().strength(0.1))
+      .stop()
+      // .tick(); depends on whether to run this once or 300 times
+    sim.tick();
+    return state;
   }
 
 
-  /* Data initialization
-  ----------------------------------------------- */
-  actions.initialize();
-  actions.move(state.data);
 
+  // var algo2 = function(state) {
+  //   state.data = state.data.map(function(r){return r.y = r.y + 1})
+  //   return state;
+  // }
+
+  /* Choose algorithm function
+  ----------------------------------------------- */
+  var chooseAlgo = function(state, config) {
+    //if elapsed time reaches 40 - apply opposite force
+    return config.timeSinceStart > 50 ? algo2 : algo1
+  }
+
+  /* Render
+  ----------------------------------------------- */
+  function render(state, canvas, svg, config) {
+    canvas.clearRect(0, 0, config.width, config.height);
+    for (var i = 0, node; i < state.data.length; ++i) {
+      node = state.data[i];
+      canvas.beginPath();
+      canvas.arc(node.x,node.y, 3, 0, 2*Math.PI);
+      canvas.fillStyle = '#3B6C73';
+      canvas.fill();
+    }
+  }
+
+  //initialize state
+  mkInitialState(config);
+
+  // Main loop
+  (function (state, time, canvas, svg, config) {
+    function main() {
+      //advance timer
+      ++time;
+      config.timeSinceStart = time;
+
+      // update the current state (using events and actions from HTML)
+      // state = updateState(state);
+
+      // choose algorithm according to which point we are in the timeline
+      var algo = chooseAlgo(state, config);
+      // apply algorithm to state 
+      state = algo(state);
+
+      // render canvas and svg elements
+      render(state, canvas, svg, config);
+    };
+
+    //d3 timer makes the vis advance
+    d3.interval(main, 100);
+
+  })(state, 0, canvas, svg, config);
 
   </script>
 </body>
