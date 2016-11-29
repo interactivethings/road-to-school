@@ -53,9 +53,9 @@ button {
 
   var svg = d3.select('#svg')
     .append('svg')
-  .attr('width', config.width )
-  .attr('height', config.height + 100)
-  .append('g');
+    .attr('width', config.width )
+    .attr('height', config.height + 100)
+    .append('g');
 
 
   /* State initialization
@@ -121,12 +121,11 @@ button {
     });
 
     d3.select("#B").on('click', function() {
-      //apply first algorithm
+      //apply second algorithm
       actions.onSelectAlgorithm(function() {
         state.selectedAlgorithm = algo2;
       });
     });
-
 
     state.selectedAlgorithm(state);
 
@@ -140,13 +139,11 @@ button {
     }
   }
 
-
-
   // Main loop
   (function (state, time, canvas, svg, config) {
     function main() {
       ++time; 
-      
+
       render(state, canvas, svg, { /* the actions object is passed to the render function */
         onSelectAlgorithm: function(selectedAlgorithm /* = "fallDown" */) {
           state.selectedAlgorithm = selectedAlgorithm;
@@ -155,11 +152,7 @@ button {
     };
 
     d3.interval(main, 10);
-
   })(makeInitialState(config), 0, canvas, svg, config);
-
-
-
 
   </script>
 </body>
