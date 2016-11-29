@@ -10,73 +10,69 @@ svg
   top: 0;
   left: 0;
 }
-rect { 
-  fill: transparent; 
-}
 </style>
 <body>
   <div id="canvas"></div>
+  <button id="first-button">click me!</button>
+  <button id="second-button">no, click me!</button>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script>
 
+
   /* Configuration
   ----------------------------------------------- */
-  var config = { n: 1000, width: 1080, height: 500, algoMap: []};
-  config.algoMap = [ 
-    {
-    t: 0,
-    algo: algo1
-    },
-    {
-      t: 60,
-      algo: algo2
-    }
-  ];
+  var config = { 
+    n: 1000, 
+    width: 1080, 
+    height: 500, 
+    algoMap: [ 
+      {
+      t: 0,
+      algo: algo1
+      },
+      {
+        t: 60,
+        algo: algo2
+      }
+    ]
+  };
   var canvas = d3.select('#canvas')
     .append('canvas')
-    .attr('id', "canvasDynamic")
     .attr('width', config.width)
     .attr('height', config.height)
     .node().getContext('2d');
 
   var svg = d3.select('body')
     .append('svg')
-      .attr('width', config.width )
-      .attr('height', config.height + 100)
-      .append('g');
-
-  svg.append('rect')
-  .attr('class', 'overlay')
-  .attr('width', config.width)
-  .attr('height', config.height);
-
-  /* Application state
-  ----------------------------------------------- */
-
+  .attr('width', config.width )
+  .attr('height', config.height + 100)
+  .append('g');
 
 
   /* State initialization
   ----------------------------------------------- */
-  var mkInitialState = function(config) {
+  var makeInitialState = function(config) {
       var state = {
-        data: [],
-        timeSinceStart: 0
+        data: d3.range(config.n).map(function() 
+              {
+                return { 
+                  x: config.width * Math.random(), 
+                  y: 10*Math.random(),
+                  vx: 0,
+                  vy: 0,
+                  moredata: {
+                    type: Math.floor(Math.random() + 0.5),
+                    text: "story of a student!",
+                    age: 0,
+                    country: "Syria"
+                  }
+                }
+              }),
+        timeSinceStart: 0,
+        width: config.width,
+        height: config.height,
+        selectedAlgorithm: identity  /* we initialize this with the identity algorithm*/
       };
-      state.data = d3.range(config.n).map(function() 
-      {
-        return { 
-          x: config.width * Math.random(), 
-          y: 10*Math.random(),
-          vx: 0,
-          vy: 0,
-          moredata: {
-            type: Math.floor(Math.random() + 0.5),
-            text: "story of a student!",
-            age: 0,
-            country: "Syria"
-          }
-        }
-      })
       return state;
   };
   
@@ -89,7 +85,6 @@ rect {
       .velocityDecay(0.5)
       .force("Y", d3.forceY().strength(-0.07))
       .stop()
-      // .tick(); depends on whether to run this once or 300 times
     sim.tick();
     return state;
   }
@@ -100,29 +95,45 @@ rect {
       .velocityDecay(0.5)
       .force("Y", d3.forceY().strength(0.1))
       .stop()
-      // .tick(); depends on whether to run this once or 300 times
     sim.tick();
     return state;
   }
-
-
-  // var algo2 = function(state) {
-  //   state.data = state.data.map(function(r){return r.y = r.y + 1})
-  //   return state;
-  // }
   
+
+  /* Update state
+  ----------------------------------------------- */
+  var updateState = function(state) {
+    // return state;
+    return identity;
+  }
 
   /* Choose algorithm function
   ----------------------------------------------- */
   var chooseAlgo = function(state, time) {
-    //if elapsed time reaches 60 - apply opposite force
-    return time > config.algoMap[1].t ? algo2 : algo1
+    // //if elapsed time reaches 60 - apply opposite force
+    // var algosWithinTime = config.algoMap.filter(function(d) {
+    //   return d.t < time;
+    // });
+    // var lastAlgo = algosWithinTime[algosWithinTime.length - 1];
+    // return lastAlgo ? lastAlgo : config.algoMap[config.algoMap.length - 1];
+
+    return identity;
+
   }
 
   /* Render
   ----------------------------------------------- */
-  function render(state, canvas, svg, config) {
-    canvas.clearRect(0, 0, config.width, config.height);
+  function render(state, canvas, svg, actions) {
+
+
+    d3.select("#first-button").on('click', function() { /* the first button was clicked */
+      //will select the algorithm according to the button clicked
+      
+      // var event = d3.event()  
+      // actions.onSelectAlgorithm( apply the algorithm and return the state)
+    });
+
+    canvas.clearRect(0, 0, state.width, state.height);
     for (var i = 0, node; i < state.data.length; ++i) {
       node = state.data[i];
       canvas.beginPath();
@@ -132,31 +143,36 @@ rect {
     }
   }
 
-  //initialize state
-  // mkInitialState(config);
+
 
   // Main loop
   (function (state, time, canvas, svg, config) {
     function main() {
       //advance timer
-      ++time;
+      ++time; 
 
-      // update the current state (using events and actions from HTML)
+      // // update the current state (using events and actions from HTML)
       // state = updateState(state);
+      // // choose algorithm according to which point we are in the timeline
+      // var algo = chooseAlgo(state, time);
+      // // apply algorithm to state 
+      // state = algo(state);
 
-      // choose algorithm according to which point we are in the timeline
-      var algo = chooseAlgo(state, time);
-      // apply algorithm to state 
-      state = algo(state);
-
-      // render canvas and svg elements
-      render(state, canvas, svg, config);
+      render(state, canvas, svg, { /* the actions object is passed to the render function */
+        onSelectAlgorithm: function(selectedAlgorithm /* = "fallDown" */) {
+          state.selectedAlgorithm = selectedAlgorithm;
+        }
+      });
     };
 
-    //d3 timer makes the vis advance
     d3.interval(main, 40);
 
-  })(mkInitialState(config), 0, canvas, svg, config);
+  })(makeInitialState(config), 0, canvas, svg, config);
+
+
+  /* Helper functions
+  ----------------------------------------------- */
+  var identity = function(x) { return x; };
 
   </script>
 </body>
