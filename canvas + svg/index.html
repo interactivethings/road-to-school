@@ -36,7 +36,7 @@ button {
       {
         id: "vertical",
         behaviour: function(state) { 
-                var sim = d3.forceSimulation(state.allData) // Vertical force applied only to the dots
+                var sim = d3.forceSimulation(state.allData) 
                   .alphaTarget(0.8)
                   .force("Y", d3.forceY().strength(function(d){  
                     return d.static ? 0.0001 : -0.01; // ------------------------------------- Dots move downwards, obstacle slighly supported from underneath
@@ -70,6 +70,8 @@ button {
     ]
   };
 
+  /* DOM elements
+  ----------------------------------------------- */
   var canvas = d3.select('#canvas')
     .append('canvas')
     .attr('width', config.width)
