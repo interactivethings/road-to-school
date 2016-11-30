@@ -16,10 +16,10 @@ button {
 </style>
 <body>
   <button id="A">behaviour A: vertical movement</button>
-  <button id="B">behaviour B: school vs no school</button>
-  <button id="C">behaviour C: change text</button>
-  <button id="D">behaviour D: horizontal movement</button>
-  <button id="E">behaviour E: move upwards</button>
+  <!-- <button id="B">behaviour B: school vs no school</button> -->
+  <!-- <button id="C">behaviour C: change text</button> -->
+  <!-- <button id="D">behaviour D: horizontal movement</button> -->
+  <!-- <button id="E">behaviour E: move upwards</button> -->
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -35,22 +35,26 @@ button {
     n: 1000, 
     width: 1080, 
     height: 500, 
-    layouts: [ 
+    behaviours: [ 
       {
         id: "A",
-        layout: function(state) { 
+        behaviour: function(state) { 
                 var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
-                  .force("Y", d3.forceY().strength(-0.01))
+                  .force("collide", d3.forceCollide().strength(0.2))
+                  // .force("charge", d3.forceManyBody().strength(0.7).distanceMin(0.3))
+                  .force("Y", d3.forceY().strength(-0.02))   
+                  // .force("center", d3.forceCenter(config.width / 2, 0))
                   .stop();
                 sim.tick();
                 return state;
+
               }
       },
       {
         id: "B",
-        layout: function(state) {
+        behaviour: function(state) {
                 state.data.filter(function(d) {
                     return d.moredata.type === 0;
                   })
@@ -62,7 +66,7 @@ button {
       },
       {
         id: "C",
-        layout: function(state) {
+        behaviour: function(state) {
           state.data.filter(function(d,i) {
             return i === Math.floor(Math.random() * state.data.length);
           })
@@ -74,10 +78,12 @@ button {
       },
       {
         id: "D",
-        layout: function(state) {
+        behaviour: function(state) {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
+                  .force("collide", d3.forceCollide().strength(0.8))
+                  .force("charge", d3.forceManyBody().strength(0.02))                  
                   .force("X", d3.forceX().strength(0.01))
                   .stop();
                 sim.tick();
@@ -86,11 +92,23 @@ button {
       },
       {
         id: "E",
-        layout: function(state) {
+        behaviour: function(state) {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
+                  .force("collide", d3.forceCollide().strength(0.8))
+                  .force("charge", d3.forceManyBody().strength(0.02))                  
                   .force("Y", d3.forceY().strength(0.01))
+                  .stop();
+                sim.tick();
+                return state;
+        }
+      },
+      {
+        id: "F",
+        behaviour: function(state, circle) {
+          var sim = d3.forceSimulation(circle)
+                  .force("center",d3.forceCenter( config.width/2, config.height - 100))     
                   .stop();
                 sim.tick();
                 return state;
@@ -106,9 +124,15 @@ button {
 
   var svg = d3.select('#svg')
     .append('svg')
-    .attr('width', config.width )
+    .attr('width', config.width)
     .attr('height', config.height + 100)
     .append('g');
+
+  var circle = svg.append('circle')
+    .style("fill", "white")
+    .attr('cx', config.width/2)
+    .attr('cy', config.height - 100)
+    .attr('r', 100);
 
   svg.append("text")
     .style("fill", "black")
@@ -116,7 +140,7 @@ button {
     .style("font-weight", "300")
     .style("font-size", "30")
     .style("text-anchor", "middle")
-    .text("here's some text that should repel stuff" )
+    .text("go away!" )
     .attr("x", config.width/2)
     .attr("y", config.height - 100);
 
@@ -142,8 +166,7 @@ button {
               }),
         width: config.width,
         height: config.height,
-        selectedAlgorithm: fn.identity,
-        collisions: fn.avoidCollisions
+        selectedBehaviour: fn.identity,
       };
       return state;
   };
@@ -153,13 +176,11 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    // ----------------------------------------------- Define the actions
-    state = state.selectedAlgorithm(state, {dom: null, svg: svg, canvas: canvas}); /* why do we need to pass the DOM element since it is detected? */
-    d3.selectAll("button").on('click', function() {
-      actions.onSelectAlgorithm(d3.event.target.id);
-      state.collisions(state);  /* not sure if this belongs here*/
-    });
+    // ----------------------------------------------- Behaviours
+    state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});
 
+    var collideBehaviour = fn.find(function(behav){ return behav.id === "F"; }, config.behaviours);
+    collideBehaviour.behaviour(state, circle);
 
     // ----------------------------------------------- Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
@@ -170,16 +191,22 @@ button {
       canvas.fillStyle = node.moredata.color;
       canvas.fill();
     }
+
+    // ----------------------------------------------- Events
+    d3.selectAll("button").on('click', function() {
+      actions.onSelectBehaviour(d3.event.target.id);
+    });
   }
 
   /* Main loop
   ----------------------------------------------- */
   (function (state, time, canvas, svg, config) {
 
+
     var actions = {
-        onSelectAlgorithm: function(selectedId) {
-          var maybeAlgorithm = fn.find(function(alg){ return alg.id === selectedId; }, config.layouts);
-          state.selectedAlgorithm = maybeAlgorithm.layout ? maybeAlgorithm.layout : fn.identity;
+        onSelectBehaviour: function(selectedId) {
+          var maybeBehaviour = fn.find(function(behav){ return behav.id === selectedId; }, config.behaviours); //------------------ Find behaviour from config
+          state.selectedBehaviour = maybeBehaviour.behaviour ? maybeBehaviour.behaviour : fn.identity; //------------------ Apply detected behaviour
         }
       };
 
