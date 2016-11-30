@@ -35,10 +35,10 @@ button {
     n: 1000, 
     width: 1080, 
     height: 500, 
-    algoMap: [ 
+    layouts: [ 
       {
         id: "A",
-        algo: function(state) { 
+        layout: function(state) { 
                 var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
@@ -50,7 +50,7 @@ button {
       },
       {
         id: "B",
-        algo: function(state) {
+        layout: function(state) {
                 state.data.filter(function(d) {
                     return d.moredata.type === 0;
                   })
@@ -62,7 +62,7 @@ button {
       },
       {
         id: "C",
-        algo: function(state) {
+        layout: function(state) {
           state.data.filter(function(d,i) {
             return i === Math.floor(Math.random() * state.data.length);
           })
@@ -74,7 +74,7 @@ button {
       },
       {
         id: "D",
-        algo: function(state) {
+        layout: function(state) {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
@@ -86,7 +86,7 @@ button {
       },
       {
         id: "E",
-        algo: function(state) {
+        layout: function(state) {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
@@ -144,7 +144,7 @@ button {
         width: config.width,
         height: config.height,
         selectedAlgorithm: fn.identity,
-        collisions: fn.identity
+        collisions: fn.avoidCollisions
       };
       return state;
   };
@@ -158,38 +158,23 @@ button {
 
     d3.selectAll("button").on('click', function() { /* onSelectAlgorithm */
 
-      config.algoMap.filter(function(algo) {
-        return algo.id === d3.event.target.id;
+      config.layouts.filter(function(layout) {
+        return layout.id === d3.event.target.id;
       })
       .map(function(d) {
         actions.onSelectAlgorithm(function() {
-          state.selectedAlgorithm = d.algo;
+          state.selectedAlgorithm = d.layout;
         });
       })
       
     });
 
-    actions.avoidCollisions(function() {  /* prevent collission*/
-      var box = d3.select("text").node().getBBox();
-      state.data.filter(function(d) {
-        return d.y > box.y;
-      })
-      .filter(function(d) {
-        return d.x > box.x;
-      })
-      .filter(function(d) {
-        return d.x < box.x + box.width
-      })
-      .map(function(d){
-        d.fy = d.y; 
-        d.fx = d.x;
-      })
-    });
 
     // --------------------------------Apply the actions
 
-    state.selectedAlgorithm(state);   /* selectedAlgorithm */
-    state.collisions(state); /* collisions */ 
+    state.selectedAlgorithm(state);  
+    state.collisions(state); 
+
 
     // --------------------------------Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
@@ -208,10 +193,6 @@ button {
     var actions = {
         onSelectAlgorithm: function(selectedAlgorithm) {
           state.selectedAlgorithm = selectedAlgorithm;
-        },
-
-        avoidCollisions: function(collisions) {
-          state.collisions = collisions;
         }
       };
 
