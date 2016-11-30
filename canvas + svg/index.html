@@ -29,10 +29,9 @@ button {
   /* Configuration
   ----------------------------------------------- */
   var config = { 
-    n: 2000, 
-    width: 1080, 
-    height: 500, 
-    res: 0.2,
+    n: 3000, 
+    width: 2000, 
+    height: 1000, 
     behaviours: [ 
       {
         id: "vertical",
@@ -54,7 +53,7 @@ button {
             var jitter = noise.perlin2(d.x, d.y);
             d.x = d.x + jitter * Math.random() * 5;
             d.y = d.y + jitter * Math.random() * 5;
-            d.y > config.height ? fixAtBottom(d) : d.y;
+            d.y > config.height ? fn.fixAtBottom(d) : d.y;
           })
           var sim = d3.forceSimulation(state.allData) // -------------------------------------- Behaviours common to dots and obstacles
                   .force(
@@ -80,12 +79,12 @@ button {
   var svg = d3.select('#svg')
     .append('svg')
     .attr('width', config.width)
-    .attr('height', config.height + 100)
+    .attr('height', config.height)
     .append('g');
 
   var circleDatum = {
-    x: config.width/2,
-    y: config.height - 100,
+    x: config.width/2 - 50,
+    y: config.height/2 - 50,
     r: 100,
     static: true
   };
@@ -103,24 +102,11 @@ button {
     .style("text-anchor", "middle")
     .text("go away!" );
 
-  var updateCircle = function() {
-    circle
-      .attr('cx', circleDatum.x)
-      .attr('cy', circleDatum.y);
-    text
-      .attr('x', circleDatum.x)
-      .attr('y', circleDatum.y);
-  }
-
-  var fixAtBottom = function(d) {
-    d.fx = d.x;
-    d.fy = d.y - Math.abs(Math.random()) * 10;
-  }
 
   /* State initialization
   ----------------------------------------------- */
   var makeInitialState = function(config) {
-    updateCircle();
+    fn.updateCircle();
     var state = {
       data: d3.range(config.n).map(function() 
             {
@@ -157,7 +143,7 @@ button {
     
     var collideBehaviour = fn.find(function(behav){ return behav.id === "baseline"; }, config.behaviours); // ------------------------ Baseline behaviour
     collideBehaviour.behaviour(state);
-    updateCircle();
+    fn.updateCircle();
     
     canvas.clearRect(0, 0, state.width, state.height);  // ----------------------------------------------- Draw the canvas
     for (var i = 0, node; i < state.data.length; ++i) {
