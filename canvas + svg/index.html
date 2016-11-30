@@ -39,11 +39,10 @@ button {
       {
         id: "A",
         behaviour: function(state) { 
+          console.log("A")
                 var sim = d3.forceSimulation(state.data)
-                  .alphaTarget(0.9)
-                  .velocityDecay(0.5)
-                  .force("Y", d3.forceY().strength(function(d){
-                    return -0.02 * Math.random();
+                  .force("Y", d3.forceY().strength(function(d){  // vertical force applied only to the dots
+                    return -0.01 * Math.floor(Math.random() + 0.5);
                   }))  
                   .stop();
                 sim.tick();
@@ -54,6 +53,7 @@ button {
       {
         id: "B",
         behaviour: function(state) {
+          console.log("B")
                 state.data.filter(function(d) {
                     return d.moredata.type === 0;
                   })
@@ -66,6 +66,7 @@ button {
       {
         id: "C",
         behaviour: function(state) {
+          console.log("C")
           state.data.filter(function(d,i) {
             return i === Math.floor(Math.random() * state.data.length);
           })
@@ -78,10 +79,11 @@ button {
       {
         id: "D",
         behaviour: function(state) {
+          console.log("D")
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
-                  .force("collide", d3.forceCollide().strength(0.8)) //send a d item, see if it is a big or small, and return the force type
+                  .force("collide", d3.forceCollide().strength(0.8)) 
                   .force("charge", d3.forceManyBody().strength(0.02))                  
                   .force("X", d3.forceX().strength(0.01))
                   .stop();
@@ -92,6 +94,7 @@ button {
       {
         id: "E",
         behaviour: function(state) {
+          console.log("E")
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)             
@@ -104,8 +107,14 @@ button {
       {
         id: "F",
         behaviour: function(state) {
-          var sim = d3.forceSimulation(state.data)
-                  .force("center", d3.forceCenter(config.width/2, config.height/2))
+          console.log("F")
+          var sim = d3.forceSimulation(state.allCircle)
+                  .force(
+                    "collide", 
+                    d3.forceCollide()
+                      .strength(0.8)
+                      .radius(d => d.r)
+                  )  //send a d item, see if it is a big or small, and return the force type              
                   .stop();
                 sim.tick();
                 return state;
@@ -125,21 +134,35 @@ button {
     .attr('height', config.height + 100)
     .append('g');
 
-  var circle = svg.append('circle')
-    .style("fill", "transparent")
-    .attr('cx', config.width/2)
-    .attr('cy', config.height - 100)
-    .attr('r', 100);
+  var circleDatum = {
+    x: config.width/2,
+    y: config.height - 100,
+    r: 100,
+    static: true
+  };
 
-  svg.append("text")
+  var circle = svg.append('circle')
+    .style("stroke", "red")
+    .style("fill", "transparent")
+    .attr('r', circleDatum.r);
+
+  var text = svg.append("text")
     .style("fill", "black")
     .style("font-family", "Helvetica Neue")
     .style("font-weight", "300")
     .style("font-size", "30")
     .style("text-anchor", "middle")
-    .text("go away!" )
-    .attr("x", config.width/2)
-    .attr("y", config.height - 100);
+    .text("go away!" );
+
+  var updateCircle = function() {
+    circle
+      .attr('cx', circleDatum.x)
+      .attr('cy', circleDatum.y);
+    text
+      .attr('x', circleDatum.x)
+      .attr('y', circleDatum.y);
+  }
+  updateCircle();
 
   /* State initialization
   ----------------------------------------------- */
@@ -152,6 +175,7 @@ button {
                   y: config.height/2*Math.random(),
                   vx: 0,
                   vy: 0,
+                  r: 3,
                   moredata: {
                     type: Math.floor(Math.random() + 0.5),  /* 1: school, 0: no school */
                     text: "story of a student!",
@@ -165,6 +189,7 @@ button {
         height: config.height,
         selectedBehaviour: fn.identity
       };
+      state.allCircle = [circleDatum].concat(state.data);
       return state;
   };
   
@@ -193,6 +218,9 @@ button {
     d3.selectAll("button").on('click', function() {
       actions.onSelectBehaviour(d3.event.target.id);
     });
+
+    updateCircle();
+    console.log(circleDatum.x, circleDatum.y)
   }
 
   /* Main loop
