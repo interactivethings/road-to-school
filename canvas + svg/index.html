@@ -37,10 +37,10 @@ button {
       {
         id: "vertical",
         behaviour: function(state) { 
-                var sim = d3.forceSimulation(state.allData) // vertical force applied only to the dots
+                var sim = d3.forceSimulation(state.allData) // Vertical force applied only to the dots
                   .alphaTarget(0.8)
                   .force("Y", d3.forceY().strength(function(d){  
-                    return d.static ? 0.0001 : -0.01; // ----------------------------------------------- Dots move downwards, cicle slighly upwards to counteract the eventual displacement
+                    return d.static ? 0.0001 : -0.01; // ------------------------------------- Dots move downwards, obstacle slighly supported from underneath
                   }))
                   .stop();
                 sim.tick();
@@ -50,12 +50,13 @@ button {
       {
         id: "baseline",
         behaviour: function(state) {
-          state.data.forEach(function(d,i){
+          state.data.forEach(function(d,i){ // ------------------------------------------------ Behaviours particular to only the dots
             var jitter = noise.perlin2(d.x, d.y);
             d.x = d.x + jitter * Math.random() * 5;
             d.y = d.y + jitter * Math.random() * 5;
+            d.y > config.height ? fixAtBottom(d) : d.y;
           })
-          var sim = d3.forceSimulation(state.allData)
+          var sim = d3.forceSimulation(state.allData) // -------------------------------------- Behaviours common to dots and obstacles
                   .force(
                     "collide", 
                     d3.forceCollide()
@@ -111,6 +112,10 @@ button {
       .attr('y', circleDatum.y);
   }
 
+  var fixAtBottom = function(d) {
+    d.fx = d.x;
+    d.fy = d.y - Math.abs(Math.random()) * 10;
+  }
 
   /* State initialization
   ----------------------------------------------- */
@@ -148,9 +153,9 @@ button {
   function render(state, canvas, svg, actions) {
 
    
-    state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});  // ----------------------------------------------- Applied behaviours
+    state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});  // ----------------------------------------------- Triggered behaviours
     
-    var collideBehaviour = fn.find(function(behav){ return behav.id === "baseline"; }, config.behaviours); // ------------------------------- Collision prevention behaviour
+    var collideBehaviour = fn.find(function(behav){ return behav.id === "baseline"; }, config.behaviours); // ------------------------ Baseline behaviour
     collideBehaviour.behaviour(state);
     updateCircle();
     
@@ -175,8 +180,8 @@ button {
 
     var actions = {
         onSelectBehaviour: function(selectedId) {
-          var maybeBehaviour = fn.find(function(behav){ return behav.id === selectedId; }, config.behaviours); //------------------ Find behaviour from config
-          state.selectedBehaviour = maybeBehaviour.behaviour ? maybeBehaviour.behaviour : fn.identity; //------------------ Apply detected behaviour
+          var maybeBehaviour = fn.find(function(behav){ return behav.id === selectedId; }, config.behaviours); //------------------ Find triggered behaviour
+          state.selectedBehaviour = maybeBehaviour.behaviour ? maybeBehaviour.behaviour : fn.identity; //------------------ Apply triggered behaviour
         }
       };
 
