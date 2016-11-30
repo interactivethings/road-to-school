@@ -154,29 +154,15 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    // --------------------------------Define the actions
-
-    d3.selectAll("button").on('click', function() { /* onSelectAlgorithm */
-
-      config.layouts.filter(function(layout) {
-        return layout.id === d3.event.target.id;
-      })
-      .map(function(d) {
-        actions.onSelectAlgorithm(function() {
-          state.selectedAlgorithm = d.layout;
-        });
-      })
-      
+    // ----------------------------------------------- Define the actions
+    state = state.selectedAlgorithm(state, {dom: null, svg: svg, canvas: canvas});
+    d3.selectAll("button").on('click', function() {
+      actions.onSelectAlgorithm(d3.event.target.id);
+      state.collisions(state); 
     });
 
 
-    // --------------------------------Apply the actions
-
-    state.selectedAlgorithm(state);  
-    state.collisions(state); 
-
-
-    // --------------------------------Draw the canvas
+    // ----------------------------------------------- Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
     for (var i = 0, node; i < state.data.length; ++i) {
       node = state.data[i];
@@ -187,12 +173,14 @@ button {
     }
   }
 
-  // Main loop
+  /* Main loop
+  ----------------------------------------------- */
   (function (state, time, canvas, svg, config) {
 
     var actions = {
-        onSelectAlgorithm: function(selectedAlgorithm) {
-          state.selectedAlgorithm = selectedAlgorithm;
+        onSelectAlgorithm: function(selectedId) {
+          var maybeAlgorithm = fn.find(function(alg){ return alg.id === selectedId; }, config.layouts);
+          state.selectedAlgorithm = maybeAlgorithm.layout ? maybeAlgorithm.layout : fn.identity;
         }
       };
 
@@ -200,7 +188,6 @@ button {
       ++time; 
       render(state, canvas, svg, actions);
     };
-
     d3.interval(main, 10);
   })(makeInitialState(config), 0, canvas, svg, config);
 
