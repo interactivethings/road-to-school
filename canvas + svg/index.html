@@ -16,10 +16,10 @@ button {
 </style>
 <body>
   <button id="A">behaviour A: vertical movement</button>
-  <!-- <button id="B">behaviour B: school vs no school</button> -->
-  <!-- <button id="C">behaviour C: change text</button> -->
-  <!-- <button id="D">behaviour D: horizontal movement</button> -->
-  <!-- <button id="E">behaviour E: move upwards</button> -->
+<!--   <button id="B">behaviour B: school vs no school</button>
+  <button id="C">behaviour C: change text</button>
+  <button id="D">behaviour D: horizontal movement</button>
+  <button id="E">behaviour E: move upwards</button> -->
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -42,10 +42,9 @@ button {
                 var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
-                  .force("collide", d3.forceCollide().strength(0.2))
-                  // .force("charge", d3.forceManyBody().strength(0.7).distanceMin(0.3))
-                  .force("Y", d3.forceY().strength(-0.02))   
-                  // .force("center", d3.forceCenter(config.width / 2, 0))
+                  .force("Y", d3.forceY().strength(function(d){
+                    return -0.02 * Math.random();
+                  }))  
                   .stop();
                 sim.tick();
                 return state;
@@ -82,7 +81,7 @@ button {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
                   .velocityDecay(0.5)
-                  .force("collide", d3.forceCollide().strength(0.8))
+                  .force("collide", d3.forceCollide().strength(0.8)) //send a d item, see if it is a big or small, and return the force type
                   .force("charge", d3.forceManyBody().strength(0.02))                  
                   .force("X", d3.forceX().strength(0.01))
                   .stop();
@@ -95,9 +94,7 @@ button {
         behaviour: function(state) {
           var sim = d3.forceSimulation(state.data)
                   .alphaTarget(0.9)
-                  .velocityDecay(0.5)
-                  .force("collide", d3.forceCollide().strength(0.8))
-                  .force("charge", d3.forceManyBody().strength(0.02))                  
+                  .velocityDecay(0.5)             
                   .force("Y", d3.forceY().strength(0.01))
                   .stop();
                 sim.tick();
@@ -106,9 +103,9 @@ button {
       },
       {
         id: "F",
-        behaviour: function(state, circle) {
-          var sim = d3.forceSimulation(circle)
-                  .force("center",d3.forceCenter( config.width/2, config.height - 100))     
+        behaviour: function(state) {
+          var sim = d3.forceSimulation(state.data)
+                  .force("center", d3.forceCenter(config.width/2, config.height/2))
                   .stop();
                 sim.tick();
                 return state;
@@ -129,7 +126,7 @@ button {
     .append('g');
 
   var circle = svg.append('circle')
-    .style("fill", "white")
+    .style("fill", "transparent")
     .attr('cx', config.width/2)
     .attr('cy', config.height - 100)
     .attr('r', 100);
@@ -166,7 +163,7 @@ button {
               }),
         width: config.width,
         height: config.height,
-        selectedBehaviour: fn.identity,
+        selectedBehaviour: fn.identity
       };
       return state;
   };
@@ -176,11 +173,11 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    // ----------------------------------------------- Behaviours
+    // ----------------------------------------------- Applied behaviours
     state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});
-
+    // ----------------------------------------------- Collision prevention behaviour
     var collideBehaviour = fn.find(function(behav){ return behav.id === "F"; }, config.behaviours);
-    collideBehaviour.behaviour(state, circle);
+    collideBehaviour.behaviour(state);
 
     // ----------------------------------------------- Draw the canvas
     canvas.clearRect(0, 0, state.width, state.height); 
@@ -201,7 +198,6 @@ button {
   /* Main loop
   ----------------------------------------------- */
   (function (state, time, canvas, svg, config) {
-
 
     var actions = {
         onSelectBehaviour: function(selectedId) {
