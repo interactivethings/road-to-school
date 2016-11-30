@@ -15,7 +15,7 @@ button {
 }
 </style>
 <body>
-  <button id="A">behaviour A: vertical movement</button>
+  <button id="vertical">behaviour A: vertical movement</button>
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
@@ -35,7 +35,7 @@ button {
     res: 0.2,
     behaviours: [ 
       {
-        id: "A",
+        id: "vertical",
         behaviour: function(state) { 
                 var sim = d3.forceSimulation(state.allData) // vertical force applied only to the dots
                   .alphaTarget(0.8)
