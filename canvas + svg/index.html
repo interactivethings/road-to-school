@@ -140,7 +140,6 @@ button {
                   }
                 }
               }),
-        timeSinceStart: 0,
         width: config.width,
         height: config.height,
         selectedAlgorithm: fn.identity,
@@ -155,10 +154,10 @@ button {
   function render(state, canvas, svg, actions) {
 
     // ----------------------------------------------- Define the actions
-    state = state.selectedAlgorithm(state, {dom: null, svg: svg, canvas: canvas});
+    state = state.selectedAlgorithm(state, {dom: null, svg: svg, canvas: canvas}); /* why do we need to pass the DOM element since it is detected? */
     d3.selectAll("button").on('click', function() {
       actions.onSelectAlgorithm(d3.event.target.id);
-      state.collisions(state); 
+      state.collisions(state);  /* not sure if this belongs here*/
     });
 
 
@@ -185,7 +184,7 @@ button {
       };
 
     function main() {
-      ++time; 
+      ++time; /*not using this right now*/ 
       render(state, canvas, svg, actions);
     };
     d3.interval(main, 10);
