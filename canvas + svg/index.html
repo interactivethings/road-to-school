@@ -16,105 +16,52 @@ button {
 </style>
 <body>
   <button id="A">behaviour A: vertical movement</button>
-<!--   <button id="B">behaviour B: school vs no school</button>
-  <button id="C">behaviour C: change text</button>
-  <button id="D">behaviour D: horizontal movement</button>
-  <button id="E">behaviour E: move upwards</button> -->
   <div style="position: relative">
     <div id="canvas"></div>
     <div id="svg"></div>
   </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="fn.js"></script>
+  <script src="perlin.js"></script>
   <script>
 
 
   /* Configuration
   ----------------------------------------------- */
   var config = { 
-    n: 1000, 
+    n: 2000, 
     width: 1080, 
     height: 500, 
+    res: 0.2,
     behaviours: [ 
       {
         id: "A",
         behaviour: function(state) { 
-          console.log("A")
-                var sim = d3.forceSimulation(state.data)
-                  .force("Y", d3.forceY().strength(function(d){  // vertical force applied only to the dots
-                    return -0.01 * Math.floor(Math.random() + 0.5);
-                  }))  
+                var sim = d3.forceSimulation(state.allData) // vertical force applied only to the dots
+                  .alphaTarget(0.8)
+                  .force("Y", d3.forceY().strength(function(d){  
+                    return d.static ? 0.0001 : -0.01; // ----------------------------------------------- Dots move downwards, cicle slighly upwards to counteract the eventual displacement
+                  }))
                   .stop();
                 sim.tick();
-                return state;
-
-              }
-      },
-      {
-        id: "B",
-        behaviour: function(state) {
-          console.log("B")
-                state.data.filter(function(d) {
-                    return d.moredata.type === 0;
-                  })
-                  .map(function(d){
-                    d.moredata.color = 'red';
-                  })
                 return state;
               }
       },
       {
-        id: "C",
+        id: "baseline",
         behaviour: function(state) {
-          console.log("C")
-          state.data.filter(function(d,i) {
-            return i === Math.floor(Math.random() * state.data.length);
+          state.data.forEach(function(d,i){
+            var jitter = noise.perlin2(d.x, d.y);
+            d.x = d.x + jitter * Math.random() * 5;
+            d.y = d.y + jitter * Math.random() * 5;
           })
-          .map(function(d) {
-            d3.select("text").text(d.moredata.text)
-          })
-          return state;
-        }
-      },
-      {
-        id: "D",
-        behaviour: function(state) {
-          console.log("D")
-          var sim = d3.forceSimulation(state.data)
-                  .alphaTarget(0.9)
-                  .velocityDecay(0.5)
-                  .force("collide", d3.forceCollide().strength(0.8)) 
-                  .force("charge", d3.forceManyBody().strength(0.02))                  
-                  .force("X", d3.forceX().strength(0.01))
-                  .stop();
-                sim.tick();
-                return state;
-        }
-      },
-      {
-        id: "E",
-        behaviour: function(state) {
-          console.log("E")
-          var sim = d3.forceSimulation(state.data)
-                  .alphaTarget(0.9)
-                  .velocityDecay(0.5)             
-                  .force("Y", d3.forceY().strength(0.01))
-                  .stop();
-                sim.tick();
-                return state;
-        }
-      },
-      {
-        id: "F",
-        behaviour: function(state) {
-          console.log("F")
-          var sim = d3.forceSimulation(state.allCircle)
+          var sim = d3.forceSimulation(state.allData)
                   .force(
                     "collide", 
                     d3.forceCollide()
                       .strength(0.8)
                       .radius(d => d.r)
-                  )  //send a d item, see if it is a big or small, and return the force type              
+                  )
                   .stop();
                 sim.tick();
                 return state;
@@ -122,6 +69,7 @@ button {
       }
     ]
   };
+
   var canvas = d3.select('#canvas')
     .append('canvas')
     .attr('width', config.width)
@@ -162,35 +110,36 @@ button {
       .attr('x', circleDatum.x)
       .attr('y', circleDatum.y);
   }
-  updateCircle();
+
 
   /* State initialization
   ----------------------------------------------- */
   var makeInitialState = function(config) {
-      var state = {
-        data: d3.range(config.n).map(function() 
-              {
-                return { 
-                  x: config.width * Math.random(), 
-                  y: config.height/2*Math.random(),
-                  vx: 0,
-                  vy: 0,
-                  r: 3,
-                  moredata: {
-                    type: Math.floor(Math.random() + 0.5),  /* 1: school, 0: no school */
-                    text: "story of a student!",
-                    age: 0,
-                    country: "Syria",
-                    color: '#3B6C73'
-                  }
+    updateCircle();
+    var state = {
+      data: d3.range(config.n).map(function() 
+            {
+              return { 
+                x: config.width * Math.random(), 
+                y: config.height/2*Math.random(),
+                vx: 0,
+                vy: 0,
+                r: 3,
+                moredata: {
+                  type: Math.floor(Math.random() + 0.5),  /* 1: school, 0: no school */
+                  text: "story of a student!",
+                  age: 0,
+                  country: "Syria",
+                  color: '#3B6C73'
                 }
-              }),
-        width: config.width,
-        height: config.height,
-        selectedBehaviour: fn.identity
-      };
-      state.allCircle = [circleDatum].concat(state.data);
-      return state;
+              }
+            }),
+      width: config.width,
+      height: config.height,
+      selectedBehaviour: fn.identity
+    };
+    state.allData = [circleDatum].concat(state.data); // create an object with the dots and the obstacles
+    return state;
   };
   
 
@@ -198,14 +147,14 @@ button {
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
 
-    // ----------------------------------------------- Applied behaviours
-    state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});
-    // ----------------------------------------------- Collision prevention behaviour
-    var collideBehaviour = fn.find(function(behav){ return behav.id === "F"; }, config.behaviours);
+   
+    state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});  // ----------------------------------------------- Applied behaviours
+    
+    var collideBehaviour = fn.find(function(behav){ return behav.id === "baseline"; }, config.behaviours); // ------------------------------- Collision prevention behaviour
     collideBehaviour.behaviour(state);
-
-    // ----------------------------------------------- Draw the canvas
-    canvas.clearRect(0, 0, state.width, state.height); 
+    updateCircle();
+    
+    canvas.clearRect(0, 0, state.width, state.height);  // ----------------------------------------------- Draw the canvas
     for (var i = 0, node; i < state.data.length; ++i) {
       node = state.data[i];
       canvas.beginPath();
@@ -218,9 +167,6 @@ button {
     d3.selectAll("button").on('click', function() {
       actions.onSelectBehaviour(d3.event.target.id);
     });
-
-    updateCircle();
-    console.log(circleDatum.x, circleDatum.y)
   }
 
   /* Main loop
