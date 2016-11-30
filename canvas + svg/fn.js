@@ -18,7 +18,7 @@ var fn = {
    */
   fixAtBottom: function(d) {
     d.fx = d.x;
-    d.fy = d.y - Math.abs(Math.random()) * 10;
+    d.fy = d.y - Math.random() * 10;
     return d;
   },
   /**
