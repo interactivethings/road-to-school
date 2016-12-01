@@ -30,7 +30,7 @@ button {
   ----------------------------------------------- */
   var config = { 
     n: 3000, 
-    width: 2000, 
+    width: 1800, 
     height: 1000, 
     behaviours: [ 
       {
@@ -43,6 +43,8 @@ button {
                   }))
                   .stop();
                 sim.tick();
+
+                fn.changeText(text);
                 return state;
               }
       },
@@ -81,18 +83,18 @@ button {
   var svg = d3.select('#svg')
     .append('svg')
     .attr('width', config.width)
-    .attr('height', config.height)
+    .attr('height', config.height + 200)
     .append('g');
 
   var circleDatum = {
-    x: config.width/2 - 50,
-    y: config.height/2 - 50,
+    x: config.width/2,
+    y: config.height/2,
     r: 100,
     static: true
   };
 
   var circle = svg.append('circle')
-    .style("stroke", "red")
+    // .style("stroke", "red")
     .style("fill", "transparent")
     .attr('r', circleDatum.r);
 
@@ -102,8 +104,17 @@ button {
     .style("font-weight", "300")
     .style("font-size", "30")
     .style("text-anchor", "middle")
-    .text("go away!" );
+    .text("I want to be a " );  
 
+  var text2 = svg.append("text")
+    .style("fill", "black")
+    .style("font-family", "Helvetica Neue")
+    .style("font-weight", "300")
+    .style("font-size", "30")
+    .attr('x', config.width/2)
+    .attr('y', config.height + 100)
+    .style("text-anchor", "middle")
+    .text("[X] refugee children are looking forward to school tomorrow" );
 
   /* State initialization
   ----------------------------------------------- */
@@ -114,7 +125,7 @@ button {
             {
               return { 
                 x: config.width * Math.random(), 
-                y: config.height/2*Math.random(),
+                y: config.height*Math.random(),
                 vx: 0,
                 vy: 0,
                 r: 3,
@@ -139,7 +150,6 @@ button {
   /* Render
   ----------------------------------------------- */
   function render(state, canvas, svg, actions) {
-
    
     state = state.selectedBehaviour(state, {dom: null, svg: svg, canvas: canvas});  // ----------------------------------------------- Triggered behaviours
     
@@ -177,7 +187,7 @@ button {
       ++time; /*not using this right now*/ 
       render(state, canvas, svg, actions);
     };
-    d3.interval(main, 10);
+    d3.interval(main, 100);
   })(makeInitialState(config), 0, canvas, svg, config);
 
   </script>

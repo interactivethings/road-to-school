@@ -2,6 +2,14 @@
  * A collection of functional programming helper functions
  */
 var fn = {
+  /**
+  * fn.changeText
+  */
+  changeText: function(text) {
+    var professions = ["teacher", "doctor", "engineer", "musician", "artist", "journalist","pilot", "bookshop owner", "chef", "diplomat", "nurse", "kindergarden teacher"];
+    var profession = professions[Math.floor(Math.random()*professions.length)];
+    text.text(profession);
+  },
 	/**
    * fn.find
    */
