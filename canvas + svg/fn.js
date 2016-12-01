@@ -5,7 +5,7 @@ var fn = {
   /**
   * fn.changeText
   */
-  changeText: function(text) {
+  changeText: function() {
     var professions = ["teacher", "doctor", "engineer", "musician", "artist", "journalist","pilot", "bookshop owner", "chef", "diplomat", "nurse", "kindergarden teacher"];
     var profession = professions[Math.floor(Math.random()*professions.length)];
     text.text(profession);

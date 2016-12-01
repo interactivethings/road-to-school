@@ -43,8 +43,7 @@ button {
                   }))
                   .stop();
                 sim.tick();
-
-                fn.changeText(text);
+                fn.changeText(); // ----------------------------------------------------- Update the text in the main field
                 return state;
               }
       },
@@ -106,7 +105,7 @@ button {
     .style("text-anchor", "middle")
     .text("I want to be a " );  
 
-  var text2 = svg.append("text")
+  var textBottom = svg.append("text")
     .style("fill", "black")
     .style("font-family", "Helvetica Neue")
     .style("font-weight", "300")
@@ -187,7 +186,7 @@ button {
       ++time; /*not using this right now*/ 
       render(state, canvas, svg, actions);
     };
-    d3.interval(main, 100);
+    d3.interval(main, 10);
   })(makeInitialState(config), 0, canvas, svg, config);
 
   </script>
