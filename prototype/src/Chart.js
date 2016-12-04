@@ -1,32 +1,51 @@
-import React from 'react';
+import React, {Component} from 'react';
+import DOM from 'react-dom';
+import * as d3 from 'd3';
 
-
-// A function that returns a random number from 0 to 1000
-const randomNum = () => Math.floor(Math.random() * 1000);
-
-export default class Chart extends React.Component{
-
-	constructor(props) {
-		super(props); 
-		    this.state = {
-		      test: 0
-		    };
-		  }
-
-
+class Chart extends Component {
   render() {
-
-  	const {
-      test
-    } = this.state;
-
-    return <div>
-      <div className="controls">
-        <button className="btn randomize" onClick={() => this.setState({test: randomNum(test) + 1})}>
-          click! click! click!
-        </button>
-        <p> {test}</p>
+    const {data, width, height} = this.props;
+    return (
+      <div>
+        <SvgRenderer data={data} width={width} height={height} />
       </div>
-    </div>
+    );
   }
 }
+
+class SvgRenderer extends Component {
+  componentDidMount() {
+    d3.select(DOM.findDOMNode(this))
+      .call(this.renderSvg.bind(this));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    d3.select(DOM.findDOMNode(this))
+      .call(this.renderSvg.bind(this));
+  }
+
+  render() {
+    const {width, height} = this.props;
+    return (
+      <svg width={width} height={height} />
+    );
+  }
+
+  renderSvg(svg) {
+    const circles = svg.selectAll('circle')
+      .data(this.props.data, d => d.id);
+
+    circles.enter()
+      .append('circle');
+
+    circles
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+      .attr('r', d => d.r);
+
+    circles.exit()
+      .remove();
+  }
+}
+
+export default Chart;
