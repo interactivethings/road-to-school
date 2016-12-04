@@ -30,8 +30,8 @@ button {
   ----------------------------------------------- */
   var config = { 
     n: 3000, 
-    width: 1800, 
-    height: 1000, 
+    width: 1400, 
+    height: 500, 
     behaviours: [ 
       {
         id: "vertical",
@@ -43,7 +43,7 @@ button {
                   }))
                   .stop();
                 sim.tick();
-                fn.changeText(); // ----------------------------------------------------- Update the text in the main field
+                // fn.changeText(); // ----------------------------------------------------- Update the text in the main field
                 return state;
               }
       },
@@ -154,7 +154,12 @@ button {
     
     var collideBehaviour = fn.find(function(behav){ return behav.id === "baseline"; }, config.behaviours); // ------------------------ Baseline behaviour
     collideBehaviour.behaviour(state);
-    fn.updateCircle();
+    circle
+      .attr('cx', circleDatum.x)
+      .attr('cy', circleDatum.y);
+    text
+      .attr('x', circleDatum.x)
+      .attr('y', circleDatum.y);
     
     canvas.clearRect(0, 0, state.width, state.height);  // ----------------------------------------------- Draw the canvas
     for (var i = 0, node; i < state.data.length; ++i) {
