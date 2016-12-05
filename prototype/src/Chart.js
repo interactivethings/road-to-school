@@ -41,7 +41,8 @@ class SvgRenderer extends Component {
     circles
       .attr('cx', d => d.x)
       .attr('cy', d => d.y)
-      .attr('r', d => d.r);
+      .attr('r', d => d.r)
+      .style('fill', d => d.datum.color);
 
     circles.exit()
       .remove();

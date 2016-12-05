@@ -1,23 +1,37 @@
 .App {
-  text-align: center;
-  font-family: Source Sans Pro;
-  font-weight: 200;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+	font-family: Source Sans Pro;
+	font-weight: 300;
 }
 
 .App-header {
-  background-color: #fff;
-  height: 50px;
-  padding: 20px;
-  color: #00f;
+	background-color: #0E8D96;
+	height: 50px;
+	width: 100%;
+	line-height: 50px;
+	position: absolute;
 }
 
-.App-intro {
-  font-size: large;
+.App-header-date {
+	background-color: black;
+	width: 10%;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+	color: #fff;
+	padding-left: 10px
+}
+
+.App-text-left, .App-chart {
+	display: inline-block;
+	margin: 100px;
+	text-align: left;
+	vertical-align: middle;
+	color: #ED1300;
+}
+
+
+button {
+	margin-right: 10px;
 }
 
 @keyframes App-logo-spin {

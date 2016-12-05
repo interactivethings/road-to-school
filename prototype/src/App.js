@@ -11,11 +11,11 @@ const identity = x => x;
 function mkActor(id) {
   return {
     id: id,
-    x: 800/2 + Math.random(), // FIXME: is dependent on props.width
-    y: 600/2 + Math.random(), // FIXME: is dependent on props.height
+    x: 800/2 , // FIXME: is dependent on props.width
+    y: 600/2 , // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 3,
+    r: 3 * (Math.random() + 1),
     datum: {
       type: Math.random() < 0.5 ? 'school' : 'noSchool',
       text: "story of a student!",
@@ -63,18 +63,20 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <h1>Kalli’s Final Project</h1>
-        </div>
-        <p className="App-intro">
-          Elapsed time: ({Math.round(time / 1000) + 's'})
-          <br />
+        <div className="App-header"></div>
+        <div className="App-header-date"> January 2014 </div>
+        <div className="App-text-left"> 
           <button onClick={this.onReset}>reset</button>
-          <button disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fallDown</button>
+          <button disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fall</button>
           <button disabled={mode === 'collapse'} onClick={this.onSelectMode('collapse')}>collapse to center</button>
-          {/* <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>baseline</button> */}
-        </p>
-        <Chart data={data} width={width} height={height} />
+          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button>
+          <br/><br/>
+          Elapsed time: {Math.round(time / 1000) + ' sec'}
+          
+        </div>
+        <div className="App-chart"> 
+          <Chart data={data} width={width} height={height} />
+        </div>
       </div>
     );
   }
