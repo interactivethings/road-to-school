@@ -34,38 +34,25 @@ var fn = {
    */
   identity: function(x) {
     return x;
-  },
-  /**
-  * fn.updateCircle
-  */
-  updateCircle: function(circle, text) {
-    circle
-      .attr('cx', circleDatum.x)
-      .attr('cy', circleDatum.y);
-    text
-      .attr('x', circleDatum.x)
-      .attr('y', circleDatum.y);
-
-    return circle, text;
   }
 }
 
 
-var x = 1;
-var y = 2;
+// var x = 1;
+// var y = 2;
 
-function sumA(a, b) {
-  return x + a + b;
-}
-function sumB(a, b) {
-  x = a + b;
-  return x + a + b;
-}
+// function sumA(a, b) {
+//   return x + a + b;
+// }
+// function sumB(a, b) {
+//   x = a + b;
+//   return x + a + b;
+// }
 
-sumA(1,4); // 6
-sumB(3,5); // 16
-sumA(1,4); // 12
+// sumA(1,4); // 6
+// sumB(3,5); // 16
+// sumA(1,4); // 12
 
-s = sum5(1,3); // s = 4
+// s = sum5(1,3); // s = 4
 
 

@@ -11,8 +11,8 @@ const identity = x => x;
 function mkActor(id) {
   return {
     id: id,
-    x: 800 * Math.random(), // FIXME: is dependent on props.width
-    y: 600 * Math.random(), // FIXME: is dependent on props.height
+    x: 800/2 + Math.random(), // FIXME: is dependent on props.width
+    y: 600/2 + Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     r: 3,
@@ -29,7 +29,7 @@ function mkActor(id) {
 function mkInitialState() {
   return {
     data: d3.range(1000).map(mkActor),
-    mode: 'moveAround'
+    mode: 'baseline'
   }
 }
 
@@ -71,7 +71,8 @@ class App extends Component {
           <br />
           <button onClick={this.onReset}>reset</button>
           <button disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fallDown</button>
-          <button disabled={mode === 'moveAround'} onClick={this.onSelectMode('moveAround')}>moveAround</button>
+          <button disabled={mode === 'collapse'} onClick={this.onSelectMode('collapse')}>collapse to center</button>
+          {/* <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>baseline</button> */}
         </p>
         <Chart data={data} width={width} height={height} />
       </div>

@@ -63,6 +63,7 @@ button {
                       .strength(0.8)
                       .radius(d => d.r)
                   )
+                  // .force("center", d3.forceCenter(config.width/2, config.height/2))
                   .stop();
                 sim.tick();
                 return state;
@@ -118,7 +119,13 @@ button {
   /* State initialization
   ----------------------------------------------- */
   var makeInitialState = function(config) {
-    fn.updateCircle();
+    circle
+      .attr('cx', circleDatum.x)
+      .attr('cy', circleDatum.y);
+    text
+      .attr('x', circleDatum.x)
+      .attr('y', circleDatum.y);
+
     var state = {
       data: d3.range(config.n).map(function() 
             {
