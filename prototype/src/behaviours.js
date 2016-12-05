@@ -40,7 +40,7 @@ export function disrupt(data, {width, height}) {
 
   d3.forceSimulation(data)
       .force('disrupt', d3.forceManyBody().strength((d) => {
-        return -10*d.r*Math.random();
+        return 10*Math.cos(d.r);
       }))
       .stop() 
       .tick();
