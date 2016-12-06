@@ -11,8 +11,8 @@ const identity = x => x;
 function mkActor(id) {
   return {
     id: id,
-    x: 800/2 , // FIXME: is dependent on props.width
-    y: 600/2 , // FIXME: is dependent on props.height
+    x: 800/2 + 100 * Math.random() , // FIXME: is dependent on props.width
+    y: 600/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     r: 2 * (Math.random() + 1),
