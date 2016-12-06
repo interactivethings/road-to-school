@@ -16,7 +16,7 @@ function mkActor(id) {
     vx: 0,
     vy: 0,
     r: 2 * (Math.random() + 1),
-    type: Math.random() < 0.95 ? 'school' : 'noSchool',
+    type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
       text: "story of a student!",
       age: 0,
@@ -27,7 +27,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(3000).map(mkActor),
+    data: d3.range(1000).map(mkActor),
     mode: 'baseline'
   }
 }
@@ -44,7 +44,7 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.time !== nextProps.time) {
       const behavior = behaviours[this.state.mode] || identity;
-      this.setState({data: behavior(this.state.data, nextProps, 0.3)});
+      this.setState({data: behavior(this.state.data, nextProps, 0.33)});
     }
   }
 
