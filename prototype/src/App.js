@@ -44,10 +44,7 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.time !== nextProps.time) {
       const behavior = behaviours[this.state.mode] || identity;
-      const changetype = behaviours['changetype'] || identity;
-      
-      this.setState({data: changetype(this.state.data, nextProps)});
-      this.setState({data: behavior(this.state.data, nextProps)});
+      this.setState({data: behavior(this.state.data, nextProps, 0.1)});
     }
   }
 
@@ -67,10 +64,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header"></div>
         <div className="App-text-left"> 
-          <button onClick={this.onReset}>reset</button>
-          <button hidden disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fall</button>
-          <button hidden disabled={mode === 'collapse'} onClick={this.onSelectMode('collapse')}>collapse to center</button>
-          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button>
+          <button onClick={this.onReset}>reset</button><br/>
+          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button> 
           <span hidden> Elapsed time: {Math.round(time / 1000) + ' sec'} </span>
         </div>
         <div className="App-chart"> 
