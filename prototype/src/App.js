@@ -15,12 +15,11 @@ function mkActor(id) {
     y: 600/2 , // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 3 * (Math.random() + 1),
+    r: 2 * (Math.random() + 1),
+    type: Math.random() < 0.95 ? 'school' : 'noSchool',
     datum: {
-      type: Math.random() < 0.5 ? 'school' : 'noSchool',
       text: "story of a student!",
       age: 0,
-      country: "Syria",
       color: '#3B6C73'
     }
   };
@@ -45,6 +44,9 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.time !== nextProps.time) {
       const behavior = behaviours[this.state.mode] || identity;
+      const changetype = behaviours['changetype'] || identity;
+      
+      this.setState({data: changetype(this.state.data, nextProps)});
       this.setState({data: behavior(this.state.data, nextProps)});
     }
   }
@@ -64,15 +66,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header"></div>
-        <div className="App-header-date"> January 2014 </div>
         <div className="App-text-left"> 
           <button onClick={this.onReset}>reset</button>
-          <button disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fall</button>
-          <button disabled={mode === 'collapse'} onClick={this.onSelectMode('collapse')}>collapse to center</button>
+          <button hidden disabled={mode === 'fallDown'} onClick={this.onSelectMode('fallDown')}>fall</button>
+          <button hidden disabled={mode === 'collapse'} onClick={this.onSelectMode('collapse')}>collapse to center</button>
           <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button>
-          <br/><br/>
-          Elapsed time: {Math.round(time / 1000) + ' sec'}
-          
+          <span hidden> Elapsed time: {Math.round(time / 1000) + ' sec'} </span>
         </div>
         <div className="App-chart"> 
           <Chart data={data} width={width} height={height} />
