@@ -15,7 +15,7 @@ class SmartDot extends Component { //-----------------Thomas's way to show an ex
     });
   }
   render() {
-    return <Dot color={this.state.color}>;
+    return <Dot color={this.state.color}/>;
   }
 }
 
