@@ -27,7 +27,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(1000).map(mkActor),
+    data: d3.range(3000).map(mkActor),
     mode: 'baseline'
   }
 }
@@ -44,7 +44,7 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.time !== nextProps.time) {
       const behavior = behaviours[this.state.mode] || identity;
-      this.setState({data: behavior(this.state.data, nextProps, 0.1)});
+      this.setState({data: behavior(this.state.data, nextProps, 0.3)});
     }
   }
 
