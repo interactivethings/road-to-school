@@ -5,7 +5,7 @@
 import * as d3 from 'd3';
 
 
-export function baseline(force, data, {width, height, time}, ratio) {
+export function baseline(force, data, {width, height, time}, ratio) { 
 
   function isolate(aForce, filter) {
     var initialize = aForce.initialize;
@@ -45,11 +45,9 @@ export function disrupt(force, data, {width, height}, ratio) {
   d3.selectAll('circle')
     .on("mousedown", function() { 
       d3.event.stopPropagation(); 
-      d3.forceSimulation(data)
-        .force('bomb', d3.forceManyBody().strength(-40))
-        .velocityDecay(0.2)
-        .stop()
-        .tick();
+      force
+        .force('bomb', d3.forceManyBody().strength(-2))
+        .velocityDecay(0.2);
     });
 }
 
