@@ -6,7 +6,7 @@ import * as behaviours from './behaviours';
 // import GameLoop from './GameLoop';
 import Chart from './Chart';
 import Content from './Content';
-import {passiveEvent} from './dom'; //not fully getting this
+import {scrollY, passiveEvent} from './dom'; //not fully getting this
 
 const identity = x => x;
 
@@ -44,19 +44,17 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = () => {
-
-      var winHeight= window.innerHeight || (document.documentElement || document.body).clientHeight;
+      const windowScrollY = scrollY();
+      const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
       var docHeight = Math.max(
         document.body.scrollHeight, document.documentElement.scrollHeight,
         document.body.offsetHeight, document.documentElement.offsetHeight,
         document.body.clientHeight, document.documentElement.clientHeight
      )
-      var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
-      var trackLength = docHeight - winHeight;
-      var pctScrolled = Math.floor(scrollTop/trackLength * 100);
+      var pctScrolled = Math.floor(windowScrollY/ (docHeight - windowHeight) * 100);
 
       const mode = 'disrupt'; //define the next mode when I have it
-      if (pctScrolled > 0) { //check if the mode needs to be changed (saving expensive changes if not)
+      if (pctScrolled > 50) { //check if the mode needs to be changed (saving expensive changes if not)
         this.setState({mode});
       }
     };
@@ -69,6 +67,7 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll, passiveEvent()); // impemented from https://github.com/gut-leben-in-deutschland/bericht/blob/master/src/components/Flagship/ScrollContainer.js
   }
+
 
   componentWillUpdate(nextProps, nextState) {
     this.configureForce(nextProps, nextState);
