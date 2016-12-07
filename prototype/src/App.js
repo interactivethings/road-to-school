@@ -21,16 +21,14 @@ function mkActor(id) {
     r: 2 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
-      text: "story of a student!",
-      age: 0,
-      color: '#3B6C73'
+      color: '#fff'
     }
   };
 }
 
 function mkInitialState() {
   return {
-    data: d3.range(300).map(mkActor),
+    data: d3.range(500).map(mkActor),
     mode: 'baseline',
     ratio: 0.9
   }
@@ -101,7 +99,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header"></div>
         <div className="App-text-left"> 
           <button onClick={this.onReset}>reset</button>
           <button hidden disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> 

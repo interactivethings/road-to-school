@@ -1,14 +1,11 @@
-.App {
+body {
+	background: #666;
+	color: #fff;
+	font-size: 12px;
 	font-family: Source Sans Pro;
 	font-weight: 300;
-}
-
-.App-header {
-	background-color: #0E8D96;
-	height: 27px;
-	width: 100%;
-	line-height: 50px;
-	position: absolute;
+	line-height: 16px;
+	letter-spacing: 0.01em;
 }
 
 
@@ -19,7 +16,7 @@
 	top: 100px;
 	left: 100px;
 	bottom: 20px;
-	width: 300px;
+	width: 400px;
 }
 
 button {
@@ -27,12 +24,10 @@ button {
 }
 
 svg {
-	border: 1px solid black;
 	padding: 0; 
 	margin: 0; 
 	position: fixed; 
 	left: 540px;
-	right: 20px; 
 	top: 100px;
 }
 
@@ -42,13 +37,11 @@ svg {
 }
 
 .Counter {
-	font-size: 18px;
+	font-size: 12px;
 	position: fixed;
-	left: 540px;
-	right: 20px; 
+	left: 640px;
 	top: 70px;
 }
 
 .Content {
-	font-size: 12px;
 }
