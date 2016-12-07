@@ -3,9 +3,10 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
-import GameLoop from './GameLoop';
+// import GameLoop from './GameLoop';
 import Chart from './Chart';
 import Content from './Content';
+import {passiveEvent} from './dom'; //not fully getting this
 
 const identity = x => x;
 
@@ -43,11 +44,22 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = () => {
-      console.log('scroll', window.pageYOffset);
-      const mode = 'x'; //define the next mode when I have it
+
+      var winHeight= window.innerHeight || (document.documentElement || document.body).clientHeight;
+      var docHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+     )
+      var scrollTop = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+      var trackLength = docHeight - winHeight;
+      var pctScrolled = Math.floor(scrollTop/trackLength * 100);
+
+      const mode = 'disrupt'; //define the next mode when I have it
       if (mode !== this.state.mode) { //check if the mode needs to be changed (saving expensive changes if not)
-        this.setState({mode});
+        return pctScrolled > 6 ? this.setState({mode}) : identity;
       }
+      console.log(this.state.mode)
     };
   }
 
@@ -56,7 +68,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll); // impement passiveEvent() from https://github.com/gut-leben-in-deutschland/bericht/blob/master/src/components/Flagship/ScrollContainer.js
+    window.addEventListener('scroll', this.onScroll, passiveEvent()); // impemented from https://github.com/gut-leben-in-deutschland/bericht/blob/master/src/components/Flagship/ScrollContainer.js
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -64,11 +76,12 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onScroll, passiveEvent());
   }
 
   configureForce(props, state) {
-    behaviours[state.mode](this.force, state.data, props, state.ratio);
+    const behavior = behaviours[this.state.mode] || identity;
+    behavior(this.force, state.data, props, state.ratio);
     this.force.restart();
   }
 
@@ -83,20 +96,20 @@ class App extends Component {
   }
 
   render() {
-    const {time, width, height} = this.props;
+    const {width, height} = this.props;
     const {data, mode, ratio} = this.state;
 
     return (
       <div className="App">
         <div className="App-header"></div>
         <div className="App-text-left"> 
-          <Content />
-          <button onClick={this.onReset}>reset</button><br/>
-          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> <br/>
+          <button onClick={this.onReset}>reset</button>
+          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> 
           <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/>
           Ratio: {ratio.toFixed(2)}{' '}
           <button disabled={ratio === 0} onClick={() => this.setState({ratio: Math.max(0, ratio - 0.05)})}>-</button> 
-          <button disabled={ratio === 1} onClick={() => this.setState({ratio: Math.min(1, ratio + 0.05)})}>+</button>
+          <button disabled={ratio === 1} onClick={() => this.setState({ratio: Math.min(1, ratio + 0.05)})}>+</button> <br/> <br/>
+          <Content />
         </div>
         <div className="App-chart"> 
           <Chart force={this.force} data={data} width={width} height={height}/>

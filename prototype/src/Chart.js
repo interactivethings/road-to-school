@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, {Component} from 'react';
-import DOM from 'react-dom';
+// import DOM from 'react-dom';
 import * as d3 from 'd3';
 
 class SvgRenderer extends Component {
