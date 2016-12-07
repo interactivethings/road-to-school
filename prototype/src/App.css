@@ -43,6 +43,10 @@ svg {
 
 .Counter {
 	font-size: 18px;
+	position: fixed;
+	left: 540px;
+	right: 20px; 
+	top: 70px;
 }
 
 .Content {

@@ -106,7 +106,7 @@ class App extends Component {
           <button onClick={this.onReset}>reset</button>
           <button hidden disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> 
           <button hidden disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/><br/>
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})}/>{ratio.toFixed(2)}{' '} <br/> <br/>
+          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} message="students currently out of school:" value={ratio.toFixed(2) * 100}/> <br/> <br/>
           <Content/>
         </div>
         <div className="App-chart"> 
