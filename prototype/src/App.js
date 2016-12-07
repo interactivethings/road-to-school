@@ -10,12 +10,13 @@ import Counter from './Counter';
 import {scrollY, passiveEvent} from './dom'; //doing this correctly?? 
 
 const identity = x => x;
+const modes =  ['baseline', 'disrupt', 'test'];
 
 function mkActor(id) {
   return {
     id: id,
-    x: 800/2 + 100 * Math.random() , // FIXME: is dependent on props.width
-    y: 600/2 + 100 * Math.random(), // FIXME: is dependent on props.height
+    x: window.innerWidth/2 + 100 * Math.random() , // FIXME: is dependent on props.width
+    y: window.innerHeight/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     r: 2 * (Math.random() + 1),
@@ -28,7 +29,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(500).map(mkActor),
+    data: d3.range(300).map(mkActor),
     mode: 'baseline',
     ratio: 0.9
   }
@@ -50,13 +51,17 @@ class App extends Component {
         document.body.clientHeight, document.documentElement.clientHeight
       )
       var pctScrolled = Math.floor(windowScrollY/ (docHeight - windowHeight) * 100);
-      const nextMode = 'disrupt'; //alternating between only two states here, I have to define all of them
-      
-      //when user has scrolled more than 50% then the behavior changes
-      if (pctScrolled > 50) { //check if the mode needs to be changed (saving expensive changes if not)
-        this.setState({mode: nextMode});
+
+      if (pctScrolled < 30) { //check if the mode needs to be changed (saving expensive changes if not)
+        this.setState({mode: modes[0]});
       }
-      this.setState({ratio: Math.min(1- pctScrolled/100, 1)});
+      else if (pctScrolled < 60) {
+        this.setState({mode: modes[1]});
+      }
+      else if (pctScrolled < 100) {
+        this.setState({mode: modes[2]});
+      }
+      this.setState({ratio: Math.min(pctScrolled/100, 1)});
     };
   }
 
@@ -95,15 +100,13 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    const {data, mode, ratio} = this.state;
+    const {data, ratio} = this.state;
 
     return (
       <div className="App">
         <div className="App-text-left"> 
           <button onClick={this.onReset}>reset</button>
-          <button hidden disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> 
-          <button hidden disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/><br/>
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} message="students currently out of school:" value={ratio.toFixed(2) * 100}/> <br/> <br/>
+          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio.toFixed(2) * 100}/> <br/> <br/>
           <Content/>
         </div>
         <div className="App-chart"> 

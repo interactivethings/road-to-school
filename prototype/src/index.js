@@ -4,7 +4,8 @@ import App from './App';
 import './index.css';
 
 ReactDOM.render(
+  
   // We should wrap this in a Dimensions component
-  <App width={1200} height={800} />,
+  <App width={window.innerWidth} height={window.innerHeight} />,
   document.getElementById('root')
 );
