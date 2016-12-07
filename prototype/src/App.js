@@ -16,7 +16,7 @@ function mkActor(id) {
     y: 600/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 2 * (Math.random() + 1),
+    r: 4 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
       text: "story of a student!",
@@ -28,7 +28,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(1000).map(mkActor),
+    data: d3.range(400).map(mkActor),
     mode: 'baseline'
   }
 }
@@ -45,7 +45,8 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.time !== nextProps.time) {
       const behavior = behaviours[this.state.mode] || identity;
-      this.setState({data: behavior(this.state.data, nextProps, 0.33)});
+      const ratio = (95 - Math.round(this.props.time / 1000))/100;
+      ratio > 0.34 ? this.setState({data: behavior(this.state.data, nextProps, ratio)}) : this.setState({data: behavior(this.state.data, nextProps, 0.34)});
     }
   }
 
@@ -67,7 +68,7 @@ class App extends Component {
         <div className="App-text-left"> 
           <Content />
           <button onClick={this.onReset}>reset</button><br/>
-          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button> 
+          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>action!</button> 
           <span hidden> Elapsed time: {Math.round(time / 1000) + ' sec'} </span>
         </div>
         <div className="App-chart"> 
