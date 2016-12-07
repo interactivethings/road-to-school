@@ -4,36 +4,38 @@ import React, {Component} from 'react';
 import DOM from 'react-dom';
 import * as d3 from 'd3';
 
-class Chart extends Component {
-  render() {
-    const {data, width, height} = this.props;
-    return (
-      <div>
-        <SvgRenderer data={data} width={width} height={height} />
-      </div>
-    );
-  }
-}
-
 class SvgRenderer extends Component {
+  constructor() {
+    super();
+    this.onRef = ref => this.ref = ref;
+  }
   componentDidMount() {
-    d3.select(DOM.findDOMNode(this))
-      .call(this.renderSvg.bind(this));
+    this.renderSvg();
+    this.props.force.on('tick', () => {
+      this.renderSvg();
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    d3.select(DOM.findDOMNode(this))
-      .call(this.renderSvg.bind(this));
+    this.renderSvg();
+  }
+
+  componentWillUnmount() {
+    this.props.force.on('tick', null);
   }
 
   render() {
     const {width, height} = this.props;
     return (
-      <svg width={width} height={height} />
+      <svg width={width} height={height} ref={this.onRef} />
     );
   }
 
-  renderSvg(svg) {
+  renderSvg() {
+    if (!this.ref) {
+      return;
+    }
+    const svg = d3.select(this.ref);
     const circles = svg.selectAll('circle')
       .data(this.props.data, d => d.id);
 
@@ -67,4 +69,4 @@ class SvgRenderer extends Component {
   }
 }
 
-export default Chart;
+export default SvgRenderer;

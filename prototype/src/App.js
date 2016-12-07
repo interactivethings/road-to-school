@@ -16,7 +16,7 @@ function mkActor(id) {
     y: 600/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 4 * (Math.random() + 1),
+    r: 2 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
       text: "story of a student!",
@@ -28,8 +28,9 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(400).map(mkActor),
-    mode: 'baseline'
+    data: d3.range(300).map(mkActor),
+    mode: 'baseline',
+    ratio: 0.9
   }
 }
 
@@ -40,18 +41,41 @@ class App extends Component {
 
     this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
+    this.force = d3.forceSimulation(this.state.data);
+    this.onScroll = () => {
+      console.log('scroll', window.pageYOffset);
+      const mode = 'x'; //define the next mode when I have it
+      if (mode !== this.state.mode) { //check if the mode needs to be changed (saving expensive changes if not)
+        this.setState({mode});
+      }
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.time !== nextProps.time) {
-      const behavior = behaviours[this.state.mode] || identity;
-      const ratio = (95 - Math.round(this.props.time / 1000))/100;
-      ratio > 0.34 ? this.setState({data: behavior(this.state.data, nextProps, ratio)}) : this.setState({data: behavior(this.state.data, nextProps, 0.34)});
-    }
+  componentWillMount() {
+    this.configureForce(this.props, this.state);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll); // impement passiveEvent() from https://github.com/gut-leben-in-deutschland/bericht/blob/master/src/components/Flagship/ScrollContainer.js
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    this.configureForce(nextProps, nextState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  configureForce(props, state) {
+    behaviours[state.mode](this.force, state.data, props, state.ratio);
+    this.force.restart();
   }
 
   onReset() {
-    this.setState(mkInitialState());
+    const state = mkInitialState();
+    this.setState(state);
+    this.force = d3.forceSimulation(state.data);
   }
 
   onSelectMode(mode) {
@@ -60,7 +84,7 @@ class App extends Component {
 
   render() {
     const {time, width, height} = this.props;
-    const {data, mode} = this.state;
+    const {data, mode, ratio} = this.state;
 
     return (
       <div className="App">
@@ -68,15 +92,18 @@ class App extends Component {
         <div className="App-text-left"> 
           <Content />
           <button onClick={this.onReset}>reset</button><br/>
-          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>action!</button> 
-          <span hidden> Elapsed time: {Math.round(time / 1000) + ' sec'} </span>
+          <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> <br/>
+          <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/>
+          Ratio: {ratio.toFixed(2)}{' '}
+          <button disabled={ratio === 0} onClick={() => this.setState({ratio: Math.max(0, ratio - 0.05)})}>-</button> 
+          <button disabled={ratio === 1} onClick={() => this.setState({ratio: Math.min(1, ratio + 0.05)})}>+</button>
         </div>
         <div className="App-chart"> 
-          <Chart data={data} width={width} height={height}/>
+          <Chart force={this.force} data={data} width={width} height={height}/>
         </div>
       </div>
     );
   }
 }
 
-export default GameLoop(App);
+export default App;
