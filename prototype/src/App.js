@@ -7,7 +7,7 @@ import * as behaviours from './behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
-import {scrollY, passiveEvent} from './dom'; //doing this correctly?? 
+import {scrollY, passiveEvent} from './utils/dom'; 
 
 const identity = x => x;
 const modes =  ['baseline', 'disrupt', 'test'];
@@ -42,7 +42,7 @@ class App extends Component {
     this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
-    this.onScroll = () => {
+    this.onScroll = () => { 
       const windowScrollY = scrollY();
       const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
       var docHeight = Math.max(
@@ -105,9 +105,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-text-left"> 
-          <button onClick={this.onReset}>reset</button>
           <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio.toFixed(2) * 100}/> <br/> <br/>
-          <Content/>
+          <Content/> <br/>
+          <button onClick={this.onReset}>reset</button>
         </div>
         <div className="App-chart"> 
           <Chart force={this.force} data={data} width={width} height={height}/>

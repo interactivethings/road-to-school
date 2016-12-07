@@ -16,7 +16,7 @@ export function baseline(force, data, {width, height, time}, ratio) {
   }
 
   force
-    .velocityDecay(0.1)
+    .velocityDecay(0.3 )
     .alphaTarget(0.3)
     .force('xSchool', isolate(d3.forceX(width/2), function(d) { return d.type === 'school' ; }))
     .force('ySchool', isolate(d3.forceY(height/2), function(d) { return d.type === 'school' ; }))
