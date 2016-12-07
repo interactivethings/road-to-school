@@ -7,7 +7,7 @@ import * as behaviours from './behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
-import {scrollY, passiveEvent} from './dom'; //not fully getting this
+import {scrollY, passiveEvent} from './dom'; //doing this correctly?? 
 
 const identity = x => x;
 
@@ -52,8 +52,9 @@ class App extends Component {
         document.body.clientHeight, document.documentElement.clientHeight
       )
       var pctScrolled = Math.floor(windowScrollY/ (docHeight - windowHeight) * 100);
-      const nextMode = 'disrupt';
+      const nextMode = 'disrupt'; //alternating between only two states here, I have to define all of them
       
+      //when user has scrolled more than 50% then the behavior changes
       if (pctScrolled > 50) { //check if the mode needs to be changed (saving expensive changes if not)
         this.setState({mode: nextMode});
       }
