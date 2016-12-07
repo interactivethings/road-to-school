@@ -56,10 +56,9 @@ class App extends Component {
       var pctScrolled = Math.floor(scrollTop/trackLength * 100);
 
       const mode = 'disrupt'; //define the next mode when I have it
-      if (mode !== this.state.mode) { //check if the mode needs to be changed (saving expensive changes if not)
-        return pctScrolled > 6 ? this.setState({mode}) : identity;
+      if (pctScrolled > 0) { //check if the mode needs to be changed (saving expensive changes if not)
+        this.setState({mode});
       }
-      console.log(this.state.mode)
     };
   }
 
