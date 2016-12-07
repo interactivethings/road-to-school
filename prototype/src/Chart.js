@@ -1,3 +1,5 @@
+import './App.css';
+
 import React, {Component} from 'react';
 import DOM from 'react-dom';
 import * as d3 from 'd3';
@@ -42,7 +44,23 @@ class SvgRenderer extends Component {
       .attr('cx', d => d.x)
       .attr('cy', d => d.y)
       .attr('r', d => d.r)
-      .style('fill', d => d.datum.color);
+      .style('fill', d => d.datum.color)
+      .call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
+
+    function dragstarted(d) {
+      d3.select(this).raise().classed("active", true);
+    }
+
+    function dragged(d) {
+      d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y).attr('r', d.r = 10);
+    }
+
+    function dragended(d) {
+      d3.select(this).classed("active", false).attr('r', d.r = 2);
+    }
 
     circles.exit()
       .remove();

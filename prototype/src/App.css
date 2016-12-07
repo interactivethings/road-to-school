@@ -37,3 +37,8 @@ button {
 svg {
 	border: 1px solid black;
 }
+
+.active {
+  stroke: #00f;
+  stroke-width: 2px;
+}

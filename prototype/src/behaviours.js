@@ -26,10 +26,6 @@ export function baseline(data, {width, height, time}, ratio, counter) {
     .stop() 
     .tick();
 
-  d3.selectAll('circle').call(d3.drag().on("drag", function(d) {
-      d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-  }));
-
   return data;
 }
 
