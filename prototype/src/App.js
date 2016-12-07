@@ -22,7 +22,7 @@ function mkActor(id) {
     r: 2 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
-      color: '#fff'
+      color: '#009593'
     }
   };
 }
@@ -107,7 +107,6 @@ class App extends Component {
         <div className="App-text-left"> 
           <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio.toFixed(2) * 100}/> <br/> <br/>
           <Content/> <br/>
-          <button onClick={this.onReset}>reset</button>
         </div>
         <div className="App-chart"> 
           <Chart force={this.force} data={data} width={width} height={height}/>
