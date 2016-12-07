@@ -6,6 +6,7 @@ import * as behaviours from './behaviours';
 // import GameLoop from './GameLoop';
 import Chart from './Chart';
 import Content from './Content';
+import Counter from './Counter';
 import {scrollY, passiveEvent} from './dom'; //not fully getting this
 
 const identity = x => x;
@@ -31,7 +32,8 @@ function mkInitialState() {
   return {
     data: d3.range(300).map(mkActor),
     mode: 'baseline',
-    ratio: 0.9
+    ratio: 0.9,
+    counter: 0
   }
 }
 
@@ -45,6 +47,7 @@ class App extends Component {
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = () => {
       const windowScrollY = scrollY();
+
       const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
       var docHeight = Math.max(
         document.body.scrollHeight, document.documentElement.scrollHeight,
@@ -57,6 +60,8 @@ class App extends Component {
       if (pctScrolled > 50) { //check if the mode needs to be changed (saving expensive changes if not)
         this.setState({mode});
       }
+
+      this.setState({counter: pctScrolled * 100});
     };
   }
 
@@ -95,7 +100,7 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    const {data, mode, ratio} = this.state;
+    const {data, mode, ratio, counter} = this.state;
 
     return (
       <div className="App">
@@ -103,11 +108,12 @@ class App extends Component {
         <div className="App-text-left"> 
           <button onClick={this.onReset}>reset</button>
           <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>leave school :( </button> 
-          <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/>
+          <button disabled={mode === 'baseline'} onClick={this.onSelectMode('baseline')}>go to school! :D </button> <br/><br/>
           Ratio: {ratio.toFixed(2)}{' '}
           <button disabled={ratio === 0} onClick={() => this.setState({ratio: Math.max(0, ratio - 0.05)})}>-</button> 
-          <button disabled={ratio === 1} onClick={() => this.setState({ratio: Math.min(1, ratio + 0.05)})}>+</button> <br/> <br/>
-          <Content />
+          <button disabled={ratio === 1} onClick={() => this.setState({ratio: Math.min(1, ratio + 0.05)})}>+</button> <br/> <br/> 
+          <Counter onScroll={() => this.setState({counter: this.onScroll()})}/> {counter} <br/> <br/>
+          <Content/>
         </div>
         <div className="App-chart"> 
           <Chart force={this.force} data={data} width={width} height={height}/>

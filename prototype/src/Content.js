@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Content extends Component {
   render() {
     return (
-<span>
+<span className="Content">
 Lorem ipsum dolor sit amet, ea mea choro essent, zril deseruisse vim ea. Eos ad postea noster diceret, nobis dolorem principes ei vel, audiam temporibus id ius. Iudico albucius cu nec, eius commodo phaedrum has cu. Et ludus voluptatibus his, sed eirmod recusabo in. Te quo latine volutpat interpretaris, eos no errem nullam audire.
 
 Alia decore legimus vis ne. Soleat alterum hendrerit ne vel. Id quas quodsi cum, eu nec vocibus feugait tractatos, labore intellegebat in pri. Prima eruditi urbanitas ex eam. Viris equidem complectitur ex sed, aeque everti assueverit eu sed.

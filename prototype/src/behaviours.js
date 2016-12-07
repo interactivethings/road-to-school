@@ -51,3 +51,4 @@ export function disrupt(force, data, {width, height}, ratio) {
         .velocityDecay(0.2);
     });
 }
+
