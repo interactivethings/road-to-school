@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import * as behaviours from './behaviours';
 import GameLoop from './GameLoop';
 import Chart from './Chart';
+import Content from './Content';
 
 const identity = x => x;
 
@@ -64,12 +65,13 @@ class App extends Component {
       <div className="App">
         <div className="App-header"></div>
         <div className="App-text-left"> 
+          <Content />
           <button onClick={this.onReset}>reset</button><br/>
           <button disabled={mode === 'disrupt'} onClick={this.onSelectMode('disrupt')}>disrupt</button> 
           <span hidden> Elapsed time: {Math.round(time / 1000) + ' sec'} </span>
         </div>
         <div className="App-chart"> 
-          <Chart data={data} width={width} height={height} />
+          <Chart data={data} width={width} height={height}/>
         </div>
       </div>
     );
