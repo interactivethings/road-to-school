@@ -25,10 +25,10 @@ function mkActor(id) {
     y: window.innerHeight/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 2 * (Math.random() + 1),
+    r: 1 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
-      color: '#009593'
+      color: '#fff'
     }
   };
 }
@@ -117,6 +117,7 @@ class App extends Component {
     ratio = formatCounter(ratio);
     return (
       <div className="App">
+        <div className="App-Header"> An <br/> Education</div>
         <DateDisplay text="Year is" value={timepoint} />
         <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
         <Content text={findContentForMode(contentMap, pctScrolled)} />
