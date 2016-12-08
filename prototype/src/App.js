@@ -14,7 +14,7 @@ const identity = x => x;
 var formatCounter = d3.format(".0%");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
-    .range([0.33, 0.67]);
+    .range([0.10, 0.67]);
 
 function mkActor(id) {
   return {
@@ -95,12 +95,10 @@ class App extends Component {
       var nextMode = findModeAtPosition(contentMap, pctScrolled);
       var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
       var ratio = Math.min(pctScrolled/100, 1);
-
       this.setState({
         ratio: ratio,
         mode: mode
       });
-
   }
 
   render() {
@@ -110,9 +108,10 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
-          <Content text={findContentForMode(contentMap, mode)} />
-          <Chart force={this.force} data={data} width={width} height={height}/>
+        <DateDisplay text="Year is" value={timepoint} />
+        <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
+        <Content text={findContentForMode(contentMap, mode)} />
+        <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
     );
   }
