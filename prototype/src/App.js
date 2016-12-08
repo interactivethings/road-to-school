@@ -2,19 +2,21 @@ import './App.css';
 
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import * as behaviours from './behaviours';
+import * as behaviours from './Behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode} from './ContentMap';
+import update from 'react-addons-update'; 
 
 const identity = x => x;
 var formatCounter = d3.format(".0%");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
     .range([0.10, 0.67]);
+const actors = 1000;
 
 function mkActor(id) {
   return {
@@ -33,7 +35,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(1000).map(mkActor),
+    data: d3.range(actors).map(mkActor),
     mode: 'baseline',
     ratio: ratioRange(0),
     timepoint: 2012,
@@ -96,6 +98,14 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     var ratio = Math.min(this.state.pctScrolled/100, 1);
+    //mutate type 
+
+    for (var i = actors - 1; i >= 0; i--) {   
+      // console.log(this.state.data[i].type )
+      var newType = (i < ratio*100) ? 'school' : 'noSchool';
+      this.setState({data : update(this.state.data[i].type, {type: {$set: newType}  })}); 
+    }
+
     this.setState({
       ratio: ratioRange(ratio),
       mode: mode
