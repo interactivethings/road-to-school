@@ -9,7 +9,7 @@ import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode} from './ContentMap';
-import update from 'react-addons-update'; 
+import update from 'react-update'; 
 
 const identity = x => x;
 var formatCounter = d3.format(".0%");
@@ -51,6 +51,7 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
+    this.update = update.bind(this);
   }
 
   componentWillMount() {
@@ -98,12 +99,10 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     var ratio = Math.min(this.state.pctScrolled/100, 1);
-    //mutate type 
 
     for (var i = actors - 1; i >= 0; i--) {   
-      // console.log(this.state.data[i].type )
       var newType = (i < ratio*100) ? 'school' : 'noSchool';
-      this.setState({data : update(this.state.data[i].type, {type: {$set: newType}  })}); 
+      // this.update('set', this.state.data[i].type, newType);
     }
 
     this.setState({
