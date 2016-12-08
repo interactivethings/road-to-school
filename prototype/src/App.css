@@ -32,6 +32,13 @@ body {
 	line-height: 27px;
 }
 
+.DateDisplay {
+	position: fixed;
+	left: 200px;
+	top: 180px;
+	color: #000;
+}
+
 svg {
 	padding: 0; 
 	margin: 0; 

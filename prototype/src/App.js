@@ -8,13 +8,14 @@ import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import contentMap from './ContentMap';
+import DateDisplay from './DateDisplay';
 
 const identity = x => x;
-var format = d3.format(".0%");
+var formatCounter = d3.format(".0%");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
     .range([0.33, 0.67]);
-
+var formatDate = d3.timeFormat("%B %d, %Y");
 
 function mkActor(id) {
   return {
@@ -35,7 +36,8 @@ function mkInitialState() {
   return {
     data: d3.range(1000).map(mkActor),
     mode: 'baseline',
-    ratio: ratioRange(0)
+    ratio: ratioRange(0),
+    timepoint:  Date(1995, 11, 17)
   }
 }
 
@@ -71,7 +73,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll, passiveEvent()); // impemented from https://github.com/gut-leben-in-deutschland/bericht/blob/master/src/components/Flagship/ScrollContainer.js
+    window.addEventListener('scroll', this.onScroll, passiveEvent());
   }
 
 
@@ -101,14 +103,16 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    var {data, ratio, mode} = this.state;
-    ratio = format(ratio); 
+    var {data, ratio, mode, timepoint} = this.state;
+    console.log(formatDate())
+    ratio = formatCounter(ratio); 
     function findContent(item) {
       return item.mode === mode;
     }
 
     return (
       <div className="App">
+          <DateDisplay text="Year is" value={timepoint} />
           <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text=" of children are out of school" value={ratio}/>
           <div className="App-Content"> 
             <Content text={contentMap.find(findContent).text} />
