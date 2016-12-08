@@ -5,19 +5,10 @@ body {
 	font-weight: 300;
 	line-height: 16px;
 	letter-spacing: 0.01em;
+	height: 3000px;
+
 }
 
-
-.App-text-left {
-	padding: 0;
-	margin: 0;
-	position: absolute;
-	top: 100px;
-	left: 10%;
-	bottom: 20px;
-	width: 400px;
-	height: 2000px;
-}
 
 button {
 	margin-right: 10px;
@@ -28,7 +19,6 @@ svg {
 	margin: 0; 
 	position: fixed; 
 	left: 20%;
-	top: 10%;
 }
 
 .active {
@@ -48,4 +38,13 @@ svg {
 }
 
 .Content {
+	font-size: 28px;
+	line-height:  32px;
+	top: 20%;
+	left: 10%;
+	bottom: 20px;
+	width: 400px;
+	padding: 0;
+	margin: 0;
+	position: fixed;
 }
