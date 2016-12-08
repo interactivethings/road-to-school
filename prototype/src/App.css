@@ -4,24 +4,23 @@ body {
 	font-weight: 300;
 	letter-spacing: 0.01em;
 	height: 3000px;
-
+	font-size: 14px;
+	line-height: 16px;
 }
 
 
-button {
-	margin-right: 10px;
+
+.App-Content {
+
 }
 
-svg {
-	padding: 0; 
-	margin: 0; 
-	position: fixed; 
-	left: 20%;
-}
-
-.active {
-  stroke: ##009593;
-  stroke-width: 2px;
+.Content {
+	top: 20%;
+	left: 10%;
+	bottom: 20px;
+	width: 400px;
+	padding: 0;
+	position: fixed;
 }
 
 .Counter {
@@ -35,14 +34,9 @@ svg {
 	line-height: 27px;
 }
 
-.Content {
-	font-size: 14px;
-	line-height: 16px;
-	top: 20%;
+svg {
+	padding: 0; 
+	margin: 0; 
+	position: fixed; 
 	left: 10%;
-	bottom: 20px;
-	width: 400px;
-	padding: 0;
-	margin: 0;
-	position: fixed;
 }
