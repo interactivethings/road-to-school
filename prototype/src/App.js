@@ -109,7 +109,7 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio}/>
+          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text=" of children are out of school" value={ratio}/>
           <Content text={contentMap.find(findContent).text} />
           <Chart force={this.force} data={data} width={width} height={height}/>
       </div>

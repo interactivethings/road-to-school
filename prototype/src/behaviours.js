@@ -40,15 +40,3 @@ export function disrupt(force, data, {width, height}, ratio) {
         .velocityDecay(0.2);
     });
 }
-
-export function test(force, data, {width, height}, ratio) { 
-  console.log('test');
-
-  
-  force
-    .alphaTarget(0.8)
-    .velocityDecay(0.3)
-    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.id < ratio * data.length; }).radius(function(d) { return d.r; }).iterations(2).strength(0.5))
-    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.id > ratio * data.length; }).radius(function(d) { return d.r; }).iterations(2).strength(0.8))
-  
-}
