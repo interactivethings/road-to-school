@@ -33,7 +33,7 @@ function mkActor(id) {
 
 function mkInitialState() {
   return {
-    data: d3.range(300).map(mkActor),
+    data: d3.range(1000).map(mkActor),
     mode: 'baseline',
     ratio: ratioRange(0)
   }

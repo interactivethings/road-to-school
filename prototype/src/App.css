@@ -11,22 +11,20 @@ body {
 
 
 .App-Content {
-
+	position: relative;
 }
 
 .Content {
-	top: 20%;
-	left: 10%;
-	bottom: 20px;
+	left: 200px;
 	width: 400px;
-	padding: 0;
-	position: fixed;
+	padding-top: 300px;
+	position: absolute;
 }
 
 .Counter {
 	position: fixed;
-	left: 10%;
-	top: 10%;
+	left: 200px;
+	top: 200px;
 	color: #000;
 	padding: 2px;
 	background-color: #ff0;
