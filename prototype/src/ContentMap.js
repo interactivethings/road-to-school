@@ -17,4 +17,22 @@ var contentMap = [
   }
 ]
 
+
+// key -> {}
+const find = (function() {
+  const cmL = makeLookup 
+  /*
+  contenMapLookup = {
+  baseline: ...,
+  disrupt: ...
+}
+*/
+  return function(contentMap, key) {
+    return cmL[key] || contentMap[0];
+  }
+}());
+
+// findMode :: ContentMap -> Number -> String
+// findContent :: ContentMap -> String -> String
+
 export default contentMap;

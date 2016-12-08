@@ -7,7 +7,7 @@ import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
-import contentMap from './ContentMap';
+import {contentMap, findMode} from './ContentMap';
 
 const identity = x => x;
 
@@ -41,24 +41,7 @@ class App extends Component {
     this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
-    this.onScroll = () => { 
-
-      var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
-      var docHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-      );
-      var pctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
-
-      function findMode(item) {
-        return item.changeAt === pctScrolled;
-      }
-      var nextMode = contentMap.find(findMode);
-      if (nextMode !== undefined) this.setState({mode: nextMode.mode})
-        
-      this.setState({ratio: Math.min(pctScrolled/100, 1).toFixed(2)});
-    };
+    this.onScroll = this.onScroll.bind(this);
   }
 
   componentWillMount() {
@@ -94,6 +77,35 @@ class App extends Component {
     return () => this.setState({mode});
   }
 
+  onScroll() {
+      var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
+      var docHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      );
+      var pctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
+
+      // function (item) {
+      //   return item.changeAt === pctScrolled;
+      // }
+      //var nextMode = contentMap.find(findMode);
+      var nextMode = findMode(contentMap, pctScrolled);
+      var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
+
+      var ratio = Math.min(pctScrolled/100, 1);
+
+      // for (var i = this.state.data.length - 1; i >= 0; i--) {
+      //   this.state.data[i] = (i < ratio) ? 'school' : 'noSchool';
+      // }
+
+      this.setState({
+        ratio: ratio,
+        mode: mode
+      });
+
+  }
+
   render() {
     const {width, height} = this.props;
     const {data, ratio, mode} = this.state;
@@ -104,7 +116,7 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio * 100}/>
+          <Counter onScroll={this.onScroll} text="students currently out of school:" value={ratio.toFixed(2) * 100}/>
           <Content text={contentMap.find(findContent).text} />
           <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
