@@ -62,6 +62,10 @@ class App extends Component {
       }
       var nextMode = contentMap.find(findMode);
       if (nextMode !== undefined) this.setState({mode: nextMode.mode})
+      
+      // for (var i = this.state.data.length - 1; i >= 0; i--) {
+        //   this.state.data[i] = (i < ratio) ? 'school' : 'noSchool';
+      // }
         
       this.setState({ratio: ratioRange(Math.min(pctScrolled/100, 1))});
     };
