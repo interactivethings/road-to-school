@@ -88,7 +88,6 @@ class App extends Component {
 
       var nextMode = findModeAtPosition(contentMap, pctScrolled);
       var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-
       var ratio = Math.min(pctScrolled/100, 1);
 
       this.setState({
@@ -102,14 +101,10 @@ class App extends Component {
     const {width, height} = this.props;
     const {data, ratio, mode} = this.state;
 
-    function findContent(item) {
-      return item.mode === mode;
-    }
-
     return (
       <div className="App">
           <Counter onScroll={this.onScroll} text="students currently out of school:" value={ratio.toFixed(2) * 100}/>
-          <Content text={contentMap.find(findContent).text} />
+          <Content text={findContentForMode(contentMap, mode)} />
           <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
     );
