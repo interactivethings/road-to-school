@@ -28,7 +28,7 @@ function mkActor(id) {
     r: 1 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
-      color: '#fff'
+      color: '#81A88D'
     }
   };
 }
@@ -118,7 +118,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-Header"> An <br/> Education</div>
-        <DateDisplay text="Year is" value={timepoint} />
+        {/* <DateDisplay text="Year is" value={timepoint} /> */}
         <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
         <Content text={findContentForMode(contentMap, pctScrolled)} />
         <Chart force={this.force} data={data} width={width} height={height}/>
