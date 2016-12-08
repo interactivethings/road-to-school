@@ -1,9 +1,7 @@
 body {
 	color: #009593;
-	font-size: 12px;
 	font-family: Source Sans Pro;
 	font-weight: 300;
-	line-height: 16px;
 	letter-spacing: 0.01em;
 	height: 3000px;
 
@@ -38,8 +36,8 @@ svg {
 }
 
 .Content {
-	font-size: 28px;
-	line-height:  32px;
+	font-size: 14px;
+	line-height: 16px;
 	top: 20%;
 	left: 10%;
 	bottom: 20px;

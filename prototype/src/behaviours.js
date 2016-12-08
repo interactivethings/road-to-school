@@ -5,6 +5,7 @@
 import * as d3 from 'd3';
 
 export function baseline(force, data, {width, height, time}, ratio) { 
+  console.log('baseline')
   
   function isolate(aForce, filter) {
     var initialize = aForce.initialize;
@@ -24,6 +25,7 @@ export function baseline(force, data, {width, height, time}, ratio) {
 }
 
 export function disrupt(force, data, {width, height}, ratio) {
+  console.log('disrupt')
 
   function isolate(aForce, filter) {
     var initialize = aForce.initialize;
@@ -51,7 +53,7 @@ export function disrupt(force, data, {width, height}, ratio) {
 }
 
 export function test(force, data, {width, height}, ratio) { 
-
+  console.log('test');
   function isolate(aForce, filter) {
     var initialize = aForce.initialize;
     aForce.initialize = function() { initialize.call(aForce, data.filter(filter)); };

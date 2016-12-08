@@ -7,7 +7,7 @@ import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
-import contentMap from './ContentMap'
+import contentMap from './ContentMap';
 
 const identity = x => x;
 
@@ -30,7 +30,7 @@ function mkInitialState() {
   return {
     data: d3.range(300).map(mkActor),
     mode: 'baseline',
-    ratio: 0.9
+    ratio: 0
   }
 }
 
@@ -43,26 +43,21 @@ class App extends Component {
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = () => { 
 
-      const windowScrollY = scrollY();
-      const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
+      var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
       var docHeight = Math.max(
         document.body.scrollHeight, document.documentElement.scrollHeight,
         document.body.offsetHeight, document.documentElement.offsetHeight,
         document.body.clientHeight, document.documentElement.clientHeight
-      )
-      var pctScrolled = Math.floor(windowScrollY/ (docHeight - windowHeight) * 100);
+      );
+      var pctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
 
-
-      if (pctScrolled < 30) { //check if the mode needs to be changed (saving expensive changes if not)
-        this.setState({mode: contentMap[0].mode});
+      function findMode(item) {
+        return item.changeAt === pctScrolled;
       }
-      else if (pctScrolled < 60) {
-        this.setState({mode: contentMap[1].mode});
-      }
-      else if (pctScrolled < 100) {
-        this.setState({mode: contentMap[2].mode});
-      }
-      this.setState({ratio: Math.min(pctScrolled/100, 1)});
+      var nextMode = contentMap.find(findMode);
+      if (nextMode !== undefined) this.setState({mode: nextMode.mode})
+        
+      this.setState({ratio: Math.min(pctScrolled/100, 1).toFixed(2)});
     };
   }
 
@@ -109,11 +104,9 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio.toFixed(2) * 100}/>
+          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio * 100}/>
           <Content text={contentMap.find(findContent).text} />
-        <div className="App-chart"> 
           <Chart force={this.force} data={data} width={width} height={height}/>
-        </div>
       </div>
     );
   }
