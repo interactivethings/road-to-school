@@ -65,16 +65,11 @@ export const findModeAtPosition = (cMap, position) => {
   return cMap[0].mode;
 };
 
-export const findContentForMode = (function() {
-  const cmLookup = contentMap.reduce((m, d) => {
-    m[d.mode] = d;
-    return m;
-  }, {});
-
-  return (cMap, mode) => {
-    // We assume there's at least 1 element in content Map for the fallback
-    const fallbackText = cMap[0].text;
-    const contentItem = cmLookup[mode];
-    return contentItem ? contentItem.text : fallbackText;
+export const findContentForMode = (cMap, position) => {
+  for (let i = cMap.length - 1; i >= 0; i--) {
+    if (position >= cMap[i].fromPosition) {
+      return cMap[i].text;
+    }
   }
-}());
+  return cMap[0].text;
+};

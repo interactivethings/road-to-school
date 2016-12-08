@@ -36,7 +36,8 @@ function mkInitialState() {
     data: d3.range(1000).map(mkActor),
     mode: 'baseline',
     ratio: ratioRange(0),
-    timepoint: 2012
+    timepoint: 2012,
+    pctScrolled: 0
   }
 }
 
@@ -84,33 +85,33 @@ class App extends Component {
   }
 
   onScroll() {
-      var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
-      var docHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-      );
-      var pctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
+    var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
+    var docHeight = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+    this.setState({ pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
 
-      var nextMode = findModeAtPosition(contentMap, pctScrolled);
-      var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-      var ratio = Math.min(pctScrolled/100, 1);
-      this.setState({
-        ratio: ratio,
-        mode: mode
-      });
+    var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
+    var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
+    var ratio = Math.min(this.state.pctScrolled/100, 1);
+    this.setState({
+      ratio: ratio,
+      mode: mode
+    });
   }
 
   render() {
     const {width, height} = this.props;
-    var {data, ratio, mode, timepoint} = this.state;
+    var {data, ratio, timepoint, pctScrolled} = this.state;
     ratio = formatCounter(ratio); 
-
+    
     return (
       <div className="App">
         <DateDisplay text="Year is" value={timepoint} />
         <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
-        <Content text={findContentForMode(contentMap, mode)} />
+        <Content text={findContentForMode(contentMap, pctScrolled)} />
         <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
     );
