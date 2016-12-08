@@ -10,6 +10,11 @@ import {scrollY, passiveEvent} from './utils/dom';
 import contentMap from './ContentMap';
 
 const identity = x => x;
+var format = d3.format(".0%");
+var ratioRange = d3.scaleLinear()
+    .domain([0,1])
+    .range([0.33, 0.67]);
+
 
 function mkActor(id) {
   return {
@@ -30,7 +35,7 @@ function mkInitialState() {
   return {
     data: d3.range(300).map(mkActor),
     mode: 'baseline',
-    ratio: 0
+    ratio: ratioRange(0)
   }
 }
 
@@ -57,7 +62,7 @@ class App extends Component {
       var nextMode = contentMap.find(findMode);
       if (nextMode !== undefined) this.setState({mode: nextMode.mode})
         
-      this.setState({ratio: Math.min(pctScrolled/100, 1).toFixed(2)});
+      this.setState({ratio: ratioRange(Math.min(pctScrolled/100, 1))});
     };
   }
 
@@ -96,15 +101,15 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    const {data, ratio, mode} = this.state;
-
+    var {data, ratio, mode} = this.state;
+    ratio = format(ratio); 
     function findContent(item) {
       return item.mode === mode;
     }
 
     return (
       <div className="App">
-          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio * 100}/>
+          <Counter onScroll={() => this.setState({ratio: this.onScroll()})} text="students currently out of school:" value={ratio}/>
           <Content text={contentMap.find(findContent).text} />
           <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
