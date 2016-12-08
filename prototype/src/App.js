@@ -7,7 +7,6 @@ import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
-import contentMap from './ContentMap';
 import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode} from './ContentMap';
 
@@ -111,7 +110,7 @@ class App extends Component {
 
     return (
       <div className="App">
-          <Counter onScroll={this.onScroll} text="students currently out of school:" value={ratio.toFixed(2) * 100}/>
+          <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
           <Content text={findContentForMode(contentMap, mode)} />
           <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
