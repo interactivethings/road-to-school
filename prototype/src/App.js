@@ -7,7 +7,7 @@ import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
-import {contentMap, findMode} from './ContentMap';
+import {contentMap, findModeAtPosition, findContentForMode} from './ContentMap';
 
 const identity = x => x;
 
@@ -86,12 +86,7 @@ class App extends Component {
       );
       var pctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
 
-      // function (item) {
-      //   return item.changeAt === pctScrolled;
-      // }
-
-      // var nextMode = contentMap.find(findMode);
-      var nextMode = findMode(contentMap, pctScrolled);
+      var nextMode = findModeAtPosition(contentMap, pctScrolled);
       var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
 
       var ratio = Math.min(pctScrolled/100, 1);

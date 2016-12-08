@@ -34,7 +34,7 @@ export const findContentForMode = (function() {
   return (cMap, mode) => {
     // We assume there's at least 1 element in content Map for the fallback
     const fallbackText = cMap[0].text;
-    const contentItem = cmL[mode];
+    const contentItem = cmLookup[mode];
     return contentItem ? contentItem.text : fallbackText;
   }
 }());
