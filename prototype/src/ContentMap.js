@@ -65,9 +65,9 @@ export const findModeAtPosition = (cMap, position) => {
   return cMap[0].mode;
 };
 
-export const findContentForMode = (cMap, position) => {
+export const findContentForMode = (cMap, percent) => {
   for (let i = cMap.length - 1; i >= 0; i--) {
-    if (position >= cMap[i].fromPosition) {
+    if (percent >= cMap[i].fromPosition) {
       return cMap[i].text;
     }
   }

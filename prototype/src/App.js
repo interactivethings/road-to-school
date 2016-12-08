@@ -91,13 +91,13 @@ class App extends Component {
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight
     );
+    
     this.setState({ pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
-
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     var ratio = Math.min(this.state.pctScrolled/100, 1);
     this.setState({
-      ratio: ratio,
+      ratio: ratioRange(ratio),
       mode: mode
     });
   }
@@ -105,8 +105,7 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     var {data, ratio, timepoint, pctScrolled} = this.state;
-    ratio = formatCounter(ratio); 
-    
+    ratio = formatCounter(ratio);
     return (
       <div className="App">
         <DateDisplay text="Year is" value={timepoint} />

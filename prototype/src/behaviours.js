@@ -5,7 +5,7 @@
 import * as d3 from 'd3';
 import {isolate} from './utils/forceHelpers';
 
-export function baseline(force, data, {width, height, time}, ratio) { 
+export function baseline(force, data, {width, height}, ratio) { 
   console.log('baseline')
 
   force
