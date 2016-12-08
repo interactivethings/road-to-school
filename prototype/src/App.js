@@ -89,15 +89,12 @@ class App extends Component {
       // function (item) {
       //   return item.changeAt === pctScrolled;
       // }
-      //var nextMode = contentMap.find(findMode);
+
+      // var nextMode = contentMap.find(findMode);
       var nextMode = findMode(contentMap, pctScrolled);
       var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
 
       var ratio = Math.min(pctScrolled/100, 1);
-
-      // for (var i = this.state.data.length - 1; i >= 0; i--) {
-      //   this.state.data[i] = (i < ratio) ? 'school' : 'noSchool';
-      // }
 
       this.setState({
         ratio: ratio,
