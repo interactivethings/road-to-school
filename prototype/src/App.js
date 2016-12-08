@@ -15,7 +15,6 @@ var formatCounter = d3.format(".0%");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
     .range([0.33, 0.67]);
-var formatDate = d3.timeFormat("%B %d, %Y");
 
 function mkActor(id) {
   return {
@@ -37,7 +36,7 @@ function mkInitialState() {
     data: d3.range(1000).map(mkActor),
     mode: 'baseline',
     ratio: ratioRange(0),
-    timepoint:  Date(1995, 11, 17)
+    timepoint: 2012
   }
 }
 
@@ -104,7 +103,7 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     var {data, ratio, mode, timepoint} = this.state;
-    console.log(formatDate())
+
     ratio = formatCounter(ratio); 
     function findContent(item) {
       return item.mode === mode;
