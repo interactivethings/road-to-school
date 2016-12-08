@@ -16,16 +16,14 @@ export const contentMap = [
   }
 ];
 
-export const findModeAtPosition = (function() {
-  return (cMap, position) => {
-    for (let i = cMap.length - 1; i >= 0; i--) {
-      if (position >= cMap[i].fromPosition) {
-        return cMap[i].mode;
-      }
+export const findModeAtPosition = (cMap, position) => {
+  for (let i = cMap.length - 1; i >= 0; i--) {
+    if (position >= cMap[i].fromPosition) {
+      return cMap[i].mode;
     }
-    return cMap[0].mode;
   }
-}());
+  return cMap[0].mode;
+};
 
 export const findContentForMode = (function() {
   const cmLookup = contentMap.reduce((m, d) => {
