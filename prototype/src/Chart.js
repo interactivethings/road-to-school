@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as d3 from 'd3';
 import './App.css';
 import {voronoiContentMap, findTextforVoronoi} from './VoronoiContentMap';
-import Voronoi from './Voronoi';
 
 class SvgRenderer extends Component {
   constructor() {
@@ -57,8 +56,8 @@ class SvgRenderer extends Component {
 
     var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
-        x: width/4 + 250*Math.random() - 100,
-        y: height/2+ 250*Math.random() - 100
+        x: width/4 + 150*Math.random(),
+        y: height/2+ 150*Math.random()
       };
     });
 
@@ -71,7 +70,7 @@ class SvgRenderer extends Component {
       .data(nodes)
       .enter().append("g");
 
-    var cell = node.append("path")
+    node.append("path")
       .data(voronoi.polygons(nodes))
       .attr("d", renderCell)
       .on("mousedown", function(d,i) {
