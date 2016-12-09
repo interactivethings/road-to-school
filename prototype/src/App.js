@@ -8,14 +8,14 @@ import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
-import {contentMap, findModeAtPosition, findContentForMode} from './ContentMap';
+import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode} from './ContentMap';
 import update from 'react-update'; 
 
 const identity = x => x;
 var formatCounter = d3.format(".0%");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
-    .range([0.10, 0.67]);
+    .range([0, 0.67]);
 const actors = 1000;
 
 function mkActor(id) {
@@ -38,7 +38,6 @@ function mkInitialState() {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
     ratio: ratioRange(0),
-    timepoint: 2012,
     pctScrolled: 0
   }
 }
@@ -95,7 +94,9 @@ class App extends Component {
       document.body.clientHeight, document.documentElement.clientHeight
     );
     
-    this.setState({ pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
+    this.setState({ 
+      pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) 
+    });
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     var ratio = Math.min(this.state.pctScrolled/100, 1);
@@ -114,15 +115,16 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    var {data, ratio, timepoint, pctScrolled} = this.state;
+    var {data, ratio, pctScrolled} = this.state;
     ratio = formatCounter(ratio);
     return (
       <div className="App">
         <div className="App-Header"> An <br/> Education</div>
-        <DateDisplay text="Year is" value={timepoint} />
-        <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
-        <Content text={findContentForMode(contentMap, pctScrolled)} />
+        <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} /> <br/>
+        <Counter onScroll={this.onScroll} value={ratio}/> <br/>
+        <div className="Counter-Text"> of school-aged children were left out of school by conflict </div>
         <Chart force={this.force} data={data} width={width} height={height}/>
+        <Content text={findContentForMode(contentMap, pctScrolled)} />
       </div>
     );
   }

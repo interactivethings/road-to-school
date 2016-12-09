@@ -3,9 +3,12 @@ body {
 	font-family: Source Sans Pro;
 	font-weight: 300;
 	letter-spacing: 0.01em;
-	height: 3000px;
-	font-size: 14px;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.App {
+	height: 4000px;
 }
 
 .App-Header {
@@ -19,40 +22,34 @@ body {
 
 }
 
-.DateDisplay {
-	position: fixed;
-	position: fixed;
-	margin-left: 10%;
-	margin-top: 19%;
-	color: #972D15;
-}
-
-.Counter {
-	position: fixed;
-	margin-left: 10%;
-	margin-top: 20%;
-	color: #fff;
-	padding: 0px 4px;
-	background-color: #972D15;
-	font-size: 18px;
-	line-height: 27px;
-}
-
-.App-Content {
-	position: relative;
-}
 
 .Content {
-	margin-left: 10%;
 	width: 35%;
 	margin-top: 30%;
 	position: fixed;
+	margin-left: 10%;
+
 }
 
+.DateDisplay, .Counter, .Counter-Text {
+	margin-left: 10%;
+	margin-top: 50%;
+	position: fixed; 
+	padding: 0px 2px;
+	color: #972D15;
+	letter-spacing: -0.01em;
+}
+
+.Counter {
+	font-size: 64px;
+	line-height: 68px;
+}
+.Counter-Text {
+	padding-top: 48px;
+}
 
 svg {
 	padding: 0; 
-	margin: 0; 
+	margin-left: 20%;
 	position: fixed; 
-	left: 20%;
 }
