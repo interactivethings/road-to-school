@@ -12,12 +12,11 @@ import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import update from 'react-update'; 
 
-const identity = x => x;
 var formatCounter = d3.format(",.2r");
-var ratioRange = d3.scaleLinear()
-    .domain([0,1])
-    .range([10, 3100000]);
+var ratioRange = d3.scaleLinear().domain([0,1]).range([10, 3100000]);
 const actors = 1000;
+
+const identity = x => x;
 
 function mkActor(id) {
   return {
@@ -49,14 +48,14 @@ class App extends Component {
     this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
-    this.bombForce = d3.forceSimulation(this.state.data);
+    // this.bombForce = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
     this.update = update.bind(this);
   }
 
   componentWillMount() {
     this.configureForce(this.props, this.state);
-    this.configureBombForce(this.props, this.state);
+    // this.configureBombForce(this.props, this.state);
   }
 
   componentDidMount() {
@@ -66,7 +65,7 @@ class App extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     this.configureForce(nextProps, nextState);
-    this.configureBombForce(nextProps, nextState);
+    // this.configureBombForce(nextProps, nextState);
   }
 
   componentWillUnmount() {
@@ -89,7 +88,7 @@ class App extends Component {
     const state = mkInitialState();
     this.setState(state);
     this.force = d3.forceSimulation(state.data);
-    this.bombForce = d3.forceSimulation(state.data);
+    // this.bombForce = d3.forceSimulation(state.data);
   }
 
   onSelectMode(mode) {
@@ -107,12 +106,13 @@ class App extends Component {
     this.setState({ 
       pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) 
     });
+
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
-      var newType = (i < findRatioFromPctScroll(this.state.pctScrolled) ) * actors ? 'school' : 'noSchool';
+      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors )? 'school' : 'noSchool';
       // this.update('set', this.state.data[i].type, newType);
-      this.state.data[i].type = newType;
+      this.state.data[i].type = nextType;
     }
 
     this.setState({
