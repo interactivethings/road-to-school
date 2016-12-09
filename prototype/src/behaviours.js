@@ -52,14 +52,14 @@ export function backToSchool(force, data, {width, height}) {
 
 export function bombForce(force, data, {width, height}) {
     d3.interval(function(){
-        console.log('bomb');
-        var bombForce = d3.forceSimulation(data);
-        bombForce.force('bombX', d3.forceX(function(d,i) { return Math.sin(i) *  R * getVariation(1,1.2) + width/2 * getVariation(0.9,1.2);} ).strength(-0.1))
-        .force('bombY', d3.forceY(function(d,i) { return Math.cos(i) * R * getVariation(1,1.2) + height/2 * getVariation(0.9,1.2);} ).strength(-0.1))
-        .alphaTarget(0.5)
-        .velocityDecay(0.8)
-        .stop()
-        .tick();
+    //     console.log('bomb');
+    //     var bombForce = d3.forceSimulation(data);
+    //     bombForce.force('bombX', d3.forceX(function(d,i) { return Math.sin(i) *  R * getVariation(1,1.2) + width/2 * getVariation(0.9,1.2);} ).strength(-0.1))
+    //     .force('bombY', d3.forceY(function(d,i) { return Math.cos(i) * R * getVariation(1,1.2) + height/2 * getVariation(0.9,1.2);} ).strength(-0.1))
+    //     .alphaTarget(0.5)
+    //     .velocityDecay(0.8)
+    //     .stop()
+    //     .tick();
         
     }, 5000);
 }
