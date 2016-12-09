@@ -108,7 +108,7 @@ class App extends Component {
     ratio = formatCounter(ratio);
     return (
       <div className="App">
-        <DateDisplay text="Year is" value={timepoint} />
+        <DateDisplay text="the year is" value={timepoint} />
         <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
         <Content text={findContentForMode(contentMap, pctScrolled)} />
         <Chart force={this.force} data={data} width={width} height={height}/>
