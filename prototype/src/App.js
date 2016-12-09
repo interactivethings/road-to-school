@@ -45,7 +45,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = mkInitialState();
-    this.onReset = this.onReset.bind(this);
+    // this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     // this.bombForce = d3.forceSimulation(this.state.data);
@@ -75,7 +75,7 @@ class App extends Component {
   configureForce(props, state) {
     const behavior = behaviours[this.state.mode] || identity;
     behavior(this.force, state.data, props);
-    this.force.restart();
+    // this.force.restart();
   }
 
   configureBombForce(props, state) {
@@ -84,12 +84,12 @@ class App extends Component {
     this.bombForce.restart();
   }
 
-  onReset() {
-    const state = mkInitialState();
-    this.setState(state);
-    this.force = d3.forceSimulation(state.data);
-    // this.bombForce = d3.forceSimulation(state.data);
-  }
+  // onReset() {
+  //   const state = mkInitialState();
+  //   this.setState(state);
+  //   this.force = d3.forceSimulation(state.data);
+  //   this.bombForce = d3.forceSimulation(state.data);
+  // }
 
   onSelectMode(mode) {
     return () => this.setState({mode});
