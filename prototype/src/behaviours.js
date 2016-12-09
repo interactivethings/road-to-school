@@ -8,7 +8,6 @@ import {isolate} from './utils/forceHelpers';
 const R = 350;
 
 export function baseline(force, data, {width, height}, ratio) { 
-  console.log('baseline')
 
   force
     .velocityDecay(0.3 )
@@ -23,7 +22,6 @@ export function baseline(force, data, {width, height}, ratio) {
 }
 
 export function outOfSchool(force, data, {width, height}, ratio) {
-  console.log('outOfSchool')
   
   force
     .alphaTarget(0.5)
@@ -38,7 +36,6 @@ export function outOfSchool(force, data, {width, height}, ratio) {
 }
 
 export function backToSchool(force, data, {width, height}, ratio) {
-  console.log('backToSchool')
   
   force
     .velocityDecay(0.3 )
