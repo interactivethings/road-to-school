@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
 import './App.css';
-import {hoverContentMap, findTextforHover} from './hoverContentMap';
-import Hover from './Hover';
+import {voronoiContentMap, findTextforVoronoi} from './VoronoiContentMap';
+import Voronoi from './Voronoi';
 
 class SvgRenderer extends Component {
   constructor() {
@@ -55,7 +55,7 @@ class SvgRenderer extends Component {
     //Voronoi overlay
     const {width, height} = this.props;
 
-    var nodes = d3.range(hoverContentMap.length).map(function() {
+    var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
         x: width/4 + 250*Math.random() - 100,
         y: height/2+ 250*Math.random() - 100
@@ -75,8 +75,7 @@ class SvgRenderer extends Component {
       .data(voronoi.polygons(nodes))
       .attr("d", renderCell)
       .on("mousedown", function(d,i) {
-        console.log(findTextforHover(hoverContentMap, i) );
-        console.log(this.state)
+        console.log(findTextforVoronoi(voronoiContentMap, i) );
       });
 
     function renderCell(d) {

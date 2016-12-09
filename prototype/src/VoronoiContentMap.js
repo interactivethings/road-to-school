@@ -1,4 +1,4 @@
-export const hoverContentMap = [ 
+export const voronoiContentMap = [ 
 	{
 		id: 1,
 		text: 'I couldn’t go to school because of the bombardment and we were afraid of the planes. I miss my friends so much and I wish that we could go back to our old school.'
@@ -41,11 +41,11 @@ export const hoverContentMap = [
 	}
 ]
 
-export const findTextforHover = (hoverContentMap, voronoiID) => {
-  for (let i = hoverContentMap.length - 1; i >= 0; i--) {
-    if (voronoiID >= hoverContentMap[i].id) {
-      return hoverContentMap[i].text;
+export const findTextforVoronoi = (voronoiContentMap, voronoiID) => {
+  for (let i = voronoiContentMap.length - 1; i >= 0; i--) {
+    if (voronoiID >= voronoiContentMap[i].id) {
+      return voronoiContentMap[i].text;
     }
   }
-  return hoverContentMap[0].text;
+  return voronoiContentMap[0].text;
 };

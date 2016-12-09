@@ -6,7 +6,7 @@ import * as behaviours from './Behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
-import Hover from './Hover';
+import Voronoi from './Voronoi';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
@@ -132,7 +132,7 @@ class App extends Component {
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
-        <Hover className="Hover-Text" text={"this will be the hover text"} />
+        <Voronoi className="Voronoi-Text" text={"this will be the Voronoi text"} />
         <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
