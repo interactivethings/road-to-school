@@ -8,7 +8,7 @@ import Content from './Content';
 import Counter from './Counter';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
-import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode} from './ContentMap';
+import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import update from 'react-update'; 
 
 const identity = x => x;
@@ -37,7 +37,6 @@ function mkInitialState() {
   return {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
-    ratio: 0,
     pctScrolled: 0
   }
 }
@@ -99,24 +98,21 @@ class App extends Component {
     });
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-    var ratio = Math.min(this.state.pctScrolled/100, 1);
-    console.log(ratio)
     for (var i = actors - 1; i >= 0; i--) {   
-      var newType = (i < ratio)*actors ? 'school' : 'noSchool';
+      var newType = (i < findRatioFromPctScroll(this.state.pctScrolled) ) * actors ? 'school' : 'noSchool';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = newType;
     }
 
     this.setState({
-      ratio: ratioRange(ratio),
       mode: mode
     });
   }
 
   render() {
     const {width, height} = this.props;
-    var {data, ratio, pctScrolled} = this.state;
-    ratio = formatCounter(ratio);
+    var {data, pctScrolled} = this.state;
+    var ratio = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
         <div className="App-Header"> An <br/> Education</div>

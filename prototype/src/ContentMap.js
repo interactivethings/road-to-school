@@ -120,3 +120,7 @@ export const findTimepointForMode = (cMap, percent) => {
   return cMap[0].timepoint;
 };
 
+export const findRatioFromPctScroll = (percent) => {
+  return Math.min(percent/100, 1);
+};
+
