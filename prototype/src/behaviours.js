@@ -8,7 +8,7 @@ import {isolate, getVariation} from './utils/forceHelpers';
 const R = 350;
 
 export function baseline(force, data, {width, height}) { 
-  console.log('baseline')
+  // console.log('baseline')
 
   force
     .force('xSchool', isolate(data, d3.forceX(width/2), function(d) { return d.type === 'school' ; }))
@@ -22,7 +22,7 @@ export function baseline(force, data, {width, height}) {
 }
 
 export function outOfSchool(force, data, {width, height}) {
-  console.log('outOfSchool')
+  // console.log('outOfSchool')
 
     force
         .force('xSchool', isolate(data, d3.forceX(width/2), function(d) { return d.type === 'school' ; }).strength(function(d,i) { return d.id/(data.length*8); }))
@@ -49,7 +49,7 @@ export function outOfSchool(force, data, {width, height}) {
 }
 
 export function backToSchool(force, data, {width, height}) {
-  console.log('backToSchool')
+  // console.log('backToSchool')
   
   force
     .force('xSchool', isolate(data, d3.forceX(width/2), function(d) { return d.type === 'school' ; }).strength(0.8))

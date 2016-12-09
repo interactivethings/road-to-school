@@ -120,8 +120,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-Header"> An <br/> Education</div>
-        <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} /> <br/>
-        <Counter onScroll={this.onScroll} value={ratio}/> <br/>
+        <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
+        <Counter onScroll={this.onScroll} value={ratio}/> 
         <div className="Counter-Text"> of school-aged Syrian children were denied an education </div>
         <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
