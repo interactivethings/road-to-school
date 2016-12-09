@@ -6,6 +6,7 @@
 	font-size: 16px;
 	line-height: 18px;
 	width: 100vw;
+	overflow-x: hidden;
 }
 
 .App-Header {
@@ -13,57 +14,57 @@
 	font-weight: 300;
 	line-height: 54px;
 	letter-spacing: -0.01em;
-	margin-top: 5rem;
-	padding-left: 20rem;
+	top: 10vh;
+	left: 19vw;
 	position: absolute;
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 }
 
 .Content-Wrap {
-	margin-bottom: 5rem;
-	border: 1px solid black;
+	margin-bottom: 10vh;
+	/*border: 1px solid black;*/
 }
 
 .Content {
-	padding-top: 40rem;
-	padding-bottom: 60rem;
-	margin-left: 20rem;
-	width: 600px;
+	padding-top: 40vh;
+	padding-bottom: 60vh;
+	left: 18vw;
+	width: 30vw;
 	position: relative;
-	border: 1px dashed black;
+	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text, .Hover {
-	margin-left: 1rem;
-	margin-top: 65rem;
+.DateDisplay, .Counter, .Counter-Text {
+	left: 1vw;
 	position: fixed;
 	color: #972D15;
 	letter-spacing: -0.01em;
-	width: 200px;
-	border: 1px solid red;
+	width: 240px;
+	/*border: 1px solid red;*/
+	top: 80vh;
 }
 
 .Hover {
-	margin-left: 100rem;
+	left: 60vw ;
+	top: 85vh ;
+	position: fixed;
 }
 
 .Counter {
 	font-size: 64px;
 	line-height: 68px;
-	padding-top: 1rem;
+	top: 81vh;
 }
 .Counter-Text {
-	padding-top: 6rem;
+	top: 90vh;
 }
-
-
 
 /*SVG */
 
 svg {
-	display: inline-block;
 	position: fixed; 
-	border: 1px solid red;
+	left: 40vw;
+	/*border: 1px solid red;*/
 }
 
 path {
