@@ -54,65 +54,37 @@ class SvgRenderer extends Component {
       .remove();
 
 
-    // //Voronoi overlay
-    // var width = 500,
-    // height = 400,
-    // radius = 32;
+    //Voronoi overlay
+    const {width, height} = this.props;
+    const svgNodes = d3.select(this.ref);
+    
+    var nodes = d3.range(10).map(function() {
+      return {
+        x: width/4 + 250*Math.random(),
+        y: height/2+ 250*Math.random()
+      };
+    });
 
-    // var voronoiNodes = d3.range(20).map(function() {
-    //   return {
-    //     x: Math.round(Math.random() * (width - radius * 2) + radius),
-    //     y: Math.round(Math.random() * (height - radius * 2) + radius)
-    //   };
-    // });
+    var voronoi = d3.voronoi()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .extent([[-1, -1], [width + 1, height + 1]]);
 
-    // var voronoi = d3.voronoi()
-    //   .x(function(d) { return d.cx; })
-    //   .y(function(d) { return d.cy; })
-    //   .extent([[-1, -1], [width + 1, height + 1]]);
+    var node = svgNodes.selectAll("g")
+      .data(nodes)
+      .enter().append("g");
 
-    // var voronoiNode = svg.selectAll("g")
-    //   .data(voronoiNodes)
-    //   .enter().append("g")
-    //     .call(d3.drag()
-    //         .on("start", dragstarted)
-    //         .on("drag", dragged)
-    //         .on("end", dragended));
+    var cell = node.append("path")
+      .data(voronoi.polygons(nodes))
+        .attr("d", renderCell)
+        .attr("id", function(d, i) { return "cell-" + i; })
+        .on("mousedown", function(d) {
+              console.log(d)
+        });
 
-    // var cell = voronoiNode.append("path")
-    //   .data(voronoi.polygons(voronoiNodes))
-    //     .attr("d", renderCell)
-    //     .attr("id", function(d, i) { return "cell-" + i; });
-
-    // voronoiNode.append("clipPath")
-    //     .attr("id", function(d, i) { return "clip-" + i; })
-    //   .append("use")
-    //     .attr("xlink:href", function(d, i) { return "#cell-" + i; });
-
-    // voronoiNode.append("rect")
-    //     .attr("clip-path", function(d, i) { return "url(#clip-" + i + ")"; })
-    //     .attr("x", function(d) { return d.x; })
-    //     .attr("y", function(d) { return d.y; })
-    //     .style("fill", "black");
-
-    // function dragstarted(d) {
-    //   d3.select(this).raise().classed("active", true);
-    // }
-
-    // function dragged(d) {
-    //   d3.select(this).select("circle").attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-    //   cell = cell.data(voronoi.polygons(voronoiNodes)).attr("d", renderCell);
-    // }
-
-    // function dragended(d, i) {
-    //   d3.select(this).classed("active", false);
-    // }
-
-    // function renderCell(d) {
-    //   return d == null ? null : "M" + d.join("L") + "Z";
-    // }
-
-
+    function renderCell(d) {
+      return d == null ? null : "M" + d.join("L") + "Z";
+    }
 
   }
 }
