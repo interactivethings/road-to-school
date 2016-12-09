@@ -1,14 +1,10 @@
-body {
-	color: #02401B;
+
+.App {
 	font-family: Source Sans Pro;
 	font-weight: 300;
 	letter-spacing: 0.01em;
 	font-size: 16px;
 	line-height: 18px;
-}
-
-.App {
-	height: 4000px;
 }
 
 .App-Header {
@@ -19,25 +15,31 @@ body {
 	font-weight: 300;
 	position: absolute;
 	letter-spacing: -0.01em;
-
 }
 
+.Content-Wrap {
+	padding-bottom: 5%;
+	border: 1px solid black;
+}
 
 .Content {
 	width: 35%;
 	margin-top: 30%;
-	position: fixed;
-	margin-left: 10%;
-
+	margin-bottom: 30%;
+	padding-left: 10%;
+	height: 100px;
+	position: relative;
+	border: 1px dashed black;
 }
 
 .DateDisplay, .Counter, .Counter-Text {
-	margin-left: 10%;
+	margin-left: 1%;
 	margin-top: 50%;
-	position: fixed; 
+	position: fixed;
 	padding: 0px 2px;
 	color: #972D15;
 	letter-spacing: -0.01em;
+	width: 150px;
 }
 
 .Counter {

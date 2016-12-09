@@ -122,9 +122,25 @@ class App extends Component {
         <div className="App-Header"> An <br/> Education</div>
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} /> <br/>
         <Counter onScroll={this.onScroll} value={ratio}/> <br/>
-        <div className="Counter-Text"> of school-aged children were left out of school by conflict </div>
+        <div className="Counter-Text"> of school-aged Syrian children were denied an education </div>
         <Chart force={this.force} data={data} width={width} height={height}/>
-        <Content text={findContentForMode(contentMap, pctScrolled)} />
+        <div className="Content-Wrap"> 
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          <Content text={findContentForMode(contentMap, pctScrolled)} />
+        </div>
       </div>
     );
   }
