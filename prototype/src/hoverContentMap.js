@@ -40,3 +40,12 @@ export const hoverContentMap = [
 		text: 'He says: "I work in a basement. I just go to work in the morning, I never see the sun and I go back after sunset. Its very dark here in this country."'
 	}
 ]
+
+export const findTextforHover = (hoverContentMap, hover) => {
+  for (let i = hoverContentMap.length - 1; i >= 0; i--) {
+    if (hover >= hoverContentMap[i].id) {
+      return hoverContentMap[i].text;
+    }
+  }
+  return hoverContentMap[0].text;
+};

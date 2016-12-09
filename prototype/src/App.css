@@ -32,7 +32,7 @@
 	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text {
+.DateDisplay, .Counter, .Counter-Text, .Hover {
 	margin-left: 1rem;
 	margin-top: 65rem;
 	position: fixed;
@@ -40,6 +40,9 @@
 	letter-spacing: -0.01em;
 	width: 200px;
 	/*border: 1px solid red;*/
+}
+.Hover {
+	margin-left: 100rem;
 }
 
 .Counter {
@@ -51,8 +54,25 @@
 	padding-top: 6rem;
 }
 
+
+
+/*SVG */
+
 svg {
 	padding: 0; 
-	margin-left: 20rem;
+	margin-left: 60rem;
 	position: fixed; 
+	/*border: 1px solid red;*/
+}
+
+path {
+  pointer-events: all;
+  fill: none;
+  stroke: #666;
+  stroke-opacity: 0.2;
+}
+
+.active circle {
+  stroke: #000;
+  stroke-width: 2px;
 }

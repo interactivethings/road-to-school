@@ -6,16 +6,17 @@ import * as behaviours from './Behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
+import Hover from './Hover';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
 import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import update from 'react-update'; 
 
 const identity = x => x;
-var formatCounter = d3.format(",");
+var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
-    .range([0, 3100000]);
+    .range([10, 3100000]);
 const actors = 1000;
 
 function mkActor(id) {
@@ -122,13 +123,16 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     var {data, pctScrolled} = this.state;
-    var ratio = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
+    var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
-        <div className="App-Header"> An <br/> Education</div>
+        <div className="App-Header"> 
+          An <br/> Education
+        </div>
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
-        <Counter onScroll={this.onScroll} value={ratio}/> 
+        <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
+        <Hover className="Hover-Text" text={"this will be the hover text"} />
         <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
