@@ -12,10 +12,10 @@ import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode
 import update from 'react-update'; 
 
 const identity = x => x;
-var formatCounter = d3.format(".0%");
+var formatCounter = d3.format(",");
 var ratioRange = d3.scaleLinear()
     .domain([0,1])
-    .range([0, 0.67]);
+    .range([0, 3100000]);
 const actors = 1000;
 
 function mkActor(id) {
@@ -122,7 +122,7 @@ class App extends Component {
         <div className="App-Header"> An <br/> Education</div>
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={ratio}/> 
-        <div className="Counter-Text"> of school-aged Syrian children were denied an education </div>
+        <div className="Counter-Text">school-aged Syrian children were denied an education </div>
         <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />

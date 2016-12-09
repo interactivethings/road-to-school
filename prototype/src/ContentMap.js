@@ -3,7 +3,7 @@ const dy = 7;
 export const contentMap = [
   {
     mode: 'baseline',
-    text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have registered abroad, roughly 7 million people have been internally displaced, at least half a million have been killed.',
+    text: 'intro image and text',
     fromPosition: 0,
     timepoint: 2012
   },
