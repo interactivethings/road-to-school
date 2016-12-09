@@ -48,12 +48,14 @@ class App extends Component {
     this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
+    this.bombForce = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
     this.update = update.bind(this);
   }
 
   componentWillMount() {
     this.configureForce(this.props, this.state);
+    this.configureBombForce(this.props, this.state);
   }
 
   componentDidMount() {
@@ -63,6 +65,7 @@ class App extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     this.configureForce(nextProps, nextState);
+    this.configureBombForce(nextProps, nextState);
   }
 
   componentWillUnmount() {
@@ -75,10 +78,17 @@ class App extends Component {
     this.force.restart();
   }
 
+  configureBombForce(props, state) {
+    const behavior = behaviours['bombForce'] || identity;
+    behavior(this.bombForce, state.data, props);
+    this.bombForce.restart();
+  }
+
   onReset() {
     const state = mkInitialState();
     this.setState(state);
     this.force = d3.forceSimulation(state.data);
+    this.bombForce = d3.forceSimulation(state.data);
   }
 
   onSelectMode(mode) {
@@ -119,7 +129,7 @@ class App extends Component {
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={ratio}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
-        <Chart force={this.force} data={data} width={width} height={height}/>
+        <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />

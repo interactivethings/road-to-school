@@ -1,4 +1,5 @@
 import './App.css';
+import {hoverContentMap} from './hoverContentMap';
 
 import React, {Component} from 'react';
 // import DOM from 'react-dom';
