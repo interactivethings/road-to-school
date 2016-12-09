@@ -24,9 +24,8 @@ class SvgRenderer extends Component {
   }
 
   render() {
-    const {width, height} = this.props;
     return (
-      <svg width={width/2} height={height} ref={this.onRef} />
+      <svg width={this.props.width * 0.7} height={this.props.height * 0.7} ref={this.onRef} />
     );
   }
 
@@ -53,11 +52,10 @@ class SvgRenderer extends Component {
 
     //Voronoi overlay
     const {width, height} = this.props;
-
     var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
-        x: width/4 + 150*Math.random(),
-        y: height/2+ 150*Math.random()
+        x: width * 0.7 /2 + 10*Math.random(),
+        y: height* 0.7 /2 + 10*Math.random()
       };
     });
 

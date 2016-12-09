@@ -2,7 +2,7 @@ import './App.css';
 
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import * as behaviours from './Behaviours';
+import * as behaviours from './behaviours';
 import Chart from './Chart';
 import Content from './Content';
 import Counter from './Counter';
