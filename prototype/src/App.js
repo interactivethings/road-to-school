@@ -110,7 +110,7 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
-      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors )? 'school' : 'noSchool';
+      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors )? 'noSchool' : 'school';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = nextType;
     }
