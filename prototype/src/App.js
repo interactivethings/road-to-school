@@ -37,7 +37,7 @@ function mkInitialState() {
   return {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
-    ratio: ratioRange(0),
+    ratio: 0,
     pctScrolled: 0
   }
 }
@@ -100,9 +100,9 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     var ratio = Math.min(this.state.pctScrolled/100, 1);
-
+    console.log(ratio)
     for (var i = actors - 1; i >= 0; i--) {   
-      var newType = (i < ratioRange(ratio)*actors) ? 'school' : 'noSchool';
+      var newType = (i < ratio)*actors ? 'school' : 'noSchool';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = newType;
     }
