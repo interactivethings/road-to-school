@@ -25,7 +25,7 @@ function mkActor(id) {
     y: window.innerHeight/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 1 * (Math.random() + 1),
+    r: 1.5 * (Math.random() + 1),
     type: Math.random() < 0.9 ? 'school' : 'noSchool',
     datum: {
       color: '#81A88D'
@@ -103,6 +103,7 @@ class App extends Component {
     for (var i = actors - 1; i >= 0; i--) {   
       var newType = (i < ratio*100) ? 'school' : 'noSchool';
       // this.update('set', this.state.data[i].type, newType);
+      this.state.data[i].type = newType;
     }
 
     this.setState({
@@ -118,7 +119,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-Header"> An <br/> Education</div>
-        {/* <DateDisplay text="Year is" value={timepoint} /> */}
+        <DateDisplay text="Year is" value={timepoint} />
         <Counter onScroll={this.onScroll} text="students currently out of school" value={ratio}/>
         <Content text={findContentForMode(contentMap, pctScrolled)} />
         <Chart force={this.force} data={data} width={width} height={height}/>
