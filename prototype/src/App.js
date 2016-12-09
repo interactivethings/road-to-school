@@ -25,8 +25,8 @@ function mkActor(id) {
     y: window.innerHeight/2 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 1.5 * (Math.random() + 1),
-    type: Math.random() < 0.9 ? 'school' : 'noSchool',
+    r: 2 * (Math.random() + 1),
+    type: Math.random() <= 0.9 ? 'school' : 'noSchool',
     datum: {
       color: '#81A88D'
     }
@@ -73,7 +73,7 @@ class App extends Component {
 
   configureForce(props, state) {
     const behavior = behaviours[this.state.mode] || identity;
-    behavior(this.force, state.data, props, state.ratio);
+    behavior(this.force, state.data, props);
     this.force.restart();
   }
 
@@ -101,7 +101,7 @@ class App extends Component {
     var ratio = Math.min(this.state.pctScrolled/100, 1);
 
     for (var i = actors - 1; i >= 0; i--) {   
-      var newType = (i < ratio*100) ? 'school' : 'noSchool';
+      var newType = (i < ratioRange(ratio)*actors) ? 'school' : 'noSchool';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = newType;
     }
