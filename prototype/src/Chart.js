@@ -1,9 +1,8 @@
-import './App.css';
-import {hoverContentMap} from './hoverContentMap';
-
 import React, {Component} from 'react';
-// import DOM from 'react-dom';
 import * as d3 from 'd3';
+import './App.css';
+import {hoverContentMap, findTextforHover} from './hoverContentMap';
+import Hover from './Hover';
 
 class SvgRenderer extends Component {
   constructor() {
@@ -37,7 +36,6 @@ class SvgRenderer extends Component {
       return;
     }
     const svg = d3.select(this.ref);
-
     const circles = svg.selectAll('circle')
       .data(this.props.data, d => d.id);
 
@@ -56,12 +54,11 @@ class SvgRenderer extends Component {
 
     //Voronoi overlay
     const {width, height} = this.props;
-    const svgNodes = d3.select(this.ref);
-    
-    var nodes = d3.range(10).map(function() {
+
+    var nodes = d3.range(hoverContentMap.length).map(function() {
       return {
-        x: width/4 + 250*Math.random(),
-        y: height/2+ 250*Math.random()
+        x: width/4 + 250*Math.random() - 100,
+        y: height/2+ 250*Math.random() - 100
       };
     });
 
@@ -70,17 +67,17 @@ class SvgRenderer extends Component {
         .y(function(d) { return d.y; })
         .extent([[-1, -1], [width + 1, height + 1]]);
 
-    var node = svgNodes.selectAll("g")
+    var node = svg.selectAll("g")
       .data(nodes)
       .enter().append("g");
 
     var cell = node.append("path")
       .data(voronoi.polygons(nodes))
-        .attr("d", renderCell)
-        .attr("id", function(d, i) { return "cell-" + i; })
-        .on("mousedown", function(d) {
-              console.log(d)
-        });
+      .attr("d", renderCell)
+      .on("mousedown", function(d,i) {
+        console.log(findTextforHover(hoverContentMap, i) );
+        console.log(this.state)
+      });
 
     function renderCell(d) {
       return d == null ? null : "M" + d.join("L") + "Z";

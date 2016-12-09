@@ -41,9 +41,9 @@ export const hoverContentMap = [
 	}
 ]
 
-export const findTextforHover = (hoverContentMap, hover) => {
+export const findTextforHover = (hoverContentMap, voronoiID) => {
   for (let i = hoverContentMap.length - 1; i >= 0; i--) {
-    if (hover >= hoverContentMap[i].id) {
+    if (voronoiID >= hoverContentMap[i].id) {
       return hoverContentMap[i].text;
     }
   }
