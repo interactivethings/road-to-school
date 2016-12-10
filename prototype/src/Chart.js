@@ -40,8 +40,8 @@ class SvgRenderer extends Component {
     /*----------------------------- Voronoi overlay --------------------*/
     var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
-        x: width * 0.7 /2 + 20*Math.random(),
-        y: height* 0.8 /2 + 20*Math.random()
+        x:  100 *Math.random() + width/2* 0.7 - 70,
+        y:  100 *Math.random() + height/2 * 0.7
       };
     });
 
