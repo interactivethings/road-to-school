@@ -98,9 +98,7 @@ class App extends Component {
       document.body.clientHeight, document.documentElement.clientHeight
     );
     
-    this.setState({ 
-      pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) 
-    });
+    this.setState({  pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
 
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
@@ -110,22 +108,19 @@ class App extends Component {
       this.state.data[i].type = nextType;
     }
 
-    this.setState({
-      mode: mode
-    });
+    this.setState({ mode: mode });
   }
 
   render() {
     const {width, height} = this.props;
-    const hasDuration = duration !== undefined; //------------------------------------------------TRICK on controlling if value exists
-    var {data, pctScrolled, duration, currentTime} = this.state;
+    const {data, pctScrolled} = this.state;
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
         <div className="App-Header"> 
           An <br/> Education
         </div>
-        <Audio onTimeUpdate={(currentTime) => this.setState({currentTime})} onMetaData={(duration) => this.setState({duration})}/>
+        <Audio />
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
