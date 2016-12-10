@@ -1,11 +1,11 @@
 import React, { Component} from 'react';
 
-class Hover extends Component {
+class Voronoi extends Component {
   render() {
     return (
-    	<div className="Hover"> {this.props.text} </div>
+    	<div className="Voronoi"> {this.props.text} </div>
     );
   }
 }
 
-export default Hover;
+export default Voronoi;

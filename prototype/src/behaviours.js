@@ -45,7 +45,7 @@ export function outOfSchool(force, data, {width, height}) {
         .velocityDecay(0.34);
 
 
-    d3.selectAll('circle').on('mousedown', function(d){
+    d3.selectAll('circle').on('mousedown', function(){
 
         d3.forceSimulation()
         .force('perturbationX', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.4))  
@@ -56,6 +56,29 @@ export function outOfSchool(force, data, {width, height}) {
         .tick();
 
     })
+
+    d3.select('.Voronoi').on('mousedown', function(){
+
+        d3.forceSimulation()
+        .force('bombX', isolate(data, d3.forceX(function(d) { 
+            var dx = Math.abs(width/2 * 0.7 - d.x); 
+            return dx;
+        }), function(d) { 
+            return d; 
+        })
+        .strength(-0.1)) 
+        .force('bombY', isolate(data, d3.forceY(function(d) { 
+            var dx = Math.abs(height/2 * 0.8 - d.x); 
+            return dx;
+        }), function(d) { 
+            return d; 
+        })
+        .strength(-0.15)) 
+        .alphaTarget(0.3)
+        .velocityDecay(0.3)
+        .stop()
+        .tick();
+    })  
 
 }
 

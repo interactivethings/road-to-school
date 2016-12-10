@@ -125,7 +125,7 @@ class App extends Component {
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
-        <Voronoi className="Voronoi-Text" text={"this will be the Voronoi text"} />
+        <Voronoi className="Voronoi" text={"this will be the Voronoi text"} />
         <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
