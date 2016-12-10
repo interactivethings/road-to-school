@@ -26,7 +26,7 @@ function mkActor(id) {
     y: window.innerHeight/2* 0.7 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 3 * (Math.random() + 1),
+    r: 2 * (Math.random() + 1),
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
     datum: {
       color: '#81A88D'
@@ -48,14 +48,12 @@ class App extends Component {
     this.state = mkInitialState();
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
-    // this.bombForce = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
     this.update = update.bind(this);
   }
 
   componentWillMount() {
     this.configureForce(this.props, this.state);
-    // this.configureBombForce(this.props, this.state);
   }
 
   componentDidMount() {
@@ -65,7 +63,6 @@ class App extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     this.configureForce(nextProps, nextState);
-    // this.configureBombForce(nextProps, nextState);
   }
 
   componentWillUnmount() {
@@ -73,16 +70,20 @@ class App extends Component {
   }
 
   configureForce(props, state) {
+    //constant behaviour
     const behavior = behaviours[this.state.mode] || identity;
     behavior(this.force, state.data, props);
-    // this.force.restart();
-  }
+    this.force.restart();
 
-  // configureBombForce(props, state) {
-  //   const behavior = behaviours['bombForce'] || identity;
-  //   behavior(this.bombForce, state.data, props);
-  //   this.bombForce.restart();
-  // }
+    //special forces - bomb
+    var bomb = behaviours['bomb'];
+    this.state.pctScrolled === 30 ? bomb(state.data, props) : 1;
+
+    //special forces - perturbation
+    var perturbation = behaviours['perturbation'];
+    this.state.pctScrolled === 38 || this.state.pctScrolled === 52 || this.state.pctScrolled === 67 ? perturbation(state.data, props) : 1;
+
+  }
 
   onSelectMode(mode) {
     return () => this.setState({mode});
