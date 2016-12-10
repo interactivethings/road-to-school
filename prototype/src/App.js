@@ -19,10 +19,11 @@ const actors = 1000;
 const identity = x => x;
 
 function mkActor(id) {
+
   return {
     id: id,
-    x: window.innerWidth/2 + 100 * Math.random() , // FIXME: is dependent on props.width
-    y: window.innerHeight/2 + 100 * Math.random(), // FIXME: is dependent on props.height
+    x: window.innerWidth/2 * 0.7 + 100 * Math.random() , // FIXME: is dependent on props.width
+    y: window.innerHeight/2* 0.7 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     r: 2 * (Math.random() + 1),
@@ -45,7 +46,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = mkInitialState();
-    // this.onReset = this.onReset.bind(this);
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     // this.bombForce = d3.forceSimulation(this.state.data);
@@ -78,17 +78,10 @@ class App extends Component {
     // this.force.restart();
   }
 
-  configureBombForce(props, state) {
-    const behavior = behaviours['bombForce'] || identity;
-    behavior(this.bombForce, state.data, props);
-    this.bombForce.restart();
-  }
-
-  // onReset() {
-  //   const state = mkInitialState();
-  //   this.setState(state);
-  //   this.force = d3.forceSimulation(state.data);
-  //   this.bombForce = d3.forceSimulation(state.data);
+  // configureBombForce(props, state) {
+  //   const behavior = behaviours['bombForce'] || identity;
+  //   behavior(this.bombForce, state.data, props);
+  //   this.bombForce.restart();
   // }
 
   onSelectMode(mode) {
