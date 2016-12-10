@@ -33,25 +33,11 @@ class SvgRenderer extends Component {
     if (!this.ref) {
       return;
     }
+
     const svg = d3.select(this.ref);
-    const circles = svg.selectAll('circle')
-      .data(this.props.data, d => d.id);
-
-    circles.enter()
-      .append('circle');
-
-    circles
-      .attr('cx', d => d.x)
-      .attr('cy', d => d.y)
-      .attr('r', d => d.r)
-      .style('fill', d => d.datum.color);
-
-    circles.exit()
-      .remove();
-
-
-    //Voronoi overlay
     const {width, height} = this.props;
+
+    /*----------------------------- Voronoi overlay --------------------*/
     var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
         x: width * 0.7 /2 + 20*Math.random(),
@@ -75,9 +61,34 @@ class SvgRenderer extends Component {
         console.log(findTextforVoronoi(voronoiContentMap, i) );
       });
 
+    /*----------------------------- Main Vis --------------------*/
+
+    const circles = svg.selectAll('circle')
+      .data(this.props.data, d => d.id);
+
+    circles.enter()
+      .append('circle');
+
+    circles
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+      .attr('r', d => d.r)
+      .style('fill', d => d.datum.color)
+      .call(d3.drag().on("drag", dragged));
+    
+    circles.exit()
+      .remove();
+
+    /*----------------------------- Helper functions --------------------*/
+
     function renderCell(d) {
       return d == null ? null : "M" + d.join("L") + "Z";
     }
+
+    function dragged(d) {   
+      d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);    
+    }
+
 
   }
 }
