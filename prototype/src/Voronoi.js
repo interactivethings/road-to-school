@@ -1,11 +1,25 @@
 import React, { Component} from 'react';
 
 class Voronoi extends Component {
-  render() {
-    return (
-    	<div className="Voronoi"> {this.props.text} </div>
-    );
-  }
+	 
+	constructor() {
+	super();
+  	this.state = {
+		isHidden: true
+		};
+	}
+
+	toggleHidden() {
+		this.setState({
+	  	isHidden: this.state.isHidden ? false : true
+		});
+	}
+
+	render() {
+	return (
+		<div className="Voronoi"> {this.props.text} </div>
+	);
+	}
 }
 
 export default Voronoi;
