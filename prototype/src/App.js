@@ -1,16 +1,17 @@
 import './App.css';
 
 import React, { Component } from 'react';
+// import update from 'react-update'; 
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
 import Chart from './Chart';
+import {scrollY, passiveEvent} from './utils/dom'; 
+import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import Counter from './Counter';
 import Voronoi from './Voronoi';
-import {scrollY, passiveEvent} from './utils/dom'; 
 import DateDisplay from './DateDisplay';
-import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
-import update from 'react-update'; 
+import Audio from './Audio';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([10, 3100000]);
@@ -49,7 +50,7 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
-    this.update = update.bind(this);
+    // this.update = update.bind(this);
   }
 
   componentWillMount() {
@@ -116,13 +117,15 @@ class App extends Component {
 
   render() {
     const {width, height} = this.props;
-    var {data, pctScrolled} = this.state;
+    const hasDuration = duration !== undefined; //------------------------------------------------TRICK on controlling if value exists
+    var {data, pctScrolled, duration, currentTime} = this.state;
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
         <div className="App-Header"> 
           An <br/> Education
         </div>
+        <Audio onTimeUpdate={(currentTime) => this.setState({currentTime})} onMetaData={(duration) => this.setState({duration})}/>
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
