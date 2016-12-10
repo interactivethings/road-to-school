@@ -74,20 +74,20 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'backToSchool',
+    mode: 'outOfSchool',
     text: 'What if they did?',
     fromPosition: 4+11*dy,
     timepoint: 2016
   },
   {
-    mode: 'hoverState',
-    text: 'Quotes and hoverable state are here',
+    mode: 'backToSchool',
+    text: 'Click to read some of their stories',
     fromPosition: 4+12*dy,
     timepoint: 2016
   },
   {
-    mode: 'hoverState',
-    text: 'show credits',
+    mode: 'backToSchool',
+    text: 'Quotes',
     fromPosition: 4+13*dy,
     timepoint: 2016
   }

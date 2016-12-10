@@ -41,7 +41,7 @@ class SvgRenderer extends Component {
     var nodes = d3.range(voronoiContentMap.length).map(function() {
       return {
         x:  100 *Math.random() + width/2* 0.7 - 70,
-        y:  100 *Math.random() + height/2 * 0.7
+        y:  100 *Math.random() + height/2 * 0.8
       };
     });
 
