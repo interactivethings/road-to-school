@@ -73,11 +73,11 @@ class App extends Component {
     //constant behaviour
     const behavior = behaviours[this.state.mode] || identity;
     behavior(this.force, state.data, props);
-    this.force.restart();
+    // this.force.restart();
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    this.state.pctScrolled === 27 ? bomb(state.data, props) : 1;
+    this.state.pctScrolled === 27  || this.state.pctScrolled === 56  ? bomb(state.data, props) : 1;
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
@@ -126,7 +126,7 @@ class App extends Component {
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
-        {this.state.isHidden && <Voronoi className="Voronoi" text={"this is where the stories show up"} />} 
+        <Voronoi text={"this is where the stories show up"} />
         <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />

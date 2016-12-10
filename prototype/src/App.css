@@ -33,7 +33,7 @@
 	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text {
+.DateDisplay, .Counter, .Counter-Text , .Voronoi{
 	left: 1vw;
 	position: fixed;
 	color: #972D15;
@@ -43,11 +43,7 @@
 	top: 80vh;
 }
 
-.Voronoi {
-	left: 18vw ;
-	top: 40vh;
-	position: fixed;
-}
+
 
 .Counter {
 	font-size: 64px;
@@ -57,7 +53,9 @@
 .Counter-Text {
 	top: 90vh;
 }
-
+.Voronoi {
+	top: 95vh;
+}
 /*SVG */
 
 svg {

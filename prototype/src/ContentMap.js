@@ -87,7 +87,7 @@ export const contentMap = [
   },
   {
     mode: 'backToSchool',
-    text: 'Quotes',
+    text: '(quotes show here)',
     fromPosition: 4+13*dy,
     timepoint: 2016
   }
