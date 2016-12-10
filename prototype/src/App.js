@@ -77,11 +77,11 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    this.state.pctScrolled === 30 ? bomb(state.data, props) : 1;
+    this.state.pctScrolled === 27 ? bomb(state.data, props) : 1;
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    this.state.pctScrolled === 38 || this.state.pctScrolled === 52 || this.state.pctScrolled === 67 ? perturbation(state.data, props) : 1;
+    this.state.pctScrolled === 46 || this.state.pctScrolled === 53 || this.state.pctScrolled === 60 ? perturbation(state.data, props) : 1;
 
   }
 
