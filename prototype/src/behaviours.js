@@ -14,9 +14,9 @@ export function baseline(force, data, {width, height}) {
     .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))
     .force('xNoSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' ; }))      
     .force('yNoSchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' ; }))
-    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(function(d) { return d.r * 2; }).strength(0.8)) 
-    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(function(d) { return d.r * 2; }).strength(0.8)) 
-    .force("charge", d3.forceManyBody().strength(0.02))
+    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(function(d) { return d.r * 4; }).strength(0.8)) 
+    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(function(d) { return d.r * 4; }).strength(0.8)) 
+    .force("charge", d3.forceManyBody().strength(0.2))
     .velocityDecay(0.3 )
     .alphaTarget(0.3);
 }
@@ -61,6 +61,7 @@ export function backToSchool(force, data, {width, height}) {
         .radius(function(d) { return d.r * 3; }).strength(0.5)) 
     .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; })
         .radius(function(d) { return d.r * 3; }).strength(0.5)) 
+    .force("charge", d3.forceManyBody().strength(0.2))
     .velocityDecay(0.6)
     .alphaTarget(0.8);
 
