@@ -1,11 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500');
+
+body {
+	background: #EAE3D1;
+}
 
 .App {
-	font-family: Source Sans Pro;
+	font-family: 'Source Code Pro', 'Source Sans Pro', monospace;
 	font-weight: 300;
-	letter-spacing: 0.01em;
-	font-size: 16px;
-	line-height: 18px;
+	letter-spacing: 0em;
+	font-size: 14px;
+	line-height: 16px;
 	width: 98vw;
+	overflow-x: hidden;
 }
 
 .App-Intro {
@@ -16,7 +22,7 @@
 
 .Content-Wrap {
 	margin-bottom: 10vh;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	display: block;
 }
 
@@ -27,17 +33,18 @@
 	width: 30vw;
 	position: relative; 
 	white-space: pre-line;
-	border: 1px dashed black;
+	/*border: 1px dashed black;*/
 }
 
 .DateDisplay, .Counter, .Counter-Text , .Voronoi{
 	left: 2vw;
+	top: 80vh;
 	position: fixed;
-	color: #972D15;
+	font-family: 'Source Sans Pro';
+	color: #9C261F;
 	letter-spacing: -0.01em;
 	width: 250px;
-	border: 1px solid red;
-	top: 80vh;
+	/*border: 1px solid red;*/
 }
 
 .Counter {
@@ -58,9 +65,9 @@
 /*SVG */
 svg {
 	left: 40vw;
-	top: 0vh;
+	top: 20vh;
 	position: fixed;
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	z-index: -1;
 }
 
@@ -74,8 +81,6 @@ path {
 
 .Credits {
 	height: 100vh;
-	z-index: 9999;
-	background: #fff;
 }
 
 .Credits-Donate, .Credits-Sources  {

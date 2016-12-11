@@ -16,7 +16,7 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 400;
+const actors = 200;
 
 const identity = x => x;
 
