@@ -25,7 +25,15 @@ class SvgRenderer extends Component {
 
   render() {
     return (
-      <svg width={this.props.width * 0.7} height={this.props.height * 0.8} ref={this.onRef} />
+      <div>
+        <svg width={this.props.width * 0.7} height={this.props.height * 0.8} ref={this.onRef}>
+        <defs id="mdef">
+          <pattern id="image" x="0" y="0" height="30" width="30">
+          <image x="0" y="0" width="30" height="30" xlinkHref="./logo.svg"></image>
+          </pattern>
+        </defs>
+        </svg>
+      </div>
     );
   }
 
@@ -72,8 +80,9 @@ class SvgRenderer extends Component {
     circles
       .attr('cx', d => d.x)
       .attr('cy', d => d.y)
-      .attr('r', d => d.r)
-      .style('fill', d => d.datum.color)
+      .attr('r', d => 10*d.r)
+      .style("fill", "url(#image)")
+      // .style('fill', d => d.datum.color)
       .call(d3.drag().on("drag", dragged));
     
     circles.exit()
