@@ -120,12 +120,12 @@ class App extends Component {
         <div className="App-Header"> 
           An <br/> Education
         </div>
-        <Audio />
+        <Audio onScroll={this.onScroll} volume={pctScrolled/100}/>
         <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
         <Voronoi text={"this is where the stories show up"} />
-        <Chart force={this.force} bombForce={this.bombForce} data={data} width={width} height={height}/>
+        <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
