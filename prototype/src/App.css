@@ -10,13 +10,13 @@ body {
 	letter-spacing: 0em;
 	font-size: 14px;
 	line-height: 16px;
-	width: 98vw;
+	width: 100vw;
 	overflow-x: hidden;
 }
 
 .App-Intro {
 	background: url(./assets/intro.png) center no-repeat;
-	width: 98vw;
+	width: 100vw;
 	height: 100vh;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 .Content {
-	padding-top: 40vh;
+	padding-top: 50vh;
 	padding-bottom: 60vh;
 	left: 18vw;
 	width: 30vw;
@@ -44,6 +44,7 @@ body {
 	color: #9C261F;
 	letter-spacing: -0.01em;
 	width: 250px;
+	z-index: -1;
 	/*border: 1px solid red;*/
 }
 
@@ -65,7 +66,7 @@ body {
 /*SVG */
 svg {
 	left: 40vw;
-	top: 20vh;
+	top: 10vh;
 	position: fixed;
 	/*border: 1px solid red;*/
 	z-index: -1;
@@ -88,6 +89,7 @@ path {
 	left: 18vw;
 	top: 40vh;
 	color: #972D15;
+	font-weight: 400;
 	letter-spacing: -0.01em;
 	line-height: 20px;
 }

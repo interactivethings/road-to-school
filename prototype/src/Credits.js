@@ -4,14 +4,16 @@ class Credits extends Component {
   render() {
     return (
 			<div className="Credits">  
-     		<div className = "Credits-Donate"> Donate
+     		<div className="Credits-Donate"> Donate
 	     		<ul>
 	     			<li>https://donate.unhcr.org/int-en/syria-chf/</li>	
 	     			<li>http://arsis.gr/en/</li>	
 	     			<li>http://childrenofsyria.info/</li>	
 	     		</ul>
      		</div>
-			<div className = "Credits-Sources">Journaling sources
+     		<br/>
+     		<br/>
+			<div className="Credits-Sources">Journaling sources
 	     		<ul>
 	     			<li>http://childrenofsyria.info/</li>	
 	     			<li>http://data.unhcr.org/mediterranean/country.php?id=83/</li>	

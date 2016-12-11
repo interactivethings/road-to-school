@@ -100,7 +100,7 @@ class App extends Component {
     );
     
     this.setState({  pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
-
+    console.log(this.state.pctScrolled)
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
@@ -126,7 +126,6 @@ class App extends Component {
         <div className="Counter-Text">children were denied an education </div>
         {/*<Voronoi text={"test text for the stories"} /> */}
         <div className="Content-Wrap"> 
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
