@@ -5,71 +5,71 @@ export const contentMap = [
     mode: 'baseline',
     text: 'intro image and text',
     fromPosition: 0,
-    timepoint: 2012
+    timepoint: 2009
   },
   {
     mode: 'baseline',
-    text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have registered abroad, roughly 7 million people have been internally displaced, at least half a million have been killed.',
+    text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have fled the country, and roughly 7 million people have been internally displaced.',
     fromPosition: 4,
-    timepoint: 2012
+    timepoint: 2010
   },
   {
     mode: 'baseline',
-    text: 'Before the war, 94% of Syrian children attended primary and lower secondary education',
+    text: 'Education has come under repeated fire throughout the conflict. ',
     fromPosition: 4+dy,
-    timepoint: 2012
+    timepoint: 2010
   },
   {
     mode: 'outOfSchool',
-    text: 'Throughout the war in Syria, education has come under repeated fire. Schools are often targeted or they are turned into shelters for internally displaced people.',
+    text: 'For the children still living in Syria, getting to school is life threatening.',
     fromPosition: 4+2*dy,
-    timepoint: 2013
+    timepoint: 2011
   },
   {
     mode: 'outOfSchool',
-    text: 'For the children still living in Syria, getting to school is life threatening. Some teachers have created undeground schools to escape bombings.',
+    text: 'Some teachers have created undeground schools to shelter students from bombings.',
     fromPosition: 4+3*dy,
-    timepoint: 2013
+    timepoint: 2012
   }, 
   {
     mode: 'outOfSchool',
-    text: 'Refugee children who have fled and live in host countries face are often not allowed to enroll in school.',
+    text: 'Children who fled and live in host countries are often not allowed to enroll in local schools.',
     fromPosition: 4+4*dy,
-    timepoint: 2014
+    timepoint: 2013
   },
   {
     mode: 'outOfSchool',
-    text: 'They have no time for school because they have to work in order to support their families. If they are in their early teens, chances are that they won’t go back to school, even if they have the chance.',
+    text: 'These children have to work in order to support their families. If they are in their early teens, chances are that they won’t go back to school again.',
     fromPosition: 4+5*dy,
     timepoint: 2014
   },
   {
     mode: 'outOfSchool',
-    text: 'Often schools which accept refugees are too far from the camps.',
+    text: 'Often schools which accept refugees are too far from the refugee camps.',
     fromPosition: 4+6*dy,
-    timepoint: 2015
+    timepoint: 2014
   },
   {
     mode: 'outOfSchool',
-    text: 'Or they don’t have classes for all age group (there needs to be more than a certain number of students to organize a class).',
+    text: 'Or they don’t have classes for all age groups.',
     fromPosition: 4+7*dy,
     timepoint: 2015
   },
   {
     mode: 'outOfSchool',
-    text: 'June 2016 only 60% of children were in school in Syria, leaving 2.1 million children and adolescents without access to education in the country.',
+    text: 'An estimated one million of school aged refugees are not attending school outside of Syria.',
     fromPosition: 4+8*dy,
-    timepoint: 2016
+    timepoint: 2015
   },
   {
     mode: 'outOfSchool',
-    text: 'An estimated one million of school aged refugees are not attending school outside of Syria.',
+    text: 'That number rises to 2.1 million children inside the country.',
     fromPosition: 4+9*dy,
     timepoint: 2016
   },
   {
     mode: 'outOfSchool',
-    text: 'As you were reading this, four children won’t be able to go to school tomorrow',
+    text: 'As you were reading this, [some number] children won’t be able to go to school tomorrow.',
     fromPosition: 4+10*dy,
     timepoint: 2016
   },

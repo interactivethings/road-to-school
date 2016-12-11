@@ -67,7 +67,7 @@ export function backToSchool(force, data, {width, height}) {
 }
 
 export function bomb(data, {width, height}) {
-    console.log('enter bomb')
+    // console.log(' bomb')
     d3.forceSimulation()
     .force('bombX', isolate(data, d3.forceX(function(d) { 
         var dx = Math.abs(width/2 * 0.7 - d.x); 
@@ -90,7 +90,7 @@ export function bomb(data, {width, height}) {
 }
 
 export function perturbation(data, {width, height}) {
-    console.log('I want to back to schooool')
+    // console.log('I want to back to schooool')
     d3.forceSimulation()
     .force('perturbationX', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.4))  
     .force('perturbationY', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.4))        
