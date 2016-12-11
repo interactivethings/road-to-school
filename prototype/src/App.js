@@ -14,7 +14,7 @@ import DateDisplay from './DateDisplay';
 import Audio from './Audio';
 
 var formatCounter = d3.format(",.2r");
-var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 3100000]);
+var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 const actors = 400;
 
 const identity = x => x;
@@ -121,7 +121,7 @@ class App extends Component {
           An <br/> Education
         </div>
         {/*<Audio onScroll={this.onScroll} volume={pctScrolled/100}/> */}
-        <DateDisplay text="in" value={findTimepointForMode(contentMap, pctScrolled)} />
+        <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">school-aged Syrian children were denied an education </div>
         <Voronoi text={"test text for the stories"} />

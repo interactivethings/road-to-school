@@ -29,7 +29,8 @@
 	padding-bottom: 60vh;
 	left: 18vw;
 	width: 30vw;
-	position: relative;
+	position: relative; 
+	white-space: pre-line;
 	/*border: 1px dashed black;*/
 }
 
