@@ -30,7 +30,7 @@ class SvgRenderer extends Component {
         <svg width={this.props.width * 0.7} height={this.props.height * 0.8} ref={this.onRef}>
         <defs id="mdef">
           <pattern id="image" x="0" y="0" width="10" height="10" >
-          <image x="0" y="0" width="50" height="50" xlinkHref="http://www.pd4pic.com/images/happy-kid-silhouette-jumping-pose-kids.png"></image>
+          <image x="0" y="0" width="50" height="50" xlinkHref="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Arabic_albayancalligraphy.svg/400px-Arabic_albayancalligraphy.svg.png"></image>
           </pattern>
         </defs>
         </svg>
