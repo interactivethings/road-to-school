@@ -87,7 +87,6 @@ export const contentMap = [
   },
   {
     mode: 'backToSchool',
-    // text: 'Donate\n\n https://donate.unhcr.org/int-en/syria-chf/ \n http://arsis.gr/en/http://data.unhcr.org/mediterranean/country.php?id=83 \n http://childrenofsyria.info/ \n \n Journaling sources \n \n http://childrenofsyria.info/ \n http://data.unhcr.org/mediterranean/country.php?id=83 \n http://data.unhcr.org/syrianrefugees/country.php?id=8 \n http://www.aljazeera.com/news/2016/10/easy-answers-syrian-students-lebanon-161006075947100.html \n https://www.hrw.org/news/2016/09/15/refugee-education-crisis-requires-global-employment-strategy \n https://www.hrw.org/news/2015/11/08/turkey-400000-syrian-children-not-school',
     text: 'credits',
     fromPosition: 4+13*dy,
     timepoint: 2016

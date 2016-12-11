@@ -8,20 +8,16 @@
 	width: 98vw;
 }
 
-.App-Header {
-	font-size: 48px;
-	font-weight: 300;
-	line-height: 54px;
-	letter-spacing: -0.01em;
-	top: 10vh;
-	left: 19vw;
-	position: absolute;
-	/*border: 1px solid red;*/
+.App-Intro {
+	background: url(./assets/intro.png) center no-repeat;
+	width: 98vw;
+	height: 100vh;
 }
 
 .Content-Wrap {
 	margin-bottom: 10vh;
-	/*border: 1px solid black;*/
+	border: 1px solid black;
+	display: block;
 }
 
 .Content {
@@ -31,7 +27,7 @@
 	width: 30vw;
 	position: relative; 
 	white-space: pre-line;
-	/*border: 1px dashed black;*/
+	border: 1px dashed black;
 }
 
 .DateDisplay, .Counter, .Counter-Text , .Voronoi{
@@ -40,7 +36,7 @@
 	color: #972D15;
 	letter-spacing: -0.01em;
 	width: 250px;
-	/*border: 1px solid red;*/
+	border: 1px solid red;
 	top: 80vh;
 }
 
@@ -60,11 +56,12 @@
 }
 
 /*SVG */
-
 svg {
-	position: fixed; 
 	left: 40vw;
-	/*border: 1px solid red;*/
+	top: 0vh;
+	position: fixed;
+	border: 1px solid red;
+	z-index: -1;
 }
 
 path {
@@ -75,3 +72,21 @@ path {
   stroke-opacity: 0;
 }
 
+.Credits {
+	height: 100vh;
+	z-index: 9999;
+	background: #fff;
+}
+
+.Credits-Donate, .Credits-Sources  {
+	position: relative; 
+	left: 18vw;
+	top: 40vh;
+	color: #972D15;
+	letter-spacing: -0.01em;
+	line-height: 20px;
+}
+
+ul > li {
+	list-style-type: none;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import mp3 from './sound.mp3';
+import mp3 from './assets/sound.mp3';
 
 class Audio extends Component {
 

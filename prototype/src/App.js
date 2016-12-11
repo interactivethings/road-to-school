@@ -12,6 +12,7 @@ import Counter from './Counter';
 import Voronoi from './Voronoi';
 import DateDisplay from './DateDisplay';
 import Audio from './Audio';
+import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
@@ -117,15 +118,13 @@ class App extends Component {
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
-        <div className="App-Header"> 
-          An <br/> Education
-        </div>
         {/*<Audio onScroll={this.onScroll} volume={pctScrolled/100}/> */}
+        <div className="App-Intro"></div>
+        <Chart force={this.force} data={data} width={width} height={height}/>
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">children were denied an education </div>
         {/*<Voronoi text={"test text for the stories"} /> */}
-        <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
@@ -143,6 +142,8 @@ class App extends Component {
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
         </div>
+        <Credits className="Credits"/>
+
       </div>
     );
   }
