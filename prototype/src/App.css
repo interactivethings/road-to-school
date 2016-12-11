@@ -2,6 +2,8 @@
 
 body {
 	background: #EAE3D1;
+	/*background: url(./assets/notebook.png) center;*/
+
 }
 
 .App {
@@ -15,7 +17,7 @@ body {
 }
 
 .App-Intro {
-	background: url(./assets/intro.png) center no-repeat;
+	background: url(./assets/intro_solidcolor.png) center no-repeat;
 	width: 100vw;
 	height: 100vh;
 }
