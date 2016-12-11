@@ -35,25 +35,27 @@
 }
 
 .DateDisplay, .Counter, .Counter-Text , .Voronoi{
-	left: 60vw;
+	left: 2vw;
 	position: fixed;
 	color: #972D15;
 	letter-spacing: -0.01em;
-	width: 350px;
+	width: 250px;
 	/*border: 1px solid red;*/
 	top: 80vh;
 }
 
 .Counter {
-	font-size: 96px;
+	font-size: 74px;
 	/*line-height: 68px;*/
 	top: 84vh;
+	letter-spacing: -0.05em;
 }
 .Counter-Text {
 	top: 89vh;
+	font-weight: 400;
 }
 .Voronoi {
-	top: 92vh;
+	top: 94vh;
 	color: #000;
 }
 

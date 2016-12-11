@@ -123,8 +123,8 @@ class App extends Component {
         {/*<Audio onScroll={this.onScroll} volume={pctScrolled/100}/> */}
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
-        <div className="Counter-Text">school-aged Syrian children were denied an education </div>
-        <Voronoi text={"test text for the stories"} />
+        <div className="Counter-Text">children were denied an education </div>
+        {/*<Voronoi text={"test text for the stories"} /> */}
         <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />

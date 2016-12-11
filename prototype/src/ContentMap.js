@@ -69,13 +69,13 @@ export const contentMap = [
   },
   {
     mode: 'outOfSchool',
-    text: 'As you were reading this, [some number] children won’t be able to go to school tomorrow.',
+    text: 'While you were reading this, one school-aged Syrian child had to give up on school.',
     fromPosition: 4+10*dy,
     timepoint: 2016
   },
   {
     mode: 'outOfSchool',
-    text: 'What if they did?',
+    text: '(question/ effect)',
     fromPosition: 4+11*dy,
     timepoint: 2016
   },
