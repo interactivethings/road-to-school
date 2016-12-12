@@ -40,9 +40,57 @@ function mkInitialState() {
   return {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
-    pctScrolled: 0
+    pctScrolled: 0,
+
+
+    // // type BombActivity = Active t | Nothing
+
+    // // A)
+    // bombActivity: {
+    //   active: true,
+    //   timer: d3.
+    // },
+
+    // // B)
+    bombActivity: undefined
   }
 }
+
+
+var GLOBAL_UGLYNESS = [];
+
+function daBomb(id, run, done) {
+  let counter = 0;
+
+  if (GLOBAL_UGLYNESS.indexOf(id) === -1) {
+    GLOBAL_UGLYNESS = GLOBAL_UGLYNESS.concat(id);
+  } else {
+    console.log('Already ran')
+    return;
+  }
+
+  function doTimeout() {
+    return setTimeout(function() {
+      counter++;
+      if (counter < 2) {
+        console.log("RUN")
+        run();
+        doTimeout();
+      } else {
+                console.log("donedone")
+        done();
+      }
+    }, 50);
+  }
+  
+  doTimeout();
+
+  return {
+    id: id,
+  }
+}
+
+
 
 class App extends Component {
   constructor() {
@@ -51,6 +99,7 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
+    this.onSelectStory = this.onSelectStory.bind(this);
     // this.update = update.bind(this);
   }
 
@@ -71,6 +120,9 @@ class App extends Component {
     window.removeEventListener('scroll', this.onScroll, passiveEvent());
   }
 
+
+  
+
   configureForce(props, state) {
     //constant behaviour
     const behavior = behaviours[this.state.mode] || identity;
@@ -79,7 +131,27 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
+    //if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
+
+
+    if (!this.state.bombActivity && this.state.pctScrolled === 15 && GLOBAL_UGLYNESS.indexOf(15) === -1) {
+      this.setState({
+        bombActivity: daBomb(15, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+      })
+    }
+
+    if (!this.state.bombActivity && this.state.pctScrolled === 28 && GLOBAL_UGLYNESS.indexOf(28) === -1) {
+      this.setState({
+        bombActivity: daBomb(28, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+      })
+    }
+
+
+
+    // 15 <= x <= 28
+
+
+
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
@@ -112,35 +184,26 @@ class App extends Component {
     this.setState({ mode: mode });
   }
 
+  onSelectStory(d) {
+    console.log("HELLO", d);
+  }
+
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled} = this.state;
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
-        {/*<Audio onScroll={this.onScroll} volume={pctScrolled/100}/> */}
+        <Audio onScroll={this.onScroll} volume={pctScrolled/100}/>
         <div className="App-Intro"></div>
         <Chart force={this.force} data={data} width={width} height={height}/>
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">children were denied an education </div>
         <div className="Content-Wrap"> 
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
-          <Content text={findContentForMode(contentMap, pctScrolled)} />
+          {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
         </div>
-        <Voronoi text={"test text for the stories"} />
+        <Voronoi onSelect={this.onSelectStory} text={"test text for the stories"} />
         <Credits className="Credits"/>
       </div>
     );
