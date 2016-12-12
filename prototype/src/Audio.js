@@ -5,8 +5,7 @@ class Audio extends Component {
 
   constructor() {
     super();
-    this.onRef = ref => this.ref = ref;
-    this.volume = 0;
+    this.onRef = ref => this.audioElement = ref;
   }
 
   componentDidMount() {
@@ -18,13 +17,13 @@ class Audio extends Component {
   }
 
   changeVolume() {
-    console.log(this.props.volume)
-    this.volume = this.props.volume;
+    // console.log(this.props.volume)
+    this.audioElement.volume = this.props.volume;
   }
 
   render() {
     return (
-      <audio ref={this.onRef} controls> <source src={mp3} type="audio/mp3" /> </audio>
+      <audio className="Audio" ref={this.onRef} controls> <source src={mp3} type="audio/mp3" /> </audio>
     );
   }
 }
