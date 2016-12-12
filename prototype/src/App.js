@@ -28,7 +28,7 @@ function mkActor(id) {
     vx: 0,
     vy: 0,
     letterID: Math.floor(Math.random() * 4),
-    type: Math.random() <= 0.9 ? 'school' : 'noSchool',
+    type: Math.random() <= 0.9 ? 'school' : 'noSchool'
   };
 }
 
@@ -91,7 +91,7 @@ class App extends Component {
     super();
     this.state = mkInitialState();
     var dataChunk = 10;
-    var heightUnit = 40;
+    var heightUnit = 33;
     var widthUnit = window.innerWidth*0.5/10;
 
     for (var j=1; j<=20; j++) { 
@@ -136,23 +136,23 @@ class App extends Component {
     //if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
 
 
-    if (!this.state.bombActivity && this.state.pctScrolled === 15 && GLOBAL_UGLYNESS.indexOf(15) === -1) {
-      this.setState({
-        bombActivity: daBomb(15, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
-    }
+    // if (!this.state.bombActivity && this.state.pctScrolled === 15 && GLOBAL_UGLYNESS.indexOf(15) === -1) {
+    //   this.setState({
+    //     bombActivity: daBomb(15, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+    //   })
+    // }
 
-    if (!this.state.bombActivity && this.state.pctScrolled === 28 && GLOBAL_UGLYNESS.indexOf(28) === -1) {
-      this.setState({
-        bombActivity: daBomb(28, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
-    }
+    // if (!this.state.bombActivity && this.state.pctScrolled === 28 && GLOBAL_UGLYNESS.indexOf(28) === -1) {
+    //   this.setState({
+    //     bombActivity: daBomb(28, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+    //   })
+    // }
 
     // 15 <= x <= 28
 
     //special forces - perturbation
-    var perturbation = behaviours['perturbation'];
-    if (this.state.pctScrolled === 34 || this.state.pctScrolled === 47) perturbation(state.data, props);    
+    // var perturbation = behaviours['perturbation'];
+    // if (this.state.pctScrolled === 34 || this.state.pctScrolled === 47) perturbation(state.data, props);    
 
   }
 
@@ -173,7 +173,7 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
-      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors )? 'noSchool' : 'school';
+      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * Math.floor(actors * Math.random())) ? 'noSchool' : 'school';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = nextType;
     }

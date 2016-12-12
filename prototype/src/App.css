@@ -41,7 +41,7 @@ body {
 
 .DateDisplay, .Counter{
 	top: 2vh;
-	left: 50vw;
+	left: 51vw;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	color: #9C261F;
@@ -71,7 +71,6 @@ body {
 	color: #fff;
 	/*border: 1px dashed black;*/
 }
-
 
 svg {
 	left: 50vw;
