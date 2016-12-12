@@ -8,13 +8,8 @@ const R = 350;
 
 export function baseline(force, data, {width, height}) { 
   // console.log('baseline')
+  return force
 
-  force
-    .force('X', isolate(data, d3.forceX(function(d) { return (20-d.id)*width*0.7/22 }), function(d) { return d.id < 25 ; }))
-    // .force('Y', d3.forceY(function(d) { return d.id * (height*0.8 - 400)/21 } ))
-     .force('collide', d3.forceCollide().radius(20).strength(0.4)) 
-    // .velocityDecay(0.3 )
-    // .alphaTarget(0.3);
 }
 
 export function outOfSchool(force, data, {width, height}) {

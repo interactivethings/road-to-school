@@ -16,15 +16,14 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 20;
+const actors = 60;
 
 const identity = x => x;
-
 function mkActor(id) {
 
   return {
     id: id,
-    x: 0 , // FIXME: is dependent on props.width
+    x: 0, // FIXME: is dependent on props.width
     y: 0, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
@@ -92,6 +91,31 @@ class App extends Component {
   constructor() {
     super();
     this.state = mkInitialState();
+    var dataChunk = this.state.data.length / 10;
+    // for (var i = this.state.data.length - 1; i >= 0; i--) {
+    //     this.state.data[i].x = i * (window.innerHeight * 0.8 - 400) /19;
+    // }
+    // for (var i = this.state.data.length - 1; i >= 0; i--) {
+    //     this.state.data[i].x = i * (window.innerHeight * 0.8 - 400) /19;
+    //     this.state.data[i].y = j* (window.innerHeight * 0.8 - 400) /19;
+    // }    
+
+    for (var i =0; i< 20; ++i) {
+        this.state.data[i].x = i * (window.innerHeight * 0.8 - 400) /19;
+    }
+    for (var i =20; i< 40; ++i) {
+        this.state.data[i].x = (i-20) * (window.innerHeight * 0.8 - 400) /19;
+        this.state.data[i].y = this.state.data[i].y + 200;
+    }    
+    for (var i =40; i< 60; ++i) {
+        this.state.data[i].x = (i-40) * (window.innerHeight * 0.8 - 400) /19;
+        this.state.data[i].y = this.state.data[i].y + 600;
+    }
+    // for (var i = this.state.data.length - 1 - this.state.data.length/10; i >= 0; i--) {
+    //   this.state.data[i].x = i * (window.innerWidth * 0.7/32);
+    // }
+    
+
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
