@@ -84,8 +84,8 @@ export function bomb(data, {width, height}) {
         return d; 
     })
     .strength(-0.02)) 
-    .alphaTarget(0.3)
-    .velocityDecay(0.3)
+    .alphaTarget(0.5)
+    .velocityDecay(0.5)
     .stop()
     .tick();
 }
@@ -93,16 +93,15 @@ export function bomb(data, {width, height}) {
 export function perturbation(data, {width, height}) {
     // console.log('I want to back to schooool')
     d3.forceSimulation()
-    .force('perturbationX', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.4))  
-    .force('perturbationY', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.4))        
-    .alphaTarget(0.2)
-    .velocityDecay(0.2)
+    .force('perturbationX', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.2))  
+    .force('perturbationY', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' && d.id === Math.floor(getVariation(1, data.length)) ; }).strength(0.2))        
+    .alphaTarget(0.5)
+    .velocityDecay(0.5)
     .stop()
     .tick();
 }
 
 export function whileAndQuestion(force, data, {width, height}) {
-    console.log('student')
     force
     .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
     .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))   
