@@ -72,7 +72,7 @@ body {
 }
 
 svg {
-	left: 10vw;
+	left: 30vw;
 	top: 10vh;
 	position: fixed;
 	border: 1px solid red;

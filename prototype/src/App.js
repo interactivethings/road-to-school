@@ -16,7 +16,7 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 80;
+const actors = 400;
 
 const identity = x => x;
 function mkActor(id) {
@@ -24,7 +24,7 @@ function mkActor(id) {
   return {
     id: id,
     x: 0, // FIXME: is dependent on props.width
-    y: 0, // FIXME: is dependent on props.height
+    y: 100, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
@@ -95,7 +95,7 @@ class App extends Component {
     var heightUnit = 40;
     var widthUnit = window.innerWidth*0.7/20;
 
-    for (var j=1; j<=4; j++) { 
+    for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
           this.state.data[i].x = (i-(j-1)*dataChunk)* widthUnit;
           this.state.data[i].y = this.state.data[i].y + (j)*heightUnit;

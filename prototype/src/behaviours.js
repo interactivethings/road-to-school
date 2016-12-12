@@ -8,32 +8,23 @@ const R = 350;
 
 export function baseline(force, data, {width, height}) { 
   // console.log('baseline')
-  return force
+  force
+    .force("charge", d3.forceManyBody().strength(0.02)) 
+    .alphaTarget(0.3)
+    .velocityDecay(0.5);
 
 }
 
 export function outOfSchool(force, data, {width, height}) {
 
-    force
-        .force('xSchool', 
-            isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; })
-            .strength(0.1))
-        .force('ySchool', 
-            isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; })
-            .strength(0.1))
-        .force('xNoSchool', 
-            isolate(data, d3.forceX(function(d) { return Math.sin(d.id) * R + (width*0.7/2);}), function(d) { return d.type === 'noSchool'; })
-            .strength(0.1 * getVariation(1,1.2)))      
-        .force('yNoSchool', 
-            isolate(data, d3.forceY(function(d) { return Math.cos(d.id) * R + (height*0.8/2);} ), function(d) { return d.type === 'noSchool'; })
-            .strength(0.1 * getVariation(1,1.2)))  
-        .force('collideSchool', 
-            isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(20).strength(0.5)) 
-        .force('collideNoSchool', 
-            isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(20).strength(0.4)) 
-        .force("charge", d3.forceManyBody().strength(0.02))
-        .alphaTarget(0.6)
-        .velocityDecay(0.34);
+  force
+    .force('yNoSchool',  isolate(data, d3.forceY(function(d) { return  (height*0.8 - 20);} ), function(d) { return d.type === 'noSchool'; })
+            .strength(0.8)) 
+    .force('collideNoSchool', 
+            isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(20).strength(0.4))  
+    .force("charge", d3.forceManyBody().strength(0.02)) 
+    .alphaTarget(0.3)
+    .velocityDecay(0.5);
 
 }
 
