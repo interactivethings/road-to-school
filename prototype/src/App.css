@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700');
 
 body {
 	background: #EAE3D1;
@@ -6,8 +6,8 @@ body {
 }
 
 .App {
-	font-family: 'Source Code Pro', 'Source Sans Pro', monospace;
-	font-weight: 300;
+	font-family: 'Lora';
+	font-weight: 400;
 	letter-spacing: 0em;
 	font-size: 18px;
 	line-height: 26px;
@@ -33,6 +33,30 @@ body {
 	visibility: hidden;
 }
 
+.Header {
+	height: 10vh;
+	position: fixed;
+	background-color: #333;
+	width: 100vw;
+
+}
+
+.DateDisplay, .Counter{
+	top: 2vh;
+	left: 2vw;
+	position: fixed;
+	font-family: 'Source Sans Pro';
+	color: #9C261F;
+	letter-spacing: -0.01em;
+	z-index: -1;
+	/*border: 1px solid red;*/
+}
+
+.Counter {
+	left: 60vw;
+	font-size: 24px;
+
+}
 .Content {
 	padding-top: 50vh;
 	padding-bottom: 61vh;
@@ -44,32 +68,6 @@ body {
 	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text{
-	left: 2vw;
-	top: 2vh;
-	position: fixed;
-	font-family: 'Source Sans Pro';
-	color: #9C261F;
-	letter-spacing: -0.01em;
-	width: 250px;
-	z-index: -1;
-	/*border: 1px solid red;*/
-}
-
-.Counter {
-	font-size: 74px;
-	top: 6vh;
-	letter-spacing: -0.05em;
-}
-.Counter-Text {
-	top: 10vh;
-	font-weight: 400;
-}
-
-.Voronoi {
-	top: 44vh;
-	color: #000;
-}
 
 svg {
 	left: 30vw;
@@ -90,7 +88,7 @@ path {
 .Voronoi {
 	height: 100vh;
 	position: relative; 
-	left: 18vw;
+	left: 2vw;
 	top: 40vh;
 	letter-spacing: -0.01em;
 	line-height: 20px;
@@ -103,15 +101,23 @@ path {
 }
 
 .Credits-Donate, .Credits-Sources  {
+	font-family: 'Source Sans Pro';
 	position: relative; 
-	left: 18vw;
+	left: 2vw;
 	top: 35vh;
 	color: #972D15;
-	font-weight: 400;
+	font-size: 14px;
 	letter-spacing: -0.01em;
 	line-height: 20px;
 }
 
 ul > li {
 	list-style-type: none;
+}
+
+::selection {
+  background: #9C261F; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #9C261F; /* Gecko Browsers */
 }

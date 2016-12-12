@@ -14,7 +14,7 @@ import DateDisplay from './DateDisplay';
 import Audio from './Audio';
 import Credits from './Credits';
 
-var formatCounter = d3.format(",.2r");
+var formatCounter = d3.format(",");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 const actors = 200;
 
@@ -36,8 +36,6 @@ function mkInitialState() {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
     pctScrolled: 0,
-
-
     // // type BombActivity = Active t | Nothing
 
     // // A)
@@ -126,9 +124,6 @@ class App extends Component {
     window.removeEventListener('scroll', this.onScroll, passiveEvent());
   }
 
-
-  
-
   configureForce(props, state) {
     //constant behaviour
     const behavior = behaviours[this.state.mode] || identity;
@@ -152,12 +147,7 @@ class App extends Component {
       })
     }
 
-
-
     // 15 <= x <= 28
-
-
-
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
@@ -202,13 +192,14 @@ class App extends Component {
       <div className="App">
         <Audio onScroll={this.onScroll} volume={pctScrolled/100}/>
         <div className="App-Intro"></div>
-        <Chart force={this.force} data={data} width={width} height={height}/>
-        <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
-        <Counter onScroll={this.onScroll} value={totalCount} /> 
-        <div className="Counter-Text">children were denied an education </div>
+        <div className="Header"> 
+          <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
+          <Counter onScroll={this.onScroll} value={totalCount} text={"children were denied an education "}/> 
+        </div>
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
         </div>
+        <Chart force={this.force} data={data} width={width} height={height}/>
         <Voronoi onSelect={this.onSelectStory} text={"test text for the stories"} />
         <Credits className="Credits"/>
       </div>
