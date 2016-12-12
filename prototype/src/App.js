@@ -28,11 +28,7 @@ function mkActor(id) {
     y: window.innerHeight/2* 0.7 + 100 * Math.random(), // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
-    r: 2 * (Math.random() + 1),
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
-    datum: {
-      color: '#81A88D'
-    }
   };
 }
 

@@ -80,7 +80,7 @@ export const contentMap = [
   },
   {
     mode: 'backToSchool',
-    text: 'Click to read some of their stories',
+    text: 'Hover over them to read their stories',
     fromPosition: 84,
     timepoint: 2016
   }

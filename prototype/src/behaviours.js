@@ -14,9 +14,9 @@ export function baseline(force, data, {width, height}) {
     .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))
     .force('xNoSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' ; }))      
     .force('yNoSchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' ; }))
-    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(20).strength(0.8)) 
-    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(20).strength(0.8)) 
-    .force("charge", d3.forceManyBody().strength(0.2))
+    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(20).strength(0.3)) 
+    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(20).strength(0.3)) 
+    .force("charge", d3.forceManyBody().strength(0.1))
     .velocityDecay(0.3 )
     .alphaTarget(0.3);
 }
@@ -107,7 +107,7 @@ export function backToSchool(force, data, {width, height}) {
         .radius(30).strength(0.2)) 
     .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; })
         .radius(30).strength(0.2)) 
-    .force("charge", d3.forceManyBody().strength(0.1))
+    // .force("charge", d3.forceManyBody().strength(0.1))
     .velocityDecay(0.3)
     .alphaTarget(0.3);
 
