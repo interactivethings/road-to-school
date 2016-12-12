@@ -67,13 +67,13 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'outOfSchool',
+    mode: 'whileAndQuestion',
     text: 'While you were reading this, one school-aged Syrian child had to give up on school.',
     fromPosition: 72,
     timepoint: 2016
   },
   {
-    mode: 'outOfSchool',
+    mode: 'whileAndQuestion',
     text: '(question/ effect)',
     fromPosition: 78,
     timepoint: 2016

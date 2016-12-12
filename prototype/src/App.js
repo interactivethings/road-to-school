@@ -16,7 +16,7 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 200;
+const actors = 100;
 
 const identity = x => x;
 
@@ -75,7 +75,7 @@ class App extends Component {
     //constant behaviour
     const behavior = behaviours[this.state.mode] || identity;
     behavior(this.force, state.data, props);
-    // this.force.restart();
+    this.force.restart();
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
@@ -84,10 +84,6 @@ class App extends Component {
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
     if (this.state.pctScrolled === 34 || this.state.pctScrolled === 47) perturbation(state.data, props);    
-
-    //special forces - one student
-    var student = behaviours['student'];
-    if (this.state.pctScrolled === 74) student(state.data, props);
 
   }
 

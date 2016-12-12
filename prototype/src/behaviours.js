@@ -101,13 +101,16 @@ export function perturbation(data, {width, height}) {
     .tick();
 }
 
-export function student(data, {width, height}) {
+export function whileAndQuestion(force, data, {width, height}) {
     console.log('student')
-    d3.forceSimulation()
-    .force('studentX', isolate(data, d3.forceX(function(d) {return Math.sin(d.id) * R + (width*0.7/2)}), function(d) { return d.id === 64 ; }).strength(0.4))  
-    .force('studentY', isolate(data, d3.forceY(function(d) {return Math.cos(d.id) * R + (height*0.2/2)}), function(d) { return d.id === 64 ; }).strength(0.4))        
-    .alphaTarget(0.7)
-    .velocityDecay(0.2)
-    .stop()
-    .tick();
+    force
+    .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
+    .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))   
+    .force('collideSchool', 
+        isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(function(d) { return d.r * 6; }).strength(0.5)) 
+    .force('collideNoSchool', 
+        isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(function(d) { return d.r * 2; }).strength(0.4)) 
+    .force("charge", d3.forceManyBody().strength(0.02)) 
+    .alphaTarget(0.6)
+    .velocityDecay(0.6);
 }
