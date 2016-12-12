@@ -23,8 +23,8 @@ function mkActor(id) {
 
   return {
     id: id,
-    x: window.innerWidth*0.7/4, // FIXME: is dependent on props.width
-    y: 100, // FIXME: is dependent on props.height
+    x: 0, // FIXME: is dependent on props.width
+    y: 10, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
@@ -91,7 +91,7 @@ class App extends Component {
     this.state = mkInitialState();
     var dataChunk = 10;
     var heightUnit = 40;
-    var widthUnit = window.innerWidth*0.7/20;
+    var widthUnit = window.innerWidth*0.5/10;
 
     for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
@@ -198,10 +198,9 @@ class App extends Component {
         </div>
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
+          <Chart force={this.force} data={data} width={width} height={height}/>
+          <Credits className="Credits"/>
         </div>
-        <Chart force={this.force} data={data} width={width} height={height}/>
-        <Voronoi onSelect={this.onSelectStory} text={"test text for the stories"} />
-        <Credits className="Credits"/>
       </div>
     );
   }

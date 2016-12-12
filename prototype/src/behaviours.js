@@ -1,7 +1,6 @@
 
 import * as d3 from 'd3';
 import {isolate, getVariation} from './utils/forceHelpers';
-const R = 350;
 
 //width of SVG: width * 0.7
 //height of SVG: height * 0.8 

@@ -41,7 +41,7 @@ class SvgRenderer extends Component {
     
     return (
       <div>
-        <svg width={this.props.width * 0.7} height={this.props.height * 0.8} ref={this.onRef}>
+        <svg width={this.props.width/2} height={this.props.height} ref={this.onRef}>
         </svg>
       </div>
     );
