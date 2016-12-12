@@ -37,23 +37,22 @@ body {
 	height: 10vh;
 	position: fixed;
 	width: 100vw;
-
 }
 
 .DateDisplay, .Counter{
 	top: 2vh;
-	left: 5vw;
+	left: 50vw;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	color: #9C261F;
 	letter-spacing: -0.01em;
 	z-index: -1;
+	font-size: 14px;
 	/*border: 1px solid red;*/
 }
 
 .Counter {
-	left: 60vw;
-	font-size: 24px;
+	left: 80vw;
 }
 
 .Content-Wrap {
@@ -66,7 +65,7 @@ body {
 	left: 5vw;
 	width: 30vw;
 	padding-top: 50vh;
-	padding-bottom: 2vh;
+	padding-bottom: 45vh;
 	position: relative; 
 	white-space: pre-line;
 	color: #fff;

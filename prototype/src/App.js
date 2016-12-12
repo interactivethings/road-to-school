@@ -23,10 +23,11 @@ function mkActor(id) {
 
   return {
     id: id,
-    x: 0, // FIXME: is dependent on props.width
+    x: 20, // FIXME: is dependent on props.width
     y: 10, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
+    letterID: Math.floor(Math.random() * 4),
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
   };
 }
@@ -70,7 +71,7 @@ function daBomb(id, run, done) {
         run();
         doTimeout();
       } else {
-                console.log("donedone")
+        console.log("donedone")
         done();
       }
     }, 50);
