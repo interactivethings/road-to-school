@@ -16,7 +16,7 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 100;
+const actors = 20;
 
 const identity = x => x;
 
@@ -24,8 +24,8 @@ function mkActor(id) {
 
   return {
     id: id,
-    x: window.innerWidth/2 * 0.7 + 100 * Math.random() , // FIXME: is dependent on props.width
-    y: window.innerHeight/2* 0.7 + 100 * Math.random(), // FIXME: is dependent on props.height
+    x: 0 , // FIXME: is dependent on props.width
+    y: 0, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     type: Math.random() <= 0.9 ? 'school' : 'noSchool',
@@ -194,7 +194,7 @@ class App extends Component {
         <div className="App-Intro"></div>
         <Chart force={this.force} data={data} width={width} height={height}/>
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
-        <Counter onScroll={this.onScroll} value={totalCount}/> 
+        <Counter onScroll={this.onScroll} value={totalCount} /> 
         <div className="Counter-Text">children were denied an education </div>
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}

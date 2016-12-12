@@ -13,13 +13,13 @@ export const contentMap = [
     timepoint: 2011
   },
   {
-    mode: 'outOfSchool',
+    mode: 'baseline',
     text: 'Education has come under repeated fire throughout the conflict. ',
     fromPosition: 15,
     timepoint: 2012
   },
   {
-    mode: 'outOfSchool',
+    mode: 'baseline',
     text: 'For the children living in Syria and particularly the Aleppo area, going to school is a coin toss with death.',
     fromPosition: 21,
     timepoint: 2012

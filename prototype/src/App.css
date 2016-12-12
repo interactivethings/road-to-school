@@ -9,8 +9,8 @@ body {
 	font-family: 'Source Code Pro', 'Source Sans Pro', monospace;
 	font-weight: 300;
 	letter-spacing: 0em;
-	font-size: 14px;
-	line-height: 16px;
+	font-size: 18px;
+	line-height: 26px;
 	width: 100vw;
 	overflow-x: hidden;
 }
@@ -36,8 +36,8 @@ body {
 .Content {
 	padding-top: 50vh;
 	padding-bottom: 61vh;
-	left: 18vw;
-	width: 30vw;
+	left: 2vw;
+	width: 20vw;
 	position: relative; 
 	white-space: pre-line;
 	color: #191406;
@@ -46,7 +46,7 @@ body {
 
 .DateDisplay, .Counter, .Counter-Text{
 	left: 2vw;
-	top: 80vh;
+	top: 2vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	color: #9C261F;
@@ -58,23 +58,24 @@ body {
 
 .Counter {
 	font-size: 74px;
-	top: 84vh;
+	top: 6vh;
 	letter-spacing: -0.05em;
 }
 .Counter-Text {
-	top: 89vh;
+	top: 10vh;
 	font-weight: 400;
 }
+
 .Voronoi {
-	top: 94vh;
+	top: 44vh;
 	color: #000;
 }
 
 svg {
-	left: 40vw;
+	left: 10vw;
 	top: 10vh;
 	position: fixed;
-	/*border: 1px solid red;*/
+	border: 1px solid red;
 	/*z-index: -1;*/
 }
 
