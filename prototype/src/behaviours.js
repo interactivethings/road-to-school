@@ -63,34 +63,34 @@ export function perturbation(data, {width, height}) {
 }
 
 export function whileAndQuestion(force, data, {width, height}) {
-    force
-    .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
-    .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))   
-    .force('collideSchool', 
-        isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(10).strength(0.5)) 
-    .force('collideNoSchool', 
-        isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(10).strength(0.4)) 
-    .force("charge", d3.forceManyBody().strength(0.02)) 
-    .alphaTarget(0.3)
-    .velocityDecay(0.3);
+    // force
+    // .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
+    // .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))   
+    // .force('collideSchool', 
+    //     isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; }).radius(10).strength(0.5)) 
+    // .force('collideNoSchool', 
+    //     isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; }).radius(10).strength(0.4)) 
+    // .force("charge", d3.forceManyBody().strength(0.02)) 
+    // .alphaTarget(0.3)
+    // .velocityDecay(0.3);
 }
 
 export function backToSchool(force, data, {width, height}) {
   // console.log('backToSchool')
   
-  force
-    .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
-    .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))
-    .force('xNoSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' ; })
-        .strength(0.1))      
-    .force('yNoSchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' ; })
-        .strength(0.1))
-    .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; })
-        .radius(30).strength(0.2)) 
-    .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; })
-        .radius(30).strength(0.2)) 
-    // .force("charge", d3.forceManyBody().strength(0.1))
-    .velocityDecay(0.3)
-    .alphaTarget(0.3);
+  // force
+  //   .force('xSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'school' ; }))
+  //   .force('ySchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'school' ; }))
+  //   .force('xNoSchool', isolate(data, d3.forceX(width*0.7/2), function(d) { return d.type === 'noSchool' ; })
+  //       .strength(0.1))      
+  //   .force('yNoSchool', isolate(data, d3.forceY(height*0.8/2), function(d) { return d.type === 'noSchool' ; })
+  //       .strength(0.1))
+  //   .force('collideSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'school' ; })
+  //       .radius(30).strength(0.2)) 
+  //   .force('collideNoSchool', isolate(data, d3.forceCollide(), function(d) { return d.type === 'noSchool' ; })
+  //       .radius(30).strength(0.2)) 
+  //   // .force("charge", d3.forceManyBody().strength(0.1))
+  //   .velocityDecay(0.3)
+  //   .alphaTarget(0.3);
 
 }

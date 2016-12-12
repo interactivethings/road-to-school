@@ -16,14 +16,14 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",.2r");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 400;
+const actors = 200;
 
 const identity = x => x;
 function mkActor(id) {
 
   return {
     id: id,
-    x: 0, // FIXME: is dependent on props.width
+    x: window.innerWidth*0.7/4, // FIXME: is dependent on props.width
     y: 100, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
@@ -91,13 +91,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = mkInitialState();
-    var dataChunk = 20;
+    var dataChunk = 10;
     var heightUnit = 40;
     var widthUnit = window.innerWidth*0.7/20;
 
     for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
-          this.state.data[i].x = (i-(j-1)*dataChunk)* widthUnit;
+          this.state.data[i].x = this.state.data[i].x+  (i-(j-1)*dataChunk)* widthUnit;
           this.state.data[i].y = this.state.data[i].y + (j)*heightUnit;
       }   
     }
