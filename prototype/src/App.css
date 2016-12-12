@@ -34,20 +34,25 @@ body {
 }
 
 .Header {
-	height: 10vh;
-	position: fixed;
+	/*position: fixed;*/
 	width: 100vw;
+	z-index: 1;
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+
 }
 
 .DateDisplay, .Counter{
 	top: 2vh;
 	left: 51vw;
+	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	color: #9C261F;
 	letter-spacing: -0.01em;
 	z-index: -1;
 	font-size: 14px;
+
 	/*border: 1px solid red;*/
 }
 

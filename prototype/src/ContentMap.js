@@ -7,7 +7,7 @@ export const contentMap = [
     timepoint: 2011
   },
   {
-    mode: 'baseline',
+    mode: 'outOfSchool',
     text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have fled the country. Roughly 7 million people have been internally displaced.',
     fromPosition: 9,
     timepoint: 2011
@@ -80,7 +80,7 @@ export const contentMap = [
   },
   {
     mode: 'backToSchool',
-    text: 'Hover over them to read their stories',
+    text: '(child story follows)',
     fromPosition: 84,
     timepoint: 2016
   }

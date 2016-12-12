@@ -28,7 +28,7 @@ function mkActor(id) {
     vx: 0,
     vy: 0,
     letterID: Math.floor(Math.random() * 4),
-    type: Math.random() <= 0.9 ? 'school' : 'noSchool'
+    type: Math.random() > 0.1 ? 'school' : 'noSchool'
   };
 }
 
