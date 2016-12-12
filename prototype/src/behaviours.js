@@ -100,3 +100,14 @@ export function perturbation(data, {width, height}) {
     .stop()
     .tick();
 }
+
+export function student(data, {width, height}) {
+    console.log('student')
+    d3.forceSimulation()
+    .force('studentX', isolate(data, d3.forceX(function(d) {return Math.sin(d.id) * R + (width*0.7/2)}), function(d) { return d.id === 64 ; }).strength(0.4))  
+    .force('studentY', isolate(data, d3.forceY(function(d) {return Math.cos(d.id) * R + (height*0.2/2)}), function(d) { return d.id === 64 ; }).strength(0.4))        
+    .alphaTarget(0.7)
+    .velocityDecay(0.2)
+    .stop()
+    .tick();
+}

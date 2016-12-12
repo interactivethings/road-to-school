@@ -79,11 +79,15 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    if (this.state.pctScrolled === 27  || this.state.pctScrolled === 56) bomb(state.data, props);
+    if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    if (this.state.pctScrolled === 46 || this.state.pctScrolled === 53 || this.state.pctScrolled === 60) perturbation(state.data, props);
+    if (this.state.pctScrolled === 34 || this.state.pctScrolled === 47) perturbation(state.data, props);    
+
+    //special forces - one student
+    var student = behaviours['student'];
+    if (this.state.pctScrolled === 74) student(state.data, props);
 
   }
 
@@ -100,7 +104,7 @@ class App extends Component {
     );
     
     this.setState({  pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
-    console.log(this.state.pctScrolled)
+
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
