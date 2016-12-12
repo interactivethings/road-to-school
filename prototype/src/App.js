@@ -79,11 +79,11 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    this.state.pctScrolled === 27  || this.state.pctScrolled === 56  ? bomb(state.data, props) : 1;
+    if (this.state.pctScrolled === 27  || this.state.pctScrolled === 56) bomb(state.data, props);
 
     //special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    this.state.pctScrolled === 46 || this.state.pctScrolled === 53 || this.state.pctScrolled === 60 ? perturbation(state.data, props) : 1;
+    if (this.state.pctScrolled === 46 || this.state.pctScrolled === 53 || this.state.pctScrolled === 60) perturbation(state.data, props);
 
   }
 
@@ -124,7 +124,6 @@ class App extends Component {
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <Counter onScroll={this.onScroll} value={totalCount}/> 
         <div className="Counter-Text">children were denied an education </div>
-        {/*<Voronoi text={"test text for the stories"} /> */}
         <div className="Content-Wrap"> 
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
@@ -141,8 +140,8 @@ class App extends Component {
           <Content text={findContentForMode(contentMap, pctScrolled)} />
           <Content text={findContentForMode(contentMap, pctScrolled)} />
         </div>
+        <Voronoi text={"test text for the stories"} />
         <Credits className="Credits"/>
-
       </div>
     );
   }

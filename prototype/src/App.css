@@ -30,7 +30,7 @@ body {
 
 .Content {
 	padding-top: 50vh;
-	padding-bottom: 60vh;
+	padding-bottom: 61vh;
 	left: 18vw;
 	width: 30vw;
 	position: relative; 
@@ -38,7 +38,7 @@ body {
 	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text , .Voronoi{
+.DateDisplay, .Counter, .Counter-Text{
 	left: 2vw;
 	top: 80vh;
 	position: fixed;
@@ -52,7 +52,6 @@ body {
 
 .Counter {
 	font-size: 74px;
-	/*line-height: 68px;*/
 	top: 84vh;
 	letter-spacing: -0.05em;
 }
@@ -65,7 +64,6 @@ body {
 	color: #000;
 }
 
-/*SVG */
 svg {
 	left: 40vw;
 	top: 10vh;
@@ -78,18 +76,29 @@ path {
   pointer-events: all;
   fill: none;
   stroke: #666;
-  /*stroke-opacity: 0.1;*/
+  stroke-opacity: 0.1;
   stroke-opacity: 0;
+}
+
+.Voronoi {
+	height: 100vh;
+	position: relative; 
+	left: 18vw;
+	top: 40vh;
+	letter-spacing: -0.01em;
+	line-height: 20px;
+	width: 30vw;
 }
 
 .Credits {
 	height: 100vh;
+	width: 30vw;
 }
 
 .Credits-Donate, .Credits-Sources  {
 	position: relative; 
 	left: 18vw;
-	top: 40vh;
+	top: 35vh;
 	color: #972D15;
 	font-weight: 400;
 	letter-spacing: -0.01em;
