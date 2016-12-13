@@ -15,7 +15,7 @@ body {
 }
 
 .App-Intro {
-	background: url(./assets/intro_solidcolor.png) center no-repeat;
+	background: url(./assets/Left.png) left no-repeat;
 	width: 100vw;
 	height: 100vh;
 	position: relative;
@@ -32,33 +32,32 @@ body {
 	display: none;
 }
 
-.DateDisplay, .Counter{
-	top: 2vh;
-	left: 51vw;
+ .Counter-text, .Counter{
+	top: 40vh;
+	left: 35vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
-	color: #9C261F;
-	letter-spacing: -0.01em;
-	z-index: -1;
-	font-size: 14px;
-
+	color: #fff;
+	font-size: 48px;
+	line-height: 65px;
+	width: 10vw;
 	/*border: 1px solid red;*/
 }
 
-.Counter {
-	left: 80vw;
+.Counter-text {
+	font-size: 24px;
+	top: 45vh;
+	line-height: 33px;
 }
-
 .Content-Wrap {
-	left: -1vw;
 	width: 50vw;
-	background-color: #0F0F0F;
+	background-color: #191406;
 
 }
 .Content {
 	left: 5vw;
-	width: 30vw;
+	width: 20vw;
 	padding-top: 50vh;
 	padding-bottom: 45vh;
 	position: relative; 

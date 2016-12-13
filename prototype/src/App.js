@@ -194,8 +194,10 @@ class App extends Component {
     return (
       <div className="App">
         <Audio hidden onScroll={this.onScroll} volume={pctScrolled/100}/>
-          <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
-          <Counter onScroll={this.onScroll} value={totalCount} text={"children were denied an education "}/> 
+        <div className="App-Intro"></div>
+        <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
+        <Counter onScroll={this.onScroll} value={totalCount}/>
+        <div className="Counter-text">children were denied an education</div> 
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
           <Chart force={this.force} data={data} width={width} height={height}/>
