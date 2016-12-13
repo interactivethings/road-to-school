@@ -1,13 +1,13 @@
 
 export const contentMap = [
   {
-    mode: 'noForce',
+    mode: 'intro',
     text: ' “There are people using books and notebooks for cooking, since fuel is so hard to find. \n \n The sight breaks your heart.” \n  \n -  woman in Aleppo, Syria. ',
     fromPosition: 0,
     timepoint: 2011
   },
   {
-    mode: 'noForce',
+    mode: 'intro',
     text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have fled the country. Roughly 7 million people have been internally displaced.',
     fromPosition: 9,
     timepoint: 2011
@@ -79,13 +79,13 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'noForce',
+    mode: 'end',
     text: 'I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.',
     fromPosition: 84,
     timepoint: 2016
   },
   {
-    mode: 'noForce',
+    mode: 'end',
     text: 'I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.',
     fromPosition: 84,
     timepoint: 2016

@@ -133,26 +133,25 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    //if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
+    // if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
 
+    if (!this.state.bombActivity && this.state.pctScrolled === 17 && GLOBAL_UGLYNESS.indexOf(17) === -1) {
+      this.setState({
+        bombActivity: daBomb(17, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+      })
+    }
 
-    // if (!this.state.bombActivity && this.state.pctScrolled === 15 && GLOBAL_UGLYNESS.indexOf(15) === -1) {
-    //   this.setState({
-    //     bombActivity: daBomb(15, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-    //   })
-    // }
-
-    // if (!this.state.bombActivity && this.state.pctScrolled === 28 && GLOBAL_UGLYNESS.indexOf(28) === -1) {
-    //   this.setState({
-    //     bombActivity: daBomb(28, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-    //   })
-    // }
+    if (!this.state.bombActivity && this.state.pctScrolled === 32 && GLOBAL_UGLYNESS.indexOf(32) === -1) {
+      this.setState({
+        bombActivity: daBomb(32, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
+      })
+    }
 
     // 15 <= x <= 28
 
-    //special forces - perturbation
-    // var perturbation = behaviours['perturbation'];
-    // if (this.state.pctScrolled === 34 || this.state.pctScrolled === 47) perturbation(state.data, props);    
+    // special forces - perturbation
+    var perturbation = behaviours['perturbation'];
+    // if (this.state.pctScrolled === 74) perturbation(state.data, props);    
 
   }
 
