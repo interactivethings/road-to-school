@@ -16,7 +16,7 @@ import Credits from './Credits';
 
 var formatCounter = d3.format(",");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 200;
+const actors = 200;  //FIXMEEEEE
 
 const identity = x => x;
 function mkActor(id) {
@@ -91,7 +91,7 @@ class App extends Component {
     super();
     this.state = mkInitialState();
     var dataChunk = 10;
-    var heightUnit = 33;
+    var heightUnit = 60;
     var widthUnit = window.innerWidth*0.5/10;
 
     for (var j=1; j<=20; j++) { 
@@ -191,12 +191,9 @@ class App extends Component {
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
-        <Audio onScroll={this.onScroll} volume={pctScrolled/100}/>
-        <div className="App-Intro"></div>
-        <div className="Header"> 
+        <Audio hidden onScroll={this.onScroll} volume={pctScrolled/100}/>
           <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
           <Counter onScroll={this.onScroll} value={totalCount} text={"children were denied an education "}/> 
-        </div>
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
           <Chart force={this.force} data={data} width={width} height={height}/>

@@ -16,15 +16,24 @@ export function baseline(force, data, {width, height}) {
 
 export function outOfSchool(force, data, {width, height}) {
   // console.log('outofSchool')
-
+  var bottom = height * 0.95;
   force 
-    .force('yNoSchool',  isolate(data, d3.forceY(height - 60), function(d) { return d.type === 'noSchool'; }).strength(0.3)) 
-    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 20)).strength(0.5)) 
+    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.1)) 
+    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 20)).strength(0.3)) 
     .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
-    .alphaTarget(0.2)
-    .velocityDecay(0.2);
+    .alphaTarget(0.3)
+    .velocityDecay(0.3);
 
 }
+
+export function whileAndQuestion(force, data, {width, height}) {
+  force
+    .force('collide', d3.forceCollide().radius(2).strength(0.4)) 
+    .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
+    .alphaTarget(0.3)
+    .velocityDecay(0.4);
+}
+
 
 export function bomb(data, {width, height}) {
     // console.log(' bomb')
@@ -60,15 +69,3 @@ export function perturbation(data, {width, height}) {
     .tick();
 }
 
-export function whileAndQuestion(force, data, {width, height}) {
-
-}
-
-export function backToSchool(force, data, {width, height}) {
- force
-    .force('collide', d3.forceCollide().radius(2).strength(0.4)) 
-    .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
-    .alphaTarget(0.3)
-    .velocityDecay(0.5);
-
-}

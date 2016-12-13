@@ -79,7 +79,7 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'backToSchool',
+    mode: 'whileAndQuestion',
     text: '(child story follows)',
     fromPosition: 84,
     timepoint: 2016

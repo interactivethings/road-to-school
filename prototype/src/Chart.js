@@ -64,30 +64,6 @@ class SvgRenderer extends Component {
     const svg = d3.select(this.ref);
     const {width, height} = this.props;
 
-    /*----------------------------- Voronoi overlay --------------------*/
-    var nodes = d3.range(voronoiContentMap.length).map(function() {
-      return {
-        x:  100 *Math.random() + width/2* 0.7 - 70,
-        y:  100 *Math.random() + height/2 * 0.8
-      };
-    });
-
-    var voronoi = d3.voronoi()
-        .x(function(d) { return d.x; })
-        .y(function(d) { return d.y; })
-        .extent([[-1, -1], [width + 1, height + 1]]);
-
-    var node = svg.selectAll("g")
-      .data(nodes)
-      .enter().append("g");
-
-    node.append("path")
-      .data(voronoi.polygons(nodes))
-      .attr("d", renderCell)
-      .on("hover", function(d,i) {
-        console.log(findTextforVoronoi(voronoiContentMap, i) );
-      });
-
     /*----------------------------- Main Vis --------------------*/
 
     const circles = svg.selectAll('path')
@@ -97,20 +73,13 @@ class SvgRenderer extends Component {
       .append('path');
 
     circles
-      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')')
-      // .attr('d', book)
+      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.7 + ')')
       .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; })
       .style('fill', '#191406')
       .call(d3.drag().on("drag", dragged));
     
     circles.exit()
       .remove();
-
-    /*----------------------------- Helper functions --------------------*/
-
-    function renderCell(d) {
-      return d == null ? null : "M" + d.join("L") + "Z";
-    }
 
     function dragged(d) {   
       d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);    
