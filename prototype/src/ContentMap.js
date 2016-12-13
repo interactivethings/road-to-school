@@ -79,13 +79,13 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'end',
+    mode: 'quote',
     text: 'I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.',
     fromPosition: 84,
     timepoint: 2016
   },
   {
-    mode: 'end',
+    mode: 'quote',
     text: 'I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.',
     fromPosition: 84,
     timepoint: 2016

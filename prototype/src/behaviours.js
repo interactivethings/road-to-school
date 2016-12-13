@@ -38,7 +38,7 @@ export function question(force, data, {width, height}) {
     .velocityDecay(0.4);
 }
 
-export function end(force, data, {width, height}) {
+export function quote(force, data, {width, height}) {
 
   force
     .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 

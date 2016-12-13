@@ -173,24 +173,27 @@ class App extends Component {
 
     this.setState({ mode: mode });
 
-  }
-
-  render() {
-    const {width, height} = this.props;
-    const {data, pctScrolled} = this.state;
-
     //CSS initialization
     d3.select('.Counter-Wrap').classed('Counter-Wrap-isHidden', true);
     d3.select('.Counter').classed('Counter-text-isHidden', true);
     d3.select('.Counter-text').classed('Counter-text-isHidden', true);
     d3.select('.TimelineItem').classed('TimelineItem-isHidden', true);
 
-    if (pctScrolled > 3) { 
+    if (this.state.pctScrolled > 3) { 
       d3.select('.Counter-Wrap').classed('Counter-Wrap-isVisible', true);
       d3.select('.Counter').classed('Counter-text-isVisible', true);
       d3.select('.Counter-text').classed('Counter-text-isVisible', true);
       d3.select('.TimelineItem').classed('TimelineItem-isVisible', true);
     }
+
+    this.state.mode === 'quote' ? d3.select('.Content').classed('Content-Quote', true) :   1;
+
+  }
+
+  render() {
+    const {width, height} = this.props;
+    const {data, pctScrolled} = this.state;
+
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
 
     return (

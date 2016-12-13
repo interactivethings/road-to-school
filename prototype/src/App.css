@@ -144,6 +144,20 @@ body {
 	/*border: 1px dashed black;*/
 }
 
+.Content-Quote {
+	padding-left: 5vw;
+	width: 30vw;
+	text-align: center;
+	padding-top: 50vh;
+	padding-bottom: 45vh;
+	position: relative; 
+	white-space: pre-line;
+	color: #9C261F;
+	font-size: 18px;
+	line-height: 64px;
+	/*border: 1px dashed black;*/
+}
+
 svg {
 	left: 50vw;
 	top: 0;
