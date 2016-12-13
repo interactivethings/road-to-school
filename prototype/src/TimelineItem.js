@@ -1,8 +1,9 @@
 import React, { Component} from 'react';
 
-class DateDisplay extends Component {
+class TimelineItem extends Component {
   render() {
-  	let classNames = ["DateDisplay"];
+    const {value} = this.props;
+  	let classNames = ["TimelineItem"];
   	if (true) classNames.push("isVisible");
  	if (false) classNames.push("isHidden");
 
@@ -12,4 +13,4 @@ class DateDisplay extends Component {
   }
 }
 
-export default DateDisplay;
+export default TimelineItem;

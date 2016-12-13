@@ -44,11 +44,11 @@ body {
 }
 
 .App-Header-Share {
-	background: url('./assets/twitter.png') 45vw 2vh no-repeat;
+	background: url('./assets/twitter.png') 42vw 2vh no-repeat;
 }
 
 .App-Header-Audio {
-	background: url('./assets/audio.png') 47vw 2vh no-repeat;
+	background: url('./assets/audio.png') 45vw 1.5vh no-repeat;
 }
 
 .Audio {
@@ -69,8 +69,6 @@ body {
 	position: fixed;
 }
 
-
-
 .Counter-text, .Counter{
 	top: 82vh;
 	left: 70vw;
@@ -82,13 +80,9 @@ body {
 	background: #EAE3D1;
 	padding: 0 1vw;
 	/*border: 1px solid red;*/
-	text-align: center;
+	vertical-align: center;
 	z-index: 1;
-	visibility: show;
 
-}
-.Counter-isHidden {
-	visibility: hidden;
 }
 
 .Counter-text {
@@ -97,9 +91,18 @@ body {
 	left: 68.5vw;
 }
 
+.Counter-isHidden, .Counter-Wrap-isHidden, .Counter-text-isHidden  {
+	opacity: 0;
+}
+.Counter-isVisible, .Counter-Wrap-isVisible, .Counter-text-isVisible  {
+	opacity: 1;
+}
+
+
+
 /* ----------------------------------------------Date  */
-.DateDisplay {
-	left: 48vw;
+.TimelineItem {
+	left: 44vw;
 	top: 40vh;
 	height: 2.5vh;
 	position: fixed;
@@ -110,10 +113,12 @@ body {
 	background-color: #191406;
 	/*position: relative;*/
 	z-index: 0;
-	opacity: 0.2;
 }
 
-.DateDisplay.isVisible {
+.TimelineItem-isHidden {
+	opacity: 0;
+}
+.TimelineItem-isVisible {
 	opacity: 1;
 }
 

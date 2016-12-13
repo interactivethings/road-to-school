@@ -1,7 +1,6 @@
 import './App.css';
 
 import React, { Component } from 'react';
-// import update from 'react-update'; 
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
 import Chart from './Chart';
@@ -9,7 +8,8 @@ import {scrollY, passiveEvent} from './utils/dom';
 import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import Counter from './Counter';
-import DateDisplay from './DateDisplay';
+import TimelineItem from './TimelineItem';
+import Timeline from './Timeline';
 import Audio from './Audio';
 import Credits from './Credits';
 import {shuffle} from './utils/forceHelpers';
@@ -18,9 +18,7 @@ var formatCounter = d3.format(",");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 const actors = 200;  
 var actorsRoles = [];
-for (var i = actors - 1; i >= 0; i--) {
-   actorsRoles[i] = i;
- } 
+for (var i = actors - 1; i >= 0; i--) { actorsRoles[i] = i; } 
 actorsRoles = shuffle(actorsRoles);
 
 const identity = x => x;
@@ -105,8 +103,6 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
-    this.onSelectStory = this.onSelectStory.bind(this);
-    // this.update = update.bind(this);
   }
 
   componentWillMount() {
@@ -134,7 +130,6 @@ class App extends Component {
 
     //special forces - bomb
     var bomb = behaviours['bomb'];
-    // if (this.state.pctScrolled === 15  || this.state.pctScrolled === 28) bomb(state.data, props);
 
     if (!this.state.bombActivity && this.state.pctScrolled === 17 && GLOBAL_UGLYNESS.indexOf(17) === -1) {
       this.setState({
@@ -148,7 +143,6 @@ class App extends Component {
       })
     }
 
-    // 15 <= x <= 28
 
     // special forces - perturbation
     var perturbation = behaviours['perturbation'];
@@ -174,43 +168,58 @@ class App extends Component {
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
       var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors) ? 'noSchool' : 'school';
-      // this.update('set', this.state.data[i].type, newType);
       this.state.data[actorsRoles[i]].type = nextType;
     }
 
     this.setState({ mode: mode });
 
-
   }
-
-  onSelectStory(d) {
-    console.log("HELLO", d);
-  }
-
 
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled} = this.state;
+
+    //CSS initialization
+    d3.select('.Counter-Wrap').classed('Counter-Wrap-isHidden', true);
+    d3.select('.Counter').classed('Counter-text-isHidden', true);
+    d3.select('.Counter-text').classed('Counter-text-isHidden', true);
+    d3.select('.TimelineItem').classed('TimelineItem-isHidden', true);
+
+    if (pctScrolled > 3) { 
+      d3.select('.Counter-Wrap').classed('Counter-Wrap-isVisible', true);
+      d3.select('.Counter').classed('Counter-text-isVisible', true);
+      d3.select('.Counter-text').classed('Counter-text-isVisible', true);
+      d3.select('.TimelineItem').classed('TimelineItem-isVisible', true);
+    }
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
+
     return (
       <div className="App">
         <div className="App-Intro">
+        {/* -------------------- Title -----------------------*/}
           <div className="App-Intro-Text"> An Education </div>
         </div>
+        {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share"> </div>
-        <div className="App-Header-Audio"> 
-          <Audio volume={pctScrolled/100} onClick={this.mute}/> 
+        <div className="App-Header-Audio" onClick={this.mute}> 
+        {/* -------------------- Audio -----------------------*/}
+          <Audio volume={pctScrolled/100}/> 
         </div>
-        <DateDisplay onScroll={this.onScroll}  value={findTimepointForMode(contentMap, pctScrolled)} />
-        <div className="Counter-Wrap"> 
+        {/* -------------------- Timeline -----------------------*/}
+        {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)}/>)} 
+        
+        {/* -------------------- Counter -----------------------*/}
+        <div className="Counter-Wrap Counter-Wrap-isHidden"> 
           <Counter onScroll={this.onScroll} value={totalCount}/>
           <div className="Counter-text">children were denied an education</div> 
         </div>
-        <div className="Content-Wrap"> 
-          {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
+        {/* -------------------- Content -----------------------*/}
+        <div className="Content-Wrap"> {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
+        {/* -------------------- Credits -----------------------*/}
           <Credits className="Credits"/>
         </div>
-          <Chart force={this.force} data={data} width={width} height={height}/>
+        {/* -------------------- Chart -----------------------*/}
+        <Chart force={this.force} data={data} width={width} height={height}/>
       </div>
     );
   }
