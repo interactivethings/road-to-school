@@ -181,12 +181,12 @@ class App extends Component {
     this.setState({ mode: mode });
 
 
-    //CSS functionalities
   }
 
   onSelectStory(d) {
     console.log("HELLO", d);
   }
+
 
   render() {
     const {width, height} = this.props;
@@ -194,11 +194,13 @@ class App extends Component {
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     return (
       <div className="App">
-        <Audio hidden onScroll={this.onScroll} volume={pctScrolled/100}/>
         <div className="App-Intro">
           <div className="App-Intro-Text"> An Education </div>
         </div>
-        <div className="App-Header"></div>
+        <div className="App-Header-Share"> </div>
+        <div className="App-Header-Audio"> 
+          <Audio volume={pctScrolled/100} onClick={this.mute}/> 
+        </div>
         <DateDisplay onScroll={this.onScroll}  value={findTimepointForMode(contentMap, pctScrolled)} />
         <div className="Counter-Wrap"> 
           <Counter onScroll={this.onScroll} value={totalCount}/>

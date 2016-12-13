@@ -36,17 +36,26 @@ body {
 	width: 30vw;
 }
 
-.App-Header {
+.App-Header-Share, .App-Header-Audio {
 	top: 0vh;
-	height: 5vh;
+	height: 6vh;
 	width: 50vw;
 	position: fixed;
-	background: url('./assets/twitter.png') 45vw 2vh no-repeat,  url('./assets/audio.png') 47vw 2vh no-repeat;
-	/*position: relative;*/
+}
+
+.App-Header-Share {
+	background: url('./assets/twitter.png') 45vw 2vh no-repeat;
+}
+
+.App-Header-Audio {
+	background: url('./assets/audio.png') 47vw 2vh no-repeat;
 }
 
 .Audio {
+	position: relative;
+	z-index: 1;
 	display: none;
+
 }
 
 /* ----------------------------------------------Counter */

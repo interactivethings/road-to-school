@@ -17,17 +17,18 @@ class Audio extends Component {
   }
 
   changeVolume() {
-    // console.log(this.props.volume)
-    this.audioElement.volume = this.props.volume;
+    console.log(this.props.volume)
+    this.audioElement.volume  = this.props.volume > 0.02 ? Math.abs(0.8-this.props.volume) : 0;
   }
 
   mute() {
-    this.audioElement.muted = true;
+    console.log('clicked')
+    this.audioElement.muted = false;
   }
 
   render() {
     return (
-      <audio className="Audio" ref={this.onRef} controls> <source src={mp3} type="audio/mp3" /> </audio>
+      <audio className="Audio" ref={this.onRef} controls autoPlay loop> <source src={mp3} type="audio/mp3" /> </audio>
     );
   }
 }
