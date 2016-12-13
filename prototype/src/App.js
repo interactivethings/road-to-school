@@ -27,7 +27,7 @@ function mkActor(id) {
     vx: 0,
     vy: 0,
     letterID: Math.floor(Math.random() * 4),
-    type: Math.random() > 0.1 ? 'school' : 'noSchool'
+    type: 'school'
   };
 }
 
@@ -83,13 +83,15 @@ class App extends Component {
     var dataChunk = 10;
     // for small screens: 34
     //for big screens: 60
-    var heightUnit = window.innerWidth > 1600 ? 48: 24;
+    var heightUnit = window.innerWidth > 1600 ? 42: 22;
     var widthUnit = window.innerWidth*0.5/15;
 
     for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
           this.state.data[i].x = this.state.data[i].x+  (i-(j-1)*dataChunk)* widthUnit;
           this.state.data[i].y = this.state.data[i].y + (j)*heightUnit;
+          this.state.data[i].x0 = this.state.data[i].x;
+          this.state.data[i].y0 = this.state.data[i].y;
       }   
     }
 
@@ -165,12 +167,15 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = actors - 1; i >= 0; i--) {   
-      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * Math.floor(actors * Math.random())) ? 'noSchool' : 'school';
+      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors) ? 'noSchool' : 'school';
       // this.update('set', this.state.data[i].type, newType);
       this.state.data[i].type = nextType;
     }
 
     this.setState({ mode: mode });
+
+
+    //CSS functionalities
   }
 
   onSelectStory(d) {
@@ -188,7 +193,7 @@ class App extends Component {
           <div className="App-Intro-Text"> An Education </div>
         </div>
         <div className="App-Header"></div>
-        <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
+        <DateDisplay onScroll={this.onScroll}  value={findTimepointForMode(contentMap, pctScrolled)} />
         <div className="Counter-Wrap"> 
           <Counter onScroll={this.onScroll} value={totalCount}/>
           <div className="Counter-text">children were denied an education</div> 

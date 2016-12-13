@@ -5,31 +5,47 @@ import {isolate} from './utils/forceHelpers';
 //width of SVG: width * 0.5
 //height of SVG: height
 
-export function baseline(force, data, {width, height}) { 
-  // console.log('baseline')
-  force
-    .force('collide', d3.forceCollide().radius(2).strength(0.4)) 
-    .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
+export function intro(force, data, {width, height}) {
+  // console.log('outofSchool')
+  force 
+    .force('X0',  d3.forceX((d) => d.x0).strength(0.1))
+    .force('Y0',  d3.forceY((d) => d.y0).strength(0.1)) 
     .alphaTarget(0.3)
-    .velocityDecay(0.4);
+    .velocityDecay(0.3);
+
 }
 
 export function outOfSchool(force, data, {width, height}) {
   // console.log('outofSchool')
   var bottom = height * 0.95;
   force 
-    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.1)) 
-    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 20)).strength(0.3)) 
-    .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
+    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.1)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.1)) 
+    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 20)).strength(0.2)) 
     .alphaTarget(0.3)
     .velocityDecay(0.3);
 
 }
 
-export function whileAndQuestion(force, data, {width, height}) {
+export function question(force, data, {width, height}) {
+  var bottom = height * 0.95;
+
   force
-    .force('collide', d3.forceCollide().radius(2).strength(0.4)) 
-    .force("charge", d3.forceManyBody().strength(0.2).distanceMin(0.3)) 
+    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.1)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.1))  
+    .alphaTarget(0.3)
+    .velocityDecay(0.4);
+}
+
+export function end(force, data, {width, height}) {
+  var bottom = height * 0.95;
+
+  force
+    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.1)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.1))  
     .alphaTarget(0.3)
     .velocityDecay(0.4);
 }

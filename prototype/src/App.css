@@ -24,6 +24,12 @@ body {
 	color: #fff;
 }
 
+@media screen and (max-width: 1500px) {
+	.App-Intro {
+		font-size: 100px;
+	}
+}
+
 .App-Intro-Text {
 	padding-left: 5vw;
 	padding-top: 40vh;
@@ -54,10 +60,11 @@ body {
 	position: fixed;
 }
 
+
+
 .Counter-text, .Counter{
 	top: 82vh;
-	left: 72vw;
-	width: 9vw;
+	left: 70vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
@@ -68,11 +75,17 @@ body {
 	/*border: 1px solid red;*/
 	text-align: center;
 	z-index: 1;
+	visibility: show;
+
+}
+.Counter-isHidden {
+	visibility: hidden;
 }
 
 .Counter-text {
-	font-size: 24px;
+	font-size: 22px;
 	top: 87vh;
+	left: 68.5vw;
 }
 
 /* ----------------------------------------------Date  */
@@ -88,6 +101,11 @@ body {
 	background-color: #191406;
 	/*position: relative;*/
 	z-index: 0;
+	opacity: 0.2;
+}
+
+.DateDisplay.isVisible {
+	opacity: 1;
 }
 
 
