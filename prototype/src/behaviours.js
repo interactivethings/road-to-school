@@ -52,8 +52,8 @@ export function end(force, data, {width, height}) {
 export function bomb(data, {width, height}) {
     console.log(' bomb')
     d3.forceSimulation()
-    .force('xBomb', isolate(data, d3.forceX(200), function(d) { return d.type === 'school'; }).strength(0.2))   
-    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(0.2))   
+    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
+    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
     .alphaTarget(0.5)
     .velocityDecay(0.5)
     .stop()
@@ -64,7 +64,7 @@ export function perturbation(data, {width, height}) {
     console.log('one student left')
 
     d3.forceSimulation()
-    .force('perturbationY', isolate(data, d3.forceX(100), function(d) { return d.type === 'school'; }).strength(0.4))        
+    .force('perturbationY', isolate(data, d3.forceY(height * 0.9), function(d) { return (d.type === 'school' && d.id===45 ); }).strength(0.4))        
     .alphaTarget(0.5)
     .velocityDecay(0.5)
     .stop()

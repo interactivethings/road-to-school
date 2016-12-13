@@ -42,7 +42,8 @@ function mkInitialState() {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
     pctScrolled: 0,
-    bombActivity: undefined
+    bombActivity: undefined,
+    audioActive: true
   }
 }
 
@@ -151,7 +152,7 @@ class App extends Component {
 
     // special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    // if (this.state.pctScrolled === 74) perturbation(state.data, props);    
+    if (this.state.pctScrolled === 74) perturbation(state.data, props); 
 
   }
 
