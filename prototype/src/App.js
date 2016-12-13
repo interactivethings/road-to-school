@@ -12,10 +12,16 @@ import Counter from './Counter';
 import DateDisplay from './DateDisplay';
 import Audio from './Audio';
 import Credits from './Credits';
+import {shuffle} from './utils/forceHelpers';
 
 var formatCounter = d3.format(",");
 var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 200;  //FIXMEEEEE
+const actors = 200;  
+var actorsRoles = [];
+for (var i = actors - 1; i >= 0; i--) {
+   actorsRoles[i] = i;
+ } 
+actorsRoles = shuffle(actorsRoles);
 
 const identity = x => x;
 function mkActor(id) {
@@ -169,7 +175,7 @@ class App extends Component {
     for (var i = actors - 1; i >= 0; i--) {   
       var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors) ? 'noSchool' : 'school';
       // this.update('set', this.state.data[i].type, newType);
-      this.state.data[i].type = nextType;
+      this.state.data[actorsRoles[i]].type = nextType;
     }
 
     this.setState({ mode: mode });
