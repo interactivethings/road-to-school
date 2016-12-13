@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import * as d3 from 'd3';
 import './App.css';
-import {voronoiContentMap, findTextforVoronoi} from './VoronoiContentMap';
 
 var letters = [
 {
@@ -62,7 +61,6 @@ class SvgRenderer extends Component {
     }
 
     const svg = d3.select(this.ref);
-    const {width, height} = this.props;
 
     /*----------------------------- Main Vis --------------------*/
 

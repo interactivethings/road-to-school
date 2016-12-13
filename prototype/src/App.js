@@ -9,7 +9,6 @@ import {scrollY, passiveEvent} from './utils/dom';
 import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import Counter from './Counter';
-import Voronoi from './Voronoi';
 import DateDisplay from './DateDisplay';
 import Audio from './Audio';
 import Credits from './Credits';
@@ -188,6 +187,7 @@ class App extends Component {
         <div className="App-Intro">
           <div className="App-Intro-Text"> An Education </div>
         </div>
+        <div className="App-Header"></div>
         <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
         <div className="Counter-Wrap"> 
           <Counter onScroll={this.onScroll} value={totalCount}/>

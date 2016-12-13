@@ -30,6 +30,15 @@ body {
 	width: 30vw;
 }
 
+.App-Header {
+	top: 0vh;
+	height: 5vh;
+	width: 50vw;
+	position: fixed;
+	background: url('./assets/twitter.png') 45vw 2vh no-repeat,  url('./assets/audio.png') 47vw 2vh no-repeat;
+	/*position: relative;*/
+}
+
 .Audio {
 	display: none;
 }
@@ -47,15 +56,18 @@ body {
 
 .Counter-text, .Counter{
 	top: 82vh;
-	left: 73vw;
+	left: 72vw;
 	width: 9vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	font-size: 64px;
 	letter-spacing: -0.01em;
+	background: #EAE3D1;
+	padding: 0 1vw;
 	/*border: 1px solid red;*/
 	text-align: center;
+	z-index: 1;
 }
 
 .Counter-text {
@@ -63,6 +75,7 @@ body {
 	top: 87vh;
 }
 
+/* ----------------------------------------------Date  */
 .DateDisplay {
 	left: 48vw;
 	top: 40vh;
