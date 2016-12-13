@@ -2,7 +2,6 @@
 
 body {
 	background: #EAE3D1;
-	/*background: url(./assets/notebook.png) center;*/
 }
 
 .App {
@@ -15,34 +14,55 @@ body {
 }
 
 .App-Intro {
-	background: url(./assets/Left.png) left no-repeat;
-	width: 100vw;
 	height: 100vh;
 	position: relative;
 	z-index: 1;
+	font-size: 148px;
+	line-height: 175px;
+	width: 50vw;
+	background-color: #191406;
+	color: #fff;
 }
 
-.Content-Wrap {
-	padding-bottom: 10vh;
-	/*border: 1px solid black;*/
-	display: block;
+.App-Intro-Text {
+	padding-left: 5vw;
+	padding-top: 40vh;
+	width: 30vw;
 }
 
 .Audio {
 	display: none;
 }
 
+/* ----------------------------------------------Counter */
+
  .Counter-text, .Counter{
 	top: 40vh;
 	left: 35vw;
+	width: 9vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
 	color: #fff;
-	font-size: 48px;
-	line-height: 65px;
-	width: 10vw;
+	font-size: 64px;
+	letter-spacing: -0.01em;
 	/*border: 1px solid red;*/
+}
+
+.DateDisplay {
+	left: 5vw;
+	top: 5vh;
+	width: 40vw;
+	height: 2.5vh;
+	position: fixed;
+	color: #fff;
+	padding: 2px;
+	vertical-align: center;
+	/*background: #444;*/
+	border-bottom: 1px solid #fff;	
+	background-color: #191406;
+	/*position: relative;*/
+	z-index: 0;
 }
 
 .Counter-text {
@@ -50,11 +70,14 @@ body {
 	top: 45vh;
 	line-height: 33px;
 }
+
+/* ----------------------------------------------Content */
+
 .Content-Wrap {
 	width: 50vw;
 	background-color: #191406;
-
 }
+
 .Content {
 	left: 5vw;
 	width: 20vw;
@@ -81,6 +104,7 @@ path {
   /*stroke-opacity: 0;*/
 }
 
+/* ----------------------------------------------Credits */
 
 .Credits {
 	height: 100vh;
