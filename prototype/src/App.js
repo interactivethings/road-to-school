@@ -23,7 +23,7 @@ function mkActor(id) {
 
   return {
     id: id,
-    x: 20, // FIXME: is dependent on props.width
+    x: window.innerWidth/10, // FIXME: is dependent on props.width
     y: 10, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
@@ -37,15 +37,6 @@ function mkInitialState() {
     data: d3.range(actors).map(mkActor),
     mode: 'baseline',
     pctScrolled: 0,
-    // // type BombActivity = Active t | Nothing
-
-    // // A)
-    // bombActivity: {
-    //   active: true,
-    //   timer: d3.
-    // },
-
-    // // B)
     bombActivity: undefined
   }
 }
@@ -93,8 +84,8 @@ class App extends Component {
     var dataChunk = 10;
     // for small screens: 34
     //for big screens: 60
-    var heightUnit = window.innerWidth > 1600 ? 60: 34;
-    var widthUnit = window.innerWidth*0.5/10;
+    var heightUnit = window.innerWidth > 1600 ? 48: 24;
+    var widthUnit = window.innerWidth*0.5/15;
 
     for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
@@ -197,9 +188,11 @@ class App extends Component {
         <div className="App-Intro">
           <div className="App-Intro-Text"> An Education </div>
         </div>
-        <DateDisplay text="Title of project" value={findTimepointForMode(contentMap, pctScrolled)} />
-        <Counter onScroll={this.onScroll} value={totalCount}/>
-        <div className="Counter-text">children were denied an education</div> 
+        <DateDisplay text="" value={findTimepointForMode(contentMap, pctScrolled)} />
+        <div className="Counter-Wrap"> 
+          <Counter onScroll={this.onScroll} value={totalCount}/>
+          <div className="Counter-text">children were denied an education</div> 
+        </div>
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
           <Credits className="Credits"/>

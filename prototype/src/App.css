@@ -36,40 +36,48 @@ body {
 
 /* ----------------------------------------------Counter */
 
- .Counter-text, .Counter{
-	top: 40vh;
-	left: 35vw;
+.Counter-Wrap {
+	top: 83vh;
+	left: 50vw;
+	width: 50vw;
+	height: 18vh;
+	border-top: 0.5px solid #191406;
+	position: fixed;
+}
+
+.Counter-text, .Counter{
+	top: 82vh;
+	left: 73vw;
 	width: 9vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Source Sans Pro';
-	color: #fff;
 	font-size: 64px;
 	letter-spacing: -0.01em;
 	/*border: 1px solid red;*/
+	text-align: center;
+}
+
+.Counter-text {
+	font-size: 24px;
+	top: 87vh;
 }
 
 .DateDisplay {
-	left: 5vw;
-	top: 5vh;
-	width: 40vw;
+	left: 48vw;
+	top: 40vh;
 	height: 2.5vh;
 	position: fixed;
 	color: #fff;
 	padding: 2px;
 	vertical-align: center;
 	/*background: #444;*/
-	border-bottom: 1px solid #fff;	
 	background-color: #191406;
 	/*position: relative;*/
 	z-index: 0;
 }
 
-.Counter-text {
-	font-size: 24px;
-	top: 45vh;
-	line-height: 33px;
-}
+
 
 /* ----------------------------------------------Content */
 
@@ -79,13 +87,15 @@ body {
 }
 
 .Content {
-	left: 5vw;
+	padding-left: 5vw;
 	width: 20vw;
 	padding-top: 50vh;
 	padding-bottom: 45vh;
 	position: relative; 
 	white-space: pre-line;
 	color: #fff;
+	font-size: 48px;
+	line-height: 64px;
 	/*border: 1px dashed black;*/
 }
 
