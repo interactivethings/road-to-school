@@ -91,7 +91,9 @@ class App extends Component {
     super();
     this.state = mkInitialState();
     var dataChunk = 10;
-    var heightUnit = 60;
+    // for small screens: 34
+    //for big screens: 60
+    var heightUnit = window.innerWidth > 1600 ? 60: 34;
     var widthUnit = window.innerWidth*0.5/10;
 
     for (var j=1; j<=20; j++) { 
