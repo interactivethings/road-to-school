@@ -3,7 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
-import {mkInitialState} from './state';
+import {mkInitialState, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
@@ -23,43 +23,6 @@ const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i));
 const identity = x => x;
 const formatCounter = d3.format(",");
 const ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-
-
-
-var GLOBAL_UGLYNESS = [];
-
-function daBomb(id, run, done) {
-  let counter = 0;
-
-  if (GLOBAL_UGLYNESS.indexOf(id) === -1) {
-    GLOBAL_UGLYNESS = GLOBAL_UGLYNESS.concat(id);
-  } else {
-    console.log('Already ran')
-    return;
-  }
-
-  function doTimeout() {
-    return setTimeout(function() {
-      counter++;
-      if (counter < 2) {
-        console.log("RUN")
-        run();
-        doTimeout();
-      } else {
-        console.log("donedone")
-        done();
-      }
-    }, 50);
-  }
-  
-  doTimeout();
-
-  return {
-    id: id,
-  }
-}
-
-
 
 class App extends Component {
   constructor() {
@@ -105,30 +68,24 @@ class App extends Component {
 
   configureForce(props, state) {
     //constant behaviour
-    const behavior = behaviours[this.state.mode] || identity;
+    const behavior = behaviours[state.mode] || identity;
     behavior(this.force, state.data, props);
     this.force.restart();
 
-    //special forces - bomb
-    var bomb = behaviours['bomb'];
-
-    if (!this.state.bombActivity && this.state.pctScrolled === 17 && GLOBAL_UGLYNESS.indexOf(17) === -1) {
-      this.setState({
-        bombActivity: daBomb(17, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
+    // special forces - bomb
+    const [nextBombStates, needsUpdate] = advanceBombState(state.bombStates, state.pctScrolled);
+    nextBombStates.forEach((b, i) => {
+      if (b.status === 'ignited') {
+        behaviours['bomb'](state.data, props);
+      }
+    });
+    if (needsUpdate) {
+      this.setState({ bombStates: nextBombStates });
     }
-
-    if (!this.state.bombActivity && this.state.pctScrolled === 32 && GLOBAL_UGLYNESS.indexOf(32) === -1) {
-      this.setState({
-        bombActivity: daBomb(32, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
-    }
-
 
     // special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    if (this.state.pctScrolled === 74) perturbation(state.data, props); 
-
+    if (state.pctScrolled === 74) perturbation(state.data, props);
   }
 
   toggleAudio() {
