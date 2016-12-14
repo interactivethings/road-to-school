@@ -20,8 +20,8 @@ export function mkInitialState(numberOfActors) {
 function mkActor(id) {
   return {
     id: id,
-    x: window.innerWidth/10, // FIXME: is dependent on props.width
-    y: 10, // FIXME: is dependent on props.height
+    x: window.innerWidth/15, // FIXME: is dependent on props.width
+    y: 100, // FIXME: is dependent on props.height
     vx: 0,
     vy: 0,
     letterID: Math.floor(Math.random() * 4),

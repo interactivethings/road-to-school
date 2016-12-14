@@ -29,16 +29,16 @@ body {
 }
 
 .App-Intro-Title {
-	font-size: 128px;
+	font-size: 138px;
 	line-height: 175px;
-	width: 35vw;
+	width: 40vw;
 	color: #fff;	
 	padding-left: 5vw;
-	padding-top: 30vh;
+	padding-top: 28vh;
 
 }
 .App-Intro-Subtitle {
-	padding-top: 10vh;
+	padding-top: 19vh;
 	font-size: 38px;
 	line-height: 58px;
 	width: 35vw;
@@ -118,9 +118,9 @@ body {
 /* ----------------------------------------------Counter */
 
 .Counter-Wrap {
-	top: 83vh;
-	left: 50vw;
-	width: 50vw;
+	top: 81vh;
+	left: 54vw;
+	width: 38vw;
 	height: 18vh;
 	border-top: 1px solid #D3D2D2;
 	position: fixed;
@@ -132,25 +132,24 @@ body {
 }
 
 .Counter-text, .Counter{
-	top: 82vh;
-	left: 70vw;
+	top: 80vh;
+	left: 52vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Open Sans';
 	font-size: 64px;
 	letter-spacing: -0.01em;
 	background: #EAE3D1;
-	padding: 0 1vw;
 	/*border: 1px solid red;*/
-	vertical-align: center;
 	z-index: 1;
-
+	margin: 0 15vw;
+	text-align: center;
 }
 
 .Counter-text {
 	font-size: 22px;
-	top: 87vh;
-	left: 68.5vw;
+	top: 84vh;
+	left: 50.5vw;
 }
 
 
@@ -176,7 +175,7 @@ body {
 }
 
 .Content-Quote {
-	padding-left: 5vw;
+	padding-left: 6vw;
 	width: 30vw;
 	text-align: center;
 	padding-top: 50vh;
@@ -207,7 +206,7 @@ svg {
 .Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits  {
 	font-family: 'Open Sans';
 	position: relative; 
-	left: 5vw;
+	left: 6vw;
 	top: 25vh;
 	color: #fff;
 	font-size: 20px;
@@ -219,7 +218,7 @@ svg {
 .Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
 	font-family: 'Open Sans';
 	position: relative; 
-	left: 5vw;
+	left: 6vw;
 	top: 25vh;
 	color: #fff;
 	font-size: 12px;
@@ -229,7 +228,7 @@ svg {
 
 .Credits-Credits-Logo {
 	position: relative; 
-	left: 5vw;
+	left: 6vw;
 	top: 30vh;
 	height: 36px;
 	padding-top: 1vh;
