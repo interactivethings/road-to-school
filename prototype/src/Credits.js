@@ -25,7 +25,7 @@ class Credits extends Component {
 		     		</ul>
 	     		</div>
 	     		<div className="Credits-Credits"> Credits </div>
-	     		<div className="Credits-Credits-Text">  love to every interactive thing  </div>			
+	     		<div className="Credits-Credits-Text">  Many thanks to every Interactive Thing, particularly Peter, Christoph and Tom.  </div>			
 		     	<div className="Credits-Credits-Logo">  </div>	
 	     	
 			</div>

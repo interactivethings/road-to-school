@@ -17,11 +17,11 @@ export function intro(force, data, {width, height}) {
 
 export function outOfSchool(force, data, {width, height}) {
   // console.log('outofSchool')
-  var bottom = height * 0.92;
+  var bottom = height * 0.91;
   force 
     .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.3)) 
-    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.8)) 
-    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.8)) 
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.3)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.3)) 
     .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 10)).strength(0.1)) 
     .alphaTarget(0.3)
     .velocityDecay(0.3);
@@ -42,8 +42,8 @@ export function quote(force, data, {width, height}) {
 
   force
     .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
-    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.8)) 
-    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.8))  
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.3)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.3))  
     .alphaTarget(0.2)
     .velocityDecay(0.4);
 }
