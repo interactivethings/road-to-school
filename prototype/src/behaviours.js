@@ -60,7 +60,7 @@ export function bomb(data, {width, height}) {
 
 export function fall(force, data, {width, height}) {
     // d3.select('svg').selectAll("path").node(function(d) { return d.type === 'falling' ;}).setAttribute('style', 'stroke: red');
-   d3.select('svg').selectAll("path").style('stroke', (d) => d.type === 'falling' ? 'red' : 'black');
+    d3.select('svg').selectAll("path").style('fill', (d) => d.type === 'falling' ? 'red' : 'black');
 
     d3.forceSimulation()
     .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.1))   
