@@ -98,26 +98,31 @@ body {
 
 
 
-/* ----------------------------------------------Date  */
+/* ----------------------------------------------Timeline  */
+
+.Timeline {
+	left: 46vw;
+	top: 30vh;
+	height: 2.5vh;
+	position: fixed;
+	background-color: #191406;
+}
+
 .TimelineItem {
-	left: 44vw;
-	top: 40vh;
 	height: 2.5vh;
 	position: fixed;
 	color: #fff;
-	padding: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	vertical-align: center;
-	/*background: #444;*/
 	background-color: #191406;
-	/*position: relative;*/
-	z-index: 0;
+	opacity: 1;
+	display: block;
+	position: relative;
 }
 
 .TimelineItem-isHidden {
 	opacity: 0;
-}
-.TimelineItem-isVisible {
-	opacity: 1;
 }
 
 

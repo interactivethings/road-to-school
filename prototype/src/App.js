@@ -199,8 +199,9 @@ class App extends Component {
         </div>
 
         {/* -------------------- Timeline -----------------------*/}
-        {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)}/>)} 
-        
+        <div className="Timeline"> 
+            {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={d.timepoint === '2015'} />)}  
+        </div>
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
         {/* -------------------- Content -----------------------*/}

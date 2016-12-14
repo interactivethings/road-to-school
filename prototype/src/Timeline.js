@@ -2,9 +2,10 @@ import React, { Component} from 'react';
 
 class Timeline extends Component {
   render() {
-		return (
-			<Timeline />
-		)
+  	const className = this.props.isVisible ? 'Timeline-Item' : 'TimelineItem-isHidden';
+	return (
+			<div className={className}> {this.props.value} </div>
+    	);
 	}
 }
 
