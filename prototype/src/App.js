@@ -5,9 +5,9 @@ import * as d3 from 'd3';
 import * as behaviours from './behaviours';
 import Chart from './Chart';
 import {scrollY, passiveEvent} from './utils/dom'; 
-import {contentMap, findModeAtPosition, findContentForMode, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
+import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
-import Counter from './Counter';
+import CounterWrap from './CounterWrap';
 import TimelineItem from './TimelineItem';
 import Timeline from './Timeline';
 import Audio from './Audio';
@@ -177,24 +177,11 @@ class App extends Component {
     }
 
     this.setState({ mode: mode });
-
-    //CSS initialization
-    d3.select('.Counter-Wrap').classed('Counter-Wrap-isHidden', true);
-    d3.select('.Counter').classed('Counter-text-isHidden', true);
-    d3.select('.Counter-text').classed('Counter-text-isHidden', true);
-    d3.select('.TimelineItem').classed('TimelineItem-isHidden', true);
-
-    if (this.state.pctScrolled > 3) { 
-      d3.select('.Counter-Wrap').classed('Counter-Wrap-isVisible', true);
-      d3.select('.Counter').classed('Counter-text-isVisible', true);
-      d3.select('.Counter-text').classed('Counter-text-isVisible', true);
-      d3.select('.TimelineItem').classed('TimelineItem-isVisible', true);
-    }
   }
 
   render() {
     const {width, height} = this.props;
-    const {data, pctScrolled, audioMuted} = this.state;
+    const {data, pctScrolled, audioMuted, mode} = this.state;
 
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
 
@@ -210,16 +197,15 @@ class App extends Component {
         {/* -------------------- Audio -----------------------*/}
           <Audio volume={pctScrolled/100} muted={audioMuted}/> 
         </div>
+
         {/* -------------------- Timeline -----------------------*/}
         {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)}/>)} 
         
-        {/* -------------------- Counter -----------------------*/}
-        <div className="Counter-Wrap Counter-Wrap-isHidden"> 
-          <Counter onScroll={this.onScroll} value={totalCount}/>
-          <div className="Counter-text">children were denied an education</div> 
-        </div>
+        {/* -------------------- Counter Wrap-----------------------*/}
+        <CounterWrap  onScroll={this.onScroll} value={totalCount} isCounterHidden={mode==='intro'}/>
         {/* -------------------- Content -----------------------*/}
-        <div className="Content-Wrap"> {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
+        <div className="Content-Wrap"> 
+          {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
         {/* -------------------- Credits -----------------------*/}
           <Credits className="Credits"/>
         </div>

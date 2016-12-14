@@ -20,11 +20,6 @@ class Audio extends Component {
     this.audioElement.volume  = this.props.volume > 0.02 ? Math.abs(0.8-this.props.volume) : 0;
   }
 
-  mute() {
-    console.log('clicked')
-    this.audioElement.muted = false;
-  }
-
   render() {
     return (
       <audio className="Audio" ref={this.onRef} controls autoPlay muted={this.props.muted} loop> <source src={mp3} type="audio/mp3" /> </audio>

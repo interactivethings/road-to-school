@@ -67,6 +67,7 @@ body {
 	height: 18vh;
 	border-top: 0.5px solid #191406;
 	position: fixed;
+	opacity: 1;
 }
 
 .Counter-text, .Counter{
@@ -91,11 +92,8 @@ body {
 	left: 68.5vw;
 }
 
-.Counter-isHidden, .Counter-Wrap-isHidden, .Counter-text-isHidden  {
+.Counter-Wrap-isHidden {
 	opacity: 0;
-}
-.Counter-isVisible, .Counter-Wrap-isVisible, .Counter-text-isVisible  {
-	opacity: 1;
 }
 
 
@@ -152,8 +150,8 @@ body {
 	padding-bottom: 45vh;
 	position: relative; 
 	white-space: pre-line;
-	color: #9C261F;
-	font-size: 18px;
+	color: #fff;
+	font-size: 48px;
 	line-height: 64px;
 	/*border: 1px dashed black;*/
 }
@@ -162,16 +160,8 @@ svg {
 	left: 50vw;
 	top: 0;
 	position: fixed;
-	/*border: 1px solid red;*/
 }
 
-path {
-  pointer-events: all;
-  fill: none;
-  stroke: #666;
-  stroke-opacity: 0.1;
-  /*stroke-opacity: 0;*/
-}
 
 /* ----------------------------------------------Credits */
 

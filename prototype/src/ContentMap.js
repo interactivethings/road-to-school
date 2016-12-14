@@ -91,7 +91,7 @@ export const contentMap = [
     text: 'I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.',
     fromPosition: 84,
     timepoint: 2016,
-    styleAsQuote: false
+    styleAsQuote: true
   }
 ];
 

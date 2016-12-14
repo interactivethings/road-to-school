@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 
 class TimelineItem extends Component {
   render() {
-    const {value} = this.props;
   	let classNames = ["TimelineItem"];
   	if (true) classNames.push("isVisible");
  	if (false) classNames.push("isHidden");
