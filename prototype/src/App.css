@@ -122,7 +122,16 @@ body {
 }
 
 .TimelineItem-isHidden {
+	height: 2.5vh;
+	position: fixed;
+	color: #fff;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: center;
+	background-color: #191406;
 	opacity: 0;
+	display: block;
+	position: relative;
 }
 
 

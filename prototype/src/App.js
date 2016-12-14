@@ -181,7 +181,6 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
-    console.log(mode)
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
     let _ = require('underscore');
     let uniqueDates = _.uniq(contentMap.map((d) => d.timepoint));
@@ -201,7 +200,7 @@ class App extends Component {
 
         {/* -------------------- Timeline -----------------------*/}
         <div className="Timeline"> 
-            {uniqueDates.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={true} />)}  
+            {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={true} />)}  
         </div>
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
