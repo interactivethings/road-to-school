@@ -25,8 +25,7 @@ function mkActor(id) {
     vx: 0,
     vy: 0,
     letterID: Math.floor(Math.random() * 4),
-    type: 'school',
-    locked: false
+    type: 'school'
   };
 }
 

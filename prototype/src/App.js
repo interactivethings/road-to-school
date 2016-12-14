@@ -16,7 +16,8 @@ import {shuffle} from './utils/forceHelpers';
 
 // Constants
 const ACTOR_COUNT = 200;
-const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i));
+const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
+const fallingID = ACTOR_ROLES[10];
 
 // Helpers
 const identity = x => x;
@@ -27,12 +28,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = mkInitialState(ACTOR_COUNT);
-    var dataChunk = 10;
-    // for small screens: 34
-    //for big screens: 60
-    var heightUnit = window.innerWidth > 1600 ? 42: 22;
-    var widthUnit = window.innerWidth*0.5/15;
+    this.state.data[fallingID].type = 'falling';
 
+    var dataChunk = 10;
+    var heightUnit = window.innerWidth > 1600 ? 42: 22;   // for small screens: 34 //for big screens: 60
+    var widthUnit = window.innerWidth*0.5/15;
     for (var j=1; j<=20; j++) { 
       for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
           this.state.data[i].x = this.state.data[i].x+  (i-(j-1)*dataChunk)* widthUnit;
@@ -82,9 +82,6 @@ class App extends Component {
       this.setState({ bombStates: nextBombStates });
     }
 
-    // special forces - perturbation
-    var perturbation = behaviours['perturbation'];
-    if (state.pctScrolled === 74) perturbation(state.data, props);
   }
 
   toggleAudio() {
@@ -109,8 +106,11 @@ class App extends Component {
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = ACTOR_COUNT - 1; i >= 0; i--) {   
-      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
-      this.state.data[ACTOR_ROLES[i]].type = nextType;
+      var currentType = this.state.data[ACTOR_ROLES[i]].type;
+      if (currentType !== 'falling')  {
+        var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
+        this.state.data[ACTOR_ROLES[i]].type = nextType;
+      }
     }
 
     this.setState({ mode: mode });

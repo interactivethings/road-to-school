@@ -34,11 +34,11 @@ body {
 	width: 40vw;
 	color: #fff;	
 	padding-left: 5vw;
-	padding-top: 28vh;
+	padding-top: 24vh;
 
 }
 .App-Intro-Subtitle {
-	padding-top: 19vh;
+	padding-top: 14vh;
 	font-size: 38px;
 	line-height: 58px;
 	width: 35vw;
@@ -207,10 +207,10 @@ body {
 
 .Quote-Source {
 	padding-top: 8vh;
-	font-size: 36px;
+	font-size: 18px;
 	font-family: 'Open Sans';
 	font-weight: 300;
-	line-height: 64px;
+	line-height: 26px;
 }
 
 .Content-Gradient {
@@ -235,6 +235,7 @@ svg {
 .Credits {
 	height: 100vh;
 	width: 30vw;
+	padding-bottom: 10vh;
 }
 
 
@@ -256,8 +257,8 @@ svg {
 	left: 6vw;
 	top: 20vh;
 	color: #fff;
-	font-size: 12px;
-	line-height: 20px;
+	font-size: 16px;
+	line-height: 24px;
 	font-weight: 300;
 }
 

@@ -68,7 +68,7 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'question',
+    mode: 'fall',
     text: 'While you were reading this, one school-aged Syrian child had to give up on school.',
     fromPosition: 72,
     timepoint: 2016
@@ -81,7 +81,7 @@ export const contentMap = [
   },
   {
     mode: 'quote',
-    text: '“I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.” \n  \n <div class="Quote-Source"> - Mayass, 9 years old </div>',
+    text: '“I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.” \n  \n <div class="Quote-Source"> - Zahra, 9 years old </div>',
     fromPosition: 84,
     timepoint: 2016,
     styleAsQuote: true
