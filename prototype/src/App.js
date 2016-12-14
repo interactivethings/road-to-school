@@ -88,6 +88,7 @@ class App extends Component {
   }
 
   toggleAudio() {
+    d3.select('.App-Header-Audio').classed('App-Header-Audio-Muted', !this.state.audioMuted);
     this.setState({audioMuted: !this.state.audioMuted})
   }
 
@@ -130,8 +131,8 @@ class App extends Component {
         </div>
         {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share"> </div>
-        <div className="App-Header-Audio" onClick={this.toggleAudio}> 
         {/* -------------------- Audio -----------------------*/}
+        <div className="App-Header-Audio" onClick={this.toggleAudio}> 
           <Audio volume={pctScrolled/100} muted={audioMuted}/> 
         </div>
 
@@ -140,7 +141,7 @@ class App extends Component {
             {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
         </div>
         {/* -------------------- Counter Wrap-----------------------*/}
-        <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
+        <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
         {/* -------------------- Content -----------------------*/}
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}

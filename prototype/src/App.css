@@ -51,11 +51,14 @@ body {
 	background: url('./assets/audio.png') 45vw 1.5vh no-repeat;
 }
 
+.App-Header-Audio-Muted {
+	background: url('./assets/audio-muted.png') 45vw 1.5vh no-repeat;
+}
+
 .Audio {
 	position: relative;
 	z-index: 1;
 	display: none;
-
 }
 
 /* ----------------------------------------------Counter */
