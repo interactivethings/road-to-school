@@ -194,7 +194,6 @@ body {
 .Content-Quote {
 	padding-left: 6vw;
 	width: 30vw;
-	text-align: center;
 	padding-top: 50vh;
 	padding-bottom: 45vh;
 	position: relative; 
@@ -204,6 +203,14 @@ body {
 	left: 5vw;
 	line-height: 64px;
 	/*border: 1px dashed black;*/
+}
+
+.Quote-Source {
+	padding-top: 8vh;
+	font-size: 36px;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	line-height: 64px;
 }
 
 .Content-Gradient {
@@ -235,7 +242,7 @@ svg {
 	font-family: 'Open Sans';
 	position: relative; 
 	left: 6vw;
-	top: 25vh;
+	top: 20vh;
 	color: #fff;
 	font-size: 20px;
 	line-height: 30px;
@@ -247,7 +254,7 @@ svg {
 	font-family: 'Open Sans';
 	position: relative; 
 	left: 6vw;
-	top: 25vh;
+	top: 20vh;
 	color: #fff;
 	font-size: 12px;
 	line-height: 20px;
