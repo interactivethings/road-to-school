@@ -38,7 +38,7 @@ function mkActor(id) {
 function mkInitialState() {
   return {
     data: d3.range(actors).map(mkActor),
-    mode: 'baseline',
+    mode: 'intro',
     pctScrolled: 0,
     bombActivity: undefined,
     audioMuted: false
@@ -182,7 +182,7 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
-
+    console.log(mode)
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
 
     return (
@@ -202,7 +202,7 @@ class App extends Component {
         {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)}/>)} 
         
         {/* -------------------- Counter Wrap-----------------------*/}
-        <CounterWrap  onScroll={this.onScroll} value={totalCount} isCounterHidden={mode==='intro'}/>
+        <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
         {/* -------------------- Content -----------------------*/}
         <div className="Content-Wrap"> 
           {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}

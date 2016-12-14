@@ -70,6 +70,10 @@ body {
 	opacity: 1;
 }
 
+.Counter-Wrap-isHidden {
+	opacity: 0;
+}
+
 .Counter-text, .Counter{
 	top: 82vh;
 	left: 70vw;
@@ -90,10 +94,6 @@ body {
 	font-size: 22px;
 	top: 87vh;
 	left: 68.5vw;
-}
-
-.Counter-Wrap-isHidden {
-	opacity: 0;
 }
 
 
