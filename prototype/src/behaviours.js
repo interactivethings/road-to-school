@@ -52,10 +52,10 @@ export function quote(force, data, {width, height}) {
 export function bomb(data, {width, height}) {
     console.log(' bomb')
     d3.forceSimulation()
-    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
-    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
-    .alphaTarget(0.4)
-    .velocityDecay(0.4)
+    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school'; }).strength(-0.1))   
+    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(-0.1))   
+    .alphaTarget(0.8)
+    .velocityDecay(0.6)
     .stop()
     .tick();
 }

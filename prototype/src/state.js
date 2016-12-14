@@ -10,7 +10,7 @@ export function mkInitialState(numberOfActors) {
     mode: 'intro',
     pctScrolled: 0,
     bombStates: [
-      {triggerAt: 17, status: BOMB_READY},
+      {triggerAt: 20, status: BOMB_READY},
       {triggerAt: 32, status: BOMB_READY}
     ],
     audioMuted: false

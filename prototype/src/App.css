@@ -127,6 +127,7 @@ body {
 	border-top: 1px solid #D3D2D2;
 	position: fixed;
 	opacity: 1;
+	transition: opacity 1s;
 }
 
 .Counter-Wrap-isHidden {
