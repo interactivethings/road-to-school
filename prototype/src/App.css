@@ -120,10 +120,10 @@ body {
 	border-top: 1px solid #fff;
 	display: block;
 	position: absolute;
-	top: 10px;
+	top: 1vh;
 	right: 0;
 	line-height: 24px;
-	width: 8px;
+	width: 0.3vw;
 }
 
 .TimelineItem-isHidden {
