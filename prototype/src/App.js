@@ -137,7 +137,7 @@ class App extends Component {
 
         {/* -------------------- Timeline -----------------------*/}
         <div className="Timeline"> 
-            {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={true} />)}  
+            {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
         </div>
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
