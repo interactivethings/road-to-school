@@ -1,100 +1,183 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700');
 
 body {
 	background: #EAE3D1;
-	/*background: url(./assets/notebook.png) center;*/
 }
 
 .App {
-	font-family: 'Source Code Pro', 'Source Sans Pro', monospace;
-	font-weight: 300;
+	font-family: 'Lora';
+	font-weight: 400;
 	letter-spacing: 0em;
-	font-size: 14px;
-	line-height: 16px;
+	font-size: 18px;
+	line-height: 26px;
 	width: 100vw;
-	overflow-x: hidden;
 }
 
 .App-Intro {
-	background: url(./assets/intro_solidcolor.png) center no-repeat;
-	width: 100vw;
 	height: 100vh;
 	position: relative;
-	z-index: 1
+	z-index: 1;
+	font-size: 148px;
+	line-height: 175px;
+	width: 50vw;
+	background-color: #191406;
+	color: #fff;
 }
 
-.Content-Wrap {
-	margin-bottom: 10vh;
-	/*border: 1px solid black;*/
-	display: block;
+@media screen and (max-width: 1500px) {
+	.App-Intro {
+		font-size: 100px;
+	}
+}
+
+.App-Intro-Text {
+	padding-left: 5vw;
+	padding-top: 40vh;
+	width: 30vw;
+}
+
+.App-Header-Share, .App-Header-Audio {
+	top: 0vh;
+	height: 6vh;
+	width: 50vw;
+	position: fixed;
+}
+
+.App-Header-Share {
+	background: url('./assets/twitter.png') 42vw 2vh no-repeat;
+}
+
+.App-Header-Audio {
+	background: url('./assets/audio.png') 45vw 1.5vh no-repeat;
 }
 
 .Audio {
-	visibility: hidden;
+	position: relative;
+	z-index: 1;
+	display: none;
+
+}
+
+/* ----------------------------------------------Counter */
+
+.Counter-Wrap {
+	top: 83vh;
+	left: 50vw;
+	width: 50vw;
+	height: 18vh;
+	border-top: 0.5px solid #191406;
+	position: fixed;
+	opacity: 1;
+}
+
+.Counter-Wrap-isHidden {
+	opacity: 0;
+}
+
+.Counter-text, .Counter{
+	top: 82vh;
+	left: 70vw;
+	height: 5vh;
+	position: fixed;
+	font-family: 'Source Sans Pro';
+	font-size: 64px;
+	letter-spacing: -0.01em;
+	background: #EAE3D1;
+	padding: 0 1vw;
+	/*border: 1px solid red;*/
+	vertical-align: center;
+	z-index: 1;
+
+}
+
+.Counter-text {
+	font-size: 22px;
+	top: 87vh;
+	left: 68.5vw;
+}
+
+
+
+/* ----------------------------------------------Timeline  */
+
+.Timeline {
+	left: 46vw;
+	top: 30vh;
+	height: 2.5vh;
+	position: fixed;
+	background-color: #191406;
+}
+
+.TimelineItem {
+	height: 2.5vh;
+	position: fixed;
+	color: #fff;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: center;
+	background-color: #191406;
+	opacity: 1;
+	display: block;
+	position: relative;
+}
+
+.TimelineItem-isHidden {
+	height: 2.5vh;
+	position: fixed;
+	color: #fff;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	vertical-align: center;
+	background-color: #191406;
+	opacity: 0;
+	display: block;
+	position: relative;
+}
+
+
+
+/* ----------------------------------------------Content */
+
+.Content-Wrap {
+	width: 50vw;
+	background-color: #191406;
 }
 
 .Content {
-	padding-top: 50vh;
-	padding-bottom: 61vh;
-	left: 18vw;
+	padding-left: 5vw;
 	width: 30vw;
+	padding-top: 50vh;
+	padding-bottom: 45vh;
 	position: relative; 
 	white-space: pre-line;
-	color: #191406;
+	color: #fff;
+	font-size: 48px;
+	line-height: 64px;
 	/*border: 1px dashed black;*/
 }
 
-.DateDisplay, .Counter, .Counter-Text{
-	left: 2vw;
-	top: 80vh;
-	position: fixed;
-	font-family: 'Source Sans Pro';
-	color: #9C261F;
-	letter-spacing: -0.01em;
-	width: 250px;
-	z-index: -1;
-	/*border: 1px solid red;*/
-}
-
-.Counter {
-	font-size: 74px;
-	top: 84vh;
-	letter-spacing: -0.05em;
-}
-.Counter-Text {
-	top: 89vh;
-	font-weight: 400;
-}
-.Voronoi {
-	top: 94vh;
-	color: #000;
+.Content-Quote {
+	padding-left: 5vw;
+	width: 30vw;
+	text-align: center;
+	padding-top: 50vh;
+	padding-bottom: 45vh;
+	position: relative; 
+	white-space: pre-line;
+	color: #fff;
+	font-size: 48px;
+	line-height: 64px;
+	/*border: 1px dashed black;*/
 }
 
 svg {
-	left: 40vw;
-	top: 10vh;
+	left: 50vw;
+	top: 0;
 	position: fixed;
-	/*border: 1px solid red;*/
-	/*z-index: -1;*/
 }
 
-path {
-  pointer-events: all;
-  fill: none;
-  stroke: #666;
-  stroke-opacity: 0.1;
-  /*stroke-opacity: 0;*/
-}
 
-.Voronoi {
-	height: 100vh;
-	position: relative; 
-	left: 18vw;
-	top: 40vh;
-	letter-spacing: -0.01em;
-	line-height: 20px;
-	width: 30vw;
-}
+/* ----------------------------------------------Credits */
 
 .Credits {
 	height: 100vh;
@@ -102,15 +185,23 @@ path {
 }
 
 .Credits-Donate, .Credits-Sources  {
+	font-family: 'Source Sans Pro';
 	position: relative; 
-	left: 18vw;
+	left: 5vw;
 	top: 35vh;
-	color: #972D15;
-	font-weight: 400;
+	color: #fff;
+	font-size: 14px;
 	letter-spacing: -0.01em;
 	line-height: 20px;
 }
 
 ul > li {
 	list-style-type: none;
+}
+
+::selection {
+  background: #9C261F; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #9C261F; /* Gecko Browsers */
 }
