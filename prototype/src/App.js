@@ -3,7 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
-import {mkInitialState, advanceBombState} from './state';
+import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
@@ -17,7 +17,7 @@ import {shuffle} from './utils/forceHelpers';
 // Constants
 const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
-const fallingID = 5;
+const FALLING_ID = 5;
 
 // Helpers
 const identity = x => x;
@@ -27,23 +27,21 @@ const ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 class App extends Component {
   constructor() {
     super();
-    this.state = mkInitialState(ACTOR_COUNT);
-    this.state.data[fallingID].type = 'falling';
 
-    var dataChunk = 10;
-    var heightUnit = window.innerWidth > 1600 ? 42: 22;   // for small screens: 34 //for big screens: 60
-    var widthUnit = window.innerWidth*0.5/15;
-    for (var j=1; j<=20; j++) { 
-      for (var i = (j-1)*dataChunk; i< j*dataChunk; ++i) {
-          this.state.data[i].x = this.state.data[i].x+  (i-(j-1)*dataChunk)* widthUnit;
-          this.state.data[i].y = this.state.data[i].y + (j)*heightUnit;
-          this.state.data[i].x0 = this.state.data[i].x;
-          this.state.data[i].y0 = this.state.data[i].y;
-      }   
-    }
+    const cols = 10;
+    const rows = ACTOR_COUNT / cols;
+    const state = mkInitialState(
+      ACTOR_COUNT,
+      mkActor(cols, rows, window.innerWidth / 2, window.innerHeight - 250 /* bottom padding */)
+    );
+
+    state.data[FALLING_ID].type = 'falling';
+
+    this.state = state;
+
+    this.force = d3.forceSimulation(this.state.data);
 
     this.onSelectMode = this.onSelectMode.bind(this);
-    this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
     this.toggleAudio = this.toggleAudio.bind(this);
   }

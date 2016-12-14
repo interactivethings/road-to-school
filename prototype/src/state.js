@@ -4,9 +4,9 @@ const BOMB_READY   = 'ready';
 const BOMB_IGNITED = 'ignited';
 const BOMB_LOCKED  = 'locked';
 
-export function mkInitialState(numberOfActors) {
-  return {
-    data: d3.range(numberOfActors).map(mkActor),
+export function mkInitialState(numberOfActors, toActor) {
+  let state = {
+    data: d3.range(numberOfActors).map(toActor),
     mode: 'intro',
     pctScrolled: 0,
     bombStates: [
@@ -15,20 +15,34 @@ export function mkInitialState(numberOfActors) {
     ],
     audioMuted: false
   }
+
+  return state;
 }
 
-function mkActor(id) {
-  return {
-    id: id,
-    x: window.innerWidth/15, // FIXME: is dependent on props.width
-    y: 100, // FIXME: is dependent on props.height
-    vx: 0,
-    vy: 0,
-    letterID: Math.floor(Math.random() * 4),
-    type: 'school'
-  };
-}
+export function mkActor(cols, rows, width, height) {
+  const colWidth = width / (cols + 2 /* 1 col padding per side */);
+  const rowHeight = height / rows;
 
+  return function(id, i) {
+    const row = Math.floor(i / cols);
+    const col  = i % cols;
+
+    const x = colWidth + col * colWidth;
+    const y = rowHeight + row * rowHeight;
+
+    return {
+      id: id,
+      x: x,
+      y: y,
+      x0: x,
+      y0: y,
+      vx: 0,
+      vy: 0,
+      letterID: Math.floor(Math.random() * 4),
+      type: 'school'
+    };
+  }
+}
 
 export function advanceBombState(bombStates, pctScrolled) {
   let needsUpdate = false;
@@ -48,7 +62,7 @@ export function advanceBombState(bombStates, pctScrolled) {
         nextStatus = inHotZone ? status : BOMB_READY;
         break;
       default:
-        throw "Impossible bombState";
+        throw new Error("Impossible bombState");
     }
 
     if (nextStatus !== status) needsUpdate = true;
