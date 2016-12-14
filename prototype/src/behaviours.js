@@ -18,7 +18,7 @@ export function outOfSchool(force, data, {width, height}) {
   var bottom = height * 0.91;
 
   force 
-    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.3)) 
+    .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.3)) 
     .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3)) 
     .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3)) 
     .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 10)).strength(0.1)) 
@@ -30,7 +30,7 @@ export function outOfSchool(force, data, {width, height}) {
 export function question(force, data, {width, height}) {
 
   force
-    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
+    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.4)) 
     .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1)) 
     .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1))  
     .alphaTarget(0.3)
@@ -40,7 +40,7 @@ export function question(force, data, {width, height}) {
 export function quote(force, data, {width, height}) {
 
   force
-    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool'; }).strength(0.4)) 
+    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.4)) 
     .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3)) 
     .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3))  
     .alphaTarget(0.2)
@@ -49,10 +49,9 @@ export function quote(force, data, {width, height}) {
 
 
 export function bomb(data, {width, height}) {
-    console.log(' bomb')
     d3.forceSimulation()
-    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school'; }).strength(-0.1))   
-    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(-0.1))   
+    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
+    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
     .alphaTarget(0.8)
     .velocityDecay(0.6)
     .stop()
@@ -62,11 +61,12 @@ export function bomb(data, {width, height}) {
 export function fall(force, data, {width, height}) {
     
     d3.forceSimulation()
-    .force('falling', isolate(data, d3.forceY(height*0.95), function(d) {return d.type === 'falling'; }).strength(0.2))   
-    .alphaTarget(0.3)
-    .velocityDecay(0.3)
+    .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling'; }).strength(0.1))   
+    .alphaTarget(0.6)
+    .velocityDecay(0.6)
     .stop()
     .tick();
 
+    d3.selectAll('svg.path').filter(function(d) { return d.type === 'falling';}).style('fill', 'red');
 }
 

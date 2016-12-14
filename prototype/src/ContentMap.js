@@ -62,7 +62,7 @@ export const contentMap = [
     timepoint: 2015
   },
   {
-    mode: 'outOfSchool',
+    mode: 'question',
     text: 'That number rises to 2.1 million children inside Syria.',
     fromPosition: 66,
     timepoint: 2016
@@ -70,7 +70,7 @@ export const contentMap = [
   {
     mode: 'fall',
     text: 'While you were reading this, one school-aged Syrian child had to give up on school.',
-    fromPosition: 72,
+    fromPosition: 73,
     timepoint: 2016
   },
   {

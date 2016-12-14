@@ -17,7 +17,7 @@ import {shuffle} from './utils/forceHelpers';
 // Constants
 const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
-const fallingID = ACTOR_ROLES[10];
+const fallingID = 5;
 
 // Helpers
 const identity = x => x;
