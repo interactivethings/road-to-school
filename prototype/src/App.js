@@ -9,7 +9,6 @@ import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctSc
 import Content from './Content';
 import CounterWrap from './CounterWrap';
 import TimelineItem from './TimelineItem';
-import Timeline from './Timeline';
 import Audio from './Audio';
 import Credits from './Credits';
 import {shuffle} from './utils/forceHelpers';
@@ -184,6 +183,8 @@ class App extends Component {
     const {data, pctScrolled, audioMuted, mode} = this.state;
     console.log(mode)
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
+    let _ = require('underscore');
+    let uniqueDates = _.uniq(contentMap.map((d) => d.timepoint));
 
     return (
       <div className="App">
@@ -200,7 +201,7 @@ class App extends Component {
 
         {/* -------------------- Timeline -----------------------*/}
         <div className="Timeline"> 
-            {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={d.timepoint === '2015'} />)}  
+            {uniqueDates.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={true} />)}  
         </div>
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap  onScroll={this.onScroll} value={totalCount} isIntro={mode}/>

@@ -2,12 +2,10 @@ import React, { Component} from 'react';
 
 class TimelineItem extends Component {
   render() {
-  	let classNames = ["TimelineItem"];
-  	if (true) classNames.push("isVisible");
- 	if (false) classNames.push("isHidden");
+  	const className = this.props.isVisible ? 'TimelineItem' : 'TimelineItem-isHidden';
 
     return (
-    	<div className={classNames.join(" ")}> {this.props.value} </div>
+    	<div className={className}> {this.props.value} </div>
     );
   }
 }
