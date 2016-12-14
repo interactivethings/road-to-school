@@ -41,7 +41,7 @@ function mkInitialState() {
     mode: 'baseline',
     pctScrolled: 0,
     bombActivity: undefined,
-    audioActive: true
+    audioMuted: false
   }
 }
 
@@ -103,6 +103,7 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.force = d3.forceSimulation(this.state.data);
     this.onScroll = this.onScroll.bind(this);
+    this.toggleAudio = this.toggleAudio.bind(this);
   }
 
   componentWillMount() {
@@ -150,6 +151,10 @@ class App extends Component {
 
   }
 
+  toggleAudio() {
+    this.setState({audioMuted: !this.state.audioMuted})
+  }
+
   onSelectMode(mode) {
     return () => this.setState({mode});
   }
@@ -185,14 +190,11 @@ class App extends Component {
       d3.select('.Counter-text').classed('Counter-text-isVisible', true);
       d3.select('.TimelineItem').classed('TimelineItem-isVisible', true);
     }
-
-    this.state.mode === 'quote' ? d3.select('.Content').classed('Content-Quote', true) :   1;
-
   }
 
   render() {
     const {width, height} = this.props;
-    const {data, pctScrolled} = this.state;
+    const {data, pctScrolled, audioMuted} = this.state;
 
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
 
@@ -204,9 +206,9 @@ class App extends Component {
         </div>
         {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share"> </div>
-        <div className="App-Header-Audio" onClick={this.mute}> 
+        <div className="App-Header-Audio" onClick={this.toggleAudio}> 
         {/* -------------------- Audio -----------------------*/}
-          <Audio volume={pctScrolled/100}/> 
+          <Audio volume={pctScrolled/100} muted={audioMuted}/> 
         </div>
         {/* -------------------- Timeline -----------------------*/}
         {contentMap.map((d,i) => <TimelineItem key={i} value={findTimepointForMode(contentMap, pctScrolled)}/>)} 
@@ -217,7 +219,7 @@ class App extends Component {
           <div className="Counter-text">children were denied an education</div> 
         </div>
         {/* -------------------- Content -----------------------*/}
-        <div className="Content-Wrap"> {contentMap.map((d,i) => <Content key={i} text={d.text} />)}
+        <div className="Content-Wrap"> {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
         {/* -------------------- Credits -----------------------*/}
           <Credits className="Credits"/>
         </div>
