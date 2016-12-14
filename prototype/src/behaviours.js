@@ -22,7 +22,7 @@ export function outOfSchool(force, data, {width, height}) {
     .force('yNoSchool',  isolate(data, d3.forceY(bottom), function(d) { return d.type === 'noSchool'; }).strength(0.3)) 
     .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool'; }).strength(0.8)) 
     .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool'; }).strength(0.8)) 
-    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 10)).strength(0.2)) 
+    .force('collide', d3.forceCollide().radius(Math.floor(Math.random() * 10)).strength(0.1)) 
     .alphaTarget(0.3)
     .velocityDecay(0.3);
 
@@ -54,8 +54,8 @@ export function bomb(data, {width, height}) {
     d3.forceSimulation()
     .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
     .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school'; }).strength(-0.2))   
-    .alphaTarget(0.5)
-    .velocityDecay(0.5)
+    .alphaTarget(0.4)
+    .velocityDecay(0.4)
     .stop()
     .tick();
 }

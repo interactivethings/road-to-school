@@ -94,12 +94,14 @@ body {
 /* ----------------------------------------------Timeline  */
 
 .Timeline {
-	left: 45vw;
+	left: 47vw;
 	top: 45vh;
 	width: auto;
 	height: auto;
 	position: fixed;
-	font-size: 36px;
+	font-size: 16px;
+	font-family: 'Open Sans';
+	font-weight: 300;
 	/*border: 1px solid white;*/
 }
 
@@ -149,7 +151,9 @@ body {
 .Counter-text {
 	font-size: 22px;
 	top: 84vh;
-	left: 50.5vw;
+	left: 51vw;
+	text-align: center;
+
 }
 
 
@@ -162,7 +166,7 @@ body {
 }
 
 .Content {
-	padding-left: 5vw;
+	left: 5vw;
 	width: 30vw;
 	padding-top: 50vh;
 	padding-bottom: 45vh;
@@ -171,7 +175,7 @@ body {
 	color: #fff;
 	font-size: 48px;
 	line-height: 64px;
-	/*border: 1px dashed black;*/
+	/*border: 1px dashed red;*/
 }
 
 .Content-Quote {
@@ -184,8 +188,19 @@ body {
 	white-space: pre-line;
 	color: #fff;
 	font-size: 48px;
+	left: 5vw;
 	line-height: 64px;
 	/*border: 1px dashed black;*/
+}
+
+.Content-Gradient {
+	position: fixed;
+	top: 95vh;
+	background: linear-gradient( to bottom,  #191406, #EAE3D0); 
+	height: 5vh;
+	z-index: 1;
+	width: 50vw;
+	opacity: 0.3;
 }
 
 svg {

@@ -154,6 +154,7 @@ class App extends Component {
         </div>
         {/* -------------------- Chart -----------------------*/}
         <Chart force={this.force} data={data} width={width} height={height}/>
+        <div className="Content-Gradient"></div>
       </div>
     );
   }
