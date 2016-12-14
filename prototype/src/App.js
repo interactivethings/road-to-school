@@ -127,7 +127,9 @@ class App extends Component {
       <div className="App">
         <div className="App-Intro">
         {/* -------------------- Title -----------------------*/}
-          <div className="App-Intro-Text"> An Education </div>
+          <div className="App-Intro-Title"> The <br/>road to school </div>
+          <div className="App-Intro-Subtitle"> The Syrian conflict is robbing millions of children of their right to education. </div>
+
         </div>
         {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share"> </div>
@@ -137,8 +139,10 @@ class App extends Component {
         </div>
 
         {/* -------------------- Timeline -----------------------*/}
-        <div className="Timeline"> 
-            {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
+        <div className="Timeline-Wrap"> 
+          <div className="Timeline"> 
+              {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
+          </div>
         </div>
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>

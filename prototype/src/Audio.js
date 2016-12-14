@@ -22,7 +22,7 @@ class Audio extends Component {
 
   render() {
     return (
-      <audio className="Audio" ref={this.onRef} controls autoPlay muted={this.props.muted} loop> <source src={mp3} type="audio/mp3" /> </audio>
+      <audio className="Audio" ref={this.onRef} controls muted={this.props.muted} loop> <source src={mp3} type="audio/mp3" /> </audio>
     );
   }
 }

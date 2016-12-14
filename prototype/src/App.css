@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 
 body {
 	background: #EAE3D1;
@@ -16,12 +17,9 @@ body {
 .App-Intro {
 	height: 100vh;
 	position: relative;
-	z-index: 1;
-	font-size: 148px;
-	line-height: 175px;
 	width: 50vw;
+	z-index: 1;
 	background-color: #191406;
-	color: #fff;
 }
 
 @media screen and (max-width: 1500px) {
@@ -30,14 +28,27 @@ body {
 	}
 }
 
-.App-Intro-Text {
+.App-Intro-Title {
+	font-size: 128px;
+	line-height: 175px;
+	width: 35vw;
+	color: #fff;	
 	padding-left: 5vw;
-	padding-top: 40vh;
-	width: 30vw;
+	padding-top: 30vh;
+
+}
+.App-Intro-Subtitle {
+	padding-top: 10vh;
+	font-size: 38px;
+	line-height: 58px;
+	width: 35vw;
+	color: #fff;	
+	padding-left: 5vw;
 }
 
 
 .App-Header-Share {
+	cursor: pointer;
 	left: 44vw;
 	top: 2vh;
 	height: 20px;
@@ -46,8 +57,20 @@ body {
 	display: block;
 	background: url('./assets/twitter.png') center no-repeat;
 }
+.App-Header-Share:hover {
+	cursor: pointer;
+	left: 44.1vw;
+	top: 1.9vh;
+	height: 20px;
+	width: 26px;
+	position: fixed;
+	display: block;
+	background: url('./assets/twitter.png') center no-repeat;
+}
+
 
 .App-Header-Audio {
+	cursor: pointer;
 	left: 46vw;
 	top: 2vh;
 	height: 20px;
@@ -57,16 +80,40 @@ body {
 	background: url('./assets/audio.png')  center no-repeat;
 }
 
-
 .App-Header-Audio-Muted {
 	background: url('./assets/audio-muted.png') no-repeat;
 }
+
 
 .Audio {
 	position: relative;
 	z-index: 1;
 	display: none;
 }
+
+/* ----------------------------------------------Timeline  */
+
+.Timeline {
+	left: 45vw;
+	top: 45vh;
+	width: auto;
+	height: auto;
+	position: fixed;
+	font-size: 36px;
+	/*border: 1px solid white;*/
+}
+
+.TimelineItem {
+	color: #fff;
+	opacity: 1;
+	text-align: right;
+}
+
+.TimelineItem-isHidden {
+	opacity: 0;
+}
+
+
 
 /* ----------------------------------------------Counter */
 
@@ -75,7 +122,7 @@ body {
 	left: 50vw;
 	width: 50vw;
 	height: 18vh;
-	border-top: 0.5px solid #191406;
+	border-top: 1px solid #D3D2D2;
 	position: fixed;
 	opacity: 1;
 }
@@ -89,7 +136,7 @@ body {
 	left: 70vw;
 	height: 5vh;
 	position: fixed;
-	font-family: 'Source Sans Pro';
+	font-family: 'Open Sans';
 	font-size: 64px;
 	letter-spacing: -0.01em;
 	background: #EAE3D1;
@@ -104,27 +151,6 @@ body {
 	font-size: 22px;
 	top: 87vh;
 	left: 68.5vw;
-}
-
-
-
-/* ----------------------------------------------Timeline  */
-
-.Timeline {
-	left: 46vw;
-	top: 45vh;
-	width: 3vw;
-	position: fixed;
-	border-right: 1px solid white;
-}
-
-.TimelineItem {
-	color: #fff;
-	opacity: 1;
-}
-
-.TimelineItem-isHidden {
-	opacity: 0;
 }
 
 
@@ -177,16 +203,37 @@ svg {
 	width: 30vw;
 }
 
+
 .Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits  {
-	font-family: 'Source Sans Pro';
+	font-family: 'Open Sans';
 	position: relative; 
 	left: 5vw;
-	top: 35vh;
+	top: 25vh;
 	color: #fff;
-	font-size: 18px;
-	letter-spacing: -0.01em;
-	line-height: 24px;
-	margin-top: 10px;
+	font-size: 20px;
+	line-height: 30px;
+	padding-top: 4vh;
+	padding-bottom: 2vh;
+	font-weight: 400;
+}
+.Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
+	font-family: 'Open Sans';
+	position: relative; 
+	left: 5vw;
+	top: 25vh;
+	color: #fff;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: 300;
+}
+
+.Credits-Credits-Logo {
+	position: relative; 
+	left: 5vw;
+	top: 30vh;
+	height: 36px;
+	padding-top: 1vh;
+	background: url('./assets/logoIXT.png') no-repeat;
 }
 
 ul > li {
@@ -200,6 +247,11 @@ ul > li > a {
 
 ul > li > a:visited {
 	color: #fff;
+}
+
+ul > li > a:hover {
+	cursor: pointer;
+	background: #9C261F;
 }
 
 ::selection {
