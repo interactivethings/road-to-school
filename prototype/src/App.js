@@ -100,12 +100,10 @@ class App extends Component {
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight
     );
-    
-    this.setState({  pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
 
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {   
+    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
       var currentType = this.state.data[ACTOR_ROLES[i]].type;
       if (currentType !== 'falling')  {
         var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
@@ -113,7 +111,7 @@ class App extends Component {
       }
     }
 
-    this.setState({ mode: mode });
+    this.setState({ mode: mode, pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
   }
 
   render() {
