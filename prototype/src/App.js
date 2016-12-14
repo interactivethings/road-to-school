@@ -147,16 +147,27 @@ class App extends Component {
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
         {/* -------------------- Content -----------------------*/}
-        <div className="Content-Wrap"> 
-          {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
-        {/* -------------------- Credits -----------------------*/}
-          <Credits className="Credits"/>
-        </div>
+        <ContentText />
         {/* -------------------- Chart -----------------------*/}
         <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Gradient"></div>
       </div>
     );
+  }
+}
+
+class ContentText extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  render() {
+    return (
+      <div className="Content-Wrap">
+        {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
+        <Credits className="Credits"/>
+      </div>
+    )
   }
 }
 
