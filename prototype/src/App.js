@@ -100,12 +100,10 @@ class App extends Component {
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight
     );
-    
-    this.setState({  pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
 
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {   
+    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
       var currentType = this.state.data[ACTOR_ROLES[i]].type;
       if (currentType !== 'falling')  {
         var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
@@ -113,7 +111,7 @@ class App extends Component {
       }
     }
 
-    this.setState({ mode: mode });
+    this.setState({ mode: mode, pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
   }
 
   render() {
@@ -147,16 +145,27 @@ class App extends Component {
         {/* -------------------- Counter Wrap-----------------------*/}
         <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
         {/* -------------------- Content -----------------------*/}
-        <div className="Content-Wrap"> 
-          {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
-        {/* -------------------- Credits -----------------------*/}
-          <Credits className="Credits"/>
-        </div>
+        <ContentText />
         {/* -------------------- Chart -----------------------*/}
         <Chart force={this.force} data={data} width={width} height={height}/>
         <div className="Content-Gradient"></div>
       </div>
     );
+  }
+}
+
+class ContentText extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  render() {
+    return (
+      <div className="Content-Wrap">
+        {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
+        <Credits className="Credits"/>
+      </div>
+    )
   }
 }
 
