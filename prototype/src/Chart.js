@@ -29,7 +29,11 @@ class SvgRenderer extends Component {
   constructor() {
     super();
     this.onRef = ref => this.ref = ref;
+    this.dragged = function(d) {
+      d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);
+    };
   }
+
   componentDidMount() {
     this.renderSvg();
     this.props.force.on('tick', () => {
@@ -46,7 +50,7 @@ class SvgRenderer extends Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <svg width={this.props.width/2} height={this.props.height} ref={this.onRef}>
@@ -67,23 +71,16 @@ class SvgRenderer extends Component {
     const circles = svg.selectAll('path')
       .data(this.props.data, d => d.id);
 
-    circles.enter()
-      .append('path');
+    circles.enter().append('path')
+      .style('fill', '#191406')
+      .call(d3.drag().on("drag", this.dragged));
 
     circles
       .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.7 + ')')
-      .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; })
-      .style('fill', '#191406')
-      .call(d3.drag().on("drag", dragged));
-    
+      .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; });
+
     circles.exit()
       .remove();
-
-    function dragged(d) {   
-      d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);    
-    }
-
-
   }
 }
 
