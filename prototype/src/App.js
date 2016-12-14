@@ -3,6 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
+import {mkInitialState, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent} from './utils/dom'; 
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
@@ -13,77 +14,19 @@ import Audio from './Audio';
 import Credits from './Credits';
 import {shuffle} from './utils/forceHelpers';
 
-var formatCounter = d3.format(",");
-var ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
-const actors = 200;  
-var actorsRoles = [];
-for (var i = actors - 1; i >= 0; i--) { actorsRoles[i] = i; } 
-actorsRoles = shuffle(actorsRoles);
+// Constants
+const ACTOR_COUNT = 200;
+const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i));
 
+// Helpers
 const identity = x => x;
-function mkActor(id) {
-
-  return {
-    id: id,
-    x: window.innerWidth/10, // FIXME: is dependent on props.width
-    y: 10, // FIXME: is dependent on props.height
-    vx: 0,
-    vy: 0,
-    letterID: Math.floor(Math.random() * 4),
-    type: 'school'
-  };
-}
-
-function mkInitialState() {
-  return {
-    data: d3.range(actors).map(mkActor),
-    mode: 'intro',
-    pctScrolled: 0,
-    bombActivity: undefined,
-    audioMuted: false
-  }
-}
-
-
-var GLOBAL_UGLYNESS = [];
-
-function daBomb(id, run, done) {
-  let counter = 0;
-
-  if (GLOBAL_UGLYNESS.indexOf(id) === -1) {
-    GLOBAL_UGLYNESS = GLOBAL_UGLYNESS.concat(id);
-  } else {
-    console.log('Already ran')
-    return;
-  }
-
-  function doTimeout() {
-    return setTimeout(function() {
-      counter++;
-      if (counter < 2) {
-        console.log("RUN")
-        run();
-        doTimeout();
-      } else {
-        console.log("donedone")
-        done();
-      }
-    }, 50);
-  }
-  
-  doTimeout();
-
-  return {
-    id: id,
-  }
-}
-
-
+const formatCounter = d3.format(",");
+const ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 
 class App extends Component {
   constructor() {
     super();
-    this.state = mkInitialState();
+    this.state = mkInitialState(ACTOR_COUNT);
     var dataChunk = 10;
     // for small screens: 34
     //for big screens: 60
@@ -124,30 +67,24 @@ class App extends Component {
 
   configureForce(props, state) {
     //constant behaviour
-    const behavior = behaviours[this.state.mode] || identity;
+    const behavior = behaviours[state.mode] || identity;
     behavior(this.force, state.data, props);
     this.force.restart();
 
-    //special forces - bomb
-    var bomb = behaviours['bomb'];
-
-    if (!this.state.bombActivity && this.state.pctScrolled === 17 && GLOBAL_UGLYNESS.indexOf(17) === -1) {
-      this.setState({
-        bombActivity: daBomb(17, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
+    // special forces - bomb
+    const [nextBombStates, needsUpdate] = advanceBombState(state.bombStates, state.pctScrolled);
+    nextBombStates.forEach((b, i) => {
+      if (b.status === 'ignited') {
+        behaviours['bomb'](state.data, props);
+      }
+    });
+    if (needsUpdate) {
+      this.setState({ bombStates: nextBombStates });
     }
-
-    if (!this.state.bombActivity && this.state.pctScrolled === 32 && GLOBAL_UGLYNESS.indexOf(32) === -1) {
-      this.setState({
-        bombActivity: daBomb(32, () => bomb(state.data, props), () => this.setState({bombActivity: undefined}) )
-      })
-    }
-
 
     // special forces - perturbation
     var perturbation = behaviours['perturbation'];
-    if (this.state.pctScrolled === 74) perturbation(state.data, props); 
-
+    if (state.pctScrolled === 74) perturbation(state.data, props);
   }
 
   toggleAudio() {
@@ -170,9 +107,9 @@ class App extends Component {
 
     var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-    for (var i = actors - 1; i >= 0; i--) {   
-      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * actors) ? 'noSchool' : 'school';
-      this.state.data[actorsRoles[i]].type = nextType;
+    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {   
+      var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
+      this.state.data[ACTOR_ROLES[i]].type = nextType;
     }
 
     this.setState({ mode: mode });
