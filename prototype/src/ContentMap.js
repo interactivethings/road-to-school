@@ -2,14 +2,14 @@
 export const contentMap = [
   {
     mode: 'intro',
-    text: ' “There are people using books and notebooks for cooking, since fuel is so hard to find. \n \n The sight breaks your heart.”  \n <div class="Quote-Source"> -  woman in Aleppo, Syria. </div>',
+    text: ' “There are people using books and notebooks for cooking, since fuel is so hard to find. <br> The sight breaks your heart.”  <div class="Quote-Source"> -  woman in Aleppo, Syria. </div>',
     fromPosition: 0,
     timepoint: 2011,
     styleAsQuote: true
   },
   {
     mode: 'intro',
-    text: 'Syria has witnessed the largest wave of displacement in modern times. Nearly 5 million refugees have fled the country. Roughly 7 million people have been internally displaced.',
+    text: 'Syria has witnessed the largest wave of displacement in modern times. <br> Nearly 5 million refugees have fled the country. <br> Roughly 7 million people have been internally displaced.',
     fromPosition: 9,
     timepoint: 2011
   },
@@ -39,7 +39,7 @@ export const contentMap = [
   },
   {
     mode: 'outOfSchool',
-    text: 'or they have to work in order to support their families. If they are in their early teens, chances are that they won’t go back to school again.',
+    text: 'or they have to work in order to support their families. <br> If they are in their early teens, chances are that they won’t go back to school again.',
     fromPosition: 41,
     timepoint: 2014
   },
@@ -69,13 +69,13 @@ export const contentMap = [
   },
   {
     mode: 'fall',
-    text: 'While you were reading this, one school-aged Syrian child had to give up on school.',
+    text: 'As you were reading these lines, one school-aged Syrian child had to give up on school.',
     fromPosition: 73,
     timepoint: 2016
   },
   {
     mode: 'question',
-    text: 'Would you have the same life if you had to stay out of school when you were young?',
+    text: 'Would you be looking at this screen if you had left school at a similar age?',
     fromPosition: 78,
     timepoint: 2016
   },

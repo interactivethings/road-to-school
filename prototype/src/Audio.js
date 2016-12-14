@@ -17,7 +17,7 @@ class Audio extends Component {
   }
 
   changeVolume() {
-    this.audioElement.volume  = this.props.volume > 0.02 ? Math.abs(0.8-this.props.volume) : 0;
+    this.audioElement.volume  = this.props.volume > 0.02 ? Math.abs(0.9-this.props.volume) : 0;
   }
 
   render() {
