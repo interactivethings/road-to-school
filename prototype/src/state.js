@@ -7,13 +7,13 @@ const BOMB_LOCKED  = 'locked';
 export function mkInitialState(numberOfActors) {
   return {
     data: d3.range(numberOfActors).map(mkActor),
-    mode: 'baseline',
+    mode: 'intro',
     pctScrolled: 0,
     bombStates: [
       {triggerAt: 17, status: BOMB_READY},
       {triggerAt: 32, status: BOMB_READY}
     ],
-    audioActive: true
+    audioMuted: false
   }
 }
 
@@ -32,6 +32,7 @@ function mkActor(id) {
 
 export function advanceBombState(bombStates, pctScrolled) {
   let needsUpdate = false;
+
   const nextBombStates = bombStates.map(({triggerAt, status}) => {
     const inHotZone = triggerAt === pctScrolled;
 
