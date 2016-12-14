@@ -58,14 +58,8 @@ body {
 	background: url('./assets/twitter.png') center no-repeat;
 }
 .App-Header-Share:hover {
-	cursor: pointer;
-	left: 44.1vw;
+	background: url('./assets/twitter-hover.png') center no-repeat;
 	top: 1.9vh;
-	height: 20px;
-	width: 26px;
-	position: fixed;
-	display: block;
-	background: url('./assets/twitter.png') center no-repeat;
 }
 
 
@@ -79,7 +73,10 @@ body {
 	display: block;
 	background: url('./assets/audio.png')  center no-repeat;
 }
-
+.App-Header-Audio:hover {
+	top: 1.9vh;
+	background: url('./assets/audio-hover.png')  center no-repeat;
+}
 .App-Header-Audio-Muted {
 	background: url('./assets/audio-muted.png') no-repeat;
 }
