@@ -67,6 +67,7 @@ export function fall(force, data, {width, height}) {
     .stop()
     .tick();
 
-    d3.selectAll('svg.path').filter(function(d) { return d.type === 'falling';}).style('fill', 'red');
+    var path = d3.select('svg').selectAll("path").node(function(d) { return d.type === 'falling';});
+    path.setAttribute('style', 'stroke: red');
 }
 
