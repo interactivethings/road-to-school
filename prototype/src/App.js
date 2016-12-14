@@ -36,7 +36,6 @@ class App extends Component {
     );
 
     state.data[FALLING_ID].type = 'falling';
-
     this.state = state;
 
     this.force = d3.forceSimulation(this.state.data);

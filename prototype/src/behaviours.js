@@ -33,8 +33,8 @@ export function question(force, data, {width, height}) {
     .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.4)) 
     .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1)) 
     .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1))  
-    .alphaTarget(0.3)
-    .velocityDecay(0.4);
+    .alphaTarget(0.1)
+    .velocityDecay(0.9);
 }
 
 export function quote(force, data, {width, height}) {
@@ -49,9 +49,10 @@ export function quote(force, data, {width, height}) {
 
 
 export function bomb(data, {width, height}) {
+
     d3.forceSimulation()
-    .force('xBomb', isolate(data, d3.forceX(600), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
-    .force('yBomb', isolate(data, d3.forceY(600), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
+    .force('xBomb', isolate(data, d3.forceX(function(d) {return Math.cos(d.id) * 10 + width * 0.2;}), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
+    .force('yBomb', isolate(data, d3.forceY(function(d) {return Math.sin(d.id) * 10 + height * 0.4;}), function(d) { return d.type === 'school' && d.type !== 'falling'; }).strength(-0.1))   
     .alphaTarget(0.8)
     .velocityDecay(0.6)
     .stop()
@@ -60,14 +61,16 @@ export function bomb(data, {width, height}) {
 
 export function fall(force, data, {width, height}) {
     // d3.select('svg').selectAll("path").node(function(d) { return d.type === 'falling' ;}).setAttribute('style', 'stroke: red');
-    d3.select('svg').selectAll("path").style('fill', (d) => d.type === 'falling' ? 'red' : 'black');
+    d3.select('svg').selectAll("path").style('stroke', (d) => d.type === 'falling' ? 'red' : 'black');
+    // d3.select('svg').selectAll("path").node((d) => d.type === 'falling' ).setAttribute('style', 'stroke: #9C261F ');
 
     d3.forceSimulation()
-    .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.1))   
-    .alphaTarget(0.6)
+    .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.4))   
+    .alphaTarget(0.3)
     .velocityDecay(0.6)
     .stop()
     .tick();
+
 
 }
 
