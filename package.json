@@ -1,6 +1,8 @@
 {
-  "name": "prototype",
-  "version": "0.1.0",
+  "name": "road-to-school",
+  "homepage": "https://lab.interactivethings.com/road-to-school/",
+  "author": "Kallirroi Retzepi <kallirroi@interactivethings.com>",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.7.0"
