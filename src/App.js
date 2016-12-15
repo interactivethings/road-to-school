@@ -18,6 +18,8 @@ import {shuffle} from './utils/forceHelpers';
 const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
 const FALLING_ID = 5;
+const QUOTE_A_ID = 55;
+const QUOTE_B_ID = 155;
 
 // Helpers
 const identity = x => x;
@@ -36,6 +38,8 @@ class App extends Component {
     );
 
     state.data[FALLING_ID].type = 'falling';
+    state.data[QUOTE_A_ID].type = 'quote_A';
+    state.data[QUOTE_B_ID].type = 'quote_B';
     this.state = state;
 
     this.force = d3.forceSimulation(this.state.data);
@@ -102,7 +106,7 @@ class App extends Component {
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
       var currentType = this.state.data[ACTOR_ROLES[i]].type;
-      if (currentType !== 'falling')  {
+      if (currentType !== 'falling' && currentType !== 'quote_A' && currentType !== 'quote_B')  {
         var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
         this.state.data[ACTOR_ROLES[i]].type = nextType;
       }

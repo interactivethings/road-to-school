@@ -38,13 +38,14 @@ export function question(force, data, {width, height}) {
 }
 
 export function quote(force, data, {width, height}) {
+    console.log('lifting')
 
-  force
-    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.4)) 
-    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3)) 
-    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.3))  
+    d3.forceSimulation()
+    .force('lifting', isolate(data, d3.forceY(height*0.4), function(d) {return d.type === 'quote_A' || d.type === 'quote_B'   ; }).strength(-0.3))   
     .alphaTarget(0.2)
-    .velocityDecay(0.4);
+    .velocityDecay(0.1)
+    .stop()
+    .tick();
 }
 
 
@@ -60,10 +61,7 @@ export function bomb(data, {width, height}) {
 }
 
 export function fall(force, data, {width, height}) {
-    // d3.select('svg').selectAll("path").node(function(d) { return d.type === 'falling' ;}).setAttribute('style', 'stroke: red');
-    // d3.select('svg').selectAll("path").style('stroke', (d) => d.type === 'falling' ? 'red' : 'black');
     d3.select('svg').selectAll("path").filter( (d) => d.type === 'falling'  ).style('stroke', 'red');
-    // d3.select('svg').selectAll("path").node((d) => d.type === 'falling' ).setAttribute('style', 'stroke: #9C261F ');
 
     d3.forceSimulation()
     .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.05))   
@@ -71,7 +69,5 @@ export function fall(force, data, {width, height}) {
     .velocityDecay(0.1)
     .stop()
     .tick();
-
-
 }
 
