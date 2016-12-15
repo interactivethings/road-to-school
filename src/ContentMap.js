@@ -70,7 +70,7 @@ export const contentMap = [
   {
     mode: 'fall',
     text: 'As you were reading these lines, one school-aged Syrian child had to give up on school.',
-    fromPosition: 72,
+    fromPosition: 73,
     timepoint: 2016
   },
   {

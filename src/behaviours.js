@@ -61,13 +61,14 @@ export function bomb(data, {width, height}) {
 
 export function fall(force, data, {width, height}) {
     // d3.select('svg').selectAll("path").node(function(d) { return d.type === 'falling' ;}).setAttribute('style', 'stroke: red');
-    d3.select('svg').selectAll("path").style('stroke', (d) => d.type === 'falling' ? 'red' : 'black');
+    // d3.select('svg').selectAll("path").style('stroke', (d) => d.type === 'falling' ? 'red' : 'black');
+    d3.select('svg').selectAll("path").filter( (d) => d.type === 'falling'  ).style('stroke', 'red');
     // d3.select('svg').selectAll("path").node((d) => d.type === 'falling' ).setAttribute('style', 'stroke: #9C261F ');
 
     d3.forceSimulation()
-    .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.4))   
-    .alphaTarget(0.3)
-    .velocityDecay(0.6)
+    .force('falling', isolate(data, d3.forceY(height*0.91), function(d) {return d.type === 'falling' ; }).strength(0.05))   
+    .alphaTarget(0.2)
+    .velocityDecay(0.1)
     .stop()
     .tick();
 
