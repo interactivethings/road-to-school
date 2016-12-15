@@ -132,7 +132,7 @@ body {
 /* ----------------------------------------------Counter */
 
 .Counter-Wrap {
-	top: 81vh;
+	top: 84vh;
 	left: 54vw;
 	width: 38vw;
 	height: 18vh;
@@ -147,7 +147,7 @@ body {
 }
 
 .Counter-text, .Counter{
-	top: 80vh;
+	top: 83vh;
 	left: 52vw;
 	height: 5vh;
 	position: fixed;
@@ -163,7 +163,7 @@ body {
 
 .Counter-text {
 	font-size: 22px;
-	top: 84vh;
+	top: 87vh;
 	left: 51vw;
 	text-align: center;
 
