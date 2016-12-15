@@ -41,6 +41,9 @@ body {
 }
 
 @media screen and (max-width: 1500px) {
+	.App {
+		line-height: 15px;
+	}
 	.App-Intro-Title {
 		font-size: 80px;
 		line-height: 103px;
@@ -156,8 +159,11 @@ body {
 @media screen and (max-width: 1500px) {
 	.Timeline {
 		font-size: 10px;
+		line-height: 14px;
 	}
-
+	.TimelineItem::after  {
+		line-height: 14px;
+	}
 }
 
 
