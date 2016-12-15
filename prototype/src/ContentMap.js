@@ -2,20 +2,20 @@
 export const contentMap = [
   {
     mode: 'intro',
-    text: ' “There are people using books and notebooks for cooking, since fuel is so hard to find. <br> The sight breaks your heart.”  <div class="Quote-Source"> -  woman in Aleppo, Syria. </div>',
+    text: '“There are people using books and notebooks for cooking, since fuel is so hard to find. <br> The sight breaks your heart.”  <div class="Quote-Source">– woman in Aleppo, Syria.</div>',
     fromPosition: 0,
     timepoint: 2011,
     styleAsQuote: true
   },
   {
     mode: 'intro',
-    text: 'Syria has witnessed the largest wave of displacement in modern times. <br> Nearly 5 million refugees have fled the country. <br> Roughly 7 million people have been internally displaced.',
+    text: 'Syria has witnessed the largest wave of displacement in modern times. <br> Nearly 5&nbsp;million refugees have fled the country. <br /> Roughly 7&nbsp;million people have been internally displaced.',
     fromPosition: 9,
     timepoint: 2011
   },
   {
     mode: 'outOfSchool',
-    text: 'Education has come under repeated fire throughout the conflict. ',
+    text: 'Education has come under repeated fire throughout the conflict.',
     fromPosition: 15,
     timepoint: 2012
   },
@@ -33,13 +33,13 @@ export const contentMap = [
   }, 
   {
     mode: 'outOfSchool',
-    text: 'The children who live in host countries as refugees are often not allowed to enroll in local schools. \n',
+    text: 'The children who live in host countries as refugees are often not allowed to enroll in local schools.',
     fromPosition: 34,
     timepoint: 2013
   },
   {
     mode: 'outOfSchool',
-    text: 'or they have to work in order to support their families. <br> If they are in their early teens, chances are that they won’t go back to school again.',
+    text: 'or they have to work in order to support their families.<br />If they are in their early teens, chances are that they won’t go back to school again.',
     fromPosition: 41,
     timepoint: 2014
   },
@@ -63,7 +63,7 @@ export const contentMap = [
   },
   {
     mode: 'outOfSchool',
-    text: 'That number rises to 2.1 million children inside Syria.',
+    text: 'That number rises to 2.1&nbsp;million children inside Syria.',
     fromPosition: 66,
     timepoint: 2016
   },
@@ -81,14 +81,14 @@ export const contentMap = [
   },
   {
     mode: 'quote',
-    text: '“I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.” \n  \n <div class="Quote-Source"> - Zahra, 9 years old </div>',
+    text: '“I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.” <div class="Quote-Source">– Zahra, 9 years old</div>',
     fromPosition: 84,
     timepoint: 2016,
     styleAsQuote: true
   },
   {
     mode: 'quote',
-    text: '“I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.” \n  \n <div class="Quote-Source"> - Ahmad, 13 years old </div>',
+    text: '“I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.”<div class="Quote-Source">– Ahmad, 13 years old</div>',
     fromPosition: 84,
     timepoint: 2016,
     styleAsQuote: true
@@ -125,4 +125,3 @@ export const findTimepointForMode = (cMap, percent) => {
 export const findRatioFromPctScroll = (percent) => {
   return Math.min(percent/100, 1);
 };
-
