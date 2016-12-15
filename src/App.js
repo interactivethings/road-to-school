@@ -38,8 +38,9 @@ class App extends Component {
     );
 
     state.data[FALLING_ID].type = 'falling';
-    state.data[QUOTE_A_ID].type = 'quote_A';
-    state.data[QUOTE_B_ID].type = 'quote_B';
+    state.data[QUOTE_A_ID].quote = true;
+    state.data[QUOTE_B_ID].quote = true;
+    
     this.state = state;
 
     this.force = d3.forceSimulation(this.state.data);

@@ -41,9 +41,9 @@ export function quote(force, data, {width, height}) {
     console.log('lifting')
 
     d3.forceSimulation()
-    .force('lifting', isolate(data, d3.forceY(height*0.4), function(d) {return d.type === 'quote_A' || d.type === 'quote_B'   ; }).strength(-0.3))   
+    .force('lifting', isolate(data, d3.forceY(height*0.4), function(d) {return d.quote; }).strength(0.3))   
     .alphaTarget(0.2)
-    .velocityDecay(0.1)
+    .velocityDecay(0.4)
     .stop()
     .tick();
 }
