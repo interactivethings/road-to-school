@@ -93,13 +93,26 @@ body {
 	display: none;
 }
 
-/*@media screen and (max-width: 1500px) {
-	.App-Header-Share, .App-Header-Audio  {
-		top: 2vh;
-		height: 18px;
-		width: 16px;
+@media screen and (max-width: 1500px) {
+	.App-Header-Share {
+		background: url('./assets/twitter-small.png') no-repeat;
 	}
-}*/
+
+	.App-Header-Share:hover {
+		background: url('./assets/twitter-hover-small.png') no-repeat;
+	}	
+
+	.App-Header-Audio  {
+		background: url('./assets/audio-small.png') no-repeat;
+	}	
+
+	.App-Header-Audio:hover  {
+		background: url('./assets/audio-hover-small.png') no-repeat;
+	}
+	.App-Header-Audio-Muted {
+		background: url('./assets/audio-muted-small.png') no-repeat;
+	}
+}
 
 /* ----------------------------------------------Timeline  */
 
