@@ -132,23 +132,24 @@ body {
 /* ----------------------------------------------Counter */
 
 .Counter-Wrap {
-	top: 84vh;
-	left: 54vw;
-	width: 38vw;
-	height: 18vh;
+	top: 85vh;
+	left: 55vw;
+	width: 40vw;
+	height: 15vh;
 	border-top: 1px solid #D3D2D2;
 	position: fixed;
 	opacity: 1;
 	transition: opacity 1s;
 }
 
+
 .Counter-Wrap-isHidden {
 	opacity: 0;
 }
 
 .Counter-text, .Counter{
-	top: 83vh;
-	left: 52vw;
+	top: 84vh;
+	left: 55vw;
 	height: 5vh;
 	position: fixed;
 	font-family: 'Open Sans';
@@ -163,10 +164,8 @@ body {
 
 .Counter-text {
 	font-size: 22px;
-	top: 87vh;
-	left: 51vw;
-	text-align: center;
-
+	top: 88vh;
+	left: 53vw;
 }
 
 
