@@ -8,7 +8,6 @@ body {
 .App {
 	font-family: 'Lora';
 	font-weight: 400;
-	letter-spacing: 0em;
 	line-height: 26px;
 	width: 100vw;
 }
@@ -323,8 +322,9 @@ path.falling {
 	color: #fff;
 	font-size: 20px;
 	line-height: 30px;
-	padding-top: 4vh;
+	padding-top: 2vh;
 	padding-bottom: 2vh;
+	letter-spacing: 0em;
 	font-weight: 400;
 }
 .Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
@@ -333,8 +333,8 @@ path.falling {
 	left: 6vw;
 	top: 20vh;
 	color: #fff;
-	font-size: 16px;
-	line-height: 24px;
+	font-size: 14px;
+	line-height: 20px;
 	font-weight: 300;
 }
 
@@ -350,7 +350,7 @@ path.falling {
 
 @media screen and (max-width: 1500px) {
 	.Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits  {
-		font-size: 14px;
+		font-size: 12px;
 		line-height: 18px;
 		padding-top: 2vh;
 		padding-bottom: 1vh;	
@@ -362,6 +362,17 @@ path.falling {
 	}
 }
 
+a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+a:hover {
+	cursor: pointer;
+	background: #9C261F;
+}
+
 
 ul > li {
 	list-style-type: none;
@@ -369,6 +380,7 @@ ul > li {
 
 ul > li > a {
 	color: #fff;
+	font-weight: 300;
 	text-decoration: none;
 }
 
