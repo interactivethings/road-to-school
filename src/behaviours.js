@@ -64,17 +64,37 @@ export function fall(force, data, {width, height}) {
     .velocityDecay(0.2);
 }
 
-export function quote(force, data, {width, height}) {
-
+export function quoteA(force, data, {width, height}) {
+    console.log('falling A')
     d3.select('svg').selectAll("path")
-        .filter( (d) => d.quote  )
+        .filter( (d) => d.quote_A  )
         .transition()
         .style('stroke', 'orange');
 
-
     d3.forceSimulation()
-    .force('lifting', isolate(data, d3.forceY((d) => d.y0), function(d) {return d.quote; }).strength(0.3))   
+    .force('lifting', isolate(data, d3.forceY(height* 0.4), function(d) {return d.quote_A; }).strength(0.3))   
     .alphaDecay(0.2)
     .velocityDecay(0.2);
 
+}
+
+export function quoteB(force, data, {width, height}) {
+    console.log('falling B')
+    d3.select('svg').selectAll("path")
+        .filter( (d) => d.quote_B  )
+        .transition()
+        .style('stroke', 'blue');
+
+    d3.forceSimulation()
+    .force('lifting', isolate(data, d3.forceY(height* 0.4), function(d) {return d.quote_B; }).strength(0.3))   
+    .alphaDecay(0.2)
+    .velocityDecay(0.2);
+
+  force
+    .force('yNoSchool',  isolate(data, d3.forceY( (d) => d.y), function(d) { return d.type === 'noSchool' && d.type !== 'falling'; }).strength(0.4)) 
+    .force('Y0',  isolate(data, d3.forceY((d) => d.y0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1)) 
+    .force('X0',  isolate(data, d3.forceX((d) => d.x0), function(d) { return d.type !== 'noSchool' && d.type !== 'falling' ; }).strength(0.1))  
+    .alphaTarget(0.1)
+    .velocityDecay(0.9);
+    
 }

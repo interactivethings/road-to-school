@@ -40,7 +40,8 @@ export function mkActor(cols, rows, width, height) {
       vy: 0,
       letterID: Math.floor(Math.random() * 4),
       type: 'school',
-      quote: false
+      quote_A: false,
+      quote_B: false,
     };
   }
 }

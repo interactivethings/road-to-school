@@ -19,7 +19,7 @@ const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
 const FALLING_ID = 10;
 const QUOTE_A_ID = 22;
-// const QUOTE_B_ID = 155;
+const QUOTE_B_ID = 45;
 
 // Helpers
 const identity = x => x;
@@ -38,8 +38,10 @@ class App extends Component {
     );
 
     state.data[FALLING_ID].type = 'falling';
-    state.data[QUOTE_A_ID].quote = true;
-    // state.data[QUOTE_B_ID].quote = true;
+    state.data[QUOTE_A_ID].quote_A = true;
+    state.data[QUOTE_B_ID].quote_B = true;       
+    state.data[QUOTE_A_ID].type = 'noSchool';
+    state.data[QUOTE_B_ID].type = 'noSchool';  
 
     this.state = state;
 
@@ -107,7 +109,7 @@ class App extends Component {
     var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
     for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
       var currentType = this.state.data[ACTOR_ROLES[i]].type;
-      if (currentType !== 'falling' && currentType !== 'quote_A' && currentType !== 'quote_B')  {
+      if (currentType !== 'falling' && !this.state.data[ACTOR_ROLES[i]].quote_A && !this.state.data[ACTOR_ROLES[i]].quote_B)  {
         var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
         this.state.data[ACTOR_ROLES[i]].type = nextType;
       }

@@ -80,16 +80,16 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'quote',
+    mode: 'quoteA',
     text: '“I’ve been back at school for two months. On the first day back I felt that my life had become beautiful. I was so happy that I would learn and study and fulfil my dream. I want to become a children’s doctor.” <div class="Quote-Source">– Zahra, 9 years old</div>',
     fromPosition: 83,
     timepoint: 2016,
     styleAsQuote: true
   },
   {
-    mode: 'quote',
+    mode: 'quoteB',
     text: '“I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.”<div class="Quote-Source">– Ahmad, 13 years old</div>',
-    fromPosition: 86,
+    fromPosition: 89,
     timepoint: 2016,
     styleAsQuote: true
   }
