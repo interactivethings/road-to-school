@@ -17,9 +17,9 @@ import {shuffle} from './utils/forceHelpers';
 // Constants
 const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
-const FALLING_ID = 5;
-const QUOTE_A_ID = 55;
-const QUOTE_B_ID = 155;
+const FALLING_ID = 10;
+const QUOTE_A_ID = 22;
+// const QUOTE_B_ID = 155;
 
 // Helpers
 const identity = x => x;
@@ -39,8 +39,8 @@ class App extends Component {
 
     state.data[FALLING_ID].type = 'falling';
     state.data[QUOTE_A_ID].quote = true;
-    state.data[QUOTE_B_ID].quote = true;
-    
+    // state.data[QUOTE_B_ID].quote = true;
+
     this.state = state;
 
     this.force = d3.forceSimulation(this.state.data);
