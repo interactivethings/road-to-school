@@ -81,12 +81,12 @@ body {
 	width: 26px;
 	position: fixed;
 	display: block;
-	background: url('./assets/twitter.png') center no-repeat;
+	background: url('./assets/twitter-small.png') center no-repeat;
+	transition: background 0.08s;
 }
 
 .App-Header-Share:hover {
-	background: url('./assets/twitter-hover.png') center no-repeat;
-	top: 1.9vh;
+	background: url('./assets/twitter-hover-small.png') center no-repeat;
 }
 
 .App-Header-Audio {
@@ -97,41 +97,22 @@ body {
 	width: 26px;
 	position: fixed;
 	display: block;
-	background: url('./assets/audio.png')  center no-repeat;
+	transition: background 0.08s;
+	background: url('./assets/audio-small.png')  center no-repeat;
 }
 .App-Header-Audio:hover {
-	top: 1.9vh;
-	background: url('./assets/audio-hover.png')  center no-repeat;
+	transition: background 0.1s;
+	background: url('./assets/audio-hover-small.png')  center no-repeat;
 }
 .App-Header-Audio-Muted {
-	background: url('./assets/audio-muted.png') no-repeat;
+	transition: background 0.08s;
+	background: url('./assets/audio-muted-small.png') no-repeat;
 }
 
 .Audio {
 	position: relative;
 	z-index: 1;
 	display: none;
-}
-
-@media screen and (max-width: 1500px) {
-	.App-Header-Share {
-		background: url('./assets/twitter-small.png') no-repeat;
-	}
-
-	.App-Header-Share:hover {
-		background: url('./assets/twitter-hover-small.png') no-repeat;
-	}	
-
-	.App-Header-Audio  {
-		background: url('./assets/audio-small.png') no-repeat;
-	}	
-
-	.App-Header-Audio:hover  {
-		background: url('./assets/audio-hover-small.png') no-repeat;
-	}
-	.App-Header-Audio-Muted {
-		background: url('./assets/audio-muted-small.png') no-repeat;
-	}
 }
 
 /* ----------------------------------------------Timeline  */
