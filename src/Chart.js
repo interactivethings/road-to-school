@@ -76,7 +76,7 @@ class SvgRenderer extends Component {
       .call(d3.drag().on("drag", this.dragged));
 
     circles
-      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')')
+      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' )
       .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; })
       .style('fill', '#191406')
       .call(d3.drag().on("drag", this.dragged));
