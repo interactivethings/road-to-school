@@ -293,6 +293,20 @@ svg {
 	position: fixed;
 }
 
+path {
+	fill: #191406;
+}
+path.falling {
+	fill: 'red';
+	stroke: 'red';
+	stroke-width: 2;
+}
+.quoteA {
+	fill: 'orange';
+}
+.quoteB {
+	fill: 'blue';
+}
 
 /* ----------------------------------------------Credits */
 
