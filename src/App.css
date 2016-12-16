@@ -40,6 +40,18 @@ body {
 	padding-left: 5vw;
 }
 
+.App-Intro-Explanation {
+	padding-left: 37vw;
+	padding-top: 17vh;
+	width: 12vw;
+	font-size: 14px;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	color: #fff;	
+	line-height: 24px;
+	text-align: right;
+}
+
 @media screen and (max-width: 1500px) {
 	.App {
 		line-height: 15px;
@@ -52,6 +64,11 @@ body {
 	.App-Intro-Subtitle {
 		font-size: 22px;
 		line-height: 34px;
+	}
+
+	.App-Intro-Explanation { 
+		font-size: 10;
+		line-height: 16px;
 	}
 }
 
@@ -270,6 +287,7 @@ body {
 	z-index: 1;
 	width: 50vw;
 	opacity: 0.3;
+	left: 0vw;
 }
 
 @media screen and (max-width: 1500px) {
@@ -338,6 +356,7 @@ path.falling {
 	line-height: 24px;
 	font-weight: 300;
 }
+
 
 .Credits-Credits-Logo {
 	position: relative; 

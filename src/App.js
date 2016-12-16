@@ -128,10 +128,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-Intro">
-        {/* -------------------- Title -----------------------*/}
+          {/* -------------------- Title -----------------------*/}
           <div className="App-Intro-Title"> The <br/>road to school </div>
           <div className="App-Intro-Subtitle"> The Syrian conflict is robbing millions of children of their right to education. </div>
-
+          <div className="App-Intro-Explanation"> Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
         </div>
         {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share"> </div>
