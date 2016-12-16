@@ -57,7 +57,7 @@ export function fall(force, data, {width, height}) {
         .transition()
         .style('fill', '#9C261F')
         .style('stroke', '#9C261F')
-        .style('stroke-width', '2');
+        .style('stroke-width', '2')
 
     d3.forceSimulation()
     .force('falling', isolate(data, d3.forceY(height*0.93), function(d) {return d.type === 'falling' ; }).strength(0.01))   
