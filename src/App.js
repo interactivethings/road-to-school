@@ -44,12 +44,11 @@ class App extends Component {
     state.data[QUOTE_B_ID].type = 'noSchool';  
 
     this.state = state;
-
     this.force = d3.forceSimulation(this.state.data);
-
     this.onSelectMode = this.onSelectMode.bind(this);
     this.onScroll = this.onScroll.bind(this);
     this.toggleAudio = this.toggleAudio.bind(this);
+    this.pageScroll = this.pageScroll.bind(this);
   }
 
   componentWillMount() {
@@ -59,7 +58,6 @@ class App extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll, passiveEvent());
   }
-
 
   componentWillUpdate(nextProps, nextState) {
     this.configureForce(nextProps, nextState);
@@ -118,6 +116,11 @@ class App extends Component {
     this.setState({ mode: mode, pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
   }
 
+  pageScroll() {
+      window.scrollBy(0, 2); // horizontal and vertical scroll increments
+      setTimeout(this.pageScroll,10000); // scrolls every 100 milliseconds
+  }
+  
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
@@ -126,7 +129,7 @@ class App extends Component {
     let uniqueDates = _.uniq(contentMap.map((d) => d.timepoint));
 
     return (
-      <div className="App">
+      <div className="App"> {/* Can add this: onLoad={this.pageScroll()} to auto scroll*/}
         <div className="App-Intro">
           {/* -------------------- Title -----------------------*/}
           <div className="App-Intro-Title"> The <br/>road to school </div>
@@ -139,7 +142,6 @@ class App extends Component {
         <div className="App-Header-Audio" onClick={this.toggleAudio}> 
           <Audio volume={pctScrolled/100} muted={audioMuted}/> 
         </div>
-
         {/* -------------------- Timeline -----------------------*/}
         <div className="Timeline-Wrap"> 
           <div className="Timeline"> 
