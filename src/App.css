@@ -11,6 +11,11 @@ body {
 	line-height: 26px;
 	width: 100vw;
 	position: absolute;
+	opacity: 1;
+}
+
+.App-Fallback {
+	opacity: 0;
 }
 
 .App-Intro {
@@ -72,6 +77,47 @@ body {
 		font-size: 10px;
 		padding-top: 10vh;
 		line-height: 16px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.App {
+		opacity: 0;
+	}
+
+	.App-Fallback {
+		opacity: 1;
+		background:  #191406;
+		height: 100vh;
+	}
+	
+	.App-Fallback-Title  {
+		font-size: 64px;
+		line-height: 90px;
+		width: 50vw;
+		color: #fff;	
+		padding-left: 5vw;
+		top: 10vh;
+		position: relative;
+	}
+
+	.App-Fallback-Text {
+		top: 20vh;
+		left: 5vw;
+		position: relative;
+		color: #fff;
+		width: 90vw;
+		font-size: 18px;
+		line-height: 24px;
+	}	
+
+	.App-Fallback-Text > a {
+		text-decoration: underline;
+	}
+
+	.App-Fallback > .Credits-Credits-Logo {
+		position: relative;
+		bottom: 20vh;
 	}
 }
 

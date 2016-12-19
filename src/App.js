@@ -130,34 +130,43 @@ class App extends Component {
     let uniqueDates = _.uniq(contentMap.map((d) => d.timepoint));
 
     return (
-      <div className="App"> {/* Can add this: onLoad={this.pageScroll()} to auto scroll*/}
-        <div className="App-Intro">
-          {/* -------------------- Title -----------------------*/}
-          <div className="App-Intro-Title"> The <br/>road to school </div>
-          <div className="App-Intro-Subtitle"> The Syrian conflict is robbing millions of children of their right to education. </div>
-          <div className="App-Intro-Explanation"> Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
-        </div>
-        {/* -------------------- Header -----------------------*/}
-        <div className="App-Header-Share">
-          <a ref="external" title="Share on Twitter" target="_blank" href="https://twitter.com/home?status=The%20Syrian%20conflict%20is%20robbing%20millions%20of%20children%20of%20their%20right%20to%20education%20https%3A%2F%2Flab.interactivethings.com%2Froad-to-school%2F" />
-        </div> 
-        {/* -------------------- Audio -----------------------*/}
-        <div className="App-Header-Audio" onClick={this.toggleAudio}> 
-          <Audio volume={pctScrolled/100} muted={audioMuted}/> 
-        </div>
-        {/* -------------------- Timeline -----------------------*/}
-        <div className="Timeline-Wrap"> 
-          <div className="Timeline"> 
-              {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
+      <div>
+        <div className="App"> {/* Can add this: onLoad={this.pageScroll()} to auto scroll*/}
+          <div className="App-Intro">
+            {/* -------------------- Title -----------------------*/}
+            <div className="App-Intro-Title"> The <br/>road to school </div>
+            <div className="App-Intro-Subtitle"> The Syrian conflict is robbing millions of children of their right to education. </div>
+            <div className="App-Intro-Explanation"> Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
           </div>
+          {/* -------------------- Header -----------------------*/}
+          <div className="App-Header-Share">
+            <a ref="external" title="Share on Twitter" target="_blank" href="https://twitter.com/home?status=The%20Syrian%20conflict%20is%20robbing%20millions%20of%20children%20of%20their%20right%20to%20education%20https%3A%2F%2Flab.interactivethings.com%2Froad-to-school%2F" />
+          </div> 
+          {/* -------------------- Audio -----------------------*/}
+          <div className="App-Header-Audio" onClick={this.toggleAudio}> 
+            <Audio volume={pctScrolled/100} muted={audioMuted}/> 
+          </div>
+          {/* -------------------- Timeline -----------------------*/}
+          <div className="Timeline-Wrap"> 
+            <div className="Timeline"> 
+                {uniqueDates.map((d,i) => <TimelineItem key={i} id={i} value={findTimepointForMode(contentMap, pctScrolled)} isVisible={findTimepointForMode(contentMap, pctScrolled) === d} />)}  
+            </div>
+          </div>
+          {/* -------------------- Counter Wrap-----------------------*/}
+          <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
+          {/* -------------------- Content -----------------------*/}
+          <ContentText />
+          {/* -------------------- Chart -----------------------*/}
+          <Chart force={this.force} data={data} width={width} height={height}/>
+          {/*<div className="Content-Gradient"></div> */}
         </div>
-        {/* -------------------- Counter Wrap-----------------------*/}
-        <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
-        {/* -------------------- Content -----------------------*/}
-        <ContentText />
-        {/* -------------------- Chart -----------------------*/}
-        <Chart force={this.force} data={data} width={width} height={height}/>
-        {/*<div className="Content-Gradient"></div> */}
+        <div className="App-Fallback"> 
+            <div className="App-Fallback-Title "> The road to school </div>
+            <div className="App-Fallback-Text"> 
+            This visualization is better viewed on desktop. Click <a href="mailto:?&subject=The%20Road%20to%20School%20link&body=https://lab.interactivethings.com/road-to-school/">here</a> to send the link via email.
+            </div>  
+          <div className="Credits-Credits-Logo">  </div>  
+        </div>
       </div>
     );
   }
