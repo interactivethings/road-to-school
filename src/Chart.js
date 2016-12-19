@@ -26,12 +26,7 @@ class SvgRenderer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <svg width={this.props.width/2} height={this.props.height} ref={this.onRef}>
-        </svg>
-      </div>
-    );
+    return <svg width={this.props.width/2} height={this.props.height} ref={this.onRef} />;
   }
 
   renderSvg() {
@@ -43,17 +38,17 @@ class SvgRenderer extends Component {
 
     /*----------------------------- Main Vis --------------------*/
 
-    const circles = svg.selectAll('path')
+    const actors = svg.selectAll('path')
       .data(this.props.data, d => d.id);
 
-    circles.enter().append('path')
+    actors.enter().append('path')
       .call(this.onDrag);
 
-    circles
+    actors
       .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' )
       .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; });
 
-    circles.exit()
+    actors.exit()
       .remove();
   }
 }
