@@ -32,7 +32,7 @@ class Credits extends Component {
 		     		</ul>
 	     		</div>
 	     		<div className="Credits-Credits"> About this project </div>
-	     		<div className="Credits-Credits-Text">  This project is the culmination of my internship at <a href="https://www.interactivethings.com/">Interactive Things</a>, an interaction design and data visualization in Zurich, Switzerland. <br/> <br/> I believe that education and literacy is the most important tool each person in our world can have, and it is currently being taken away from millions of Syrian children. I wanted to create a data visualization and storytelling experience that addresses this issue and hopefully sensitizes the Western media to it. <br/> <br/> Many thanks to every Interactive Thing, particularly Peter, Christoph and Tom for their support in making the visualization and website. </div>			
+	     		<div className="Credits-Credits-Text">  This project is the culmination of my internship at <a href="https://www.interactivethings.com/">Interactive Things</a>, an interaction design and data visualization in Zurich, Switzerland. <p> I believe that education and literacy is the most important tool each person in our world can have, and it is currently being taken away from millions of Syrian children. This data visualization and storytelling experience address this issue and aims to sensitizes the target audience to it.</p> <p> Many thanks to every Interactive Thing, particularly Peter, Christoph and Tom for their support in making the visualization and website. </p> </div>			
 		     	<div className="Credits-Credits-Logo">  </div>	
 	     	
 			</div>
