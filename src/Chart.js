@@ -8,9 +8,10 @@ class SvgRenderer extends Component {
   constructor() {
     super();
     this.onRef = ref => this.ref = ref;
-    this.dragged = function(d) {
-      d3.select(this).attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y);
-    };
+    this.onDrag = d3.drag().on("drag", (d) => {
+      d.x = d3.event.x;
+      d.y = d3.event.y;
+    });
   }
 
   componentDidMount() {
@@ -46,7 +47,7 @@ class SvgRenderer extends Component {
       .data(this.props.data, d => d.id);
 
     circles.enter().append('path')
-      .call(d3.drag().on("drag", this.dragged));
+      .call(this.onDrag);
 
     circles
       .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' )
