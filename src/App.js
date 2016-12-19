@@ -121,6 +121,7 @@ class App extends Component {
       setTimeout(this.pageScroll,10000); // scrolls every 100 milliseconds
   }
   
+
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
@@ -138,8 +139,8 @@ class App extends Component {
         </div>
         {/* -------------------- Header -----------------------*/}
         <div className="App-Header-Share">
-          <a ref="external" title="Share on Twitter" target="_blank" href=""></a>
-        </div>
+          <a ref="external" title="Share on Twitter" target="_blank" href="https://twitter.com/home?status=The%20Syrian%20conflict%20is%20robbing%20millions%20of%20children%20of%20their%20right%20to%20education%20https%3A%2F%2Flab.interactivethings.com%2Froad-to-school%2F" />
+        </div> 
         {/* -------------------- Audio -----------------------*/}
         <div className="App-Header-Audio" onClick={this.toggleAudio}> 
           <Audio volume={pctScrolled/100} muted={audioMuted}/> 
