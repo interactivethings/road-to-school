@@ -104,17 +104,23 @@ class App extends Component {
       document.body.clientHeight, document.documentElement.clientHeight
     );
 
-    var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
-    var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
-    for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
-      var currentType = this.state.data[ACTOR_ROLES[i]].type;
-      if (currentType !== 'falling' && !this.state.data[ACTOR_ROLES[i]].quote_A && !this.state.data[ACTOR_ROLES[i]].quote_B)  {
-        var nextType = (i < findRatioFromPctScroll(this.state.pctScrolled) * ACTOR_COUNT) ? 'noSchool' : 'school';
-        this.state.data[ACTOR_ROLES[i]].type = nextType;
-      }
-    }
+    var nextPctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
 
-    this.setState({ mode: mode, pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
+    if (this.state.pctScrolled !== nextPctScrolled) {
+      console.log('scroll', nextPctScrolled)
+      var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
+      var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
+      var ratio = findRatioFromPctScroll(this.state.pctScrolled);
+      for (var i = ACTOR_COUNT - 1; i >= 0; i--) {
+        var currentType = this.state.data[ACTOR_ROLES[i]].type;
+        if (currentType !== 'falling' && !this.state.data[ACTOR_ROLES[i]].quote_A && !this.state.data[ACTOR_ROLES[i]].quote_B)  {
+          var nextType = (i < ratio * ACTOR_COUNT) ? 'noSchool' : 'school';
+          this.state.data[ACTOR_ROLES[i]].type = nextType;
+        }
+      }
+
+      this.setState({ mode: mode, pctScrolled: nextPctScrolled });
+    }
   }
 
   render() {
