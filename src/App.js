@@ -162,10 +162,9 @@ class App extends Component {
         </div>
         <div className="App-Fallback"> 
             <div className="App-Fallback-Title "> The road to school </div>
-            <div className="App-Fallback-Text"> 
-            This visualization is better viewed on desktop. Click <a href="mailto:?&subject=The%20Road%20to%20School%20link&body=https://lab.interactivethings.com/road-to-school/">here</a> to send the link via email.
+            <div className="App-Fallback-Text"> This visualization is built for desktop. Click <a href="mailto:?&subject=The%20Road%20to%20School%20link&body=https://lab.interactivethings.com/road-to-school/">here</a> to send the link via email.
             </div>  
-          <div className="Credits-Credits-Logo">  </div>  
+          <div className="App-Fallback-Logo">  </div>  
         </div>
       </div>
     );

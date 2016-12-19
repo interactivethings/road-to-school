@@ -89,6 +89,8 @@ body {
 		opacity: 1;
 		background:  #191406;
 		height: 100vh;
+		position: fixed;
+		width: 100vw;
 	}
 	
 	.App-Fallback-Title  {
@@ -106,7 +108,7 @@ body {
 		left: 5vw;
 		position: relative;
 		color: #fff;
-		width: 90vw;
+		width: 60vw;
 		font-size: 18px;
 		line-height: 24px;
 	}	
@@ -115,9 +117,12 @@ body {
 		text-decoration: underline;
 	}
 
-	.App-Fallback > .Credits-Credits-Logo {
+	.App-Fallback-Logo {
 		position: relative;
-		bottom: 20vh;
+		height: 36px;
+		background: url('./assets/logoIXT.png') no-repeat;
+		left: 5vw;
+		top: 35vh;
 	}
 }
 
