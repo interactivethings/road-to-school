@@ -137,7 +137,9 @@ class App extends Component {
           <div className="App-Intro-Explanation"> Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
         </div>
         {/* -------------------- Header -----------------------*/}
-        <div className="App-Header-Share"> </div>
+        <div className="App-Header-Share">
+          <a ref="external" title="Share on Twitter" target="_blank" href=""></a>
+        </div>
         {/* -------------------- Audio -----------------------*/}
         <div className="App-Header-Audio" onClick={this.toggleAudio}> 
           <Audio volume={pctScrolled/100} muted={audioMuted}/> 
