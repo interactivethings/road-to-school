@@ -2,10 +2,9 @@ import React, { Component} from 'react';
 
 // FIXME: these will need a hash tag and say that it's a project from us.
 const TWITTER_TEXTS = [
-  "The Syrian conflict is robbing millions of children of their right to education - a datavis project by @IXT",
-  "2.1M Syrian children did not go to school today - a datavis project by @IXT about Syria war's impact on education",
-  "“Every hour, one Syrian child gives up school”- a datavis project by @IXT about Syria war's impact on education",
-  "“There are people using books for cooking” - a datavis project by @IXT about Syria war's impact on education"
+  "The #SyriaCrisis is robbing millions of children of their right to education - a datavis project by @IXT",
+  "2.1M Syrian children did not go to school today - a datavis project by @IXT about #Syria war's impact on education",
+  "“Every hour, one Syrian child gives up school”- a datavis project by @IXT about #Syria war's impact on education"
 ];
 
 function twitterUrl() {
