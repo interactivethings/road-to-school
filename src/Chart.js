@@ -43,16 +43,11 @@ class SvgRenderer extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.renderSvg();
-  }
-
   componentWillUnmount() {
     this.props.force.on('tick', null);
   }
 
   render() {
-
     return (
       <div>
         <svg width={this.props.width/2} height={this.props.height} ref={this.onRef}>
