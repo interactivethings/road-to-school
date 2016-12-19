@@ -69,7 +69,8 @@ body {
 	}
 
 	.App-Intro-Explanation { 
-		font-size: 10;
+		font-size: 10px;
+		padding-top: 10vh;
 		line-height: 16px;
 	}
 }
@@ -229,6 +230,11 @@ body {
 
 
 @media screen and (max-width: 1500px) {
+	.Counter-Wrap { 
+		left: 58vw;
+		
+	}
+
 	.Counter-text, .Counter {
 		font-size: 38px;
 	}
