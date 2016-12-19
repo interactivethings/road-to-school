@@ -128,19 +128,10 @@ body {
 
 /* ---------------------------------------------- Icons  */
 .App-Header-Share {
-	cursor: pointer;
+	position: fixed;
 	left: 44vw;
 	top: 2vh;
-	height: 20px;
-	width: 26px;
-	position: fixed;
 	display: block;
-	background: url('./assets/twitter-small.png') center no-repeat;
-	transition: background 0.08s;
-}
-
-.App-Header-Share:hover {
-	background: url('./assets/twitter-hover-small.png') center no-repeat;
 }
 
 .App-Header-Audio {
@@ -188,6 +179,26 @@ body {
 	opacity: 0.2;
 	left: 0vw;
 }
+
+
+/* ----------------------------------------------Share  */
+
+.Share {
+}
+
+.Share-Twitter {
+  cursor: pointer;
+  display: block;
+  height: 20px;
+  width: 26px;
+  background: url('./assets/twitter-small.png') center no-repeat;
+  transition: background 0.08s;
+}
+
+.Share-Twitter:hover {
+	background: url('./assets/twitter-hover-small.png') center no-repeat;
+}
+
 
 /* ----------------------------------------------Timeline  */
 

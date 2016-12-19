@@ -5,13 +5,14 @@ import * as d3 from 'd3';
 import * as behaviours from './behaviours';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
-import {scrollY, passiveEvent} from './utils/dom'; 
+import {scrollY, passiveEvent} from './utils/dom';
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import CounterWrap from './CounterWrap';
 import TimelineItem from './TimelineItem';
 import Audio from './Audio';
 import Credits from './Credits';
+import Share from './Share';
 import {shuffle} from './utils/forceHelpers';
 
 // Constants
@@ -140,8 +141,8 @@ class App extends Component {
           </div>
           {/* -------------------- Header -----------------------*/}
           <div className="App-Header-Share">
-            <a ref="external" title="Share on Twitter" target="_blank" href="https://twitter.com/home?status=The%20Syrian%20conflict%20is%20robbing%20millions%20of%20children%20of%20their%20right%20to%20education%20https%3A%2F%2Flab.interactivethings.com%2Froad-to-school%2F" />
-          </div> 
+            <Share />
+          </div>
           {/* -------------------- Audio -----------------------*/}
           <div className="App-Header-Audio" onClick={this.toggleAudio}> 
             <Audio volume={pctScrolled/100} muted={audioMuted}/> 
