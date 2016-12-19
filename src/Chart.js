@@ -42,11 +42,11 @@ class SvgRenderer extends Component {
       .data(this.props.data, d => d.id);
 
     actors.enter().append('path')
+      .attr('d', (d) => letters[d.letterID].LETTER_PATH)
       .call(this.onDrag);
 
     actors
-      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' )
-      .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; });
+      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' );
 
     actors.exit()
       .remove();
