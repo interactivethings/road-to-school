@@ -6,7 +6,7 @@ import * as behaviours from './behaviours';
 import {throttle, uniq} from 'underscore';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
-import {scrollY, passiveEvent} from './utils/dom';
+import {scrollY, passiveEvent, windowHeight, docHeight} from './utils/dom';
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import CounterWrap from './CounterWrap';
@@ -97,14 +97,7 @@ class App extends Component {
   }
 
   onScroll() {
-    var windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight;
-    var docHeight = Math.max(
-      document.body.scrollHeight, document.documentElement.scrollHeight,
-      document.body.offsetHeight, document.documentElement.offsetHeight,
-      document.body.clientHeight, document.documentElement.clientHeight
-    );
-
-    var nextPctScrolled = Math.floor( scrollY() / (docHeight - windowHeight) * 100);
+    var nextPctScrolled = Math.floor( scrollY() / (docHeight() - windowHeight()) * 100);
 
     if (this.state.pctScrolled !== nextPctScrolled) {
       console.log('scroll', nextPctScrolled)
