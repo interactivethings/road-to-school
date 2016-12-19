@@ -73,9 +73,8 @@ class SvgRenderer extends Component {
 
     circles
       .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' )
-      .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; })
-      .call(d3.drag().on("drag", this.dragged));
-    
+      .attr('d', function(d) { return letters[d.letterID].LETTER_PATH; });
+
     circles.exit()
       .remove();
   }
