@@ -100,7 +100,6 @@ class App extends Component {
     var nextPctScrolled = Math.floor( scrollY() / (docHeight() - windowHeight()) * 100);
 
     if (this.state.pctScrolled !== nextPctScrolled) {
-      console.log('scroll', nextPctScrolled)
       var nextMode = findModeAtPosition(contentMap, this.state.pctScrolled);
       var mode = (nextMode !== undefined) ? nextMode : this.state.mode;
       var ratio = findRatioFromPctScroll(this.state.pctScrolled);
