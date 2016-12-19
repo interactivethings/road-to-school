@@ -50,7 +50,6 @@ class App extends Component {
     this.onSelectMode = this.onSelectMode.bind(this);
     this.onScroll = throttle(this.onScroll.bind(this), 100);
     this.toggleAudio = this.toggleAudio.bind(this);
-    this.pageScroll = this.pageScroll.bind(this);
   }
 
   componentWillMount() {
@@ -118,12 +117,6 @@ class App extends Component {
     this.setState({ mode: mode, pctScrolled: Math.floor( scrollY() / (docHeight - windowHeight) * 100) });
   }
 
-  pageScroll() {
-      window.scrollBy(0, 2); // horizontal and vertical scroll increments
-      setTimeout(this.pageScroll,10000); // scrolls every 100 milliseconds
-  }
-  
-
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
@@ -132,7 +125,7 @@ class App extends Component {
 
     return (
       <div>
-        <div className="App"> {/* Can add this: onLoad={this.pageScroll()} to auto scroll*/}
+        <div className="App">
           <div className="App-Intro">
             {/* -------------------- Title -----------------------*/}
             <div className="App-Intro-Title"> The <br/>road to school </div>
