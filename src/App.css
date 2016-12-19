@@ -111,6 +111,16 @@ body {
 	background: url('./assets/audio-muted-small.png') no-repeat;
 }
 
+@media screen and (max-width: 1100px) {
+	.App-Header-Share {
+		left: 42vw;
+	}	
+	.App-Header-Audio, .App-Header-Audio-Muted   {
+		left: 46vw;
+	}
+}
+
+
 .Audio {
 	position: relative;
 	z-index: 1;
@@ -312,10 +322,17 @@ path.falling {
 /* ----------------------------------------------Credits */
 
 .Credits {
-	height: 100vh;
+	height: 105vh;
 	width: 30vw;
 	padding-bottom: 10vh;
 }
+
+@media screen and (max-width: 900px) {
+	.Credits {
+		height: 115vh;
+	}
+}
+
 
 .Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits  {
 	font-family: 'Open Sans';
