@@ -1,6 +1,10 @@
 import React, { Component} from 'react';
 
 class CounterWrap extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.value !== nextProps.value || this.props.isIntro !== nextProps.isIntro;
+  }
+
   render() {
   	const className = this.props.isIntro==='intro' ? 'Counter-Wrap-isHidden' : 'Counter-Wrap';
     return (

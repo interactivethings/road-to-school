@@ -8,6 +8,10 @@ class Audio extends Component {
     this.onRef = ref => this.audioElement = ref;
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.muted !== nextProps.muted || this.props.volume !== nextProps.volume;
+  }
+
   componentDidMount() {
     this.changeVolume();
   }

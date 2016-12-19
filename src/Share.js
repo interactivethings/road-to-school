@@ -14,6 +14,10 @@ function twitterUrl() {
 }
 
 class Share extends Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     return (
       <div className="Share">

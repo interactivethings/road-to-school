@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class Credits extends Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     return (
 			<div className="Credits">  
