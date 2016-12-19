@@ -10,6 +10,7 @@ body {
 	font-weight: 400;
 	line-height: 26px;
 	width: 100vw;
+	position: absolute;
 }
 
 .App-Intro {
@@ -49,6 +50,8 @@ body {
 	color: #fff;	
 	line-height: 24px;
 	text-align: right;
+	z-index: 1;
+	background:  #191406;
 }
 
 @media screen and (max-width: 1500px) {
@@ -112,6 +115,16 @@ body {
 	position: relative;
 	z-index: 1;
 	display: none;
+}
+
+.Content-Gradient {
+	position: fixed;
+	top: 95vh;
+	background: linear-gradient( to bottom,  #191406, #EAE3D0); 
+	height: 5vh;
+	width: 50vw;
+	opacity: 0.2;
+	left: 0vw;
 }
 
 /* ----------------------------------------------Timeline  */
@@ -259,16 +272,6 @@ body {
 	line-height: 26px;
 }
 
-.Content-Gradient {
-	position: fixed;
-	top: 95vh;
-	background: linear-gradient( to bottom,  #191406, #EAE3D0); 
-	height: 5vh;
-	z-index: 1;
-	width: 50vw;
-	opacity: 0.3;
-	left: 0vw;
-}
 
 @media screen and (max-width: 1500px) {
 	.Content, .Content-Quote {
