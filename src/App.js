@@ -3,6 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
+import {throttle, uniq} from 'underscore';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent} from './utils/dom';
@@ -47,7 +48,7 @@ class App extends Component {
     this.state = state;
     this.force = d3.forceSimulation(this.state.data);
     this.onSelectMode = this.onSelectMode.bind(this);
-    this.onScroll = this.onScroll.bind(this);
+    this.onScroll = throttle(this.onScroll.bind(this), 100);
     this.toggleAudio = this.toggleAudio.bind(this);
     this.pageScroll = this.pageScroll.bind(this);
   }
@@ -127,8 +128,7 @@ class App extends Component {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
-    let _ = require('underscore');
-    let uniqueDates = _.uniq(contentMap.map((d) => d.timepoint));
+    let uniqueDates = uniq(contentMap.map((d) => d.timepoint));
 
     return (
       <div>
