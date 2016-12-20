@@ -43,11 +43,11 @@ export function fall(force, data, {width, height}) {
 
 export function quoteA(force, data, {width, height}) {
     force
-    .force('quoteAforce', isolate(data, d3.forceY(height* 0.2), function(d) {return d.quote_A; }).strength(0.14));
+    .force('quoteAforce', isolate(data, d3.forceY((d) => d.y0), function(d) {return d.quote_A; }).strength(0.14));
   
 }
 
 export function quoteB(force, data, {width, height}) {
     force
-    .force('quoteBforce', isolate(data, d3.forceY(height* 0.2), function(d) {return d.quote_B; }).strength(0.14));
+    .force('quoteBforce', isolate(data, d3.forceY((d) => d.y0), function(d) {return d.quote_B; }).strength(0.14));
 }
