@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
+    "html-webpack-plugin": "^2.24.1",
     "react-scripts": "0.7.0"
   },
   "dependencies": {
