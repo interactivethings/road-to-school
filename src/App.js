@@ -3,7 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
-import {throttle, uniq} from 'underscore';
+import {compose, throttle, uniq} from 'underscore';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent, windowHeight, docHeight} from './utils/dom';
@@ -28,7 +28,7 @@ const identity = x => x;
 const formatCounter = d3.format(",");
 const ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
 const uniqueDates = uniq(contentMap.map((d) => d.timepoint));
-
+const totalCount = compose(formatCounter, ratioRange, findRatioFromPctScroll);
 
 class App extends Component {
   constructor() {
@@ -119,7 +119,6 @@ class App extends Component {
   render() {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
-    var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
 
     return (
       <div>
@@ -145,7 +144,7 @@ class App extends Component {
             </div>
           </div>
           {/* -------------------- Counter Wrap-----------------------*/}
-          <CounterWrap onScroll={this.onScroll} value={totalCount} isIntro={mode}/>
+          <CounterWrap onScroll={this.onScroll} value={totalCount(this.state.pctScrolled)} isIntro={mode}/>
           {/* -------------------- Content -----------------------*/}
           <ContentText />
           {/* -------------------- Chart -----------------------*/}
