@@ -38,13 +38,13 @@ export function bomb(data, {width, height}) {
 
 export function fall(force, data, {width, height}) {
     force
-    .force('fallingforce', isolate(data, d3.forceY(height*0.93), function(d) {return d.type === 'falling' ; }).strength(0.03));   
+    .force('fallingforce', isolate(data, d3.forceY(height*0.93), function(d) {return d.type === 'falling' ; }).strength(0.14));   
 }
 
 export function quoteA(force, data, {width, height}) {
     force
     .force('quoteAforce', isolate(data, d3.forceY((d) => d.y0), function(d) {return d.quote_A; }).strength(0.14));
-  
+
 }
 
 export function quoteB(force, data, {width, height}) {
