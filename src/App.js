@@ -20,7 +20,7 @@ const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
 const FALLING_ID = 10;
 const QUOTE_A_ID = 11;
-const QUOTE_B_ID = 12;
+const QUOTE_B_ID = 45;
 
 // Helpers
 const identity = x => x;

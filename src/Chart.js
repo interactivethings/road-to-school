@@ -58,7 +58,7 @@ class SvgRenderer extends Component {
 
     actors
       .attr('transform', (d) => {
-        const s = isActive(mode, d) ? 2.5 : 1.2;
+        const s = isActive(mode, d) ? 2 : 1.2;
         return `translate(${d.x},${d.y}) scale(${s})`;
       })
       .classed('isFalling', (d) => isActive(mode, d) && d.type === 'falling')
