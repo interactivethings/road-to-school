@@ -88,7 +88,6 @@ class App extends Component {
   }
 
   toggleAudio() {
-    d3.select('.App-Header-Audio').classed('App-Header-Audio-Muted', !this.state.audioMuted);
     this.setState({audioMuted: !this.state.audioMuted})
   }
 
@@ -135,8 +134,8 @@ class App extends Component {
             <Share />
           </div>
           {/* -------------------- Audio -----------------------*/}
-          <div className="App-Header-Audio" onClick={this.toggleAudio}> 
-            <Audio volume={pctScrolled/100} muted={audioMuted}/> 
+          <div className="App-Header-Audio"> 
+            <Audio volume={pctScrolled/100} muted={audioMuted} onClick={this.toggleAudio}/> 
           </div>
           {/* -------------------- Timeline -----------------------*/}
           <div className="Timeline-Wrap"> 

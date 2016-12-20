@@ -25,8 +25,13 @@ class Audio extends Component {
   }
 
   render() {
+    const className = this.props.muted ? 'Audio isMuted' : 'Audio'
     return (
-      <audio className="Audio" ref={this.onRef} controls autoPlay muted={this.props.muted} loop> <source src={mp3} type="audio/mp3" /> </audio>
+      <div className={className} onClick={this.props.onClick}>
+        <audio className="Audio-Player" ref={this.onRef} controls autoPlay muted={this.props.muted} loop>
+          <source src={mp3} type="audio/mp3" />
+        </audio>
+      </div>
     );
   }
 }

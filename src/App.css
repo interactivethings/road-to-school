@@ -135,30 +135,16 @@ body {
 }
 
 .App-Header-Audio {
-	cursor: pointer;
+	position: fixed;
 	left: 46vw;
 	top: 2vh;
-	height: 20px;
-	width: 26px;
-	position: fixed;
-	display: block;
-	transition: background 0.08s;
-	background: url('./assets/audio-small.png')  center no-repeat;
-}
-.App-Header-Audio:hover {
-	transition: background 0.1s;
-	background: url('./assets/audio-hover-small.png')  center no-repeat;
-}
-.App-Header-Audio-Muted {
-	transition: background 0.08s;
-	background: url('./assets/audio-muted-small.png') no-repeat;
 }
 
 @media screen and (max-width: 1100px) {
 	.App-Header-Share {
 		left: 42vw;
 	}	
-	.App-Header-Audio, .App-Header-Audio-Muted   {
+	.App-Header-Audio   {
 		left: 46vw;
 	}
 }
@@ -167,8 +153,28 @@ body {
 .Audio {
 	position: relative;
 	z-index: 1;
-	display: none;
+	display: block;
+	cursor: pointer;
+	height: 20px;
+	width: 26px;
+	transition: background 0.08s;
+	background: url('./assets/audio-small.png')  center no-repeat;
 }
+
+.Audio:hover {
+	transition: background 0.1s;
+	background: url('./assets/audio-hover-small.png')  center no-repeat;
+}
+
+.Audio.isMuted {
+	transition: background 0.08s;
+	background: url('./assets/audio-muted-small.png') no-repeat;
+}
+
+.Audio-Player {
+  display: none;
+}
+
 
 .Content-Gradient {
 	position: fixed;
