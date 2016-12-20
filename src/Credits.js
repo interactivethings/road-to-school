@@ -38,7 +38,7 @@ class Credits extends Component {
 	     		<div className="Credits-Credits"> About this project </div>
 	     		<div className="Credits-Credits-Text">  This project is the culmination of my internship at <a href="https://www.interactivethings.com/">Interactive Things</a>, an interaction design and data visualization in Zurich, Switzerland. <p> I believe that education and literacy is the most important tool each person in our world can have, and it is currently being taken away from millions of Syrian children. This data visualization and storytelling experience address this issue and aims to sensitizes the target audience to it.</p>
 	     		<div className="Credits-Author"> Credits</div>
-	     		<p>Made by <a href="https://twitter.com/kallirroi">Kalli Retzepi</a>.</p> 
+	     		<p>Made by <a href="https://twitter.com/kallirroi" target="_blank">Kalli Retzepi</a>.</p> 
 	     		 <p> Many thanks to every Interactive Thing, particularly Peter, Christoph and Tom for their support in making the visualization and website. </p> 
 	     		</div>			
 		     	<div className="Credits-Credits-Logo">  </div>	
