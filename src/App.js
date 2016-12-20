@@ -27,6 +27,8 @@ const QUOTE_B_ID = 45;
 const identity = x => x;
 const formatCounter = d3.format(",");
 const ratioRange = d3.scaleLinear().domain([0,1]).range([1000, 2800000]);
+const uniqueDates = uniq(contentMap.map((d) => d.timepoint));
+
 
 class App extends Component {
   constructor() {
@@ -118,7 +120,6 @@ class App extends Component {
     const {width, height} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
     var totalCount = formatCounter(ratioRange(findRatioFromPctScroll(this.state.pctScrolled)));
-    let uniqueDates = uniq(contentMap.map((d) => d.timepoint));
 
     return (
       <div>
