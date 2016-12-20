@@ -137,7 +137,7 @@ body {
 	padding-top: 2vh;
 	padding-left: 4vw;
 	padding-bottom: 1vh;
-	width: 40vw;
+	width: 36vw;
 	display: block;
 	color: #fff;
 	font-size: 18px;
@@ -148,9 +148,8 @@ body {
 
 .App-Header-Share {
 	position: fixed;
-	left: 44vw;
-	top: 2vh;
-	display: block;
+	left: 46vw;
+	top: 5vh;
 }
 
 .App-Header-Audio {
@@ -159,20 +158,8 @@ body {
 	top: 2vh;
 }
 
-@media screen and (max-width: 1100px) {
-	.App-Header-Share {
-		left: 42vw;
-	}	
-	.App-Header-Audio   {
-		left: 46vw;
-	}
-}
-
-
 .Audio {
-	position: relative;
-	z-index: 1;
-	display: block;
+	display: inline-block;
 	cursor: pointer;
 	height: 20px;
 	width: 26px;
@@ -205,11 +192,15 @@ body {
 	left: 0vw;
 }
 
+@media screen and (max-width: 1100px) {	
+	.App-Header-Audio   {
+		left: 46vw;
+	}
+}
+
 
 /* ----------------------------------------------Share  */
 
-.Share {
-}
 
 .Share-Twitter {
   cursor: pointer;
@@ -224,6 +215,19 @@ body {
 	background: url('./assets/twitter-hover-small.png') center no-repeat;
 }
 
+.Share-Facebook {
+  cursor: pointer;
+  display: block;
+  height: 20px;
+  width: 26px;
+  margin-top: 1vh;
+  background: url('./assets/facebook-small.png') center no-repeat;
+  transition: background 0.08s;
+}
+
+.Share-Facebook:hover {
+	background: url('./assets/facebook-hover-small.png') center no-repeat;
+}
 
 /* ----------------------------------------------Timeline  */
 
