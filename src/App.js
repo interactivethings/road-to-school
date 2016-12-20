@@ -19,8 +19,8 @@ import Share from './Share';
 const ACTOR_COUNT = 200;
 const ACTOR_ROLES = shuffle(d3.range(ACTOR_COUNT).map((d,i) => i)); // [3, 2, 6, 1, 4]
 const FALLING_ID = 10;
-const QUOTE_A_ID = 22;
-const QUOTE_B_ID = 45;
+const QUOTE_A_ID = 11;
+const QUOTE_B_ID = 12;
 
 // Helpers
 const identity = x => x;
@@ -147,7 +147,7 @@ class App extends Component {
           {/* -------------------- Content -----------------------*/}
           <ContentText />
           {/* -------------------- Chart -----------------------*/}
-          <Chart force={this.force} data={data} width={width} height={height}/>
+          <Chart mode={mode} force={this.force} data={data} width={width} height={height}/>
           {/*<div className="Content-Gradient"></div> */}
         </div>
         <div className="App-Fallback"> 

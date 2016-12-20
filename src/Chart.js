@@ -12,6 +12,7 @@ class SvgRenderer extends Component {
       d.x = d3.event.x;
       d.y = d3.event.y;
     });
+    this.renderSvg = this.renderSvg.bind(this);
   }
 
   componentDidMount() {
@@ -34,23 +35,45 @@ class SvgRenderer extends Component {
       return;
     }
 
+    const {mode} = this.props;
+
     const svg = d3.select(this.ref);
 
     /*----------------------------- Main Vis --------------------*/
 
-    const actors = svg.selectAll('path')
+    const actors = svg.selectAll('path') /* should be g */
       .data(this.props.data, d => d.id);
 
+    /* children of <g> should be:
+    enter()
+      path // <arabic>
+      text // teacher
+      rect // 0,0 70,30
+    */
+
     actors.enter().append('path')
+      .attr('class', 'word')
       .attr('d', (d) => letters[d.letterID].LETTER_PATH)
       .call(this.onDrag);
 
     actors
-      .attr('transform', d => 'translate('+ d.x + ',' + d.y +') scale(' + 1.2 + ')' );
+      .attr('transform', (d) => {
+        const s = isActive(mode, d) ? 2 : 1.2;
+        return `translate(${d.x},${d.y}) scale(${s})`;
+      })
+      .classed('isFalling', (d) => isActive(mode, d) && d.type === 'falling')
+      .classed('isQuoteA', (d) => isActive(mode, d) && d.quote_A)
+      .classed('isQuoteB', (d) => isActive(mode, d) && d.quote_B);
 
     actors.exit()
       .remove();
   }
+}
+
+function isActive(mode, d) {
+  return (mode === 'fall' && d.type === 'falling')
+      || (mode === 'quoteA' && d.quote_A)
+      || (mode === 'quoteB' && d.quote_B);
 }
 
 export default SvgRenderer;

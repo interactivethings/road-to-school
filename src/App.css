@@ -383,19 +383,22 @@ svg {
 	position: fixed;
 }
 
-path {
+.word {
 	fill: #191406;
 }
-path.falling {
-	fill: 'red';
-	stroke: 'red';
+
+.word.isFalling {
+	fill: #9C261F;
+	stroke: #9C261F;
 	stroke-width: 2;
 }
-.quoteA {
-	fill: 'orange';
+
+.word.isQuoteA {
+	fill: orange;
 }
-.quoteB {
-	fill: 'blue';
+
+.word.isQuoteB {
+	fill: blue;
 }
 
 /* ----------------------------------------------Credits */

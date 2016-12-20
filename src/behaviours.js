@@ -51,14 +51,6 @@ export function bomb(data, {width, height}) {
 }
 
 export function fall(force, data, {width, height}) {
-
-    d3.select('svg').selectAll('path')
-        .filter( (d) => d.type === 'falling'  )
-        .transition()
-        .style('fill', '#9C261F')
-        .style('stroke', '#9C261F')
-        .style('stroke-width', '2')
-
     d3.forceSimulation()
     .force('falling', isolate(data, d3.forceY(height*0.93), function(d) {return d.type === 'falling' ; }).strength(0.01))   
     .alphaDecay(0.2)
@@ -66,30 +58,13 @@ export function fall(force, data, {width, height}) {
 }
 
 export function quoteA(force, data, {width, height}) {
-
-    d3.select('svg').selectAll("path")
-        .filter( (d) => d.quote_A  )
-        .transition()
-        .style('fill', '#9C261F')
-        .style('stroke', '#9C261F')
-        .style('stroke-width', '2');
-
     d3.forceSimulation()
     .force('lifting', isolate(data, d3.forceY(height* 0.35), function(d) {return d.quote_A; }).strength(0.3))   
     .alphaDecay(0.2)
     .velocityDecay(0.2);
-
 }
 
 export function quoteB(force, data, {width, height}) {
-
-    d3.select('svg').selectAll("path")
-        .filter( (d) => d.quote_B  )
-        .transition()
-        .style('fill', '#9C261F')
-        .style('stroke', '#9C261F')
-        .style('stroke-width', '2');
-
     d3.forceSimulation()
     .force('lifting', isolate(data, d3.forceY(height* 0.35), function(d) {return d.quote_B; }).strength(0.3))   
     .alphaDecay(0.2)
