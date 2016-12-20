@@ -435,7 +435,7 @@ svg {
 }
 
 
-.Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits  {
+.Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits, .Credits-Author  {
 	font-family: 'Open Sans';
 	position: relative; 
 	left: 6vw;
@@ -448,6 +448,14 @@ svg {
 	letter-spacing: 0em;
 	font-weight: 400;
 }
+
+.Credits-Author {
+	padding-top: 2vh;
+	top: 0vh;
+	padding-bottom: 0vh;
+	left: 0vw;
+}
+
 .Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
 	font-family: 'Open Sans';
 	position: relative; 
