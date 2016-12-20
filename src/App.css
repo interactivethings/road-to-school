@@ -353,7 +353,7 @@ body {
 	left: 5vw;
 	width: 30vw;
 	padding-top: 50vh;
-	padding-bottom: 45vh;
+	padding-bottom: 43vh;
 	position: relative; 
 	white-space: pre-line;
 	color: #fff;
@@ -409,20 +409,15 @@ svg {
 .word {
 	fill: #191406;
 }
-
 .word.isFalling {
-	fill: #9C261F;
-	stroke: #9C261F;
+	stroke: #9C261F
+
+}
+.word.isQuoteA , .word.isQuoteB {
+	stroke:  #191406;
 	stroke-width: 2;
 }
 
-.word.isQuoteA {
-	fill: orange;
-}
-
-.word.isQuoteB {
-	fill: blue;
-}
 
 /* ----------------------------------------------Credits */
 

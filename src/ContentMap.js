@@ -74,7 +74,7 @@ export const contentMap = [
     timepoint: 2016
   },
   {
-    mode: 'question',
+    mode: 'outOfSchool',
     text: 'Would you be looking at this screen if you had left school at a similar age?',
     fromPosition: 78,
     timepoint: 2016
@@ -89,7 +89,7 @@ export const contentMap = [
   {
     mode: 'quoteB',
     text: '“I felt so happy when I heard I was going back to school. I finally had a hope that I could succeed through studying. I want to be an engineer when I grow up so I can help to rebuild Syria.”<div class="Quote-Source">– Ahmad, 13 years old</div>',
-    fromPosition: 89,
+    fromPosition: 92,
     timepoint: 2016,
     styleAsQuote: true
   }
