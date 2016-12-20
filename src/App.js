@@ -3,7 +3,7 @@ import './App.css';
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import * as behaviours from './behaviours';
-import {compose, throttle, uniq} from 'underscore';
+import {compose, shuffle, throttle, uniq} from 'underscore';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
 import {scrollY, passiveEvent, windowHeight, docHeight} from './utils/dom';
@@ -14,7 +14,6 @@ import TimelineItem from './TimelineItem';
 import Audio from './Audio';
 import Credits from './Credits';
 import Share from './Share';
-import {shuffle} from './utils/forceHelpers';
 
 // Constants
 const ACTOR_COUNT = 200;
