@@ -1,3 +1,4 @@
+export const windowWidth = () => window.innerWidth || (document.documentElement || document.body).clientWidth;
 export const windowHeight = () => window.innerHeight || (document.documentElement || document.body).clientHeight;
 export const docHeight = () => Math.max(
   document.body.scrollHeight, document.documentElement.scrollHeight,

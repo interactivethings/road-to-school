@@ -6,7 +6,7 @@ import * as behaviours from './behaviours';
 import {compose, shuffle, throttle, uniq} from 'underscore';
 import {mkInitialState, mkActor, advanceBombState} from './state';
 import Chart from './Chart';
-import {scrollY, passiveEvent, windowHeight, docHeight} from './utils/dom';
+import {scrollY, passiveEvent, windowWidth, windowHeight, docHeight} from './utils/dom';
 import {contentMap, findModeAtPosition, findTimepointForMode, findRatioFromPctScroll} from './ContentMap';
 import Content from './Content';
 import CounterWrap from './CounterWrap';
@@ -37,7 +37,7 @@ class App extends Component {
     const rows = ACTOR_COUNT / cols;
     const state = mkInitialState(
       ACTOR_COUNT,
-      mkActor(cols, rows, window.innerWidth / 2, window.innerHeight - 250 /* bottom padding */)
+      mkActor(cols, rows, windowWidth() / 2, windowHeight() - 250 /* bottom padding */)
     );
 
     state.data[FALLING_ID].type = 'falling';
@@ -116,7 +116,7 @@ class App extends Component {
   }
 
   render() {
-    const {width, height} = this.props;
+    const {containerWidth, containerHeight} = this.props;
     const {data, pctScrolled, audioMuted, mode} = this.state;
 
     return (
@@ -148,7 +148,7 @@ class App extends Component {
           {/* -------------------- Content -----------------------*/}
           <ContentText />
           {/* -------------------- Chart -----------------------*/}
-          <Chart mode={mode} force={this.force} data={data} width={width / 2} height={height}/>
+          <Chart mode={mode} force={this.force} data={data} width={containerWidth / 2} height={containerHeight}/>
           <div className="Content-Gradient"></div>
         </div>
         <div className="App-Fallback">

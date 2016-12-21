@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Dimensions from 'react-dimensions'
+import {windowHeight} from './utils/dom';
+
+const ResizingApp = Dimensions({
+  getHeight: windowHeight
+})(App);
 
 ReactDOM.render(
-  // We should wrap this in a Dimensions component
-  <App width={window.innerWidth} height={window.innerHeight} />,
+  <ResizingApp />,
   document.getElementById('root')
 );

@@ -9,7 +9,6 @@ body {
 	font-family: 'Lora';
 	font-weight: 400;
 	line-height: 26px;
-	width: 100vw;
 	position: absolute;
 	top: 0vh;
 	left: 0vw;
@@ -291,6 +290,7 @@ body {
 	position: fixed;
 	opacity: 1;
 	transition: opacity 1s;
+  z-index: 10;
 }
 
 
