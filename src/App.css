@@ -422,24 +422,13 @@ body {
 /* ----------------------------------------------Credits */
 
 .Credits {
-	height: 105vh;
 	width: 30vw;
-	padding-top: 50vh;
-	padding-bottom: 10vh;
+  padding: 0 6vw;
+  margin-bottom: 5vh;
 }
-
-@media screen and (max-width: 1200px) {
-	.Credits {
-		height: 125vh;
-	}
-}
-
 
 .Credits-Methods, .Credits-Donate, .Credits-Sources, .Credits-Credits, .Credits-Author  {
 	font-family: 'Open Sans';
-	position: relative; 
-	left: 6vw;
-	top: 20vh;
 	color: #fff;
 	font-size: 20px;
 	line-height: 30px;
@@ -451,16 +440,11 @@ body {
 
 .Credits-Author {
 	padding-top: 2vh;
-	top: 0vh;
 	padding-bottom: 0vh;
-	left: 0vw;
 }
 
 .Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
 	font-family: 'Open Sans';
-	position: relative; 
-	left: 6vw;
-	top: 20vh;
 	color: #fff;
 	font-size: 14px;
 	line-height: 20px;
@@ -469,11 +453,16 @@ body {
 
 
 .Credits-Credits-Logo {
-	position: relative; 
-	left: 6vw;
-	top: 30vh;
+  margin-top: 5vh;
 	height: 36px;
-	padding-top: 1vh;
+  width: 200px;
+  display: block;
+	background: url('./assets/logoIXT.png') no-repeat;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Credits-Credits-Logo:hover {
 	background: url('./assets/logoIXT.png') no-repeat;
 }
 
@@ -482,7 +471,7 @@ body {
 		font-size: 12px;
 		line-height: 18px;
 		padding-top: 2vh;
-		padding-bottom: 1vh;	
+		padding-bottom: 1vh;
 	}
 
 	.Credits-Methods-Text, .Credits-Donate-Text, .Credits-Sources-Text, .Credits-Credits-Text  {
