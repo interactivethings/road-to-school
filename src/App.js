@@ -149,7 +149,6 @@ class App extends Component {
           <ContentText />
           {/* -------------------- Chart -----------------------*/}
           <Chart mode={mode} force={this.force} data={data} width={containerWidth / 2} height={containerHeight}/>
-          <div className="Content-Gradient"></div>
         </div>
         <div className="App-Fallback">
           <div className="App-Fallback-Title "> The road to school </div>

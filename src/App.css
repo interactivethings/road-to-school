@@ -176,17 +176,6 @@ body {
   display: none;
 }
 
-
-.Content-Gradient {
-	position: fixed;
-	top: 95vh;
-	background: linear-gradient( to bottom,  #191406, #EAE3D0); 
-	height: 5vh;
-	width: 50vw;
-	opacity: 0.2;
-	left: 0vw;
-}
-
 @media screen and (max-width: 1100px) {	
 	.App-Header-Audio   {
 		left: 46vw;
