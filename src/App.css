@@ -141,19 +141,15 @@ body {
 	z-index: 1;
 }
 
-.App-Header-Share {
+.App-Header-Controls {
 	position: fixed;
 	left: 46vw;
 	top: 5vh;
 }
 
-.App-Header-Audio {
-	position: fixed;
-	left: 46vw;
-	top: 2vh;
-}
-
 .Audio {
+  position: relative;
+  left: 2px;
 	display: inline-block;
 	cursor: pointer;
 	height: 20px;
@@ -187,6 +183,7 @@ body {
 
 
 .Share-Twitter {
+  margin-top: 1vh;
   cursor: pointer;
   display: block;
   height: 20px;

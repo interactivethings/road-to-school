@@ -130,12 +130,9 @@ class App extends Component {
           </div>
           {/* -------------------- Header -----------------------*/}
           <div className="App-Header-Title"> The Road to School</div> 
-          <div className="App-Header-Share">
-            <Share />
-          </div>
-          {/* -------------------- Audio -----------------------*/}
-          <div className="App-Header-Audio"> 
+          <div className="App-Header-Controls">
             <Audio volume={pctScrolled/100} muted={audioMuted} onClick={this.toggleAudio}/> 
+            <Share />
           </div>
           {/* -------------------- Timeline -----------------------*/}
           <div className="Timeline-Wrap"> 
