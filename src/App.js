@@ -151,11 +151,12 @@ class App extends Component {
           <Chart mode={mode} force={this.force} data={data} width={width} height={height}/>
           <div className="Content-Gradient"></div>
         </div>
-        <div className="App-Fallback"> 
-            <div className="App-Fallback-Title "> The road to school </div>
-            <div className="App-Fallback-Text"> This visualization is built for desktop. Click <a href="mailto:?&subject=The%20Road%20to%20School%20link&body=https://lab.interactivethings.com/road-to-school/">here</a> to send the link via email.
-            </div>  
-          <div className="App-Fallback-Logo">  </div>  
+        <div className="App-Fallback">
+          <div className="App-Fallback-Title "> The road to school </div>
+          <div className="App-Fallback-Text">
+            This visualization is built for large screens. <a href={`mailto:?subject=${encodeURIComponent("The Road to School")}&body=${encodeURIComponent("The Road to School is a data visualization project about how the Syrian Conflict is forcing children to give up on school.\n\nhttps://lab.interactivethings.com/road-to-school/\n\nCreated by Kalli Retzepi at Interactive Things\nhttps://interactivethings.com")}`}>Send yourself a link</a> to view view this project at a later time.
+          </div>
+          <a href=" https://interactivethings.com" className="App-Fallback-Logo"></a>
         </div>
       </div>
     );

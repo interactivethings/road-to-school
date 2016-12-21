@@ -5,20 +5,21 @@ body {
 	background: #EAE3D1;
 }
 
+@media screen and (max-width: 767px) {
+  body {
+    background: #191406;
+  }
+}
+
+
 .App {
 	font-family: 'Lora';
 	font-weight: 400;
 	line-height: 26px;
 	width: 100vw;
 	position: absolute;
-	opacity: 1;
 	top: 0vh;
 	left: 0vw;
-}
-
-.App-Fallback {
-	opacity: 0;
-	overflow: scroll;
 }
 
 .App-Intro {
@@ -83,50 +84,51 @@ body {
 	}
 }
 
+.App-Fallback {
+  box-sizing: border-box;
+  display: none;
+	background:  #191406;
+  padding: 5vh 5vw;
+}
+
+.App-Fallback-Title  {
+	font-size: 54px;
+	line-height: 1.1;
+	max-width: 6em;
+	color: #fff;
+}
+
+.App-Fallback-Text {
+	color: #fff;
+  max-width: 18em;
+	font-size: 18px;
+	line-height: 1.6;
+  margin-top: 4vh;
+}
+
+.App-Fallback-Text > a {
+	text-decoration: underline;
+}
+
+.App-Fallback-Logo {
+  position: absolute;
+  bottom: 5vh;
+  display: block;
+	height: 36px;
+  width: 200px;
+	background: url('./assets/logoIXT.png') no-repeat;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 767px) {
 	.App {
-		opacity: 0;
+		display: none;
 	}
 
-	.App-Fallback {
-		opacity: 1;
-		background:  #191406;
-		height: 100vh;
-		position: fixed;
-		width: 100vw;
-	}
-	
-	.App-Fallback-Title  {
-		font-size: 54px;
-		line-height: 80px;
-		width: 50vw;
-		color: #fff;	
-		padding-left: 5vw;
-		top: 10vh;
-		position: relative;
-	}
-
-	.App-Fallback-Text {
-		top: 20vh;
-		left: 5vw;
-		position: relative;
-		color: #fff;
-		width: 60vw;
-		font-size: 18px;
-		line-height: 24px;
-	}	
-
-	.App-Fallback-Text > a {
-		text-decoration: underline;
-	}
-
-	.App-Fallback-Logo {
-		position: relative;
-		height: 36px;
-		background: url('./assets/logoIXT.png') no-repeat;
-		left: 5vw;
-		top: 35vh;
-	}
+  .App-Fallback {
+    display: block;
+  }
 }
 
 /* ---------------------------------------------- Icons  */
