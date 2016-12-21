@@ -148,7 +148,7 @@ class App extends Component {
           {/* -------------------- Content -----------------------*/}
           <ContentText />
           {/* -------------------- Chart -----------------------*/}
-          <Chart mode={mode} force={this.force} data={data} width={width} height={height}/>
+          <Chart mode={mode} force={this.force} data={data} width={width / 2} height={height}/>
           <div className="Content-Gradient"></div>
         </div>
         <div className="App-Fallback">

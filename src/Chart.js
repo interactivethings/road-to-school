@@ -27,7 +27,11 @@ class SvgRenderer extends Component {
   }
 
   render() {
-    return <svg width={this.props.width/2} height={this.props.height} ref={this.onRef} />;
+    return (
+      <div className="Chart" width={this.props.width} height={this.props.height}>
+        <svg className="Chart-Element" width={this.props.width} height={this.props.height} ref={this.onRef} />
+      </div>
+    );
   }
 
   renderSvg() {

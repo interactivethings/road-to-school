@@ -2,15 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 
 body {
-	background: #EAE3D1;
+	background: #191406;
 }
-
-@media screen and (max-width: 767px) {
-  body {
-    background: #191406;
-  }
-}
-
 
 .App {
 	font-family: 'Lora';
@@ -315,7 +308,6 @@ body {
 	font-size: 64px;
 	letter-spacing: -0.01em;
 	background: #EAE3D1;
-	/*border: 1px solid red;*/
 	z-index: 1;
 	margin: 0 15vw;
 	text-align: center;
@@ -402,11 +394,15 @@ body {
 
 /* ---------------------------------------------- SVG */
 
-
-svg {
-	left: 50vw;
-	top: 0;
+.Chart {
 	position: fixed;
+  right: 0;
+	top: 0;
+  background: #EAE3D1;
+}
+
+.Chart-Element {
+  display: block;
 }
 
 .word {
