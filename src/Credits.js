@@ -7,8 +7,8 @@ class Credits extends Component {
 
   render() {
     return (
-			<div className="Credits">  
-				<div className="Credits-Methods"> Methods </div>
+			<div className="Credits">
+				<div className="Credits-Methods"><a name="about">Methods</a></div>
 		     	<div className="Credits-Methods-Text">Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
 	     		<div className="Credits-Donate"> NGOs you can donate to </div>
 		     	<div className="Credits-Donate-Text">  	

@@ -129,7 +129,7 @@ class App extends Component {
             <div className="App-Intro-Explanation"> Every word in the visualization corresponds to roughly 10,000 Syrian children. </div>
           </div>
           {/* -------------------- Header -----------------------*/}
-          <div className="App-Header-Title"> The Road to School</div> 
+          <div className="App-Header-Title">The Road to School <a className="App-Header-Title-About" href="#about">About</a></div>
           <div className="App-Header-Controls">
             <Audio volume={pctScrolled/100} muted={audioMuted} onClick={this.toggleAudio}/> 
             <Share />
@@ -168,7 +168,7 @@ class ContentText extends React.Component {
     return (
       <div className="Content-Wrap">
         {contentMap.map((d,i) => <Content key={i} text={d.text} isQuote={d.styleAsQuote} />)}
-        <Credits className="Credits"/>
+        <Credits className="Credits" />
       </div>
     )
   }
