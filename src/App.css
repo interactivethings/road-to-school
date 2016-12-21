@@ -299,7 +299,7 @@ body {
 	transition: opacity 1s;
 }
 
-.Counter-text, .Counter{
+.Counter-text, .Counter {
 	top: 84vh;
 	left: 55vw;
 	height: 5vh;
@@ -317,6 +317,7 @@ body {
 	font-size: 22px;
 	top: 88vh;
 	left: 53vw;
+  height: auto;
 }
 
 
