@@ -1,7 +1,6 @@
-# L1601 Road to School
+# Road to School
 
-* Working title: L1601 Crossings
-* Author: Kallirroi Retzepi
+This is the final project of our intern Kallirroi Retzepi. It was created in December 2016.
 
 ## Development
 
