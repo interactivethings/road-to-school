@@ -33,11 +33,6 @@ server: _banner install
 build: install
 	npm run build
 
-deploy: build
-	@echo -e "$(CLI_NOTICE) Starting deployment ...$(CLI_RESET)"
-	$(DEPLOY_CMD)
-	@echo -e "$(CLI_SUCCESS) Deployed to $(DEPLOY_URL)$(CLI_RESET)"
-
 node_modules: package.json
 	npm install
 	@touch -fc $@

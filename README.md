@@ -8,6 +8,4 @@ Install all dependencies and start a development server:
 
     make
 
-Deploy to lab.interactivethings.com
-
-    make deploy
+The project is automatically deployed to https://road-to-school.interactivethings.io
